@@ -89,6 +89,7 @@ SRCS += $(OTHER_SRCS)
 OBJS = $(addsuffix .o,  $(basename $(SRCS)))
 SUS  = $(addsuffix .su, $(basename $(OBJS)))
 
+CFLAGS += -g
 CFLAGS += -mcpu=cortex-m3 -mthumb -mabi=aapcs
 CFLAGS += -Wall -Wextra
 CFLAGS += -fno-common -static
