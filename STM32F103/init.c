@@ -34,7 +34,7 @@
 void ResetHandler(void); // This is the first function to be executed.
 void Halt(void);         // This function just runs an infinite loop.
 extern int main(void);   // ResetHandler will call main after initialization.
-
+void timer2_isr(void);
 
 
 // *****************************************************************************
@@ -114,7 +114,7 @@ uint32_t (* const vectortable[]) __attribute__ ((section(".isrvectors"))) = {
   ISR_NOT_SET,                      /* TIM1_UP           0x00A4   25    41 */
   ISR_NOT_SET,                      /* TIM1_TRG_COM      0x00A8   26    42 */
   ISR_NOT_SET,                      /* TIM1_CC           0x00AC   27    43 */
-  ISR_NOT_SET,                      /* TIM2              0x00B0   28    44 */
+  (uint32_t*) timer2_isr,           /* TIM2              0x00B0   28    44 */
   ISR_NOT_SET,                      /* TIM3              0x00B4   29    45 */
   ISR_NOT_SET,                      /* TIM4              0x00B8   30    46 */
   ISR_NOT_SET,                      /* I2C1_EV           0x00BC   31    47 */
@@ -205,3 +205,12 @@ __attribute__ ((noreturn)) void Halt(void){
 }
 
 
+__attribute__ ((interrupt ("IRQ"))) void timer2_isr(void) {
+    volatile TIM2_Type* timer2 = (volatile TIM2_Type*)TIM2_BASE;
+    volatile GPIOA_Type* gpioc = (volatile GPIOA_Type*)GPIOC_BASE;
+
+    if(gpioc->ODR & (1 << 13)) gpioc->ODR &= ~(1 << 13);
+    else gpioc->ODR |= (1 << 13);
+
+    timer2->SR &= ~(1 << 6); // Clear Interrupt Flag
+}

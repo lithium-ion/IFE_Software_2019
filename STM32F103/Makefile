@@ -36,7 +36,7 @@
 # TARGET: This sets the name of the program.                                   #
 #         It's used as a prefix for the output files.                          #
 # **************************************************************************** #
-TARGET = myprogram
+TARGET = blink
 
 
 
