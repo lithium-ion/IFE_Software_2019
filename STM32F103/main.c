@@ -34,9 +34,9 @@ int main(void){
 
     while(1) {
         for(int i = 0; i < 50000; i++) __asm__("nop");
-        //gpioc->ODR |= (0x01 << 13);
+        gpioc->ODR |= (0x01 << 13);
         for(int i = 0; i < 50000; i++) __asm__("nop");
-        //gpioc->ODR &= ~(0x01 << 13);
+        gpioc->ODR &= ~(0x01 << 13);
     }
 }
 
