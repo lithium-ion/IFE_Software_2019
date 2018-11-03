@@ -94,6 +94,7 @@ CFLAGS += -mcpu=cortex-m3 -mthumb -mabi=aapcs
 CFLAGS += -Wall -Wextra
 CFLAGS += -fno-common -static
 CFLAGS += -ffunction-sections -fdata-sections -Wl,--gc-sections
+CFLAGS += -std=c11
 
 LDFLAGS += -march=armv7-m -mabi=aapcs
 LDFLAGS += -nostartfiles -nostdlib -lgcc
