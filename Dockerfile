@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     telnet \
     libusb-1.0-0-dev \
+    usbutils \
  && rm -rf /var/lib/apt/lists/*
 
 # Get ARM Toolchain
