@@ -125,12 +125,12 @@ const uint16_t OV_THRESHOLD = 41000; // Over voltage threshold ADC Code. LSB = 0
 const uint16_t UV_THRESHOLD = 33000; // Under voltage threshold ADC Code. LSB = 0.0001
 
 //Loop Measurement Setup These Variables are ENABLED or DISABLED Remember ALL CAPS
-const uint8_t WRITE_CONFIG = DISABLED; // This is ENABLED or DISABLED
-const uint8_t READ_CONFIG = DISABLED; // This is ENABLED or DISABLED
+const uint8_t WRITE_CONFIG = ENABLED; // This is ENABLED or DISABLED
+const uint8_t READ_CONFIG = ENABLED; // This is ENABLED or DISABLED
 const uint8_t MEASURE_CELL = ENABLED; // This is ENABLED or DISABLED
 const uint8_t MEASURE_AUX = DISABLED; // This is ENABLED or DISABLED
 const uint8_t MEASURE_STAT = DISABLED; //This is ENABLED or DISABLED
-const uint8_t PRINT_PEC = DISABLED; //This is ENABLED or DISABLED
+const uint8_t PRINT_PEC = ENABLED; //This is ENABLED or DISABLED
 /************************************
   END SETUP
 *************************************/
