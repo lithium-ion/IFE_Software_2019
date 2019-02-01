@@ -1,0 +1,32 @@
+/usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/usr/bin/cc -DCMAKE_C_COMPILER=/usr/bin/arm-none-eabi-gcc -DCMAKE_CXX_COMPILER=/usr/bin/arm-none-eabi-gcc -G "CodeBlocks - Unix Makefiles" /mnt/c/Users/chait/Documents/WSL/IFE_Software_2019/BMS/BMS_Master_STM32
+-- The C compiler identification is GNU 7.3.1
+-- The CXX compiler identification is GNU 7.3.1
+-- Check for working C compiler: /usr/bin/arm-none-eabi-gcc
+-- Check for working C compiler: /usr/bin/arm-none-eabi-gcc -- broken
+CMake Error at /usr/share/cmake-3.13/Modules/CMakeTestCCompiler.cmake:52 (message):
+  The C compiler
+
+    "/usr/bin/arm-none-eabi-gcc"
+
+  is not able to compile a simple test program.
+
+  It fails with the following output:
+
+    Change Dir: /mnt/c/Users/chait/Documents/WSL/IFE_Software_2019/BMS/BMS_Master_STM32/cmake-build-debug/CMakeFiles/CMakeTmp
+    
+    Run Build Command:"/usr/bin/cc" "cmTC_67662/fast"
+    cc: error: cmTC_67662/fast: No such file or directory
+    cc: fatal error: no input files
+    compilation terminated.
+    
+
+  
+
+  CMake will not be able to correctly generate this project.
+Call Stack (most recent call first):
+  CMakeLists.txt:2 (project)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/mnt/c/Users/chait/Documents/WSL/IFE_Software_2019/BMS/BMS_Master_STM32/cmake-build-debug/CMakeFiles/CMakeOutput.log".
+See also "/mnt/c/Users/chait/Documents/WSL/IFE_Software_2019/BMS/BMS_Master_STM32/cmake-build-debug/CMakeFiles/CMakeError.log".
