@@ -76,39 +76,13 @@ int back_avg = 0;
 int tc_on = 1;
 
 //front left wheel
-int fl_new = 0; // current timer value
-int fl_old = 0; // previous timer value
-int fl_count = 0; // count TIM2 resets between fl_new and fl_old
-int fl_delta = 0; // difference in ticks between new and old
-int fl_freq = 0; // frequency in Hz
-
-//front right wheel
-int fr_new = 0; // current timer value
-int fr_old = 0; // previous timer value
-int fr_count = 0; // count TIM2 resets between fl_new and fl_old
-int fr_delta = 0; // difference in ticks between new and old
-int fr_freq = 0; // frequency in Hz
-
-//back left wheel
-int bl_new = 0; // current timer value
-int bl_old = 0; // previous timer value
-int bl_count = 0; // count TIM2 resets between fl_new and fl_old
-int bl_delta = 0; // difference in ticks between new and old
-int bl_freq = 0; // frequency in Hz
-
-//back right wheel
-int br_new = 0; // current timer value
-int br_old = 0; // previous timer value
-int br_count = 0; // count TIM2 resets between fl_new and fl_old
-int br_delta = 0; // difference in ticks between new and old
-int br_freq = 0; // frequency in Hz
+wheel_t fl = {0, 0, 0, 0, 0};
+wheel_t fr = {0, 0, 0, 0, 0};
+wheel_t bl = {0, 0, 0, 0, 0};
+wheel_t br = {0, 0, 0, 0, 0};
 
 // traction control code
 uint8_t traction_control_count = 0;
-#define MAX_CONTROL_VALUE 255
-#define TRACTION_DISABLE_COUNT 8
-#define MIN(x, y) ((y) ^ (((x) ^ (y)) & -((x) < (y))))
-#define MAX(x, y) ((x) ^ (((x) ^ (y)) & -((x) < (y))))
 
 /* USER CODE END PV */
 
@@ -122,7 +96,7 @@ static void MX_TIM2_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_TIM3_Init(void);
 /* USER CODE BEGIN PFP */
-
+void UpdateWheel(wheel_t * const wheel) __attribute__((hot));
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -178,18 +152,18 @@ int main(void)
 	else I = 0, send lowest R over I2C */
 	// PID interrupt still runs when TC is off, but the value isn't sent
 	
-	fl_freq = 40000 / fl_delta;
-	fr_freq = 40000 / fr_delta;
-	bl_freq = 40000 / bl_delta;
-	br_freq = 40000 / br_delta;
+	fl.freq = 40000 / fl.delta;
+	fr.freq = 40000 / fr.delta;
+	bl.freq = 40000 / bl.delta;
+	br.freq = 40000 / br.delta;
 	
-	if (fl_count >= 2) fl_freq = 0;
-	if (fr_count >= 2) fr_freq = 0;
-	if (bl_count >= 2) bl_freq = 0;
-	if (br_count >= 2) br_freq = 0;
+	if (fl.count >= 2) fl.freq = 0;
+	if (fr.count >= 2) fr.freq = 0;
+	if (bl.count >= 2) bl.freq = 0;
+	if (br.count >= 2) br.freq = 0;
 	
-	front_avg = (fl_freq + fr_freq) / 2;
-	back_avg = (bl_freq + br_freq) / 2;
+	front_avg = (fl.freq + fr.freq) / 2;
+	back_avg = (bl.freq + br.freq) / 2;
 	
 	slip = front_avg - back_avg;
 	
@@ -237,6 +211,16 @@ int main(void)
   /* USER CODE END 3 */
 }
 
+void UpdateWheel(wheel_t* const wheel) {
+  wheel->new = __HAL_TIM_GET_COUNTER(&htim2);
+  wheel->delta = wheel->new - wheel->old + 40000 * wheel->count;
+  wheel->old = wheel->new;
+  wheel->count = 0;
+  traction_control_count = 0;
+  /* USER CODE END EXTI0_IRQn 0 */
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
+}
+
 /******************************************************************************/
 /* STM32F1xx Peripheral Interrupt Handlers                                    */
 /* Add here the Interrupt Handlers for the used peripherals.                  */
@@ -250,15 +234,10 @@ int main(void)
 void EXTI0_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI0_IRQn 0 */
-  fl_new = __HAL_TIM_GET_COUNTER(&htim2);
-  fl_delta = fl_new - fl_old + 40000 * fl_count;
-  fl_old = fl_new;
-  fl_count = 0;
-  traction_control_count = 0;
+  UpdateWheel(&fl);
   /* USER CODE END EXTI0_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
   /* USER CODE BEGIN EXTI0_IRQn 1 */
-
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
   /* USER CODE END EXTI0_IRQn 1 */
 }
 
@@ -268,15 +247,10 @@ void EXTI0_IRQHandler(void)
 void EXTI1_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI1_IRQn 0 */
-  fr_new = __HAL_TIM_GET_COUNTER(&htim2);
-  fr_delta = fr_new - fr_old + 40000 * fr_count;
-  fr_old = fr_new;
-  fr_count = 0;
-  traction_control_count = 0;
-  /* USER CODE END EXTI1_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_1);
+  UpdateWheel(&fr);
+ /* USER CODE END EXTI1_IRQn 0 */
   /* USER CODE BEGIN EXTI1_IRQn 1 */
-
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_1);
   /* USER CODE END EXTI1_IRQn 1 */
 }
 
@@ -286,15 +260,10 @@ void EXTI1_IRQHandler(void)
 void EXTI2_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI2_IRQn 0 */
-  bl_new = __HAL_TIM_GET_COUNTER(&htim2);
-  bl_delta = bl_new - bl_old + 40000 * bl_count;
-  bl_old = bl_new;
-  bl_count = 0;
-  traction_control_count = 0;
+  UpdateWheel(&bl);
   /* USER CODE END EXTI2_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_2);
   /* USER CODE BEGIN EXTI2_IRQn 1 */
-
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_2);
   /* USER CODE END EXTI2_IRQn 1 */
 }
 
@@ -304,11 +273,7 @@ void EXTI2_IRQHandler(void)
 void EXTI3_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI3_IRQn 0 */
-  br_new = __HAL_TIM_GET_COUNTER(&htim2);
-  br_delta = br_new - br_old + 40000 * br_count;
-  br_old = br_new;
-  br_count = 0;
-  traction_control_count = 0;
+  UpdateWheel(&br);
   /* USER CODE END EXTI3_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_3);
   /* USER CODE BEGIN EXTI3_IRQn 1 */
@@ -322,10 +287,10 @@ void EXTI3_IRQHandler(void)
 void TIM2_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM2_IRQn 0 */
-  fl_count++;
-  fr_count++;
-  bl_count++;
-  br_count++;
+  fl.count++;
+  fr.count++;
+  bl.count++;
+  br.count++;
   /* USER CODE END TIM2_IRQn 0 */
   HAL_TIM_IRQHandler(&htim2);
   // If traction control is greater than the max, set to TRACTION_DISABLE_COUNT+1
