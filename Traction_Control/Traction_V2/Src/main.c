@@ -103,6 +103,12 @@ int br_count = 0; // count TIM2 resets between fl_new and fl_old
 int br_delta = 0; // difference in ticks between new and old
 int br_freq = 0; // frequency in Hz
 
+// traction control code
+uint8_t traction_control_count = 0;
+#define MAX_CONTROL_VALUE 255
+#define TRACTION_DISABLE_COUNT 8
+#define MIN(x, y) ((y) ^ (((x) ^ (y)) & -((x) < (y))))
+#define MAX(x, y) ((x) ^ (((x) ^ (y)) & -((x) < (y))))
 
 /* USER CODE END PV */
 
@@ -248,6 +254,7 @@ void EXTI0_IRQHandler(void)
   fl_delta = fl_new - fl_old + 40000 * fl_count;
   fl_old = fl_new;
   fl_count = 0;
+  traction_control_count = 0;
   /* USER CODE END EXTI0_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
   /* USER CODE BEGIN EXTI0_IRQn 1 */
@@ -265,6 +272,7 @@ void EXTI1_IRQHandler(void)
   fr_delta = fr_new - fr_old + 40000 * fr_count;
   fr_old = fr_new;
   fr_count = 0;
+  traction_control_count = 0;
   /* USER CODE END EXTI1_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_1);
   /* USER CODE BEGIN EXTI1_IRQn 1 */
@@ -282,6 +290,7 @@ void EXTI2_IRQHandler(void)
   bl_delta = bl_new - bl_old + 40000 * bl_count;
   bl_old = bl_new;
   bl_count = 0;
+  traction_control_count = 0;
   /* USER CODE END EXTI2_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_2);
   /* USER CODE BEGIN EXTI2_IRQn 1 */
@@ -299,6 +308,7 @@ void EXTI3_IRQHandler(void)
   br_delta = br_new - br_old + 40000 * br_count;
   br_old = br_new;
   br_count = 0;
+  traction_control_count = 0;
   /* USER CODE END EXTI3_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_3);
   /* USER CODE BEGIN EXTI3_IRQn 1 */
@@ -318,6 +328,8 @@ void TIM2_IRQHandler(void)
   br_count++;
   /* USER CODE END TIM2_IRQn 0 */
   HAL_TIM_IRQHandler(&htim2);
+  // If traction control is greater than the max, set to TRACTION_DISABLE_COUNT+1
+  traction_control_count = MIN(TRACTION_DISABLE_COUNT + 1, traction_control_count++);
   /* USER CODE BEGIN TIM2_IRQn 1 */
 
   /* USER CODE END TIM2_IRQn 1 */
@@ -333,7 +345,9 @@ void TIM3_IRQHandler(void)
   integral += dt * error;
   derivative = (error - prev_error) / dt;
   
-  control = bias + kp * error + ki * integral + kd * derivative;
+  control = traction_control_count > TRACTION_DISABLE_COUNT 
+	  ? MAX_CONTROL_VALUE 
+	  : bias + kp * error + ki * integral + kd * derivative;
   /* USER CODE END TIM3_IRQn 0 */
   HAL_TIM_IRQHandler(&htim3);
   /* USER CODE BEGIN TIM3_IRQn 1 */
