@@ -20,7 +20,8 @@
 // Status byte-
 // Bit  | Description
 // ---------------------------------------------------
-// 7-3	| Undefined
+// 7-4	| Undefined
+// 3    | 1 if temp sensor is disconnected
 // 2	| 1 if being balanced
 // 1	| 1 if data is valid (Any data received will still be transmitted)
 // 0	| 1 if cell is connected (Data fields are undefined)
