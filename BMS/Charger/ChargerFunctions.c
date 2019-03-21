@@ -1,5 +1,7 @@
 /*
-	All variables below are required for the functions to run.
+	All variables below are required for the functions to run. Data for every board has been received, call the setChargeDischarge function.
+	Then call the setChargerTxData to set the CAN transmission message for the charger. This data will be sent to the charger in a CAN message
+	with extended ID 0x1806E5F4 at 500Kbps bit rate. The charger expects a message every one second.
 	
 	Functions:
 		int setChargeDischarge (int cellsDischarge[numBoards][cellsPerBoard], int *chargeCurrent, float cellVoltage[numBoards][cellsPerBoard])
@@ -14,7 +16,7 @@
 			@brief - finds and returns the lowest cell voltage
 			@return - the lowest voltage of all cells
 		
-		void getChargerTxData()
+		void setChargerTxData()
 			@brief - calculates and sets the CAN transmission data for the charger
 
 	Author: Evan Chen
@@ -32,13 +34,13 @@ float balancingDifference = 0.05;			// max difference in voltage (V) between cur
 
 /*************** Charging Settings ********************/
 /* hex value of ten times the current (A) in normal operation(when no cell is above lowerVoltage_Threshold) */
-uint16_t normalCurrent = 0x000F;		// 1.5 A
+uint16_t normalCurrent = 0x003E;		// 6.2 A
 
 /* hex value of ten times the current (A) when any cell exceeds lowerVoltage_Threshold */
 uint16_t lowerCurrent = 0x000A;			// 1 A
 
 /* hex value of ten times the voltage (V) of the charger */
-uint16_t chargerVoltage = 0x0028;		// 4 V
+uint16_t chargerVoltage = 0x0FA0;		// 400 V
 /************** End Charging Settings *****************/
 
 
@@ -59,7 +61,7 @@ uint8_t CANtx[8]		// CAN transmission data for the charger
 int setChargeDischarge (int cellsDischarge[numBoards][cellsPerBoard], int *chargeCurrent, float cellVoltage[numBoards][cellsPerBoard]);
 float getLowestVoltage(float cellVoltage[numBoards][cellsPerBoard]);
 float getLowestVoltage(float cellVoltage[numBoards][cellsPerBoard]);
-void getChargerTxData();
+void setChargerTxData();
 
 /*
 	@brief - when function returns, the array cellsDischarge will be modified based on the new data as follows:
@@ -128,7 +130,7 @@ float getLowestVoltage(float cellVoltage[numBoards][cellsPerBoard]) {
 /*
 	@brief - calculates and sets the CAN transmission data for the charger
 */
-void getChargerTxData() {
+void setChargerTxData() {
 	/* voltage data (hex value of desired voltage (V) times 10)*/
 	CANtx[0] = (uint8_t)(chargerVoltage >> 8);
 	CANtx[1] = (uint8_t)chargerVoltage;
