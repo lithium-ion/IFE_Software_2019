@@ -31,7 +31,7 @@
 //
 #define 	CELLVAL		0x007
 
-// 1 byte, 1Hz, Status Byte|OV cell nunmber|UV cell number|OT cell number
+// 6 bytes, 1Hz, Status Byte|OV cell nunmber|UV cell number|OT cell number|Disconnected voltage cell number|Disconnected temp cell number
 //
 // This message contains status information of the BMS as a whole
 // Status byte-
