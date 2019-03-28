@@ -22,6 +22,8 @@
 	Author: Evan Chen
  */
 
+ #include <stdint.h>
+
 /*********************************************************** Variables **********************************************************/
 
 /************** Voltage Thresholds *******************/
@@ -53,7 +55,7 @@ int cellsDischarge[12][8];			// 1 for discharging, 0 for not discharging
 
 /******************** Other **************************/
 int chargeCurrent;		// flag used by program (2 for normal current, 1 for lower current, 0 for not charging)
-uint8_t CANtx[8]		// CAN transmission data for the charger
+uint8_t CANtx[8];		// CAN transmission data for the charger
 /******************* End Other ***********************/
 
 /*********************************************************** End Variables ******************************************************/
@@ -73,7 +75,7 @@ void setChargerTxData();
 */
 int setChargeDischarge (int cellsDischarge[numBoards][cellsPerBoard], int *chargeCurrent, float cellVoltage[numBoards][cellsPerBoard]) {
 	float lowestVoltage = getLowestVoltage(cellVoltage);			// get lowest voltage of all cells
-	chargeCurrent = 2;												// initialize the charging current to normal operation
+	*chargeCurrent = 2;												// initialize the charging current to normal operation
 	
 	/* iterate through every cell */
 	for (int board = 0; board < numBoards; board++) {
@@ -83,7 +85,7 @@ int setChargeDischarge (int cellsDischarge[numBoards][cellsPerBoard], int *charg
 
 			/* If any cell exceeds BMSFault_Threshold2 Throw BMS Fault */
 			if (voltage > BMSFault_Threshold) {
-				chargeCurrent = 0;
+				*chargeCurrent = 0;
 				return 1;
 			}
 
@@ -96,9 +98,9 @@ int setChargeDischarge (int cellsDischarge[numBoards][cellsPerBoard], int *charg
 			 * If any cell exceeds lowerVoltage_Threshold: lower charge current to lowerCurrent and continue balancing
 			 */
 			if (voltage > higherVoltage_Threshold) {
-				chargeCurrent = 0;
+				*chargeCurrent = 0;
 			} else if (voltage > lowerVoltage_Threshold && chargeCurrent != 0) {
-				chargeCurrent = 1;
+				*chargeCurrent = 1;
 			}
 		}
 	 }
