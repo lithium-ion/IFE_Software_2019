@@ -4,17 +4,22 @@
 		ADOWPulldown = 0x229
 */
 
+#include "LTC6811.h"
+#include "stm32f1xx.h"
+
+bool checkBoardConnected(uint8_t address, bool cellConnected[12][12], int boardIndex);
+
 /*
 	@return true if all cells are connected on every board, false if any cell is disconnected.
 	@output sets cellConnected[i] to 1 if cell i is connected. cellConnected[i] is set to 0 if cell i is disconnected.
 */
 bool checkAllConnected(bool cellConnected[12][12]) {
-	return checkBoardConnected(1, cellConnected, 0) && checkBoardConnected(2, cellConnected, 1) &&
-			checkBoardConnected(3, cellConnected, 2) && checkBoardConnected(4, cellConnected, 3) &&
-			checkBoardConnected(5, cellConnected, 4) && checkBoardConnected(6, cellConnected, 5) &&
-			checkBoardConnected(7, cellConnected, 6) && checkBoardConnected(8, cellConnected, 7) &&
-			checkBoardConnected(9, cellConnected, 8) && checkBoardConnected(10, cellConnected, 9) &&
-			checkBoardConnected(11, cellConnected, 10) && checkBoardConnected(12, cellConnected, 11);
+	return checkBoardConnected((uint8_t)1, cellConnected, 0) && checkBoardConnected((uint8_t)2, cellConnected, 1) &&
+			checkBoardConnected((uint8_t)3, cellConnected, 2) && checkBoardConnected((uint8_t)4, cellConnected, 3) &&
+			checkBoardConnected((uint8_t)5, cellConnected, 4) && checkBoardConnected((uint8_t)6, cellConnected, 5) &&
+			checkBoardConnected((uint8_t)7, cellConnected, 6) && checkBoardConnected((uint8_t)8, cellConnected, 7) &&
+			checkBoardConnected((uint8_t)9, cellConnected, 8) && checkBoardConnected((uint8_t)10, cellConnected, 9) &&
+			checkBoardConnected((uint8_t)11, cellConnected, 10) && checkBoardConnected((uint8_t)12, cellConnected, 11);
 }
 
 /*
@@ -62,7 +67,7 @@ bool checkBoardConnected(uint8_t address, bool cellConnected[12][12], int boardI
 	if (pulldownVoltages[11] == 0) {
 		cellConnected[boardIndex][11] = 0;
 	} else {
-		cellConnected[[boardIndex][11] = 1;
+		cellConnected[boardIndex][11] = 1;
 	}
 
 	return returnVal;
