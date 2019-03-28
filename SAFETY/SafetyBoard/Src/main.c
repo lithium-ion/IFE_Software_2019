@@ -69,7 +69,11 @@ CAN_HandleTypeDef hcan;
 SPI_HandleTypeDef hspi1;
 
 /* USER CODE BEGIN PV */
-
+CAN_TxHeaderTypeDef   TxHeader;
+CAN_RxHeaderTypeDef   RxHeader;
+uint8_t               TxData[8] = {0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55};
+uint8_t               RxData[8];
+uint32_t              TxMailbox;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -109,8 +113,6 @@ int main(void)
   /* Configure the system clock */
   SystemClock_Config();
 
-  ConfigureADC();
-
   /* USER CODE BEGIN SysInit */
 
   /* USER CODE END SysInit */
@@ -121,46 +123,19 @@ int main(void)
   MX_SPI1_Init();
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
-
+  HAL_CAN_Start(&hcan);
   /* USER CODE END 2 */
-
-  uint32_t g_ADCValue;
-  int g_MeasurementNumber;
-
-  int brakeThreshold = 0;
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  HAL_ADC_Start(&g_AdcHandle);
+  //HAL_ADC_Start(&g_AdcHandle);
   while (1)
   {
+	if (HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox) == HAL_OK) 
+		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+	
     /* USER CODE END WHILE */
-
-    
-
-    if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_8) == SET){
-      if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6) == SET){
-
-        if (HAL_ADC_PollForConversion(&g_AdcHandle, 1000000) == HAL_OK)
-        {
-            g_ADCValue = HAL_ADC_GetValue(&g_AdcHandle);
-            g_MeasurementNumber++;
-
-            if(g_ADCValue == brakeThreshold){
-
-              if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_3) == SET && HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_3) == SET){
-
-                HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, SET);
-
-              }
-
-            }
-        }
-
-
-      }
-    }
-
+	
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -176,7 +151,7 @@ void SystemClock_Config(void)
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
-  /**Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the CPU, AHB and APB busses clocks 
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
@@ -186,7 +161,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /**Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the CPU, AHB and APB busses clocks 
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
@@ -224,7 +199,7 @@ static void MX_ADC1_Init(void)
   /* USER CODE BEGIN ADC1_Init 1 */
 
   /* USER CODE END ADC1_Init 1 */
-  /**Common config 
+  /** Common config 
   */
   hadc1.Instance = ADC1;
   hadc1.Init.ScanConvMode = ADC_SCAN_DISABLE;
@@ -237,7 +212,7 @@ static void MX_ADC1_Init(void)
   {
     Error_Handler();
   }
-  /**Configure Regular Channel 
+  /** Configure Regular Channel 
   */
   sConfig.Channel = ADC_CHANNEL_0;
   sConfig.Rank = ADC_REGULAR_RANK_1;
@@ -268,11 +243,11 @@ static void MX_CAN_Init(void)
 
   /* USER CODE END CAN_Init 1 */
   hcan.Instance = CAN1;
-  hcan.Init.Prescaler = 16;
+  hcan.Init.Prescaler = 2;
   hcan.Init.Mode = CAN_MODE_NORMAL;
   hcan.Init.SyncJumpWidth = CAN_SJW_1TQ;
-  hcan.Init.TimeSeg1 = CAN_BS1_1TQ;
-  hcan.Init.TimeSeg2 = CAN_BS2_1TQ;
+  hcan.Init.TimeSeg1 = CAN_BS1_3TQ;
+  hcan.Init.TimeSeg2 = CAN_BS2_4TQ;
   hcan.Init.TimeTriggeredMode = DISABLE;
   hcan.Init.AutoBusOff = DISABLE;
   hcan.Init.AutoWakeUp = DISABLE;
@@ -284,7 +259,12 @@ static void MX_CAN_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN CAN_Init 2 */
-
+  TxHeader.StdId = 0x321; 					// CAN standard ID
+  TxHeader.ExtId = 0x01; 					// CAN extended ID
+  TxHeader.RTR = CAN_RTR_DATA; 				// CAN frame type
+  TxHeader.IDE = CAN_ID_STD; 				// CAN ID type
+  TxHeader.DLC = 8; 						// CAN frame length in bytes
+  TxHeader.TransmitGlobalTime = DISABLE;	// CAN timestamp in TxData[6] and TxData[7]
   /* USER CODE END CAN_Init 2 */
 
 }
