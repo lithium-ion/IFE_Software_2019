@@ -92,7 +92,7 @@ void HAL_MspInit(void)
 
   /* System interrupt init*/
 
-  /** DISABLE: JTAG-DP Disabled and SW-DP Disabled 
+  /**DISABLE: JTAG-DP Disabled and SW-DP Disabled 
   */
   __HAL_AFIO_REMAP_SWJ_DISABLE();
 
@@ -109,6 +109,7 @@ void HAL_MspInit(void)
 */
 void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
 {
+
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   if(hadc->Instance==ADC1)
   {
@@ -139,8 +140,10 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
 * @param hadc: ADC handle pointer
 * @retval None
 */
+
 void HAL_ADC_MspDeInit(ADC_HandleTypeDef* hadc)
 {
+
   if(hadc->Instance==ADC1)
   {
   /* USER CODE BEGIN ADC1_MspDeInit 0 */
@@ -169,6 +172,7 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef* hadc)
 */
 void HAL_CAN_MspInit(CAN_HandleTypeDef* hcan)
 {
+
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   if(hcan->Instance==CAN1)
   {
@@ -193,6 +197,9 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* hcan)
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+    /* CAN1 interrupt Init */
+    HAL_NVIC_SetPriority(CAN1_RX1_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(CAN1_RX1_IRQn);
   /* USER CODE BEGIN CAN1_MspInit 1 */
 
   /* USER CODE END CAN1_MspInit 1 */
@@ -206,8 +213,10 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* hcan)
 * @param hcan: CAN handle pointer
 * @retval None
 */
+
 void HAL_CAN_MspDeInit(CAN_HandleTypeDef* hcan)
 {
+
   if(hcan->Instance==CAN1)
   {
   /* USER CODE BEGIN CAN1_MspDeInit 0 */
@@ -222,6 +231,8 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* hcan)
     */
     HAL_GPIO_DeInit(GPIOA, GPIO_PIN_11|GPIO_PIN_12);
 
+    /* CAN1 interrupt DeInit */
+    HAL_NVIC_DisableIRQ(CAN1_RX1_IRQn);
   /* USER CODE BEGIN CAN1_MspDeInit 1 */
 
   /* USER CODE END CAN1_MspDeInit 1 */
@@ -237,6 +248,7 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* hcan)
 */
 void HAL_SPI_MspInit(SPI_HandleTypeDef* hspi)
 {
+
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   if(hspi->Instance==SPI1)
   {
@@ -276,8 +288,10 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef* hspi)
 * @param hspi: SPI handle pointer
 * @retval None
 */
+
 void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
 {
+
   if(hspi->Instance==SPI1)
   {
   /* USER CODE BEGIN SPI1_MspDeInit 0 */
