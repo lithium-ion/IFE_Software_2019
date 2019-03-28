@@ -1,0 +1,172 @@
+ARM GAS  C:\cygwin64\tmp\ccs6aTRd.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"BMSconfig.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.loadConfig,"ax",%progbits
+  18              		.align	1
+  19              		.global	loadConfig
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	loadConfig:
+  27              	.LVL0:
+  28              	.LFB130:
+  29              		.file 1 "Src/BMSconfig.c"
+   1:Src/BMSconfig.c **** #include "BMSconfig.h"
+   2:Src/BMSconfig.c **** 
+   3:Src/BMSconfig.c **** void loadConfig(BMSconfigStructTypedef* cfg) {
+  30              		.loc 1 3 46 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+   4:Src/BMSconfig.c **** 	
+   5:Src/BMSconfig.c **** 	// 422 Hz
+   6:Src/BMSconfig.c **** 	cfg->ADCModeOption = 0;
+  35              		.loc 1 6 2 view .LVU1
+  36              		.loc 1 6 21 is_stmt 0 view .LVU2
+  37 0000 0023     		movs	r3, #0
+  38 0002 8371     		strb	r3, [r0, #6]
+   7:Src/BMSconfig.c **** 	cfg->ADCMode = 0;
+  39              		.loc 1 7 2 is_stmt 1 view .LVU3
+  40              		.loc 1 7 15 is_stmt 0 view .LVU4
+  41 0004 4376     		strb	r3, [r0, #25]
+   8:Src/BMSconfig.c **** 	
+   9:Src/BMSconfig.c **** 	cfg->GPIO5PulldownOff = 1;
+  42              		.loc 1 9 2 is_stmt 1 view .LVU5
+  43              		.loc 1 9 24 is_stmt 0 view .LVU6
+  44 0006 0122     		movs	r2, #1
+  45 0008 0270     		strb	r2, [r0]
+  10:Src/BMSconfig.c **** 	cfg->GPIO4PulldownOff = 1;
+  46              		.loc 1 10 2 is_stmt 1 view .LVU7
+  47              		.loc 1 10 24 is_stmt 0 view .LVU8
+  48 000a 4270     		strb	r2, [r0, #1]
+ARM GAS  C:\cygwin64\tmp\ccs6aTRd.s 			page 2
+
+
+  11:Src/BMSconfig.c **** 	cfg->GPIO3PulldownOff = 1;
+  49              		.loc 1 11 2 is_stmt 1 view .LVU9
+  50              		.loc 1 11 24 is_stmt 0 view .LVU10
+  51 000c 8270     		strb	r2, [r0, #2]
+  12:Src/BMSconfig.c **** 	cfg->GPIO2PulldownOff = 1;
+  52              		.loc 1 12 2 is_stmt 1 view .LVU11
+  53              		.loc 1 12 24 is_stmt 0 view .LVU12
+  54 000e C270     		strb	r2, [r0, #3]
+  13:Src/BMSconfig.c **** 	cfg->GPIO1PulldownOff = 1;
+  55              		.loc 1 13 2 is_stmt 1 view .LVU13
+  56              		.loc 1 13 24 is_stmt 0 view .LVU14
+  57 0010 0271     		strb	r2, [r0, #4]
+  14:Src/BMSconfig.c **** 	
+  15:Src/BMSconfig.c **** 	cfg->ReferenceOn = 1; // makes conversion faster
+  58              		.loc 1 15 2 is_stmt 1 view .LVU15
+  59              		.loc 1 15 19 is_stmt 0 view .LVU16
+  60 0012 4271     		strb	r2, [r0, #5]
+  16:Src/BMSconfig.c **** 	
+  17:Src/BMSconfig.c **** 	cfg->UndervoltageComparisonVoltage = 0x000;
+  61              		.loc 1 17 2 is_stmt 1 view .LVU17
+  62              		.loc 1 17 37 is_stmt 0 view .LVU18
+  63 0014 0381     		strh	r3, [r0, #8]	@ movhi
+  18:Src/BMSconfig.c **** 	cfg->OvervoltageComparisonVoltage = 0x000;
+  64              		.loc 1 18 2 is_stmt 1 view .LVU19
+  65              		.loc 1 18 36 is_stmt 0 view .LVU20
+  66 0016 4381     		strh	r3, [r0, #10]	@ movhi
+  19:Src/BMSconfig.c **** 	
+  20:Src/BMSconfig.c **** 	cfg->DischargeCell1 = 0;
+  67              		.loc 1 20 2 is_stmt 1 view .LVU21
+  68              		.loc 1 20 22 is_stmt 0 view .LVU22
+  69 0018 0373     		strb	r3, [r0, #12]
+  21:Src/BMSconfig.c **** 	cfg->DischargeCell2 = 0;
+  70              		.loc 1 21 2 is_stmt 1 view .LVU23
+  71              		.loc 1 21 22 is_stmt 0 view .LVU24
+  72 001a 4373     		strb	r3, [r0, #13]
+  22:Src/BMSconfig.c **** 	cfg->DischargeCell3 = 0;
+  73              		.loc 1 22 2 is_stmt 1 view .LVU25
+  74              		.loc 1 22 22 is_stmt 0 view .LVU26
+  75 001c 8373     		strb	r3, [r0, #14]
+  23:Src/BMSconfig.c **** 	cfg->DischargeCell4 = 0;
+  76              		.loc 1 23 2 is_stmt 1 view .LVU27
+  77              		.loc 1 23 22 is_stmt 0 view .LVU28
+  78 001e C373     		strb	r3, [r0, #15]
+  24:Src/BMSconfig.c **** 	cfg->DischargeCell5 = 0;
+  79              		.loc 1 24 2 is_stmt 1 view .LVU29
+  80              		.loc 1 24 22 is_stmt 0 view .LVU30
+  81 0020 0374     		strb	r3, [r0, #16]
+  25:Src/BMSconfig.c **** 	cfg->DischargeCell6 = 0;
+  82              		.loc 1 25 2 is_stmt 1 view .LVU31
+  83              		.loc 1 25 22 is_stmt 0 view .LVU32
+  84 0022 4374     		strb	r3, [r0, #17]
+  26:Src/BMSconfig.c **** 	cfg->DischargeCell7 = 0;
+  85              		.loc 1 26 2 is_stmt 1 view .LVU33
+  86              		.loc 1 26 22 is_stmt 0 view .LVU34
+  87 0024 8374     		strb	r3, [r0, #18]
+  27:Src/BMSconfig.c **** 	cfg->DischargeCell8 = 0;
+  88              		.loc 1 27 2 is_stmt 1 view .LVU35
+ARM GAS  C:\cygwin64\tmp\ccs6aTRd.s 			page 3
+
+
+  89              		.loc 1 27 22 is_stmt 0 view .LVU36
+  90 0026 C374     		strb	r3, [r0, #19]
+  28:Src/BMSconfig.c **** 	cfg->DischargeCell9 = 0;
+  91              		.loc 1 28 2 is_stmt 1 view .LVU37
+  92              		.loc 1 28 22 is_stmt 0 view .LVU38
+  93 0028 0375     		strb	r3, [r0, #20]
+  29:Src/BMSconfig.c **** 	cfg->DischargeCell10 = 0;
+  94              		.loc 1 29 2 is_stmt 1 view .LVU39
+  95              		.loc 1 29 23 is_stmt 0 view .LVU40
+  96 002a 4375     		strb	r3, [r0, #21]
+  30:Src/BMSconfig.c **** 	cfg->DischargeCell11 = 0;
+  97              		.loc 1 30 2 is_stmt 1 view .LVU41
+  98              		.loc 1 30 23 is_stmt 0 view .LVU42
+  99 002c 8375     		strb	r3, [r0, #22]
+  31:Src/BMSconfig.c **** 	cfg->DischargeCell12 = 0;
+ 100              		.loc 1 31 2 is_stmt 1 view .LVU43
+ 101              		.loc 1 31 23 is_stmt 0 view .LVU44
+ 102 002e C375     		strb	r3, [r0, #23]
+  32:Src/BMSconfig.c **** 	
+  33:Src/BMSconfig.c **** 	cfg->DischargeTimeoutValue = 0x0;
+ 103              		.loc 1 33 2 is_stmt 1 view .LVU45
+ 104              		.loc 1 33 29 is_stmt 0 view .LVU46
+ 105 0030 0376     		strb	r3, [r0, #24]
+  34:Src/BMSconfig.c **** }
+ 106              		.loc 1 34 1 view .LVU47
+ 107 0032 7047     		bx	lr
+ 108              		.cfi_endproc
+ 109              	.LFE130:
+ 111              		.text
+ 112              	.Letext0:
+ 113              		.file 2 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 114              		.file 3 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 115              		.file 4 "Drivers/CMSIS/Include/core_cm4.h"
+ 116              		.file 5 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
+ 117              		.file 6 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\sys\\lock.h"
+ 118              		.file 7 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\sys\\_types.h"
+ 119              		.file 8 "c:\\arm-gcc\\8-2018-q4-major\\lib\\gcc\\arm-none-eabi\\8.2.1\\include\\stddef.h"
+ 120              		.file 9 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\sys\\reent.h"
+ 121              		.file 10 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\stdlib.h"
+ 122              		.file 11 "Inc/BMSconfig.h"
+ARM GAS  C:\cygwin64\tmp\ccs6aTRd.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 BMSconfig.c
+C:\cygwin64\tmp\ccs6aTRd.s:18     .text.loadConfig:00000000 $t
+C:\cygwin64\tmp\ccs6aTRd.s:26     .text.loadConfig:00000000 loadConfig
+
+NO UNDEFINED SYMBOLS
