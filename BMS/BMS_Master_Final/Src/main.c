@@ -24,6 +24,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "LTC6811.h"
+#include "ChargerFunctions.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -130,7 +131,7 @@ int main(void)
   loadConfig(&BMSconfig); // loads configuration settings from config.c
   writeConfig(BMSconfig, 1); // number specifies how many ICs are connected
   // !! this assumes that the addresses for each IC count up from 1 !! //
-  
+  float cellVoltage[numBoards][cellsPerBoard];
   uint16_t voltage[8];
   uint8_t printbuffer[16];
   /* USER CODE END 2 */
@@ -176,7 +177,20 @@ int main(void)
 	
 	SerialPrint(printbuffer, 8);
 	SerialPrint(printbuffer + 8, 8);
-	
+
+	/* Charger functions assume voltage data from every cell has already been receieved */
+	//while (/* data for every cell has not been received */){}
+
+	/*** Charging  ***/
+	setChargeDischarge(cellsDischarge, &chargeCurrent, cellVoltage);
+	setChargerTxData();
+
+	if (HAL_CAN_AddTxMessage(&hcan2, &TxHeader2, CANtx, &TxMailbox) == HAL_OK) {
+		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+	}
+
+	/*** End Charging ***/
+
 	HAL_Delay(500);
     /* USER CODE BEGIN 3 */
   }
@@ -369,6 +383,13 @@ static void MX_CAN2_Init(void)
 	HAL_CAN_Start(&hcan2);
 	
 	HAL_CAN_ActivateNotification(&hcan2, CAN_IT_RX_FIFO0_MSG_PENDING);
+
+	TxHeader2.StdId = 0x321; 					// CAN standard ID
+	TxHeader2.ExtId = 0x1806E5F4; 					// CAN extended ID
+	TxHeader2.RTR = CAN_RTR_DATA; 				// CAN frame type
+	TxHeader2.IDE = CAN_ID_EXT; 				// CAN ID type
+	TxHeader2.DLC = 8; 						// CAN frame length in bytes
+	TxHeader2.TransmitGlobalTime = DISABLE;	// CAN timestamp in TxData[6] and TxData[7]
   /* USER CODE END CAN2_Init 2 */
 
 }

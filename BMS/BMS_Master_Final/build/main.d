@@ -29,7 +29,7 @@ build/main.o: Src/main.c Inc/main.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h Inc/LTC6811.h \
- Inc/SPI.h Inc/BMSconfig.h
+ Inc/SPI.h Inc/BMSconfig.h Inc/ChargerFunctions.h
 
 Inc/main.h:
 
@@ -102,3 +102,5 @@ Inc/LTC6811.h:
 Inc/SPI.h:
 
 Inc/BMSconfig.h:
+
+Inc/ChargerFunctions.h:

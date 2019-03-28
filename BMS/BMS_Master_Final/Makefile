@@ -62,8 +62,8 @@ Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c \
 Src/system_stm32f4xx.c \
 Src/BMSconfig.c \
 Src/LTC6811.c \
-Src/SPI.c 
-
+Src/SPI.c  \
+Src/ChargerFunctions.c
 
 
 # ASM sources
@@ -74,7 +74,7 @@ startup_stm32f446xx.s
 #######################################
 # binaries
 #######################################
-PREFIX = C:/arm-gcc/8-2018-q4-major/bin/arm-none-eabi-
+PREFIX = /mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/bin/arm-none-eabi-
 # The gcc compiler bin path can be either defined in make command via GCC_PATH variable (> make GCC_PATH=xxx)
 # either it can be added to the PATH environment variable.
 ifdef GCC_PATH
