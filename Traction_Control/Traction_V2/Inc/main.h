@@ -79,6 +79,18 @@ void Error_Handler(void);
 
 /* Private defines -----------------------------------------------------------*/
 /* USER CODE BEGIN Private defines */
+#define MAX_CONTROL_VALUE 255
+#define TRACTION_DISABLE_COUNT 8
+#define MIN(x, y) ((y) ^ (((x) ^ (y)) & -((x) < (y))))
+#define MAX(x, y) ((x) ^ (((x) ^ (y)) & -((x) < (y))))
+
+typedef struct wheel_s {
+  int new; // current timer value
+  int old; // previous timer value
+  int count; // count TIM2 resets between fl_new and fl_old
+  int delta; // difference in ticks between new and old
+  int freq; // frequency in Hz
+} wheel_t;
 
 /* USER CODE END Private defines */
 
