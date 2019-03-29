@@ -137,6 +137,9 @@ int main(void)
   // !! this assumes that the addresses for each IC count up from 1 !! //
   
   uint16_t voltage[8];
+  uint16_t temp[4];
+  bool connection[12];
+  uint8_t rdcfg[6];
   uint8_t printbuffer[16];
 
   /* USER CODE END 2 */
@@ -146,22 +149,29 @@ int main(void)
   while (1)
   {
 	  
-	// readCellVoltage(uint8_t address, uint16_t cellVoltage[8])
-	// after calling this, the cellVoltage array will contain the 16-bit voltage values for all 8 cells
-	// cellVoltage[0] holds cell 1 voltage
-	// cellVoltage[1] holds cell 2 voltage
-	// cellVoltage[2] holds cell 3 voltage
-	// cellVoltage[3] holds cell 4 voltage
-	// cellVoltage[4] holds cell 7 voltage
-	// cellVoltage[5] holds cell 8 voltage
-	// cellVoltage[6] holds cell 9 voltage
-	// cellVoltage[7] holds cell 10 voltage
+	// read cell voltage
+	// read cell temp
+	// check for disconnected cells
+	// handle faults and send CAN messages
 	
-	if (readCellVoltage(1, voltage) == true) HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+	if (readCellVoltage(0, voltage) == true) HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+	
+	//if (readCellTemp(0, temp) == true) HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+	
+	writeConfig(BMSconfig, 1);
+	
+	readConfig(0, rdcfg);
+	
+	printbuffer[0] = rdcfg[0];
+	printbuffer[1] = rdcfg[1];
+	printbuffer[2] = rdcfg[2];
+	printbuffer[3] = rdcfg[3];
+	printbuffer[4] = rdcfg[4];
+	printbuffer[5] = rdcfg[5];
 	
 	// print cell voltage data
 	
-	printbuffer[0] = (uint8_t) (voltage[0] >> 8) & 0xFF;
+	/*printbuffer[0] = (uint8_t) (voltage[0] >> 8) & 0xFF;
 	printbuffer[1] = (uint8_t) voltage[0] & 0xFF;
 	printbuffer[2] = (uint8_t) (voltage[1] >> 8) & 0xFF;
 	printbuffer[3] = (uint8_t) voltage[1] & 0xFF;
@@ -176,10 +186,20 @@ int main(void)
 	printbuffer[12] = (uint8_t) (voltage[6] >> 8) & 0xFF;
 	printbuffer[13] = (uint8_t) voltage[6] & 0xFF;
 	printbuffer[14] = (uint8_t) (voltage[7] >> 8) & 0xFF;
-	printbuffer[15] = (uint8_t) voltage[7] & 0xFF;
+	printbuffer[15] = (uint8_t) voltage[7] & 0xFF;*/
 	
-	SerialPrint(printbuffer, 8);
-	SerialPrint(printbuffer + 8, 8);
+	/*printbuffer[0] = (uint8_t) (temp[0] >> 8) & 0xFF;
+	printbuffer[1] = (uint8_t) temp[0] & 0xFF;
+	printbuffer[2] = (uint8_t) (temp[1] >> 8) & 0xFF;
+	printbuffer[3] = (uint8_t) temp[1] & 0xFF;
+	printbuffer[4] = (uint8_t) (temp[2] >> 8) & 0xFF;
+	printbuffer[5] = (uint8_t) temp[2] & 0xFF;
+	printbuffer[6] = (uint8_t) (temp[3] >> 8) & 0xFF;
+	printbuffer[7] = (uint8_t) temp[3] & 0xFF;*/
+	
+	SerialPrint(printbuffer, 6);
+	//SerialPrint(printbuffer, 8);
+	//SerialPrint(printbuffer + 8, 8);
 	
 	HAL_Delay(500);
 	

@@ -58,7 +58,7 @@ Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c \
 Src/system_stm32f1xx.c  \
 Src/SPI.c \
 Src/LTC6811.c \
-Src/BMSconfig.c
+Src/BMSconfig.c 
 
 # ASM sources
 ASM_SOURCES =  \
