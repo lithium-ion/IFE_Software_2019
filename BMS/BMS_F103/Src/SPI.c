@@ -14,7 +14,7 @@ void SPI_Init(void)
   SPIHandle.Init.CLKPolarity = SPI_POLARITY_HIGH;
   SPIHandle.Init.CLKPhase = SPI_PHASE_2EDGE;
   SPIHandle.Init.NSS = SPI_NSS_HARD_OUTPUT;
-  SPIHandle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;
+  SPIHandle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16; // minimum SPI period is 1us, so minimum prescaler is 8(7)
   SPIHandle.Init.FirstBit = SPI_FIRSTBIT_MSB;
   SPIHandle.Init.TIMode = SPI_TIMODE_DISABLE;
   SPIHandle.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
