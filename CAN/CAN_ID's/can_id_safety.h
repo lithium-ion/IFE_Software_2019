@@ -22,9 +22,11 @@
 *	1		| 	Boolean	|	0xFF = Fault present| IMD 
 *			| 			|	0x00 = no fault 	|
 ------------------------------------------------------
-* 	2 		| 	Boolean	|	0xFF = Fault Presnet| BSPD
+* 	2 		| 	Boolean	|	0xFF = Fault present| BSPD
 *			|			| 	0x00 = no FAULT 	| 
-*
+------------------------------------------------------
+* 	3 		| 	Boolean	|	0xFF = Fault present| APPS
+*			|			| 	0x00 = no FAULT 	| 
 *
 */
 
