@@ -54,10 +54,10 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 
-#define APPS_STDID x300;
-#define BTSF_STDID x301;
-#define brakeThreshold = 80;
-#define brakeThreshold = 80;
+#define APPS_STDID 0x300;
+#define BTSF_STDID 0x301;
+const int throttleThreshold = 80;
+const int brakeThreshold = 80;
 
 
 /* USER CODE END PD */
@@ -81,14 +81,28 @@ int brakePressure_1;
 int throttle_A;
 int throttle_B;
 
-bool driving = false;
-bool hardFaultFlag = false;
+int driving = 0;  		//boolean
+int hardFaultFlag = 0;  //boolean
 
 CAN_TxHeaderTypeDef TxHeader;
 CAN_RxHeaderTypedef RxHeader;
 uint8_t TxData[8] = {0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55};
+/*Set these values: 0xFF = Fault present
+					0x00 = No fault*/
+//FAULTS
+uint8_t bms;        //TxData[0]
+uint8_t imd;		//TxData[1]
+uint8_t bspd; 		//TxData[2]
+uint8_t apps; 		//TxData[3]
+//PRECHARGE
+uint8_t charged;    //TxData[0]
+//ENABLE
+uint8_t enable;		//TxData[0]
+
 uint8_t RxData[8];
 uint32_t TxMailbox;
+
+ADC_ChannelConfTypeDef sConfig = {0};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -105,9 +119,9 @@ static void MX_CAN_Init(void);
 /* USER CODE BEGIN 0 */
 
 int refTime = millis();
-bool APPSFlag = false;
+int APPSFlag = 0; //boolean
 
-bool checkAPPS(){
+int checkAPPS(){ //return boolean 
 
   //ADC for throttle_A
   sConfig.Channel = ADC_CHANNEL_9;
@@ -129,36 +143,34 @@ bool checkAPPS(){
 
   //0-5000 based
 
-  if((throttle_B-throttle_A > 25 || throttle_A-throttle_B > 25) && APPSFlag == false){
-
-    APPSFlag = true;
-    refTime = HAL_Delay();
-
+  if((throttle_B-throttle_A > 25 || throttle_A-throttle_B > 25) && !APPSFlag){
+    APPSFlag = 1;
+    refTime = millis();
   }
 
-  if(HAL_Delay - refTime >= 100 && APPSFlag == true){
+  if(millis() - refTime >= 100 && APPSFlag){ //hmmm needs to be changed
     //APPS_EN Fault
 
     //sending CAN message
     TxHeader.StdId = APPS_STDID;
     HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox);
 
-    return true;
+    return 1;
   }
 
   if((throttle_B-throttle_A < 25 && throttle_A-throttle_B > -25) || (throttle_B-throttle_A > -25 && throttle_A-throttle_B < 25)){
 
-    APPSFlag = false;
+    APPSFlag = 0;
 
   }
 
-  return false;
+  return 0;
 
 }
 
-bool BTSFFlag = false;
+int BTSFFlag = 0;
 
-bool checkBTSF(){
+int checkBTSF(){
 
   //HAL_ADC_Start_IT(&hadc1); do we need this?
 
@@ -184,19 +196,17 @@ bool checkBTSF(){
 
   if(brakePressure_1 > brakeThreshold && throttle_A > throttleThreshold){
 
-    BTSFFlag = true;
+    BTSFFlag = 1;
 
     //sending CAN message
     if (HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox) == HAL_OK){
       TxHeader.StdId = BTSF_STDID;
       HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox);
     }
-    return true;
-    
-
+    return 1;
   }
-  return false;
-
+  
+  return 0;
 }
 
 /* USER CODE END 0 */
@@ -267,7 +277,7 @@ int main(void)
             while(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_15) == HIGH){
 
               //RTD Sound
-              if(driving == false){
+              if(!driving){
 
                 //ADC for Brake pressure
                 sConfig.Channel = ADC_CHANNEL_3;
@@ -283,15 +293,15 @@ int main(void)
                     //RTD Sound Enable
                     int RTDS_time = HAL_Delay();
                     while(HAL_Delay() - RTDS_time < 3000){
-                      HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, HIGH);
+                      HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, GPIO_PIN_SET);
                     }
                     //turn off sound
-                    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, LOW);
+                    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, GPIO_PIN_RESET);
 
                     //Send RTD Enable
-                    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, HIGH);
+                    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET);
 
-                    driving = true;
+                    driving = 1;
 
                   }
 
@@ -302,51 +312,50 @@ int main(void)
               //BSPD Fault
               if(HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_0) == HIGH){
                 //send CAN message
-                hardFaultFlag = true;
-                driving = false;
+                hardFaultFlag = 1;
+                driving = 0;
               }
 
               //IMD Fault
               if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_14) == HIGH){
                 //send CAN message
-                hardFaultFlag = true;
-                driving = false;
+                hardFaultFlag = 1;
+                driving = 0;
               }
 
               //BSPD Fault
               if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_15) == HIGH){
                 //send CAN message
 
-                hardFaultFlag = true;
-                driving = false;
+                hardFaultFlag = 1;
+                driving = 0;
               }
 
-              if (checkBTSF() == true){
+              if (checkBTSF()){
+                //send CAN message
+
+                driving = 0;
+
+              }
+              if (checkAPPS()){
                 //send CAN message
 
                 driving = false;
-
-              }
-              if (checkAPPS() == true){
-                //send CAN message
-
-                driving = false;
-
               }
 
               
 
             }//end inside while
 
-            if(hardFaultFlag == true) break;
+            if(hardFaultFlag) break;
           }//end BMS Fault
-          if(hardFaultFlag == true) break;
+          if(hardFaultFlag) break;
         }//end IMD Fault
-        if(hardFaultFlag == true) break;
+        if(hardFaultFlag) break;
       }//end precharch check
-      if(hardFaultFlag == true) break;
+      if(hardFaultFlag) break;
     }//end initial BSPD
-    if(hardFaultFlag == true) break;
+    if(hardFaultFlag) break;
 
     /* USER CODE END WHILE */
 
@@ -408,7 +417,7 @@ static void MX_ADC1_Init(void)
 
   /* USER CODE END ADC1_Init 0 */
 
-  ADC_ChannelConfTypeDef sConfig = {0};
+  //ADC_ChannelConfTypeDef sConfig = {0};
 
   /* USER CODE BEGIN ADC1_Init 1 */
 
@@ -600,6 +609,27 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void sendFaultMsg(){
+	TxHeader.StdId = FAULTS; // CAN FAULT ID
+	TxData[0] = bms;  //Set all the data (faults) to their current values
+	TxData[1] = imd;
+	TxData[2] = bspd;
+	TxData[3] = apps;
+	HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox);
+}
+
+void sendPrechargeMsg(){
+	TxHeader.StdId = PRECHARGE;
+	TxData[0] = charged;
+	HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox);
+}
+
+void sendEnableMsg(){
+	TxHeader.StdId = ENABLE;
+	TxData[0] = enable;
+	HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox);
+}
 
 /* USER CODE END 4 */
 

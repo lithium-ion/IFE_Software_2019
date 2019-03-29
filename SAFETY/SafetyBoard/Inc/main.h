@@ -79,6 +79,13 @@ void Error_Handler(void);
 
 /* Private defines -----------------------------------------------------------*/
 /* USER CODE BEGIN Private defines */
+#define FAULTS 0x0D0
+#define PRECHARGE 0x0D1
+#define ENABLE 0x0D2
+
+void sendFaultMsg();
+void sendPrechargeMsg();
+void sendEnableMsg();
 
 /* USER CODE END Private defines */
 
