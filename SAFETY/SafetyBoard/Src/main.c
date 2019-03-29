@@ -76,6 +76,14 @@ SPI_HandleTypeDef hspi1;
 
 /* USER CODE BEGIN PV */
 
+
+int brakePressure_1;
+int throttle_A;
+int throttle_B;
+
+bool driving = false;
+bool hardFaultFlag = false;
+
 CAN_TxHeaderTypeDef TxHeader;
 CAN_RxHeaderTypedef RxHeader;
 uint8_t TxData[8] = {0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55};
@@ -86,9 +94,9 @@ uint32_t TxMailbox;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-static void MX_CAN_Init(void);
 static void MX_SPI1_Init(void);
 static void MX_ADC1_Init(void);
+static void MX_CAN_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -96,65 +104,107 @@ static void MX_ADC1_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+int refTime = millis();
+bool APPSFlag = false;
+
+bool checkAPPS(){
+
+  //ADC for throttle_A
+  sConfig.Channel = ADC_CHANNEL_9;
+  sConfig.Rank = ADC_REGULAR_RANK_1;
+  sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
+  HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+  if (HAL_ADC_PollForConversion(&g_AdcHandle, 1000000) == HAL_OK){
+    throttle_A = HAL_ADC_GetValue(&hadc1);
+  }
+
+  //ADC for throttle_B
+  sConfig.Channel = ADC_CHANNEL_8;
+  sConfig.Rank = ADC_REGULAR_RANK_1;
+  sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
+  HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+  if (HAL_ADC_PollForConversion(&g_AdcHandle, 1000000) == HAL_OK){
+    throttle_B = HAL_ADC_GetValue(&hadc1);
+  }
+
+  //0-5000 based
+
+  if((throttle_B-throttle_A > 25 || throttle_A-throttle_B > 25) && APPSFlag == false){
+
+    APPSFlag = true;
+    refTime = HAL_Delay();
+
+  }
+
+  if(HAL_Delay - refTime >= 100 && APPSFlag == true){
+    //APPS_EN Fault
+
+    //sending CAN message
+    TxHeader.StdId = APPS_STDID;
+    HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox);
+
+    return true;
+  }
+
+  if((throttle_B-throttle_A < 25 && throttle_A-throttle_B > -25) || (throttle_B-throttle_A > -25 && throttle_A-throttle_B < 25)){
+
+    APPSFlag = false;
+
+  }
+
+  return false;
+
+}
+
+bool BTSFFlag = false;
+
+bool checkBTSF(){
+
+  //HAL_ADC_Start_IT(&hadc1); do we need this?
+
+  //ADC for Brake pressure
+  sConfig.Channel = ADC_CHANNEL_3;
+  sConfig.Rank = ADC_REGULAR_RANK_1;
+  sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
+  HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+  if (HAL_ADC_PollForConversion(&g_AdcHandle, 1000000) == HAL_OK){
+    brakePressure_1 = HAL_ADC_GetValue(&hadc1);
+  }
+
+  //ADC for throttle_A
+  sConfig.Channel = ADC_CHANNEL_8;
+  sConfig.Rank = ADC_REGULAR_RANK_1;
+  sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
+  HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+  if (HAL_ADC_PollForConversion(&g_AdcHandle, 1000000) == HAL_OK){
+    throttle_A = HAL_ADC_GetValue(&hadc1);
+  }
+
+  //0-5000 based
+
+  if(brakePressure_1 > brakeThreshold && throttle_A > throttleThreshold){
+
+    BTSFFlag = true;
+
+    //sending CAN message
+    if (HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox) == HAL_OK){
+      TxHeader.StdId = BTSF_STDID;
+      HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox);
+    }
+    return true;
+    
+
+  }
+  return false;
+
+}
+
 /* USER CODE END 0 */
 
 /**
   * @brief  The application entry point.
   * @retval int
   */
-
-int refTime = millis();
-bool APPSFlag = false;
-
-void checkAPPS(int throttle1, int throttle2){
-
-  //0-5000 based
-  //int throttle1;
-  //int throttle2;
-
-  if((throttle2-throttle1 > 25 || throttle1-throttle2 > 25) && APPSFlag == false){
-
-    APPSFlag = true;
-    refTime = millis();
-
-  }
-
-  if(millis() - refTime >= 100){
-    //APPS_EN Fault
-
-    //sending CAN message
-    TxHeader.StdId = APPS_STDID;
-    HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox);
-  }
-
-  if((throttle2-throttle1 < 25 && throttle1-throttle2 > -25) || (throttle2-throttle1 > -25 && throttle1-throttle2 < 25)){
-
-    APPSFlag = false;
-
-  }
-
-}
-
-bool BTSFFlag = false;
-
-void checkBTSF(int brake, int throttle){
-
-  //0-5000 based
-
-  if(brake > brakeThreshold && throttle > throttleThreshold){
-
-    BTSFFlag = true;
-
-    //sending CAN message
-    TxHeader.StdId = BTSF_STDID;
-    HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox);
-
-  }
-
-}
-
-
-
 int main(void)
 {
   /* USER CODE BEGIN 1 */
@@ -179,45 +229,126 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_CAN_Init();
   MX_SPI1_Init();
   MX_ADC1_Init();
+  MX_CAN_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  HAL_ADC_Start(&g_AdcHandle);
+  
   while (1)
   {
-    /* USER CODE END WHILE */
-    if (HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox) == HAL_OK) 
-    HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
 
-    //BTSF Enable Brake throttle soft fault
-    if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_8) == SET){
-      //Precharge complete
-      if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6) == SET){
-        //ADC for Brake pressure
-        if (HAL_ADC_PollForConversion(&g_AdcHandle, 1000000) == HAL_OK)
-        {
-            g_ADCValue = HAL_ADC_GetValue(&g_AdcHandle);
-            g_MeasurementNumber++;
+    //BSPD Fault
+  if(HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_0) == HIGH){
+    //Precharge complete
+    if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6) == HIGH){
+      //IMD Fault
+      if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_14) == HIGH){
+        //BMS Fault
+        if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_15) == HIGH){
 
-            if(g_ADCValue == brakeThreshold){
-              //RTDS Enable
-              if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_3) == SET && HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_3) == SET){
+          /* Infinite loop */
+          /* USER CODE BEGIN WHILE */
+          HAL_ADC_Start_IT(&hadc1);
+            /* USER CODE END WHILE */
 
-                HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, SET);
+            /*
+            if (HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox) == HAL_OK) 
+            HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+            */
+
+            
+
+            //CHeck ENABLE_IN from driver switch
+            while(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_15) == HIGH){
+
+              //RTD Sound
+              if(driving == false){
+
+                //ADC for Brake pressure
+                sConfig.Channel = ADC_CHANNEL_3;
+                sConfig.Rank = ADC_REGULAR_RANK_1;
+                sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
+                HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+                if (HAL_ADC_PollForConversion(&g_AdcHandle, 1000000) == HAL_OK){
+                  brakePressure_1 = HAL_ADC_GetValue(&hadc1);
+
+                  //if brake pressed
+                  if(brakePressure_1 >= brakeThreshold){
+
+                    //RTD Sound Enable
+                    int RTDS_time = HAL_Delay();
+                    while(HAL_Delay() - RTDS_time < 3000){
+                      HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, HIGH);
+                    }
+                    //turn off sound
+                    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, LOW);
+
+                    //Send RTD Enable
+                    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, HIGH);
+
+                    driving = true;
+
+                  }
+
+                }
 
               }
 
-            }
-          }
-        }
-      }
+              //BSPD Fault
+              if(HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_0) == HIGH){
+                //send CAN message
+                hardFaultFlag = true;
+                driving = false;
+              }
 
+              //IMD Fault
+              if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_14) == HIGH){
+                //send CAN message
+                hardFaultFlag = true;
+                driving = false;
+              }
+
+              //BSPD Fault
+              if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_15) == HIGH){
+                //send CAN message
+
+                hardFaultFlag = true;
+                driving = false;
+              }
+
+              if (checkBTSF() == true){
+                //send CAN message
+
+                driving = false;
+
+              }
+              if (checkAPPS() == true){
+                //send CAN message
+
+                driving = false;
+
+              }
+
+              
+
+            }//end inside while
+
+            if(hardFaultFlag == true) break;
+          }//end BMS Fault
+          if(hardFaultFlag == true) break;
+        }//end IMD Fault
+        if(hardFaultFlag == true) break;
+      }//end precharch check
+      if(hardFaultFlag == true) break;
+    }//end initial BSPD
+    if(hardFaultFlag == true) break;
+
+    /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
   }
@@ -323,6 +454,13 @@ static void MX_CAN_Init(void)
   /* USER CODE END CAN_Init 0 */
 
   /* USER CODE BEGIN CAN_Init 1 */
+  HAL_CAN_Start(&hcan);
+  TxHeader.StdId = 0x321;         // CAN standard ID
+  TxHeader.ExtId = 0x01;          // CAN extended ID
+  TxHeader.RTR = CAN_RTR_DATA;      // CAN frame type
+  TxHeader.IDE = CAN_ID_STD;        // CAN ID type
+  TxHeader.DLC = 8;             // CAN frame length in bytes
+  TxHeader.TransmitGlobalTime = DISABLE;  // CAN timestamp in TxData[6] and TxData[7]
 
   /* USER CODE END CAN_Init 1 */
   hcan.Instance = CAN1;
@@ -337,6 +475,11 @@ static void MX_CAN_Init(void)
   hcan.Init.AutoRetransmission = DISABLE;
   hcan.Init.ReceiveFifoLocked = DISABLE;
   hcan.Init.TransmitFifoPriority = DISABLE;
+
+  
+
+
+
   if (HAL_CAN_Init(&hcan) != HAL_OK)
   {
     Error_Handler();
@@ -396,6 +539,7 @@ static void MX_GPIO_Init(void)
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
@@ -403,7 +547,8 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5 
+                          |GPIO_PIN_8, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_RESET);
@@ -415,36 +560,28 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PA1 PA2 */
-  GPIO_InitStruct.Pin = GPIO_PIN_1|GPIO_PIN_2;
-  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : PA3 */
-  GPIO_InitStruct.Pin = GPIO_PIN_3;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+  /*Configure GPIO pins : PC14 PC15 */
+  GPIO_InitStruct.Pin = GPIO_PIN_14|GPIO_PIN_15;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PB0 PB1 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1;
-  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+  /*Configure GPIO pin : PD0 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PB10 PB6 PB8 */
-  GPIO_InitStruct.Pin = GPIO_PIN_10|GPIO_PIN_6|GPIO_PIN_8;
+  /*Configure GPIO pins : PB10 PB15 PB6 */
+  GPIO_InitStruct.Pin = GPIO_PIN_10|GPIO_PIN_15|GPIO_PIN_6;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PB11 PB14 */
-  GPIO_InitStruct.Pin = GPIO_PIN_11|GPIO_PIN_14;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : PB13 PB3 PB4 PB5 */
-  GPIO_InitStruct.Pin = GPIO_PIN_13|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5;
+  /*Configure GPIO pins : PB13 PB3 PB4 PB5 
+                           PB8 */
+  GPIO_InitStruct.Pin = GPIO_PIN_13|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5 
+                          |GPIO_PIN_8;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -457,12 +594,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI3_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(EXTI3_IRQn);
-
-  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+  /*Configure peripheral I/O remapping */
+  __HAL_AFIO_REMAP_PD01_ENABLE();
 
 }
 
