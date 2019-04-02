@@ -66,10 +66,10 @@ ADC_HandleTypeDef hadc1;
 
 UART_HandleTypeDef huart1;
 
-ADC_ChannelConfTypeDef sConfig = {0};
-
 /* USER CODE BEGIN PV */
 int count = 0;
+uint16_t val[2];
+uint8_t serial[4];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -125,8 +125,25 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	HAL_ADC_Start_IT(&hadc1);
-	HAL_Delay(100);
+	HAL_ADC_Start(&hadc1);
+	HAL_ADC_PollForConversion(&hadc1, 1000);
+	val[0] = HAL_ADC_GetValue(&hadc1);
+	
+	HAL_ADC_PollForConversion(&hadc1, 1000);
+	val[1] = HAL_ADC_GetValue(&hadc1);
+	
+	HAL_ADC_Stop(&hadc1);
+	
+	HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+	
+	serial[0] = (uint8_t) ((val[0] >> 8) & 0xFF);
+	serial[1] = (uint8_t) ((val[0] >> 0) & 0xFF);
+	serial[2] = (uint8_t) ((val[1] >> 8) & 0xFF);
+	serial[3] = (uint8_t) ((val[1] >> 0) & 0xFF);
+	
+	HAL_UART_Transmit(&huart1, serial, sizeof(serial), 1000);
+	
+	HAL_Delay(250);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -134,7 +151,7 @@ int main(void)
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
 	
-	if ((count % 2) == 0) {
+	/*if ((count % 2) == 0) {
 		sConfig.Channel = ADC_CHANNEL_0;
 		sConfig.Rank = ADC_REGULAR_RANK_1;
 		sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
@@ -146,14 +163,14 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
 		sConfig.Rank = ADC_REGULAR_RANK_1;
 		sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
 		HAL_ADC_ConfigChannel(&hadc1, &sConfig);
-	}
+	}*/
 	
-	count++;
+	//count++;
 	
-	int val = HAL_ADC_GetValue(&hadc1);
-	if (val > 10) {
+	/*int val = HAL_ADC_GetValue(&hadc1);
+	if (val > 2000) {
 		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-	}
+	}*/
 	
 }
 
@@ -167,7 +184,7 @@ void SystemClock_Config(void)
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
-  /**Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the CPU, AHB and APB busses clocks 
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
@@ -177,7 +194,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /**Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the CPU, AHB and APB busses clocks 
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
@@ -210,23 +227,25 @@ static void MX_ADC1_Init(void)
 
   /* USER CODE END ADC1_Init 0 */
 
+  ADC_ChannelConfTypeDef sConfig = {0};
+
   /* USER CODE BEGIN ADC1_Init 1 */
 
   /* USER CODE END ADC1_Init 1 */
-  /**Common config 
+  /** Common config 
   */
   hadc1.Instance = ADC1;
-  hadc1.Init.ScanConvMode = ADC_SCAN_DISABLE; //enable
-  hadc1.Init.ContinuousConvMode = DISABLE;
+  hadc1.Init.ScanConvMode = ENABLE; // enable to read from different ranks
+  hadc1.Init.ContinuousConvMode = ENABLE;
   hadc1.Init.DiscontinuousConvMode = DISABLE;
   hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
   hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-  hadc1.Init.NbrOfConversion = 1; //4
+  hadc1.Init.NbrOfConversion = 2;
   if (HAL_ADC_Init(&hadc1) != HAL_OK)
   {
     Error_Handler();
   }
-  /**Configure Regular Channel 
+  /** Configure Regular Channel 
   */
   sConfig.Channel = ADC_CHANNEL_0;
   sConfig.Rank = ADC_REGULAR_RANK_1;
@@ -235,33 +254,15 @@ static void MX_ADC1_Init(void)
   {
     Error_Handler();
   }
-  /**Configure Regular Channel 
+  /** Configure Regular Channel 
   */
   sConfig.Channel = ADC_CHANNEL_1;
   sConfig.Rank = ADC_REGULAR_RANK_2;
-  sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
   {
     Error_Handler();
   }
-  /**Configure Regular Channel 
-  */
-  sConfig.Channel = ADC_CHANNEL_2;
-  sConfig.Rank = ADC_REGULAR_RANK_3;
-  sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
-  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /**Configure Regular Channel 
-  */
-  sConfig.Channel = ADC_CHANNEL_3;
-  sConfig.Rank = ADC_REGULAR_RANK_4;
-  sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
-  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
+
   /* USER CODE BEGIN ADC1_Init 2 */
   
   /* USER CODE END ADC1_Init 2 */
@@ -313,6 +314,7 @@ static void MX_GPIO_Init(void)
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);

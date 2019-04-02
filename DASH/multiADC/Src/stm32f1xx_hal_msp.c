@@ -92,7 +92,7 @@ void HAL_MspInit(void)
 
   /* System interrupt init*/
 
-  /**DISABLE: JTAG-DP Disabled and SW-DP Disabled 
+  /** DISABLE: JTAG-DP Disabled and SW-DP Disabled 
   */
   __HAL_AFIO_REMAP_SWJ_DISABLE();
 
@@ -109,7 +109,6 @@ void HAL_MspInit(void)
 */
 void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
 {
-
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   if(hadc->Instance==ADC1)
   {
@@ -120,15 +119,19 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
     __HAL_RCC_ADC1_CLK_ENABLE();
   
     __HAL_RCC_GPIOA_CLK_ENABLE();
+    __HAL_RCC_GPIOB_CLK_ENABLE();
     /**ADC1 GPIO Configuration    
     PA0-WKUP     ------> ADC1_IN0
-    PA1     ------> ADC1_IN1
-    PA2     ------> ADC1_IN2
-    PA3     ------> ADC1_IN3 
+    PB0     ------> ADC1_IN8
+    PB1     ------> ADC1_IN9 
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3;
+    GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_8;
     GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+    GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1;
+    GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
     /* ADC1 interrupt Init */
     HAL_NVIC_SetPriority(ADC1_2_IRQn, 0, 0);
@@ -146,10 +149,8 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
 * @param hadc: ADC handle pointer
 * @retval None
 */
-
 void HAL_ADC_MspDeInit(ADC_HandleTypeDef* hadc)
 {
-
   if(hadc->Instance==ADC1)
   {
   /* USER CODE BEGIN ADC1_MspDeInit 0 */
@@ -160,11 +161,12 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef* hadc)
   
     /**ADC1 GPIO Configuration    
     PA0-WKUP     ------> ADC1_IN0
-    PA1     ------> ADC1_IN1
-    PA2     ------> ADC1_IN2
-    PA3     ------> ADC1_IN3 
+    PB0     ------> ADC1_IN8
+    PB1     ------> ADC1_IN9 
     */
-    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3);
+    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_0);
+
+    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_0|GPIO_PIN_1);
 
     /* ADC1 interrupt DeInit */
     HAL_NVIC_DisableIRQ(ADC1_2_IRQn);
@@ -183,7 +185,6 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef* hadc)
 */
 void HAL_UART_MspInit(UART_HandleTypeDef* huart)
 {
-
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   if(huart->Instance==USART1)
   {
@@ -221,10 +222,8 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
 * @param huart: UART handle pointer
 * @retval None
 */
-
 void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
 {
-
   if(huart->Instance==USART1)
   {
   /* USER CODE BEGIN USART1_MspDeInit 0 */
