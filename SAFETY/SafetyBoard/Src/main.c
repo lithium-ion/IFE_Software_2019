@@ -71,21 +71,22 @@ const int brakeThreshold = 80;
 ADC_HandleTypeDef hadc1;
 
 CAN_HandleTypeDef hcan;
-
 SPI_HandleTypeDef hspi1;
 
 /* USER CODE BEGIN PV */
 
-
-int brakePressure_1;
-int throttle_A;
-int throttle_B;
+uint16_t brakePos;
+uint16_t steeringPos;
+uint16_t brakePressure_1;
+uint16_t brakePressure_2;
+uint16_t throttle_A;
+uint16_t throttle_B;
 
 int driving = 0;  		//boolean
 int hardFaultFlag = 0;  //boolean
 
 CAN_TxHeaderTypeDef TxHeader;
-CAN_RxHeaderTypedef RxHeader;
+//CAN_RxHeaderTypedef RxHeader;
 uint8_t TxData[8] = {0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55};
 /*Set these values: 0xFF = Fault present
 					0x00 = No fault*/
@@ -95,14 +96,14 @@ uint8_t imd;		//TxData[1]
 uint8_t bspd; 		//TxData[2]
 uint8_t apps; 		//TxData[3]
 //PRECHARGE
-uint8_t charged;    //TxData[0]
+uint8_t charged;    //TxData[4]
 //ENABLE
-uint8_t enable;		//TxData[0]
+uint8_t enable;		//TxData[5]
 
 uint8_t RxData[8];
 uint32_t TxMailbox;
 
-ADC_ChannelConfTypeDef sConfig = {0};
+//ADC_ChannelConfTypeDef sConfig = {0};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -120,96 +121,6 @@ static void MX_CAN_Init(void);
 
 int refTime = millis();
 int APPSFlag = 0; //boolean
-
-int checkAPPS(){ //return boolean 
-
-  //ADC for throttle_A
-  sConfig.Channel = ADC_CHANNEL_9;
-  sConfig.Rank = ADC_REGULAR_RANK_1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
-  HAL_ADC_ConfigChannel(&hadc1, &sConfig);
-  if (HAL_ADC_PollForConversion(&g_AdcHandle, 1000000) == HAL_OK){
-    throttle_A = HAL_ADC_GetValue(&hadc1);
-  }
-
-  //ADC for throttle_B
-  sConfig.Channel = ADC_CHANNEL_8;
-  sConfig.Rank = ADC_REGULAR_RANK_1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
-  HAL_ADC_ConfigChannel(&hadc1, &sConfig);
-  if (HAL_ADC_PollForConversion(&g_AdcHandle, 1000000) == HAL_OK){
-    throttle_B = HAL_ADC_GetValue(&hadc1);
-  }
-
-  //0-5000 based
-
-  if((throttle_B-throttle_A > 25 || throttle_A-throttle_B > 25) && !APPSFlag){
-    APPSFlag = 1;
-    refTime = millis();
-  }
-
-  if(millis() - refTime >= 100 && APPSFlag){ //hmmm needs to be changed
-    //APPS_EN Fault
-
-    //sending CAN message
-    TxHeader.StdId = APPS_STDID;
-    HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox);
-
-    return 1;
-  }
-
-  if((throttle_B-throttle_A < 25 && throttle_A-throttle_B > -25) || (throttle_B-throttle_A > -25 && throttle_A-throttle_B < 25)){
-
-    APPSFlag = 0;
-
-  }
-
-  return 0;
-
-}
-
-int BTSFFlag = 0;
-
-int checkBTSF(){
-
-  //HAL_ADC_Start_IT(&hadc1); do we need this?
-
-  //ADC for Brake pressure
-  sConfig.Channel = ADC_CHANNEL_3;
-  sConfig.Rank = ADC_REGULAR_RANK_1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
-  HAL_ADC_ConfigChannel(&hadc1, &sConfig);
-  if (HAL_ADC_PollForConversion(&g_AdcHandle, 1000000) == HAL_OK){
-    brakePressure_1 = HAL_ADC_GetValue(&hadc1);
-  }
-
-  //ADC for throttle_A
-  sConfig.Channel = ADC_CHANNEL_8;
-  sConfig.Rank = ADC_REGULAR_RANK_1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
-  HAL_ADC_ConfigChannel(&hadc1, &sConfig);
-  if (HAL_ADC_PollForConversion(&g_AdcHandle, 1000000) == HAL_OK){
-    throttle_A = HAL_ADC_GetValue(&hadc1);
-  }
-
-  //0-5000 based
-
-  if(brakePressure_1 > brakeThreshold && throttle_A > throttleThreshold){
-
-    BTSFFlag = 1;
-
-    //sending CAN message
-    if (HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox) == HAL_OK){
-      TxHeader.StdId = BTSF_STDID;
-      HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox);
-    }
-    return 1;
-  }
-  
-  return 0;
-}
-
-/* USER CODE END 0 */
 
 /**
   * @brief  The application entry point.
@@ -253,13 +164,13 @@ int main(void)
   {
 
     //BSPD Fault
-  if(HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_0) == HIGH){
+  if(HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_0) == GPIO_PIN_SET){
     //Precharge complete
-    if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6) == HIGH){
+    if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6) == GPIO_PIN_SET){
       //IMD Fault
-      if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_14) == HIGH){
+      if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_14) == GPIO_PIN_SET){
         //BMS Fault
-        if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_15) == HIGH){
+        if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_15) == GPIO_PIN_SET){
 
           /* Infinite loop */
           /* USER CODE BEGIN WHILE */
@@ -270,61 +181,51 @@ int main(void)
             if (HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox) == HAL_OK) 
             HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
             */
-
-            
-
+			
             //CHeck ENABLE_IN from driver switch
-            while(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_15) == HIGH){
+            while(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_15) == GPIO_PIN_SET){
 
               //RTD Sound
               if(!driving){
 
-                //ADC for Brake pressure
-                sConfig.Channel = ADC_CHANNEL_3;
-                sConfig.Rank = ADC_REGULAR_RANK_1;
-                sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
-                HAL_ADC_ConfigChannel(&hadc1, &sConfig);
-                if (HAL_ADC_PollForConversion(&g_AdcHandle, 1000000) == HAL_OK){
-                  brakePressure_1 = HAL_ADC_GetValue(&hadc1);
+				  //ADC for Brake pressure
+				  updateADC();
 
-                  //if brake pressed
-                  if(brakePressure_1 >= brakeThreshold){
+				  //if brake pressed
+				  if(brakePressure_1 >= brakeThreshold){
 
-                    //RTD Sound Enable
-                    int RTDS_time = HAL_Delay();
-                    while(HAL_Delay() - RTDS_time < 3000){
-                      HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, GPIO_PIN_SET);
-                    }
-                    //turn off sound
-                    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, GPIO_PIN_RESET);
+					//RTD Sound Enable
+					int RTDS_time = HAL_Delay();
+					while(HAL_Delay() - RTDS_time < 3000){
+					  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, GPIO_PIN_SET);
+					}
+					//turn off sound
+					HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, GPIO_PIN_RESET);
 
-                    //Send RTD Enable
-                    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET);
+					//Send RTD Enable
+					HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET);
 
-                    driving = 1;
+					driving = 1;
 
                   }
-
-                }
-
-              }
+              }//if !driving 
 
               //BSPD Fault
-              if(HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_0) == HIGH){
+              if(HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_0) == GPIO_PIN_SET){
                 //send CAN message
                 hardFaultFlag = 1;
                 driving = 0;
               }
 
               //IMD Fault
-              if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_14) == HIGH){
+              if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_14) == GPIO_PIN_SET){
                 //send CAN message
                 hardFaultFlag = 1;
                 driving = 0;
               }
 
               //BSPD Fault
-              if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_15) == HIGH){
+              if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_15) == GPIO_PIN_SET){
                 //send CAN message
 
                 hardFaultFlag = 1;
@@ -340,10 +241,8 @@ int main(void)
               if (checkAPPS()){
                 //send CAN message
 
-                driving = false;
+                driving = 0;
               }
-
-              
 
             }//end inside while
 
@@ -405,6 +304,95 @@ void SystemClock_Config(void)
   }
 }
 
+
+/********************************************************************************/
+//Checks for APPS errors, sends fault if there is one 
+//Returns one if difference in throttleA/B is greater than 10% for 100 ms
+//Returns zero if else
+/********************************************************************************/
+int checkAPPS(){
+
+  updateADC();
+
+  //0-5000 based
+
+  if((throttle_B-throttle_A > 25 || throttle_A-throttle_B > 25) && !APPSFlag){
+    APPSFlag = 1;
+    refTime = millis();
+  }
+
+  //APPS_EN Fault
+  if(millis() - refTime >= 100 && APPSFlag){ //hmmm needs to be changed
+    TxHeader.StdId = APPS_STDID; //sending CAN message
+    HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox);
+
+    return 1; 
+  }
+
+  if((throttle_B-throttle_A < 25 && throttle_A-throttle_B > -25) || (throttle_B-throttle_A > -25 && throttle_A-throttle_B < 25)){
+    APPSFlag = 0;
+  }
+
+  return 0;
+
+}
+
+/********************************************************************************/
+//Checks for BTSF errors, If the brake and throttle are pressed at the same time, above a certain threshold
+//Returns one if fault was sensed and sent out
+//zero if nothing is detected
+/********************************************************************************/
+int checkBTSF(){
+
+  int BTSFFlag = 0;
+  //HAL_ADC_Start_IT(&hadc1); do we need this?
+
+  //ADC for Brake pressure
+  updateADC();
+
+  //0-5000 based
+
+  if(brakePressure_1 > brakeThreshold && throttle_A > throttleThreshold){
+    BTSFFlag = 1;
+
+    //sending CAN message
+    if (HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox) == HAL_OK){
+      TxHeader.StdId = BTSF_STDID;
+      HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox);
+    }
+  }
+  
+  return BTSFFlag;
+}
+
+/********************************************************************************/
+// This function updates the ADC values for all positions/pressures
+//
+//
+/********************************************************************************/
+void updateADC(){	
+	HAL_ADC_Start(&hadc1);
+	
+	HAL_ADC_PollForConversion(&hadc1, 1000);
+	brakePos = HAL_ADC_GetValue(&hadc1);  //brakePos
+	HAL_ADC_PollForConversion(&hadc1, 1000);
+	steeringPos = HAL_ADC_GetValue(&hadc1);  //steeringPos
+	HAL_ADC_PollForConversion(&hadc1, 1000);
+	brakePressure_1 = HAL_ADC_GetValue(&hadc1);  //brakePressure_1
+	HAL_ADC_PollForConversion(&hadc1, 1000);
+	brakePressure_2 = HAL_ADC_GetValue(&hadc1);  //brakePressure_2
+	HAL_ADC_PollForConversion(&hadc1, 1000);
+	throttle_A = HAL_ADC_GetValue(&hadc1);  //throttle_A
+	HAL_ADC_PollForConversion(&hadc1, 1000);
+	throttle_B = HAL_ADC_GetValue(&hadc1);  //throttle_B
+	
+	HAL_ADC_Stop(&hadc1);
+}
+
+/* USER CODE END 0 */
+
+
+
 /**
   * @brief ADC1 Initialization Function
   * @param None
@@ -417,7 +405,7 @@ static void MX_ADC1_Init(void)
 
   /* USER CODE END ADC1_Init 0 */
 
-  //ADC_ChannelConfTypeDef sConfig = {0};
+  ADC_ChannelConfTypeDef sConfig = {0};
 
   /* USER CODE BEGIN ADC1_Init 1 */
 
@@ -425,18 +413,19 @@ static void MX_ADC1_Init(void)
   /**Common config 
   */
   hadc1.Instance = ADC1;
-  hadc1.Init.ScanConvMode = ADC_SCAN_DISABLE;
-  hadc1.Init.ContinuousConvMode = DISABLE;
+  hadc1.Init.ScanConvMode = ENABLE;
+  hadc1.Init.ContinuousConvMode = ENABLE;
   hadc1.Init.DiscontinuousConvMode = DISABLE;
   hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
   hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-  hadc1.Init.NbrOfConversion = 1;
+  hadc1.Init.NbrOfConversion = 6;
   if (HAL_ADC_Init(&hadc1) != HAL_OK)
   {
     Error_Handler();
   }
   /**Configure Regular Channel 
   */
+  //Brake position
   sConfig.Channel = ADC_CHANNEL_0;
   sConfig.Rank = ADC_REGULAR_RANK_1;
   sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
@@ -446,8 +435,46 @@ static void MX_ADC1_Init(void)
   }
   /* USER CODE BEGIN ADC1_Init 2 */
 
+  //Steering Position 
+  sConfig.Channel = ADC_CHANNEL_1;
+  sConfig.Rank = ADC_REGULAR_RANK_2;
+  HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK){
+    Error_Handler();
+  }
+  
+  //Brake Pressure 1
+  sConfig.Channel = ADC_CHANNEL_3;
+  sConfig.Rank = ADC_REGULAR_RANK_3;
+  HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK){
+    Error_Handler();
+  }
+  
+  //Brake Pressure 2
+  sConfig.Channel = ADC_CHANNEL_2;
+  sConfig.Rank = ADC_REGULAR_RANK_4;
+  HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK){
+    Error_Handler();
+  }
+  
+  //ADC for throttle_A
+  sConfig.Channel = ADC_CHANNEL_8;
+  sConfig.Rank = ADC_REGULAR_RANK_5;
+  HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK){
+    Error_Handler();
+  }
+  
+  //ADC for throttle_B
+  sConfig.Channel = ADC_CHANNEL_9;
+  sConfig.Rank = ADC_REGULAR_RANK_6;
+  HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK){
+    Error_Handler();
+  }
   /* USER CODE END ADC1_Init 2 */
-
 }
 
 /**
@@ -484,10 +511,6 @@ static void MX_CAN_Init(void)
   hcan.Init.AutoRetransmission = DISABLE;
   hcan.Init.ReceiveFifoLocked = DISABLE;
   hcan.Init.TransmitFifoPriority = DISABLE;
-
-  
-
-
 
   if (HAL_CAN_Init(&hcan) != HAL_OK)
   {

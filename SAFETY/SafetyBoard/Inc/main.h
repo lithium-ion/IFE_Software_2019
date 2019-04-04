@@ -86,6 +86,7 @@ void Error_Handler(void);
 void sendFaultMsg();
 void sendPrechargeMsg();
 void sendEnableMsg();
+void updateADC();
 
 /* USER CODE END Private defines */
 
