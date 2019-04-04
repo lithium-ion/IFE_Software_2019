@@ -6,18 +6,15 @@
 *	
 **/
 
+#define DASH_CAN_ID		0x00F
 
+// MESSAGE LENGTH: 4 bytes
+// BYTE 1: CURRENT_POT VALUE
+// BYTE 2: CUSTOM_POT VALUE
+// BYTE 3: TC_POT VALUE
+// BYTE 4: DRS_POT VALUE
 
-
-#define CURRENT_ID		0x00F 	//Current knob
-#define TC_ID			0x010	// traction control knob
-#define DRS_ID			0x011	// drs knob
-#define CUSTOM			0x012	// open ended knob if we want
-
-
-//ALL of these WILL FOLLOW THE SAME PROTOCOL
-// HERE IS THE DEFINED PROTOCOL
-// MESSAGE LENGTH = 8 bits
+// EACH BYTE FOLLOWS THIS PROTOCOL
 
 // (Base 10) | (Binary)   | Description
 //============================
