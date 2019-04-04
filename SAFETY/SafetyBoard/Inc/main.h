@@ -38,6 +38,7 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
+#pragma once
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MAIN_H
@@ -52,6 +53,9 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+
+uint32_t millisTimer;
+uint32_t secTimer;
 
 /* USER CODE END Includes */
 

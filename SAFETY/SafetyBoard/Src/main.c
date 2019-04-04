@@ -36,6 +36,9 @@
   *
   ******************************************************************************
   */
+
+
+
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
@@ -43,6 +46,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+
+
 
 /* USER CODE END Includes */
 
@@ -53,6 +58,10 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
+int checkBTSF();
+int checkAPPS();
+int APPS_Diff();
 
 #define APPS_STDID 0x300;
 #define BTSF_STDID 0x301;
@@ -82,6 +91,9 @@ uint16_t brakePressure_2;
 uint16_t throttle_A;
 uint16_t throttle_B;
 
+//need to figure out:
+uint16_t max_throttle = 10;
+
 int driving = 0;  		//boolean
 int hardFaultFlag = 0;  //boolean
 
@@ -104,6 +116,12 @@ uint8_t RxData[8];
 uint32_t TxMailbox;
 
 //ADC_ChannelConfTypeDef sConfig = {0};
+
+//For Timers
+extern uint32_t millisTimer;
+extern uint32_t secTimer;
+
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -119,8 +137,8 @@ static void MX_CAN_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-int refTime = millis();
-int APPSFlag = 0; //boolean
+//int refTime = millis();
+//int APPSFlag = 0; //boolean
 
 /**
   * @brief  The application entry point.
@@ -130,6 +148,10 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
 
+  //For Timers
+  millisTimer = 100000; //100 millis
+  secTimer = 3000000; //3 seconds
+
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -138,6 +160,11 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
+
+  // Update SystemCoreClock value
+  SystemCoreClockUpdate();
+  // Configure the SysTick timer to overflow every 1 us
+  SysTick_Config(SystemCoreClock / 1000000);
 
   /* USER CODE END Init */
 
@@ -194,13 +221,17 @@ int main(void)
 				  //if brake pressed
 				  if(brakePressure_1 >= brakeThreshold){
 
+          //reset 3 second timer
+          secTimer = 3000000;
+
 					//RTD Sound Enable
-					int RTDS_time = HAL_Delay();
-					while(HAL_Delay() - RTDS_time < 3000){
+					while(secTimer > 0){
 					  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, GPIO_PIN_SET);
 					}
 					//turn off sound
 					HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, GPIO_PIN_RESET);
+          //reset 3 second timer
+          secTimer = 3000000;
 
 					//Send RTD Enable
 					HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET);
@@ -314,24 +345,22 @@ int checkAPPS(){
 
   updateADC();
 
-  //0-5000 based
+  //0-5000 based ?
 
-  if((throttle_B-throttle_A > 25 || throttle_A-throttle_B > 25) && !APPSFlag){
-    APPSFlag = 1;
-    refTime = millis();
+  //Throttles Agree
+  if(APPS_Diff() == 0){
+    millisTimer = 100000;
   }
 
   //APPS_EN Fault
-  if(millis() - refTime >= 100 && APPSFlag){ //hmmm needs to be changed
+  if(millisTimer == 0){ //hmmm needs to be changed
     TxHeader.StdId = APPS_STDID; //sending CAN message
     HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox);
 
     return 1; 
   }
 
-  if((throttle_B-throttle_A < 25 && throttle_A-throttle_B > -25) || (throttle_B-throttle_A > -25 && throttle_A-throttle_B < 25)){
-    APPSFlag = 0;
-  }
+  
 
   return 0;
 
@@ -387,6 +416,50 @@ void updateADC(){
 	throttle_B = HAL_ADC_GetValue(&hadc1);  //throttle_B
 	
 	HAL_ADC_Stop(&hadc1);
+}
+
+// SysTick_Handler function will be called every 1 us
+/*
+void SysTick_Handler()
+{
+    if (millisTimer != 0)
+    {
+        millisTimer--;
+    }
+
+    if (secTimer != 0)
+    {
+        secTimer--;
+    }
+
+}
+*/
+
+//Determine if greater than 10% diff in throttles
+int APPS_Diff(){
+
+  double t_A = throttle_A;
+  double t_B = throttle_B;
+  
+  t_A -= (1/12.5)*max_throttle; //equalize throttles assuming 1mm diff out of 12.5mm from pots
+
+  double numerator = t_A - t_B;
+  //absolute value
+  if(numerator < 0){
+    numerator = -1*numerator;
+  }
+
+  double denominator = (t_A + t_B)/2;
+
+  double difference = 100*numerator/denominator;
+
+  if(difference >= 10){
+    return 1;
+  }
+
+  return 0;
+
+
 }
 
 /* USER CODE END 0 */

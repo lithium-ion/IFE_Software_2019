@@ -58,6 +58,8 @@
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
 
+
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -198,6 +200,18 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
   /* USER CODE BEGIN SysTick_IRQn 0 */
+
+  if (millisTimer != 0)
+    {
+        millisTimer--;
+    }
+
+  if (secTimer != 0)
+  {
+      secTimer--;
+  }
+
+
 
   /* USER CODE END SysTick_IRQn 0 */
   HAL_IncTick();
