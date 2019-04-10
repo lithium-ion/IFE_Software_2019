@@ -90,7 +90,9 @@ void Error_Handler(void);
 void sendFaultMsg();
 void sendPrechargeMsg();
 void sendEnableMsg();
-void updateADC();
+void updateADC(int channel);
+void resetTXData();
+void readFaults();
 
 /* USER CODE END Private defines */
 
