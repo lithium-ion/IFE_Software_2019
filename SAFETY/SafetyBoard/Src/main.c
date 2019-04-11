@@ -153,6 +153,7 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
 
+
   //For Timers
   millisTimer = 100000; //100 millis
   secTimer = 3000000; //3 seconds
@@ -196,6 +197,10 @@ int main(void)
   
   while (1)
   {
+
+  //HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+  //HAL_Delay(500);
+
 	readFaults();
 	resetTXData();
 	//TxHeader.StdId = 0x00;
@@ -711,21 +716,30 @@ void resetTXData(){
 }
 
 void readFaults(){
-	if (HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_0) == GPIO_PIN_SET)
+	if (HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_0) == GPIO_PIN_SET){
 		bspd = 1;
+    sendFaultMsg();
+  }
 	else bspd = 0;
 	
-	if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6) == GPIO_PIN_SET)
+	if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6) == GPIO_PIN_SET){
 		charged = 1;
+  }
 	else charged = 0;
 	
-	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_14) == GPIO_PIN_SET)
+	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_14) == GPIO_PIN_SET){
 		imd = 1;
+    sendFaultMsg();
+  }
 	else imd = 0;
 	
-	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_15) == GPIO_PIN_SET)
+	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_15) == GPIO_PIN_SET){
 		bms = 1;
+    sendFaultMsg();
+  }
 	else bms = 0;
+
+
 }
 
 /* USER CODE END 4 */
