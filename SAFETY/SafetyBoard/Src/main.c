@@ -65,8 +65,12 @@ int APPS_Diff();
 
 #define APPS_STDID 0x300;
 #define BTSF_STDID 0x301;
+#define FAULTS 0x0D0
+#define PRECHARGE 0x0D1
+#define ENABLE 0x0D2
+
 const int throttleThreshold = 80;
-const int brakeThreshold = 80;
+const int brakeThreshold = 0; //80;
 
 
 /* USER CODE END PD */
@@ -120,6 +124,7 @@ uint32_t TxMailbox;
 //For Timers
 extern uint32_t millisTimer;
 extern uint32_t secTimer;
+extern uint32_t sysTimer;
 
 ADC_ChannelConfTypeDef sConfig = {0};
 /* USER CODE END PV */
@@ -151,6 +156,7 @@ int main(void)
   //For Timers
   millisTimer = 100000; //100 millis
   secTimer = 3000000; //3 seconds
+  sysTimer = 500; //timer to send message every second
 
   /* USER CODE END 1 */
 
@@ -162,9 +168,9 @@ int main(void)
   /* USER CODE BEGIN Init */
 
   // Update SystemCoreClock value
-  SystemCoreClockUpdate();
+ // SystemCoreClockUpdate();
   // Configure the SysTick timer to overflow every 1 us
-  SysTick_Config(SystemCoreClock / 1000000);
+ // SysTick_Config(SystemCoreClock / 1000000);
 
   /* USER CODE END Init */
 
@@ -191,19 +197,24 @@ int main(void)
   while (1)
   {
 	readFaults();
+	resetTXData();
+	//TxHeader.StdId = 0x00;
+	//TxData[0] = 0x66;
+	//HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox);
+	HAL_Delay(100);
 	//Check ENABLE_IN from driver switch and precharge
 	if(charged && HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_15) == GPIO_PIN_SET){
 	  //RTD Sound
 	  if(!driving){
 
 		  //ADC for Brake pressure
-		  updateADC(2);
+		  brakePressure_1 = updateADC(2);
 
 		  //if brake pressed, we are ready to drive 
 		  if(brakePressure_1 >= brakeThreshold){
 
 			//reset 3 second timer
-			secTimer = 3000;
+			secTimer = 300; //change to 3000 for 3 seconds 
 
 			//RTD Sound Enable
 			//Play sound for ~3 seconds 
@@ -237,9 +248,13 @@ int main(void)
 	  }
 
 	}//end driving sequence if statement
-	sendPrechargeMsg();
-	sendFaultMsg();
-	sendEnableMsg();
+	
+	if (sysTimer == 0){
+		sendPrechargeMsg();
+		sendFaultMsg();
+		sendEnableMsg();
+		sysTimer = 500;
+	}
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -254,15 +269,15 @@ int main(void)
 /********************************************************************************/
 int checkAPPS(){
 
-  updateADC(8); //throttle A
-  updateADC(9); //throttle B 
+  throttle_A = updateADC(8); 
+  throttle_B = updateADC(9); 
   //0-5000 based ?
 
   //Throttles Agree
   millisTimer = 1000;
   while(millisTimer > 0 && APPS_Diff()){
-	updateADC(8);
-	updateADC(9);
+	throttle_A = updateADC(8);
+	throttle_B = updateADC(9);
   } //stay in this loop while there is a 10% difference in throttles
 
   //APPS_EN Fault
@@ -281,8 +296,8 @@ int checkAPPS(){
 //zero if nothing is detected
 /********************************************************************************/
 int checkBTSF(){
-  updateADC(2); //brake pressure 1
-  updateADC(8); //throttle A 
+  brakePressure_1 = updateADC(2);
+  throttle_A = updateADC(8); 
 
   //0-5000 based
 
@@ -304,7 +319,7 @@ int checkBTSF(){
 //
 //
 /********************************************************************************/
-void updateADC(int channel){	
+uint16_t updateADC(int channel){	
 	//HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
   if (channel == 0) //Brake position 
     sConfig.Channel = ADC_CHANNEL_0;
@@ -440,8 +455,8 @@ static void MX_ADC1_Init(void)
   /**Common config 
   */
   hadc1.Instance = ADC1;
-  hadc1.Init.ScanConvMode = ENABLE;
-  hadc1.Init.ContinuousConvMode = ENABLE;
+  hadc1.Init.ScanConvMode = DISABLE; //enable 
+  hadc1.Init.ContinuousConvMode = DISABLE; //enable 
   hadc1.Init.DiscontinuousConvMode = DISABLE;
   hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
   hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
@@ -516,22 +531,13 @@ static void MX_CAN_Init(void)
 
   /* USER CODE END CAN_Init 0 */
 
-  /* USER CODE BEGIN CAN_Init 1 */
-  HAL_CAN_Start(&hcan);
-  TxHeader.StdId = 0x321;         // CAN standard ID
-  TxHeader.ExtId = 0x01;          // CAN extended ID
-  TxHeader.RTR = CAN_RTR_DATA;      // CAN frame type
-  TxHeader.IDE = CAN_ID_STD;        // CAN ID type
-  TxHeader.DLC = 8;             // CAN frame length in bytes
-  TxHeader.TransmitGlobalTime = DISABLE;  // CAN timestamp in TxData[6] and TxData[7]
 
-  /* USER CODE END CAN_Init 1 */
   hcan.Instance = CAN1;
-  hcan.Init.Prescaler = 1;
+  hcan.Init.Prescaler = 2;
   hcan.Init.Mode = CAN_MODE_NORMAL;
   hcan.Init.SyncJumpWidth = CAN_SJW_1TQ;
-  hcan.Init.TimeSeg1 = CAN_BS1_1TQ;
-  hcan.Init.TimeSeg2 = CAN_BS2_1TQ;
+  hcan.Init.TimeSeg1 = CAN_BS1_11TQ;
+  hcan.Init.TimeSeg2 = CAN_BS2_4TQ;
   hcan.Init.TimeTriggeredMode = DISABLE;
   hcan.Init.AutoBusOff = DISABLE;
   hcan.Init.AutoWakeUp = DISABLE;
@@ -543,6 +549,17 @@ static void MX_CAN_Init(void)
   {
     Error_Handler();
   }
+  
+    /* USER CODE BEGIN CAN_Init 1 */
+ // HAL_CAN_Start(&hcan);
+  TxHeader.StdId = 0x321;         // CAN standard ID
+  TxHeader.ExtId = 0x01;          // CAN extended ID
+  TxHeader.RTR = CAN_RTR_DATA;      // CAN frame type
+  TxHeader.IDE = CAN_ID_STD;        // CAN ID type
+  TxHeader.DLC = 8;             // CAN frame length in bytes
+  TxHeader.TransmitGlobalTime = DISABLE;  // CAN timestamp in TxData[6] and TxData[7]
+
+  /* USER CODE END CAN_Init 1 */
   /* USER CODE END CAN_Init 2 */
 
 }

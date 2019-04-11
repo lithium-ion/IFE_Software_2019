@@ -210,6 +210,9 @@ void SysTick_Handler(void)
   {
       secTimer--;
   }
+  
+  if (sysTimer != 0)
+	  sysTimer--;
 
 
 

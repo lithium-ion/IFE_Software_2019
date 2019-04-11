@@ -56,6 +56,7 @@ extern "C" {
 
 uint32_t millisTimer;
 uint32_t secTimer;
+uint32_t sysTimer;
 
 /* USER CODE END Includes */
 
@@ -83,14 +84,12 @@ void Error_Handler(void);
 
 /* Private defines -----------------------------------------------------------*/
 /* USER CODE BEGIN Private defines */
-#define FAULTS 0x0D0
-#define PRECHARGE 0x0D1
-#define ENABLE 0x0D2
+
 
 void sendFaultMsg();
 void sendPrechargeMsg();
 void sendEnableMsg();
-void updateADC(int channel);
+uint16_t updateADC(int channel);
 void resetTXData();
 void readFaults();
 

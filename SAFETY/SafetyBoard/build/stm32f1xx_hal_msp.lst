@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccQEhXnk.s 			page 1
+ARM GAS  /tmp/ccl7nY7m.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccQEhXnk.s 			page 1
   30:Src/stm32f1xx_hal_msp.c ****   * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
   31:Src/stm32f1xx_hal_msp.c ****   * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
   32:Src/stm32f1xx_hal_msp.c ****   * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-ARM GAS  /tmp/ccQEhXnk.s 			page 2
+ARM GAS  /tmp/ccl7nY7m.s 			page 2
 
 
   33:Src/stm32f1xx_hal_msp.c ****   * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccQEhXnk.s 			page 1
   28              		.cfi_startproc
   29              		@ args = 0, pretend = 0, frame = 8
   30              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  /tmp/ccQEhXnk.s 			page 3
+ARM GAS  /tmp/ccl7nY7m.s 			page 3
 
 
   31              		@ link register save eliminated.
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccQEhXnk.s 			page 1
   68 0036 02B0     		add	sp, sp, #8
   69              	.LCFI1:
   70              		.cfi_def_cfa_offset 0
-ARM GAS  /tmp/ccQEhXnk.s 			page 4
+ARM GAS  /tmp/ccl7nY7m.s 			page 4
 
 
   71              		@ sp needed
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccQEhXnk.s 			page 1
  116:Src/stm32f1xx_hal_msp.c ****   /* USER CODE BEGIN ADC1_MspInit 0 */
  117:Src/stm32f1xx_hal_msp.c **** 
  118:Src/stm32f1xx_hal_msp.c ****   /* USER CODE END ADC1_MspInit 0 */
-ARM GAS  /tmp/ccQEhXnk.s 			page 5
+ARM GAS  /tmp/ccl7nY7m.s 			page 5
 
 
  119:Src/stm32f1xx_hal_msp.c ****     /* Peripheral clock enable */
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccQEhXnk.s 			page 1
  152              	.LVL4:
  153 005a 04A9     		add	r1, sp, #16
  154 005c FFF7FEFF 		bl	HAL_GPIO_Init
-ARM GAS  /tmp/ccQEhXnk.s 			page 6
+ARM GAS  /tmp/ccl7nY7m.s 			page 6
 
 
  155              	.LVL5:
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccQEhXnk.s 			page 1
  197              	HAL_ADC_MspDeInit:
  198              	.LFB65:
  149:Src/stm32f1xx_hal_msp.c **** 
-ARM GAS  /tmp/ccQEhXnk.s 			page 7
+ARM GAS  /tmp/ccl7nY7m.s 			page 7
 
 
  150:Src/stm32f1xx_hal_msp.c **** /**
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccQEhXnk.s 			page 1
  178:Src/stm32f1xx_hal_msp.c ****     HAL_GPIO_DeInit(GPIOB, GPIO_PIN_0|GPIO_PIN_1);
  225              		.loc 1 178 0
  226 001c 0648     		ldr	r0, .L13+12
-ARM GAS  /tmp/ccQEhXnk.s 			page 8
+ARM GAS  /tmp/ccl7nY7m.s 			page 8
 
 
  227 001e 0321     		movs	r1, #3
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccQEhXnk.s 			page 1
  265 0002 87B0     		sub	sp, sp, #28
  266              	.LCFI7:
  267              		.cfi_def_cfa_offset 40
-ARM GAS  /tmp/ccQEhXnk.s 			page 9
+ARM GAS  /tmp/ccl7nY7m.s 			page 9
 
 
  197:Src/stm32f1xx_hal_msp.c **** 
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccQEhXnk.s 			page 1
  215:Src/stm32f1xx_hal_msp.c ****     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
  304              		.loc 1 215 0
  305 0048 0D4D     		ldr	r5, .L18+4
-ARM GAS  /tmp/ccQEhXnk.s 			page 10
+ARM GAS  /tmp/ccl7nY7m.s 			page 10
 
 
  306 004a 2846     		mov	r0, r5
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccQEhXnk.s 			page 1
  345 007c 00640040 		.word	1073767424
  346 0080 00080140 		.word	1073809408
  347              		.cfi_endproc
-ARM GAS  /tmp/ccQEhXnk.s 			page 11
+ARM GAS  /tmp/ccl7nY7m.s 			page 11
 
 
  348              	.LFE66:
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccQEhXnk.s 			page 1
  380              	.LVL21:
  381 0016 4FF4C051 		mov	r1, #6144
  382 001a FFF7FEFF 		bl	HAL_GPIO_DeInit
-ARM GAS  /tmp/ccQEhXnk.s 			page 12
+ARM GAS  /tmp/ccl7nY7m.s 			page 12
 
 
  383              	.LVL22:
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccQEhXnk.s 			page 1
  274:Src/stm32f1xx_hal_msp.c ****   GPIO_InitTypeDef GPIO_InitStruct = {0};
  420              		.loc 1 274 0
  421 0004 0023     		movs	r3, #0
-ARM GAS  /tmp/ccQEhXnk.s 			page 13
+ARM GAS  /tmp/ccl7nY7m.s 			page 13
 
 
  422 0006 0293     		str	r3, [sp, #8]
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccQEhXnk.s 			page 1
  458              		.loc 1 292 0
  459 0046 0323     		movs	r3, #3
  460 0048 0593     		str	r3, [sp, #20]
-ARM GAS  /tmp/ccQEhXnk.s 			page 14
+ARM GAS  /tmp/ccl7nY7m.s 			page 14
 
 
  293:Src/stm32f1xx_hal_msp.c ****     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccQEhXnk.s 			page 1
  306:Src/stm32f1xx_hal_msp.c **** 
  307:Src/stm32f1xx_hal_msp.c **** /**
  308:Src/stm32f1xx_hal_msp.c **** * @brief SPI MSP De-Initialization
-ARM GAS  /tmp/ccQEhXnk.s 			page 15
+ARM GAS  /tmp/ccl7nY7m.s 			page 15
 
 
  309:Src/stm32f1xx_hal_msp.c **** * This function freeze the hardware resources used in this example
@@ -898,54 +898,56 @@ ARM GAS  /tmp/ccQEhXnk.s 			page 1
  535 0020 00300140 		.word	1073819648
  536 0024 00100240 		.word	1073876992
  537 0028 00080140 		.word	1073809408
-ARM GAS  /tmp/ccQEhXnk.s 			page 16
+ARM GAS  /tmp/ccl7nY7m.s 			page 16
 
 
  538              		.cfi_endproc
  539              	.LFE69:
- 541              		.comm	secTimer,4,4
- 542              		.comm	millisTimer,4,4
- 543              		.text
- 544              	.Letext0:
- 545              		.file 2 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
- 546              		.file 3 "/usr/include/newlib/machine/_default_types.h"
- 547              		.file 4 "/usr/include/newlib/sys/_stdint.h"
- 548              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h"
- 549              		.file 6 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
- 550              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
- 551              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
- 552              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h"
- 553              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h"
- 554              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h"
- 555              		.file 12 "Drivers/CMSIS/Include/core_cm3.h"
- 556              		.file 13 "Inc/main.h"
- 557              		.file 14 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h"
-ARM GAS  /tmp/ccQEhXnk.s 			page 17
+ 541              		.comm	sysTimer,4,4
+ 542              		.comm	secTimer,4,4
+ 543              		.comm	millisTimer,4,4
+ 544              		.text
+ 545              	.Letext0:
+ 546              		.file 2 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 547              		.file 3 "/usr/include/newlib/machine/_default_types.h"
+ 548              		.file 4 "/usr/include/newlib/sys/_stdint.h"
+ 549              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h"
+ 550              		.file 6 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 551              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ 552              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 553              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h"
+ 554              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h"
+ 555              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h"
+ 556              		.file 12 "Drivers/CMSIS/Include/core_cm3.h"
+ 557              		.file 13 "Inc/main.h"
+ 558              		.file 14 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h"
+ARM GAS  /tmp/ccl7nY7m.s 			page 17
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32f1xx_hal_msp.c
-     /tmp/ccQEhXnk.s:19     .text.HAL_MspInit:0000000000000000 $t
-     /tmp/ccQEhXnk.s:24     .text.HAL_MspInit:0000000000000000 HAL_MspInit
-     /tmp/ccQEhXnk.s:76     .text.HAL_MspInit:000000000000003c $d
-     /tmp/ccQEhXnk.s:82     .text.HAL_ADC_MspInit:0000000000000000 $t
-     /tmp/ccQEhXnk.s:87     .text.HAL_ADC_MspInit:0000000000000000 HAL_ADC_MspInit
-     /tmp/ccQEhXnk.s:185    .text.HAL_ADC_MspInit:0000000000000080 $d
-     /tmp/ccQEhXnk.s:192    .text.HAL_ADC_MspDeInit:0000000000000000 $t
-     /tmp/ccQEhXnk.s:197    .text.HAL_ADC_MspDeInit:0000000000000000 HAL_ADC_MspDeInit
-     /tmp/ccQEhXnk.s:239    .text.HAL_ADC_MspDeInit:000000000000002c $d
-     /tmp/ccQEhXnk.s:247    .text.HAL_CAN_MspInit:0000000000000000 $t
-     /tmp/ccQEhXnk.s:252    .text.HAL_CAN_MspInit:0000000000000000 HAL_CAN_MspInit
-     /tmp/ccQEhXnk.s:345    .text.HAL_CAN_MspInit:000000000000007c $d
-     /tmp/ccQEhXnk.s:351    .text.HAL_CAN_MspDeInit:0000000000000000 $t
-     /tmp/ccQEhXnk.s:356    .text.HAL_CAN_MspDeInit:0000000000000000 HAL_CAN_MspDeInit
-     /tmp/ccQEhXnk.s:393    .text.HAL_CAN_MspDeInit:0000000000000028 $d
-     /tmp/ccQEhXnk.s:400    .text.HAL_SPI_MspInit:0000000000000000 $t
-     /tmp/ccQEhXnk.s:405    .text.HAL_SPI_MspInit:0000000000000000 HAL_SPI_MspInit
-     /tmp/ccQEhXnk.s:491    .text.HAL_SPI_MspInit:000000000000006c $d
-     /tmp/ccQEhXnk.s:497    .text.HAL_SPI_MspDeInit:0000000000000000 $t
-     /tmp/ccQEhXnk.s:502    .text.HAL_SPI_MspDeInit:0000000000000000 HAL_SPI_MspDeInit
-     /tmp/ccQEhXnk.s:535    .text.HAL_SPI_MspDeInit:0000000000000020 $d
+     /tmp/ccl7nY7m.s:19     .text.HAL_MspInit:0000000000000000 $t
+     /tmp/ccl7nY7m.s:24     .text.HAL_MspInit:0000000000000000 HAL_MspInit
+     /tmp/ccl7nY7m.s:76     .text.HAL_MspInit:000000000000003c $d
+     /tmp/ccl7nY7m.s:82     .text.HAL_ADC_MspInit:0000000000000000 $t
+     /tmp/ccl7nY7m.s:87     .text.HAL_ADC_MspInit:0000000000000000 HAL_ADC_MspInit
+     /tmp/ccl7nY7m.s:185    .text.HAL_ADC_MspInit:0000000000000080 $d
+     /tmp/ccl7nY7m.s:192    .text.HAL_ADC_MspDeInit:0000000000000000 $t
+     /tmp/ccl7nY7m.s:197    .text.HAL_ADC_MspDeInit:0000000000000000 HAL_ADC_MspDeInit
+     /tmp/ccl7nY7m.s:239    .text.HAL_ADC_MspDeInit:000000000000002c $d
+     /tmp/ccl7nY7m.s:247    .text.HAL_CAN_MspInit:0000000000000000 $t
+     /tmp/ccl7nY7m.s:252    .text.HAL_CAN_MspInit:0000000000000000 HAL_CAN_MspInit
+     /tmp/ccl7nY7m.s:345    .text.HAL_CAN_MspInit:000000000000007c $d
+     /tmp/ccl7nY7m.s:351    .text.HAL_CAN_MspDeInit:0000000000000000 $t
+     /tmp/ccl7nY7m.s:356    .text.HAL_CAN_MspDeInit:0000000000000000 HAL_CAN_MspDeInit
+     /tmp/ccl7nY7m.s:393    .text.HAL_CAN_MspDeInit:0000000000000028 $d
+     /tmp/ccl7nY7m.s:400    .text.HAL_SPI_MspInit:0000000000000000 $t
+     /tmp/ccl7nY7m.s:405    .text.HAL_SPI_MspInit:0000000000000000 HAL_SPI_MspInit
+     /tmp/ccl7nY7m.s:491    .text.HAL_SPI_MspInit:000000000000006c $d
+     /tmp/ccl7nY7m.s:497    .text.HAL_SPI_MspDeInit:0000000000000000 $t
+     /tmp/ccl7nY7m.s:502    .text.HAL_SPI_MspDeInit:0000000000000000 HAL_SPI_MspDeInit
+     /tmp/ccl7nY7m.s:535    .text.HAL_SPI_MspDeInit:0000000000000020 $d
+                            *COM*:0000000000000004 sysTimer
                             *COM*:0000000000000004 secTimer
                             *COM*:0000000000000004 millisTimer
                      .debug_frame:0000000000000010 $d
