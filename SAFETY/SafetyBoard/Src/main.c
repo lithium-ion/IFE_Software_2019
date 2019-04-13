@@ -207,8 +207,8 @@ int main(void)
 	//TxData[0] = 0x66;
 	//HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox);
 	HAL_Delay(100);
-	//Check ENABLE_IN from driver switch and precharge
-	if(charged && HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_15) == GPIO_PIN_SET){
+	//Check ENABLE_IN from driver switch and precharge /******Change '1' to 'charged'**********************/ <------ALERT
+	if(1 && HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_15) == GPIO_PIN_SET){
 	  //RTD Sound
 	  if(!driving){
 
@@ -255,9 +255,9 @@ int main(void)
 	}//end driving sequence if statement
 	
 	if (sysTimer == 0){
-		sendPrechargeMsg();
-		sendFaultMsg();
-		sendEnableMsg();
+		sendPrechargeMsg(); //0D1
+		sendFaultMsg(); //0D0
+		sendEnableMsg(); //0D2
 		sysTimer = 500;
 	}
     /* USER CODE END WHILE */
