@@ -37,7 +37,7 @@
 
 #define FAULTS				0x0D0
 #define PRECHARGE			0x0D1
-#define ENABLE				0x0D2
+#define ENABLE_SIG		0x0D2
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -59,7 +59,7 @@ CAN_TxHeaderTypeDef   	POT_TxHeader;
 uint8_t               	POT_data[8];
 uint32_t              	TxMailbox;
 
-bool					CAN_flag = 0;
+volatile char					CAN_flag;
 
 uint16_t				pot_threshold[11] = {0, 615, 1025, 1435, 1845, 2255, 2665, 3075, 3485, 3895, 4095};
 
@@ -73,6 +73,7 @@ static void MX_CAN_Init(void);
 /* USER CODE BEGIN PFP */
 void POT_read(uint16_t pot_values[4]);
 void CAN_interpret(void);
+void  POT_interpret(uint16_t pot_values[4]);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -122,17 +123,20 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 	
-	if (CAN_flag == 1)
+	if (CAN_flag == 0xFF)
 		CAN_interpret();
 
 	//send POT positions CAN message
-	//HAL_CAN_AddTxMessage(&hcan, &POT_TxHeader, POT_data, &TxMailbox);
 	
-	//uint16_t pot_position[4];
-	//POT_read(pot_position);
-	//POT_interpret(pot_position)
+	uint16_t pot_position[4];
+  POT_read(pot_position);
+	POT_interpret(pot_position);
+
+  HAL_CAN_AddTxMessage(&hcan, &POT_TxHeader, POT_data, &TxMailbox);
+
 	
 	//HAL_Delay();
+
 	
   }
   /* USER CODE END 3 */
@@ -264,11 +268,11 @@ static void MX_CAN_Init(void)
 
   /* USER CODE END CAN_Init 1 */
   hcan.Instance = CAN1;
-  hcan.Init.Prescaler = 16;
+  hcan.Init.Prescaler = 2;
   hcan.Init.Mode = CAN_MODE_NORMAL;
   hcan.Init.SyncJumpWidth = CAN_SJW_1TQ;
-  hcan.Init.TimeSeg1 = CAN_BS1_1TQ;
-  hcan.Init.TimeSeg2 = CAN_BS2_1TQ;
+  hcan.Init.TimeSeg1 = CAN_BS1_3TQ;
+  hcan.Init.TimeSeg2 = CAN_BS2_4TQ;
   hcan.Init.TimeTriggeredMode = DISABLE;
   hcan.Init.AutoBusOff = DISABLE;
   hcan.Init.AutoWakeUp = DISABLE;
@@ -405,7 +409,7 @@ void POT_interpret(uint16_t pot_values[4]) {
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *CanHandle)
 {
   if (HAL_CAN_GetRxMessage(&hcan, CAN_RX_FIFO0, &RxHeader, RxData) == HAL_OK)
-	  CAN_flag = 1;
+	  CAN_flag = 0xFF;
 }
 
 void CAN_interpret(void) {
@@ -477,7 +481,7 @@ void CAN_interpret(void) {
 		
 	}
 	
-	CAN_flag = 0;
+	CAN_flag = 0x00;
 	
 }
 /* USER CODE END 4 */

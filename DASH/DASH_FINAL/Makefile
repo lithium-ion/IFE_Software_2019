@@ -64,7 +64,7 @@ startup_stm32f103xb.s
 #######################################
 # binaries
 #######################################
-PREFIX = C:/arm-gcc/8-2018-q4-major/bin/arm-none-eabi-
+PREFIX = /mnt/c/gcc-arm-none-eabi-8-2018-q4-major/bin/arm-none-eabi-
 # The gcc compiler bin path can be either defined in make command via GCC_PATH variable (> make GCC_PATH=xxx)
 # either it can be added to the PATH environment variable.
 ifdef GCC_PATH
