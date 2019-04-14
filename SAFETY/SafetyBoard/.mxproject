@@ -1,7 +1,7 @@
 [PreviousGenFiles]
-HeaderPath=C:/Users/cshan/OneDrive/Documents/UIUC/IFE/IFE_Software_2019/SAFETY/SafetyBoard/Inc
+HeaderPath=C:/Users/Nick Tuczak/Desktop/IFE/IFE_GITHUB/IFE_Software_2019/SAFETY/SafetyBoard/Inc
 HeaderFiles=stm32f1xx_it.h;stm32f1xx_hal_conf.h;main.h;
-SourcePath=C:/Users/cshan/OneDrive/Documents/UIUC/IFE/IFE_Software_2019/SAFETY/SafetyBoard/Src
+SourcePath=C:/Users/Nick Tuczak/Desktop/IFE/IFE_GITHUB/IFE_Software_2019/SAFETY/SafetyBoard/Src
 SourceFiles=stm32f1xx_it.c;stm32f1xx_hal_msp.c;main.c;
 
 [PreviousLibFiles]

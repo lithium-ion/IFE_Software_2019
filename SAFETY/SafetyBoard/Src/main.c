@@ -63,11 +63,23 @@ int checkBTSF();
 int checkAPPS();
 int APPS_Diff();
 
-#define APPS_STDID 0x300;
-#define BTSF_STDID 0x301;
-#define FAULTS 0x0D0
-#define PRECHARGE 0x0D1
-#define ENABLE 0x0D2
+#define APPS_STDID        0x300
+#define BTSF_STDID        0x301
+#define FAULTS            0x0D0
+// FAULT DEFS
+  #define FAULT_ACTIVE    0xFF
+  #define FAULT_INACTIVE  0x00
+
+//FAULT DEGS
+#define CAR_STATE         0x0D1
+// CAR STATES
+  #define LV_ON           0x01
+  #define PRECHARGED      0x02
+  #define ENABLE_FLIPPED  0x04
+  #define RTDS_SOUND      0x08
+  #define PWR_AVAILABLE   0x10 
+  #define SOFT_FAULT      0x20
+// CAR STATES
 
 const int throttleThreshold = 80;
 const int brakeThreshold = 0; //80;
@@ -84,6 +96,7 @@ const int brakeThreshold = 0; //80;
 ADC_HandleTypeDef hadc1;
 
 CAN_HandleTypeDef hcan;
+
 SPI_HandleTypeDef hspi1;
 
 /* USER CODE BEGIN PV */
@@ -98,28 +111,24 @@ uint16_t throttle_B;
 //need to figure out:
 uint16_t max_throttle = 10;
 
-int driving = 0;  		//boolean
+char Prev_State = 0x00; 		//boolean
 int hardFaultFlag = 0;  //boolean
 
-CAN_TxHeaderTypeDef TxHeader;
-//CAN_RxHeaderTypedef RxHeader;
-uint8_t TxData[8] = {0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55};
+// CAR STAT STATES FOR CAN
+CAN_TxHeaderTypeDef TxCar_state;
+uint8_t TxCar_state_data[1] = {0x00};
+uint32_t TxCar_stateMailbox;
+
+//CAN FAULT VARIABLES
+CAN_TxHeaderTypeDef TxFaults;
+uint8_t TxFault_data[8] = {0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55};
 /*Set these values: 0xFF = Fault present
-					0x00 = No fault*/
-//FAULTS
+                    0x00 = No fault*/
 uint8_t bms;        //TxData[0]
-uint8_t imd;		//TxData[1]
-uint8_t bspd; 		//TxData[2]
-uint8_t apps; 		//TxData[3]
-//PRECHARGE
-uint8_t charged;    //TxData[4] Precharge will be low if any hardfaults have been detected 
-//ENABLE
-uint8_t enable;		//TxData[5]
-
-uint8_t RxData[8];
-uint32_t TxMailbox;
-
-//ADC_ChannelConfTypeDef sConfig = {0};
+uint8_t imd;        //TxData[1]
+uint8_t bspd;       //TxData[2]
+uint8_t apps;       //TxData[3]
+uint32_t TxFaultsMailbox;
 
 //For Timers
 extern uint32_t millisTimer;
@@ -197,67 +206,53 @@ int main(void)
   
   while (1)
   {
+    //READ FOR PRECHARGE
+	if(HAL_GPIO_ReadPin(GPIOB, PRECHARGE_COMPLETE_Pin) == GPIO_PIN_SET){
+	  car_state_machine(PRECHARGED);
 
-  //HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-  //HAL_Delay(500);
-
-	readFaults();
-	resetTXData();
-	//TxHeader.StdId = 0x00;
-	//TxData[0] = 0x66;
-	//HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox);
-	HAL_Delay(100);
-	//Check ENABLE_IN from driver switch and precharge /******Change '1' to 'charged'**********************/ <------ALERT
-	if(1 && HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_15) == GPIO_PIN_SET){
-	  //RTD Sound
-	  if(!driving){
-
-		  //ADC for Brake pressure
+      //READ FOR ENABLE
+	  if(HAL_GPIO_ReadPin(GPIOB,ENABLE_IN_Pin) == GPIO_PIN_RESET){
+		  car_state_machine(ENABLE_FLIPPED);
+      //ADC for Brake pressure
 		  brakePressure_1 = updateADC(2);
 
-		  //if brake pressed, we are ready to drive 
+		  //SEE IF BRAKE IS PRESSED 
 		  if(brakePressure_1 >= brakeThreshold){
-
-			//reset 3 second timer
-			secTimer = 300; //change to 3000 for 3 seconds 
-
-			//RTD Sound Enable
-			//Play sound for ~3 seconds 
-			while(secTimer > 0){
-			  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, GPIO_PIN_SET);
-			}
+			//set 3 second timer
+			 if(TxCar_state_data[0] == ENABLE_FLIPPED) {
+        secTimer = 3000; //change to 3000 for 3 seconds
+        car_state_machine(RTDS_SOUND);
+        HAL_GPIO_WritePin(GPIOB, RTD_EN_Pin | RTDS_EN_Pin | BTSF_EN_Pin | APPS_EN_Pin, GPIO_PIN_SET);
+        } 
+			//RTD Sound Enable Play sound for 2.5 seconds 
+      }
 			
-			//turn off sound
-			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, GPIO_PIN_RESET);
+			// IF OUR TIMER IS OVER FINALLY
+        if((secTimer == 0) && (TxCar_state_data[0] & 0x28)){
+			    HAL_GPIO_WritePin(GPIOB, RTDS_EN_Pin, GPIO_PIN_RESET);
+          //SeT pwr
+          car_state_priortiy(PWR_AVAILABLE);
 
-			//Set RTD Enable
-			/*******Do we need to do this????*********/
-			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET);
-
-			driving = 1;
-
-		  }
-	  }//end RTD sequence
+        }// rtds buzzer stop
+	  }//END OF RTD SEQUENCE
+  } // of start up sequence
 	  
-	  if (checkBTSF()){
-		//send CAN message
-		driving = 0;
-		//set low to stop the car
-		HAL_GPIO_WritePin(GPIOB,GPIO_PIN_4,GPIO_PIN_RESET);
-		
-	  }
-	  if (checkAPPS()){
-		//send CAN message
-		driving = 0;
-		HAL_GPIO_WritePin(GPIOB,GPIO_PIN_8,GPIO_PIN_RESET);
-	  }
-
-	}//end driving sequence if statement
-	
+    // SEQUENCE FOR CHECKING SOFT FAULTS
+    if(TxCar_state_data[0] >= RTDS_SOUND){
+	  if (checkBTSF() || checkAPPS()){
+		  HAL_GPIO_WritePin(GPIOB,BTSF_EN_Pin | APPS_EN_Pin,GPIO_PIN_RESET);
+      TxCar_state_data[0] = SOFT_FAULT;
+    }
+    else if(TxCar_state_data[0] == SOFT_FAULT) {
+        TxCar_state_data[0] = PWR_AVAILABLE;
+        HAL_GPIO_WritePin(GPIOB, BTSF_EN_Pin|APPS_EN_Pin ,GPIO_PIN_SET);
+    }
+  }
+    readFaults();
+	 
 	if (sysTimer == 0){
-		sendPrechargeMsg(); //0D1
-		sendFaultMsg(); //0D0
-		sendEnableMsg(); //0D2
+		sendFaultMsg();
+		sendCar_state();
 		sysTimer = 500;
 	}
     /* USER CODE END WHILE */
@@ -375,6 +370,10 @@ uint16_t updateADC(int channel){
 /********************************************************************************/
 int APPS_Diff(){
 
+
+
+//0.66 3.11
+//0.32 2.77
   double t_A = throttle_A;
   double t_B = throttle_B;
   
@@ -397,8 +396,48 @@ int APPS_Diff(){
   }
   return 0;
 }
+void sendFaultMsg(){
+  TxFault_data[0] = bms;  //Set all the data (faults) to their current values
+  TxFault_data[1] = imd;
+  TxFault_data[2] = bspd;
+  TxFault_data[3] = apps;
+  HAL_CAN_AddTxMessage(&hcan, &TxFaults, TxFault_data, &TxFaultsMailbox);
+}
+
+void sendCar_state(){
+  HAL_CAN_AddTxMessage(&hcan, &TxCar_state,TxCar_state_data, &TxCar_stateMailbox);
+}
+
+void car_state_machine(char STATE)
+{
+  if(STATE > TxCar_state_data[0])
+  {
+    TxCar_state_data[0] = STATE;
+  }
+}
+
+void readFaults(){
+  if (HAL_GPIO_ReadPin(GPIOD, FAULT_BSPD_STATUS_Pin) == GPIO_PIN_RESET)
+    bspd = FAULT_ACTIVE;
+  else bspd = FAULT_INACTIVE;
+  
+  if (HAL_GPIO_ReadPin(GPIOC, FAULT_IMD_STATUS_Pin) == GPIO_PIN_RESET)
+    imd = FAULT_ACTIVE;
+  else imd = FAULT_INACTIVE;
+  
+  if (HAL_GPIO_ReadPin(GPIOC, FAULT_BMS_STATUS_Pin) == GPIO_PIN_RESET)
+    bms = FAULT_ACTIVE;
+  else bms = FAULT_INACTIVE;
+
+  if(bms || imd || bspd){
+    TxCar_state_data[0] = LV_ON;
+    HAL_GPIO_WritePin(GPIOB, RTD_EN_Pin | RTDS_EN_Pin, GPIO_PIN_RESET);
+  }
+
+}
 
 /* USER CODE END 0 */
+
 
 
 /**
@@ -411,7 +450,7 @@ void SystemClock_Config(void)
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
-  /**Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the CPU, AHB and APB busses clocks 
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
@@ -421,7 +460,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /**Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the CPU, AHB and APB busses clocks 
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
@@ -450,7 +489,7 @@ void SystemClock_Config(void)
 static void MX_ADC1_Init(void)
 {
 
-  /* USER CODE BEGIN ADC1_Init 0 */
+   /* USER CODE BEGIN ADC1_Init 0 */
 
   /* USER CODE END ADC1_Init 0 */
 
@@ -522,6 +561,7 @@ static void MX_ADC1_Init(void)
     Error_Handler();
   }
   /* USER CODE END ADC1_Init 2 */
+
 }
 
 /**
@@ -532,7 +572,7 @@ static void MX_ADC1_Init(void)
 static void MX_CAN_Init(void)
 {
 
-  /* USER CODE BEGIN CAN_Init 0 */
+ /* USER CODE BEGIN CAN_Init 0 */
 
   /* USER CODE END CAN_Init 0 */
 
@@ -557,12 +597,19 @@ static void MX_CAN_Init(void)
   
     /* USER CODE BEGIN CAN_Init 1 */
  // HAL_CAN_Start(&hcan);
-  TxHeader.StdId = 0x321;         // CAN standard ID
-  TxHeader.ExtId = 0x01;          // CAN extended ID
-  TxHeader.RTR = CAN_RTR_DATA;      // CAN frame type
-  TxHeader.IDE = CAN_ID_STD;        // CAN ID type
-  TxHeader.DLC = 8;             // CAN frame length in bytes
-  TxHeader.TransmitGlobalTime = DISABLE;  // CAN timestamp in TxData[6] and TxData[7]
+  TxFaults.StdId = FAULTS;         // CAN standard ID
+  TxFaults.ExtId = 0x01;          // CAN extended ID
+  TxFaults.RTR = CAN_RTR_DATA;      // CAN frame type
+  TxFaults.IDE = CAN_ID_STD;        // CAN ID type
+  TxFaults.DLC = 8;             // CAN frame length in bytes
+  TxFaults.TransmitGlobalTime = DISABLE;  // CAN timestamp in TxData[6] and TxData[7]
+
+  TxCar_state.StdId = CAR_STATE;         // CAN standard ID
+  TxCar_state.ExtId = 0x01;          // CAN extended ID
+  TxCar_state.RTR = CAN_RTR_DATA;      // CAN frame type
+  TxCar_state.IDE = CAN_ID_STD;        // CAN ID type
+  TxCar_state.DLC = 1;             // CAN frame length in bytes
+  TxCar_state.TransmitGlobalTime = DISABLE;
 
   /* USER CODE END CAN_Init 1 */
   /* USER CODE END CAN_Init 2 */
@@ -623,44 +670,34 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
-
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5 
-                          |GPIO_PIN_8, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, BRAKE_LIGHT_EN_Pin|RTDS_EN_Pin|APPS_EN_Pin|RTD_EN_Pin 
+                          |BTSF_EN_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : PC13 */
-  GPIO_InitStruct.Pin = GPIO_PIN_13;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : PC14 PC15 */
-  GPIO_InitStruct.Pin = GPIO_PIN_14|GPIO_PIN_15;
+  /*Configure GPIO pins : FAULT_IMD_STATUS_Pin FAULT_BMS_STATUS_Pin */
+  GPIO_InitStruct.Pin = FAULT_IMD_STATUS_Pin|FAULT_BMS_STATUS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : PD0 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0;
+  /*Configure GPIO pin : FAULT_BSPD_STATUS_Pin */
+  GPIO_InitStruct.Pin = FAULT_BSPD_STATUS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+  HAL_GPIO_Init(FAULT_BSPD_STATUS_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PB10 PB15 PB6 */
-  GPIO_InitStruct.Pin = GPIO_PIN_10|GPIO_PIN_15|GPIO_PIN_6;
+  /*Configure GPIO pins : HV_CONNECTED_Pin ENABLE_IN_Pin PRECHARGE_COMPLETE_Pin */
+  GPIO_InitStruct.Pin = HV_CONNECTED_Pin|ENABLE_IN_Pin|PRECHARGE_COMPLETE_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PB13 PB3 PB4 PB5 
-                           PB8 */
-  GPIO_InitStruct.Pin = GPIO_PIN_13|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5 
-                          |GPIO_PIN_8;
+  /*Configure GPIO pins : BRAKE_LIGHT_EN_Pin RTDS_EN_Pin APPS_EN_Pin RTD_EN_Pin 
+                           BTSF_EN_Pin */
+  GPIO_InitStruct.Pin = BRAKE_LIGHT_EN_Pin|RTDS_EN_Pin|APPS_EN_Pin|RTD_EN_Pin 
+                          |BTSF_EN_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -680,67 +717,6 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
-void sendFaultMsg(){
-	resetTXData();
-	TxHeader.StdId = FAULTS; // CAN FAULT ID
-	TxData[0] = bms;  //Set all the data (faults) to their current values
-	TxData[1] = imd;
-	TxData[2] = bspd;
-	TxData[3] = apps;
-	HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox);
-}
-
-void sendPrechargeMsg(){
-	resetTXData();
-	TxHeader.StdId = PRECHARGE;
-	TxData[0] = charged;
-	HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox);
-}
-
-void sendEnableMsg(){
-	resetTXData();
-	TxHeader.StdId = ENABLE;
-	TxData[0] = enable;
-	HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox);
-}
-
-void resetTXData(){
-	TxData[0] = 0x00;
-	TxData[1] = 0x00;
-	TxData[2] = 0x00;
-	TxData[3] = 0x00;
-	TxData[4] = 0x00;
-	TxData[5] = 0x00;
-	TxData[6] = 0x00;
-	TxData[7] = 0x00;
-}
-
-void readFaults(){
-	if (HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_0) == GPIO_PIN_SET){
-		bspd = 1;
-    sendFaultMsg();
-  }
-	else bspd = 0;
-	
-	if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6) == GPIO_PIN_SET){
-		charged = 1;
-  }
-	else charged = 0;
-	
-	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_14) == GPIO_PIN_SET){
-		imd = 1;
-    sendFaultMsg();
-  }
-	else imd = 0;
-	
-	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_15) == GPIO_PIN_SET){
-		bms = 1;
-    sendFaultMsg();
-  }
-	else bms = 0;
-
-
-}
 
 /* USER CODE END 4 */
 

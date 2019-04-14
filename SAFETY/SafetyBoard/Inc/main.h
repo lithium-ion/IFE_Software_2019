@@ -38,7 +38,6 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-#pragma once
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MAIN_H
@@ -83,6 +82,40 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define FAULT_IMD_STATUS_Pin GPIO_PIN_14
+#define FAULT_IMD_STATUS_GPIO_Port GPIOC
+#define FAULT_BMS_STATUS_Pin GPIO_PIN_15
+#define FAULT_BMS_STATUS_GPIO_Port GPIOC
+#define FAULT_BSPD_STATUS_Pin GPIO_PIN_0
+#define FAULT_BSPD_STATUS_GPIO_Port GPIOD
+#define BRAKE_POSITION_Pin GPIO_PIN_0
+#define BRAKE_POSITION_GPIO_Port GPIOA
+#define STEERING_POSITION_Pin GPIO_PIN_1
+#define STEERING_POSITION_GPIO_Port GPIOA
+#define BRAKE_PRESSURE_2_Pin GPIO_PIN_2
+#define BRAKE_PRESSURE_2_GPIO_Port GPIOA
+#define BRAKE_PRESSURE_1_Pin GPIO_PIN_3
+#define BRAKE_PRESSURE_1_GPIO_Port GPIOA
+#define THROTTLE_A_Pin GPIO_PIN_0
+#define THROTTLE_A_GPIO_Port GPIOB
+#define THROTTLE_B_Pin GPIO_PIN_1
+#define THROTTLE_B_GPIO_Port GPIOB
+#define HV_CONNECTED_Pin GPIO_PIN_10
+#define HV_CONNECTED_GPIO_Port GPIOB
+#define BRAKE_LIGHT_EN_Pin GPIO_PIN_13
+#define BRAKE_LIGHT_EN_GPIO_Port GPIOB
+#define ENABLE_IN_Pin GPIO_PIN_15
+#define ENABLE_IN_GPIO_Port GPIOB
+#define RTDS_EN_Pin GPIO_PIN_3
+#define RTDS_EN_GPIO_Port GPIOB
+#define APPS_EN_Pin GPIO_PIN_4
+#define APPS_EN_GPIO_Port GPIOB
+#define RTD_EN_Pin GPIO_PIN_5
+#define RTD_EN_GPIO_Port GPIOB
+#define PRECHARGE_COMPLETE_Pin GPIO_PIN_6
+#define PRECHARGE_COMPLETE_GPIO_Port GPIOB
+#define BTSF_EN_Pin GPIO_PIN_8
+#define BTSF_EN_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 
