@@ -59,9 +59,7 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 
-int checkBTSF();
-int checkAPPS();
-int APPS_Diff();
+
 
 #define APPS_STDID        0x300
 #define BTSF_STDID        0x301
@@ -146,6 +144,14 @@ static void MX_ADC1_Init(void);
 static void MX_CAN_Init(void);
 /* USER CODE BEGIN PFP */
 
+int checkBTSF();
+int checkAPPS();
+int APPS_Diff();
+void sendFaultMsg();
+void sendCar_state();
+void readFaults();
+void car_state_machine(char STATE);
+uint16_t updateADC(int channel); 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -231,7 +237,7 @@ int main(void)
         if((secTimer == 0) && (TxCar_state_data[0] & 0x28)){
 			    HAL_GPIO_WritePin(GPIOB, RTDS_EN_Pin, GPIO_PIN_RESET);
           //SeT pwr
-          car_state_priortiy(PWR_AVAILABLE);
+          car_state_machine(PWR_AVAILABLE);
 
         }// rtds buzzer stop
 	  }//END OF RTD SEQUENCE
@@ -282,9 +288,6 @@ int checkAPPS(){
 
   //APPS_EN Fault
   if(millisTimer == 0){ //hmmm needs to be changed
-	resetTXData();
-    TxHeader.StdId = APPS_STDID; //sending CAN message
-    HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox);
     return 1; //will set driving = 0;
   }
   return 0; //APPS is good
@@ -302,13 +305,7 @@ int checkBTSF(){
   //0-5000 based
 
   if(brakePressure_1 > brakeThreshold && throttle_A > throttleThreshold){
-
-    //sending CAN message
-    resetTXData();
-    TxHeader.StdId = BTSF_STDID;
-    HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox);
-    
-	return 1;
+	     return 1;
   }
   
   return 0;
