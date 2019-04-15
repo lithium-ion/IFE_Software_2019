@@ -46,7 +46,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "stdlib.h"
 
 
 /* USER CODE END Includes */
@@ -78,9 +78,19 @@
   #define PWR_AVAILABLE   0x10 
   #define SOFT_FAULT      0x20
 // CAR STATES
+// 1 volt is 1241.21
+//throttle A .66-3.2 scaled to .396-1.866
+//throttle B .33-2.7 scaled to .198-1.62
+// That means 5% from 0 is .4705 volts
+const uint16_t ThrottleA_5 = 584;
+// That means 25% from 0 is .7635 volts
+const uint16_t ThrottleA_25 = 947;
+const uint16_t brakeThreshold = 2606; //80; >> 3.5 volts on 5 v scale, 2.1 on 3.3v scale
+const uint16_t RTD_Threshold = 2000; // NO idea for this
 
-const int throttleThreshold = 80;
-const int brakeThreshold = 0; //80;
+// APPS is .35 volts, so .21 volts scaled
+const int APPS_difference = 260;
+
 
 
 /* USER CODE END PD */
@@ -106,11 +116,15 @@ uint16_t brakePressure_2;
 uint16_t throttle_A;
 uint16_t throttle_B;
 
+
 //need to figure out:
 uint16_t max_throttle = 10;
 
+
+//STATE FLAGS
 char Prev_State = 0x00; 		//boolean
 int hardFaultFlag = 0;  //boolean
+char BTSF_ACTIVE = 0x00;
 
 // CAR STAT STATES FOR CAN
 CAN_TxHeaderTypeDef TxCar_state;
@@ -119,7 +133,7 @@ uint32_t TxCar_stateMailbox;
 
 //CAN FAULT VARIABLES
 CAN_TxHeaderTypeDef TxFaults;
-uint8_t TxFault_data[8] = {0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55};
+uint8_t TxFault_data[4] = {0x55, 0x55, 0x55, 0x55};
 /*Set these values: 0xFF = Fault present
                     0x00 = No fault*/
 uint8_t bms;        //TxData[0]
@@ -144,9 +158,9 @@ static void MX_ADC1_Init(void);
 static void MX_CAN_Init(void);
 /* USER CODE BEGIN PFP */
 
-int checkBTSF();
-int checkAPPS();
-int APPS_Diff();
+char checkBTSF();
+char checkAPPS();
+char APPS_Diff();
 void sendFaultMsg();
 void sendCar_state();
 void readFaults();
@@ -233,8 +247,8 @@ int main(void)
 			//RTD Sound Enable Play sound for 2.5 seconds 
       }
 			
-			// IF OUR TIMER IS OVER FINALLY
-        if((secTimer == 0) && (TxCar_state_data[0] & 0x28)){
+			// IF OUR TIMER IS OVER FINALLY //we also stop timer if we started it from RTDS state or Soft fault state
+        if((secTimer == 0) && (TxCar_state_data[0] & 0x38)){
 			    HAL_GPIO_WritePin(GPIOB, RTDS_EN_Pin, GPIO_PIN_RESET);
           //SeT pwr
           car_state_machine(PWR_AVAILABLE);
@@ -273,7 +287,7 @@ int main(void)
 //Returns one if difference in throttleA/B is greater than 10% for 100 ms
 //Returns zero if else
 /********************************************************************************/
-int checkAPPS(){
+char checkAPPS(){
 
   throttle_A = updateADC(8); 
   throttle_B = updateADC(9); 
@@ -298,14 +312,24 @@ int checkAPPS(){
 //Returns one if fault was sensed and sent out
 //zero if nothing is detected
 /********************************************************************************/
-int checkBTSF(){
+char checkBTSF(){
   brakePressure_1 = updateADC(2);
   throttle_A = updateADC(8); 
 
   //0-5000 based
+  if(BTSF_ACTIVE)
+  {
+    if(throttle_A <= ThrottleA_5)
+    {
+      BTSF_ACTIVE = 0x00;
+      return 0;
+    }
+    return 1;
+  }
 
-  if(brakePressure_1 > brakeThreshold && throttle_A > throttleThreshold){
-	     return 1;
+  if((brakePressure_1 > brakeThreshold) && (throttle_A > ThrottleA_25)){
+	     BTSF_ACTIVE = 0xFF;
+       return 1;
   }
   
   return 0;
@@ -365,17 +389,20 @@ uint16_t updateADC(int channel){
 //Returns: 1 if difference > 10%
 //		   0 if everything is good 
 /********************************************************************************/
-int APPS_Diff(){
-
-
+char APPS_Diff(){
 
 //0.66 3.11
 //0.32 2.77
-  double t_A = throttle_A;
-  double t_B = throttle_B;
+  int t_A = (int)throttle_A;
+  int t_B = (int)throttle_B;
+
+  if(abs(t_A-t_B) > APPS_difference)
+    return 1;
+  else
+    return 0;
   
   //equalize throttles assuming 1mm diff out of 12.5mm from pots
-  t_A -= (1/12.5)*max_throttle; 
+ /* t_A -= (1/12.5)*max_throttle; 
 
   double numerator = t_A - t_B;
   
@@ -391,7 +418,9 @@ int APPS_Diff(){
   if(difference >= 10){
     return 1;
   }
-  return 0;
+  return 0;*/
+
+
 }
 void sendFaultMsg(){
   TxFault_data[0] = bms;  //Set all the data (faults) to their current values

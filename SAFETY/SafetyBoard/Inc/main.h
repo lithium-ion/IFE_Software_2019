@@ -119,12 +119,14 @@ void Error_Handler(void);
 /* USER CODE BEGIN Private defines */
 
 
+char checkBTSF();
+char checkAPPS();
+char APPS_Diff();
 void sendFaultMsg();
-void sendPrechargeMsg();
-void sendEnableMsg();
-uint16_t updateADC(int channel);
-void resetTXData();
+void sendCar_state();
 void readFaults();
+void car_state_machine(char STATE);
+uint16_t updateADC(int channel); 
 
 /* USER CODE END Private defines */
 
