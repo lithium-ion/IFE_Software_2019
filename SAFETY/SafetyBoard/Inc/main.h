@@ -81,6 +81,8 @@ void Error_Handler(void);
 
 /* USER CODE END EFP */
 
+/* USER CODE BEGIN Private defines */
+
 /* Private defines -----------------------------------------------------------*/
 #define FAULT_IMD_STATUS_Pin GPIO_PIN_14
 #define FAULT_IMD_STATUS_GPIO_Port GPIOC
@@ -116,7 +118,13 @@ void Error_Handler(void);
 #define PRECHARGE_COMPLETE_GPIO_Port GPIOB
 #define BTSF_EN_Pin GPIO_PIN_8
 #define BTSF_EN_GPIO_Port GPIOB
-/* USER CODE BEGIN Private defines */
+#define BRAKE_POS_ADC_CHANNEL 0
+#define STEERING_POS_ADC_CHANNEL 1
+#define BRAKE_PRESSURE_1_ADC_CHANNEL 2
+#define BRAKE_PRESSURE_2_ADC_CHANNEL 3
+#define THROTTLE_A_ADC_CHANNEL 8
+#define THROTTLE_B_ADC_CHANNEL 9
+
 
 
 char checkBTSF();

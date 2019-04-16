@@ -89,7 +89,14 @@ const uint16_t brakeThreshold = 2606; //80; >> 3.5 volts on 5 v scale, 2.1 on 3.
 const uint16_t RTD_Threshold = 2000; // NO idea for this
 
 // APPS is .35 volts, so .21 volts scaled
-const int APPS_difference = 260;
+//This values is 0-100 based
+const int APPS_difference = 600; //~0.5 voltz
+
+//These are based off above values measured
+const int throttle_A_min = 491;
+const int throttle_A_max = 2316;
+const int throttle_B_min = 246;
+const int throttle_B_max = 2010;
 
 
 
@@ -181,12 +188,14 @@ uint16_t updateADC(int channel);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+  //HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+  //HAL_Delay(200);
 
 
   //For Timers
-  millisTimer = 100000; //100 millis
-  secTimer = 3000000; //3 seconds
-  sysTimer = 500; //timer to send message every second
+  millisTimer = 100; //100 millis
+  secTimer = 3000; //3 seconds
+  sysTimer = 1000; //timer to send message every second
 
   /* USER CODE END 1 */
 
@@ -198,9 +207,9 @@ int main(void)
   /* USER CODE BEGIN Init */
 
   // Update SystemCoreClock value
- // SystemCoreClockUpdate();
-  // Configure the SysTick timer to overflow every 1 us
- // SysTick_Config(SystemCoreClock / 1000000);
+  SystemCoreClockUpdate();
+  // Configure the SysTick timer to overflow every 1 ms
+  SysTick_Config(SystemCoreClock / 1000);
 
   /* USER CODE END Init */
 
@@ -223,18 +232,21 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
   
+
   while (1)
   {
     //READ FOR PRECHARGE
-	if(HAL_GPIO_ReadPin(GPIOB, PRECHARGE_COMPLETE_Pin) == GPIO_PIN_SET){
+	if(HAL_GPIO_ReadPin(GPIOB, PRECHARGE_COMPLETE_Pin) == GPIO_PIN_RESET){
 	  car_state_machine(PRECHARGED);
+    HAL_GPIO_WritePin(BRAKE_LIGHT_EN_GPIO_Port, BRAKE_LIGHT_EN_Pin, GPIO_PIN_SET);
 
       //READ FOR ENABLE
 	  if(HAL_GPIO_ReadPin(GPIOB,ENABLE_IN_Pin) == GPIO_PIN_RESET){
 		  car_state_machine(ENABLE_FLIPPED);
       //ADC for Brake pressure
-		  brakePressure_1 = updateADC(2);
+		  brakePressure_2 = updateADC(BRAKE_PRESSURE_2_ADC_CHANNEL);
 
 		  //SEE IF BRAKE IS PRESSED 
 		  if(brakePressure_1 >= brakeThreshold){
@@ -254,7 +266,7 @@ int main(void)
           car_state_machine(PWR_AVAILABLE);
 
         }// rtds buzzer stop
-	  }//END OF RTD SEQUENCE
+	  }//END OF RTD SEQUENCE*/
   } // of start up sequence
 	  
     // SEQUENCE FOR CHECKING SOFT FAULTS
@@ -270,16 +282,38 @@ int main(void)
   }
     readFaults();
 	 
-	if (sysTimer == 0){
+	if (sysTimer == 0){ //sending routine message every 1 second
 		sendFaultMsg();
 		sendCar_state();
-		sysTimer = 500;
+		sysTimer = 1000;
+    //HAL_GPIO_WritePin(BRAKE_LIGHT_EN_GPIO_Port, BRAKE_LIGHT_EN_Pin, GPIO_PIN_SET);
+
 	}
+
+  //Brake Light
+  brakePressure_2 = updateADC(BRAKE_PRESSURE_2_ADC_CHANNEL);
+  if(brakePressure_2 > brakeThreshold){
+    HAL_GPIO_WritePin(BRAKE_LIGHT_EN_GPIO_Port, BRAKE_LIGHT_EN_Pin, GPIO_PIN_SET);
+  }
+  else
+    HAL_GPIO_WritePin(BRAKE_LIGHT_EN_GPIO_Port, BRAKE_LIGHT_EN_Pin, GPIO_PIN_RESET);
+
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
+
+  //TEST WHILE
+ /* while(1){
+
+    HAL_GPIO_WritePin(BRAKE_LIGHT_EN_GPIO_Port, BRAKE_LIGHT_EN_Pin, GPIO_PIN_SET);
+    HAL_Delay(500);
+  }
+  */
+
+  
 }
 
 /********************************************************************************/
@@ -289,22 +323,31 @@ int main(void)
 /********************************************************************************/
 char checkAPPS(){
 
-  throttle_A = updateADC(8); 
-  throttle_B = updateADC(9); 
-  //0-5000 based ?
+  throttle_A = updateADC(THROTTLE_A_ADC_CHANNEL); 
+  throttle_B = updateADC(THROTTLE_B_ADC_CHANNEL); 
 
+/*
+  if(throttle_A > throttle_B){
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET);
+    HAL_Delay(100);
+  }
+  else
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_RESET);
+  return 1;*/
+  
   //Throttles Agree
-  millisTimer = 1000;
-  while(millisTimer > 0 && APPS_Diff()){
-	throttle_A = updateADC(8);
-	throttle_B = updateADC(9);
-  } //stay in this loop while there is a 10% difference in throttles
-
+  if(APPS_Diff() == 0){
+	 millisTimer = 100;
+   //HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_RESET);
+  }
+  
   //APPS_EN Fault
-  if(millisTimer == 0){ //hmmm needs to be changed
+  if(millisTimer == 0){ //this occurs when APPS_diff is true for > 100 ms
+    //HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET);
     return 1; //will set driving = 0;
   }
   return 0; //APPS is good
+
 }
 
 /********************************************************************************/
@@ -313,24 +356,26 @@ char checkAPPS(){
 //zero if nothing is detected
 /********************************************************************************/
 char checkBTSF(){
-  brakePressure_1 = updateADC(2);
-  throttle_A = updateADC(8); 
-
-  //0-5000 based
+  brakePressure_2 = updateADC(BRAKE_PRESSURE_2_ADC_CHANNEL);
+  throttle_A = updateADC(THROTTLE_A_ADC_CHANNEL); 
+  
   if(BTSF_ACTIVE)
   {
     if(throttle_A <= ThrottleA_5)
     {
       BTSF_ACTIVE = 0x00;
+      //HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_RESET);
       return 0;
     }
     return 1;
   }
 
-  if((brakePressure_1 > brakeThreshold) && (throttle_A > ThrottleA_25)){
+  if((brakePressure_2 > brakeThreshold) && (throttle_A > ThrottleA_25)){
+       //HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET);
 	     BTSF_ACTIVE = 0xFF;
        return 1;
   }
+  
   
   return 0;
 }
@@ -342,17 +387,17 @@ char checkBTSF(){
 /********************************************************************************/
 uint16_t updateADC(int channel){	
 	//HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
-  if (channel == 0) //Brake position 
+  if (channel == BRAKE_POS_ADC_CHANNEL) //Brake position 
     sConfig.Channel = ADC_CHANNEL_0;
-  if (channel == 1) //steering position 
+  if (channel == STEERING_POS_ADC_CHANNEL) //steering position 
     sConfig.Channel = ADC_CHANNEL_1;
-  if (channel == 2) //brake pressure 1
+  if (channel == BRAKE_PRESSURE_1_ADC_CHANNEL) //brake pressure 1
     sConfig.Channel = ADC_CHANNEL_2;
-  if (channel == 3) //brake pressure 2
+  if (channel == BRAKE_PRESSURE_2_ADC_CHANNEL) //brake pressure 2
     sConfig.Channel = ADC_CHANNEL_3;
-  if (channel == 8) //throttle A
+  if (channel == THROTTLE_A_ADC_CHANNEL) //throttle A
     sConfig.Channel = ADC_CHANNEL_8;
-  if (channel == 9) //throttle B 
+  if (channel == THROTTLE_B_ADC_CHANNEL) //throttle B 
     sConfig.Channel = ADC_CHANNEL_9;
 
   sConfig.Rank = ADC_REGULAR_RANK_1;
@@ -388,37 +433,33 @@ uint16_t updateADC(int channel){
 //Determines if the throttle percent difference is above 10%
 //Returns: 1 if difference > 10%
 //		   0 if everything is good 
+//
+//Throttle_A will get values 491 to 2316 (throttle_A_min to max)
+//Throttle_B will get values 246 to 2010 (throttle_B_min to max)
 /********************************************************************************/
 char APPS_Diff(){
 
 //0.66 3.11
 //0.32 2.77
-  int t_A = (int)throttle_A;
-  int t_B = (int)throttle_B;
+ // int t_A = (int)throttle_A;
+  //int t_B = (int)throttle_B;
+
+  if(abs(throttle_A - throttle_B) > APPS_difference){ //600 ~ 0.5v
+    return 1;
+  }
+  else return 0;
+
+  /*
+
+  t_A = (t_A - throttle_A_min)/(throttle_A_max - throttle_A_min); //Normalize both values to be 0-100
+  t_B = (t_B - throttle_B_min)/(throttle_B_max - throttle_B_min);
 
   if(abs(t_A-t_B) > APPS_difference)
     return 1;
   else
     return 0;
-  
-  //equalize throttles assuming 1mm diff out of 12.5mm from pots
- /* t_A -= (1/12.5)*max_throttle; 
 
-  double numerator = t_A - t_B;
-  
-  //absolute value
-  if(numerator < 0){
-    numerator = -1*numerator;
-  }
-
-  double denominator = (t_A + t_B)/2;
-
-  double difference = 100*numerator/denominator;
-
-  if(difference >= 10){
-    return 1;
-  }
-  return 0;*/
+    */
 
 
 }
@@ -607,7 +648,7 @@ static void MX_CAN_Init(void)
   hcan.Init.Prescaler = 2;
   hcan.Init.Mode = CAN_MODE_NORMAL;
   hcan.Init.SyncJumpWidth = CAN_SJW_1TQ;
-  hcan.Init.TimeSeg1 = CAN_BS1_11TQ;
+  hcan.Init.TimeSeg1 = CAN_BS1_3TQ;
   hcan.Init.TimeSeg2 = CAN_BS2_4TQ;
   hcan.Init.TimeTriggeredMode = DISABLE;
   hcan.Init.AutoBusOff = DISABLE;
