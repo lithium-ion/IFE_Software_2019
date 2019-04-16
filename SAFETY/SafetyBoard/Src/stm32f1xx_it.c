@@ -206,13 +206,13 @@ void SysTick_Handler(void)
         millisTimer--;
     }
 
-  if (secTimer != 0)
+  if (RTDS_Timer != 0)
   {
-      secTimer--;
+      RTDS_Timer--;
   }
   
-  if (sysTimer != 0)
-	  sysTimer--;
+  if (CAN_Timer != 0)
+    CAN_Timer--;
 
 
 
