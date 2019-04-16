@@ -54,8 +54,8 @@ extern "C" {
 /* USER CODE BEGIN Includes */
 
 uint32_t millisTimer;
-uint32_t secTimer;
-uint32_t sysTimer;
+uint32_t RTDS_Timer;
+uint32_t CAN_Timer;
 
 /* USER CODE END Includes */
 
@@ -120,8 +120,8 @@ void Error_Handler(void);
 #define BTSF_EN_GPIO_Port GPIOB
 #define BRAKE_POS_ADC_CHANNEL 0
 #define STEERING_POS_ADC_CHANNEL 1
-#define BRAKE_PRESSURE_1_ADC_CHANNEL 2
-#define BRAKE_PRESSURE_2_ADC_CHANNEL 3
+#define BRAKE_PRESSURE_1_ADC_CHANNEL 3
+#define BRAKE_PRESSURE_2_ADC_CHANNEL 2
 #define THROTTLE_A_ADC_CHANNEL 8
 #define THROTTLE_B_ADC_CHANNEL 9
 
