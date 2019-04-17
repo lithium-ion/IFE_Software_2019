@@ -233,79 +233,79 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-  while (1)
-  {
-    //READ FOR PRECHARGE
-  if(HAL_GPIO_ReadPin(GPIOB, PRECHARGE_COMPLETE_Pin) == GPIO_PIN_RESET){
-    car_state_machine(PRECHARGED);
-
-      //READ FOR ENABLE
+   while (1)
+   {
+     //READ FOR PRECHARGE
+   if(HAL_GPIO_ReadPin(GPIOB, PRECHARGE_COMPLETE_Pin) == GPIO_PIN_RESET){
+     car_state_machine(PRECHARGED);
+     //READ FOR ENABLE
     if(HAL_GPIO_ReadPin(GPIOB,ENABLE_IN_Pin) == GPIO_PIN_RESET){
-      car_state_machine(ENABLE_FLIPPED);
-      //ADC for Brake pressure
-      brakePressure_2 = updateADC(BRAKE_PRESSURE_2_ADC_CHANNEL);
-      //SEE IF BRAKE IS PRESSED 
-      if(brakePressure_2 >= RTD_Threshold){
-      //set 3 second timer
-       if(TxCar_state_data[0] == ENABLE_FLIPPED) {
-        RTDS_Timer = 2500; //change to 3000 for 3 seconds
-        car_state_machine(RTDS_SOUND);
+       car_state_machine(ENABLE_FLIPPED);
+       //ADC for Brake pressure
+       brakePressure_2 = updateADC(BRAKE_PRESSURE_2_ADC_CHANNEL);
+       //SEE IF BRAKE IS PRESSED 
+       if(brakePressure_2 >= RTD_Threshold){
+       //set 3 second timer
+        if(TxCar_state_data[0] == ENABLE_FLIPPED) {
+         RTDS_Timer = 2500; //change to 3000 for 3 seconds
+         car_state_machine(RTDS_SOUND);
           
-        HAL_GPIO_WritePin(GPIOB, RTD_EN_Pin | RTDS_EN_Pin | BTSF_EN_Pin | APPS_EN_Pin, GPIO_PIN_SET);
-        } 
-      //RTD Sound Enable Play sound for 2.5 seconds 
-      }
+         HAL_GPIO_WritePin(GPIOB, RTD_EN_Pin | RTDS_EN_Pin | BTSF_EN_Pin | APPS_EN_Pin, GPIO_PIN_SET);
+         } 
+       //RTD Sound Enable Play sound for 2.5 seconds 
+       }
       
-      // IF OUR TIMER IS OVER FINALLY //we also stop timer if we started it from RTDS state or Soft fault state
-        if((RTDS_Timer == 0) && (TxCar_state_data[0] & 0x38)){
-          HAL_GPIO_WritePin(GPIOB, RTDS_EN_Pin, GPIO_PIN_RESET);
-          //SeT pwr
-          car_state_machine(PWR_AVAILABLE);
-           }// rtds buzzer stop
-    }//END OF RTD SEQUENCE*/
-    else if(HAL_GPIO_ReadPin(GPIOB,ENABLE_IN_Pin) == GPIO_PIN_SET)
-    { //IF WE HAVE DE ENABLED LA COCHE
-      TxCar_state_data[0] = PRECHARGED;
-      HAL_Delay(500);//THIS IS PUT HERE TO AVOID BOUNCING WHEN ITS REMOVED
-    }
-  } // end of if precharge complete statement
-     if(RTDS_Timer == 0)
-      HAL_GPIO_WritePin(GPIOB, RTDS_EN_Pin, GPIO_PIN_RESET);
-    
-    // SEQUENCE FOR CHECKING SOFT FAULTS
-    if(TxCar_state_data[0] >= RTDS_SOUND){
-    if (checkBTSF()){
-      HAL_GPIO_WritePin(GPIOB,BTSF_EN_Pin | APPS_EN_Pin,GPIO_PIN_RESET);
-      TxCar_state_data[0] = SOFT_FAULT;
-    }
-    else if(TxCar_state_data[0] == SOFT_FAULT) {
-        TxCar_state_data[0] = PWR_AVAILABLE;
-        HAL_GPIO_WritePin(GPIOB, BTSF_EN_Pin|APPS_EN_Pin ,GPIO_PIN_SET);
-    }
-  }
+       // IF OUR TIMER IS OVER FINALLY //we also stop timer if we started it from RTDS state or Soft fault state
+         if((RTDS_Timer == 0) && (TxCar_state_data[0] & 0x38)){
+           HAL_GPIO_WritePin(GPIOB, RTDS_EN_Pin, GPIO_PIN_RESET);
+           //SeT pwr
+           car_state_machine(PWR_AVAILABLE);
+            }// rtds buzzer stop
+     }//END OF RTD SEQUENCE*/
+     else if(HAL_GPIO_ReadPin(GPIOB,ENABLE_IN_Pin) == GPIO_PIN_SET)
+     { //IF WE HAVE DE ENABLED LA COCHE
+       TxCar_state_data[0] = PRECHARGED;
+       HAL_GPIO_WritePin(GPIOB, RTD_EN_Pin,GPIO_PIN_RESET);
+       HAL_Delay(500);//THIS IS PUT HERE TO AVOID BOUNCING WHEN ITS REMOVED
+     }
+   } // end of if precharge complete statement
+      if(RTDS_Timer == 0)
+       HAL_GPIO_WritePin(GPIOB, RTDS_EN_Pin, GPIO_PIN_RESET);
+  
+     // SEQUENCE FOR CHECKING SOFT FAULTS
+     if(TxCar_state_data[0] >= RTDS_SOUND){
+     if (checkBTSF()){
+       HAL_GPIO_WritePin(GPIOB,BTSF_EN_Pin | APPS_EN_Pin,GPIO_PIN_RESET);
+       TxCar_state_data[0] = SOFT_FAULT;
+     }
+     else if(TxCar_state_data[0] == SOFT_FAULT) {
+         TxCar_state_data[0] = PWR_AVAILABLE;
+         HAL_GPIO_WritePin(GPIOB, BTSF_EN_Pin|APPS_EN_Pin ,GPIO_PIN_SET);
+     }
+   }
 
-  readFaults(); 
-  if (CAN_Timer == 0){ //sending routine message every 1 second
-    sendFaultMsg();
-    sendCar_state();
-    CAN_Timer = 1000;
-    //HAL_GPIO_WritePin(BRAKE_LIGHT_EN_GPIO_Port, BRAKE_LIGHT_EN_Pin, GPIO_PIN_SET);
+   readFaults(); 
+   if (CAN_Timer == 0){ //sending routine message every 1 second
+     sendFaultMsg();
+     sendCar_state();
+     CAN_Timer = 1000;
+     //HAL_GPIO_WritePin(BRAKE_LIGHT_EN_GPIO_Port, BRAKE_LIGHT_EN_Pin, GPIO_PIN_SET);
 
-  }
+   }
 
-  //Brake Light
-  brakePressure_2 = updateADC(BRAKE_PRESSURE_2_ADC_CHANNEL);
-  if(brakePressure_2 > brakeThreshold){
-    HAL_GPIO_WritePin(GPIOB, BRAKE_LIGHT_EN_Pin, GPIO_PIN_SET);
-  }
-  else
-    HAL_GPIO_WritePin(GPIOB, BRAKE_LIGHT_EN_Pin, GPIO_PIN_RESET);
+   //Brake Light
+   brakePressure_2 = updateADC(BRAKE_PRESSURE_2_ADC_CHANNEL);
+   if(brakePressure_2 > brakeThreshold){
+     HAL_GPIO_WritePin(GPIOB, BRAKE_LIGHT_EN_Pin, GPIO_PIN_SET);
+   }
+   else
+     HAL_GPIO_WritePin(GPIOB, BRAKE_LIGHT_EN_Pin, GPIO_PIN_RESET);
 
 
-    /* USER CODE END WHILE */
+     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-  }
+   }
   /* USER CODE END 3 */
 
   //TEST WHILE
@@ -499,9 +499,9 @@ void readFaults(){
     bms = FAULT_ACTIVE;
   else bms = FAULT_INACTIVE;
 
-  if(bms || imd || bspd){
-   // TxCar_state_data[0] = LV_ON;
-   // HAL_GPIO_WritePin(GPIOB, RTD_EN_Pin | RTDS_EN_Pin, GPIO_PIN_RESET);
+  if(bms || imd){
+    TxCar_state_data[0] = LV_ON;
+    HAL_GPIO_WritePin(GPIOB, RTD_EN_Pin | RTDS_EN_Pin, GPIO_PIN_RESET);
   }
 
 }
