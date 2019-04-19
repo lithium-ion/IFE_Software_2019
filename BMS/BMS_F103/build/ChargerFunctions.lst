@@ -1,0 +1,871 @@
+ARM GAS  /tmp/cc9WRhBl.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"ChargerFunctions.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.global	__aeabi_fcmpgt
+  16              		.section	.text.getLowestVoltage,"ax",%progbits
+  17              		.align	1
+  18              		.global	getLowestVoltage
+  19              		.arch armv7-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu softvfp
+  25              	getLowestVoltage:
+  26              	.LVL0:
+  27              	.LFB1:
+  28              		.file 1 "Src/ChargerFunctions.c"
+   1:Src/ChargerFunctions.c **** /*
+   2:Src/ChargerFunctions.c **** 	All variables below are required for the functions to run. Data for every board has been received,
+   3:Src/ChargerFunctions.c **** 	Then call the setChargerTxData to set the CAN transmission message for the charger. This data will
+   4:Src/ChargerFunctions.c **** 	with extended ID 0x1806E5F4 at 500Kbps bit rate. The charger expects a message every one second.
+   5:Src/ChargerFunctions.c **** 	
+   6:Src/ChargerFunctions.c **** 	Functions:
+   7:Src/ChargerFunctions.c **** 		int setChargeDischarge (bool cellsDischarge[numBoards][cellsPerBoard], int *chargeCurrent, float 
+   8:Src/ChargerFunctions.c **** 			@brief - when function returns, the array cellsDischarge will be modified based on the new data 
+   9:Src/ChargerFunctions.c **** 					-- Every cell: if the voltage is more than balancingDifference above the minimum cell voltage,
+  10:Src/ChargerFunctions.c **** 					-- If any cell exceeds lowerVoltage_Threshold lower charge current to lowerCurrent and continu
+  11:Src/ChargerFunctions.c **** 					-- If any cell exceeds higherVoltage_Threshold: Set charge current to 0 and continue balancing
+  12:Src/ChargerFunctions.c **** 					-- If any cell exceeds BMSFault_Threshold: Throw BMS Fault
+  13:Src/ChargerFunctions.c **** 			@return - 1 if there is a BMS fault, 0 if not
+  14:Src/ChargerFunctions.c **** 		
+  15:Src/ChargerFunctions.c **** 		float getLowestVoltage(float cellVoltage[numBoards][cellsPerBoard])
+  16:Src/ChargerFunctions.c **** 			@brief - finds and returns the lowest cell voltage
+  17:Src/ChargerFunctions.c **** 			@return - the lowest voltage of all cells
+  18:Src/ChargerFunctions.c **** 		
+  19:Src/ChargerFunctions.c **** 		void setChargerTxData()
+  20:Src/ChargerFunctions.c **** 			@brief - calculates and sets the CAN transmission data for the charger
+  21:Src/ChargerFunctions.c **** 
+  22:Src/ChargerFunctions.c **** 	Author: Evan Chen
+  23:Src/ChargerFunctions.c ****  */
+  24:Src/ChargerFunctions.c **** 
+  25:Src/ChargerFunctions.c ****  #include <stdint.h>
+  26:Src/ChargerFunctions.c ****  #include "ChargerFunctions.h"
+  27:Src/ChargerFunctions.c **** 
+  28:Src/ChargerFunctions.c **** /*********************************************************** Variables ****************************
+  29:Src/ChargerFunctions.c **** 
+  30:Src/ChargerFunctions.c **** /************** Voltage Thresholds *******************/
+ARM GAS  /tmp/cc9WRhBl.s 			page 2
+
+
+  31:Src/ChargerFunctions.c **** float BMSFault_Threshold = 4.2;				// max voltage (V) before BMS Fault is thrown
+  32:Src/ChargerFunctions.c **** float lowerVoltage_Threshold = 4.1;			// max voltage (V) before charge current is lowered
+  33:Src/ChargerFunctions.c **** float higherVoltage_Threshold = 4.185;		// max voltage (V) before charge current is set to 0
+  34:Src/ChargerFunctions.c **** float balancingDifference = 0.05;			// max difference in voltage (V) between current cell and cell 
+  35:Src/ChargerFunctions.c **** /************* End Voltage Thresholds ****************/
+  36:Src/ChargerFunctions.c **** 
+  37:Src/ChargerFunctions.c **** 
+  38:Src/ChargerFunctions.c **** /*************** Charging Settings ********************/
+  39:Src/ChargerFunctions.c **** /* hex value of ten times the current (A) in normal operation(when no cell is above lowerVoltage_Th
+  40:Src/ChargerFunctions.c **** uint16_t normalCurrent = 0x003E;		// 6.2 A
+  41:Src/ChargerFunctions.c **** 
+  42:Src/ChargerFunctions.c **** /* hex value of ten times the current (A) when any cell exceeds lowerVoltage_Threshold */
+  43:Src/ChargerFunctions.c **** uint16_t lowerCurrent = 0x000A;			// 1 A
+  44:Src/ChargerFunctions.c **** 
+  45:Src/ChargerFunctions.c **** /* hex value of ten times the voltage (V) of the charger */
+  46:Src/ChargerFunctions.c **** uint16_t chargerVoltage = 0x0FA0;		// 400 V
+  47:Src/ChargerFunctions.c **** /************** End Charging Settings *****************/
+  48:Src/ChargerFunctions.c **** 
+  49:Src/ChargerFunctions.c **** 
+  50:Src/ChargerFunctions.c **** /************* Battery and Cell Numbers **************/
+  51:Src/ChargerFunctions.c **** int numBoards = 12;
+  52:Src/ChargerFunctions.c **** int cellsPerBoard = 8;
+  53:Src/ChargerFunctions.c **** bool cellsDischarge[12][8];			// true for discharging, false for not discharging
+  54:Src/ChargerFunctions.c **** /************* End Battery and Cell Numbers **********/
+  55:Src/ChargerFunctions.c **** 
+  56:Src/ChargerFunctions.c **** 
+  57:Src/ChargerFunctions.c **** /******************** Other **************************/
+  58:Src/ChargerFunctions.c **** int chargeCurrent;		// flag used by program (2 for normal current, 1 for lower current, 0 for not c
+  59:Src/ChargerFunctions.c **** uint8_t CANtx[8];		// CAN transmission data for the charger
+  60:Src/ChargerFunctions.c **** /******************* End Other ***********************/
+  61:Src/ChargerFunctions.c **** 
+  62:Src/ChargerFunctions.c **** /*********************************************************** End Variables ************************
+  63:Src/ChargerFunctions.c **** 
+  64:Src/ChargerFunctions.c **** int setChargeDischarge (bool cellsDischarge[numBoards][cellsPerBoard], int *chargeCurrent, float ce
+  65:Src/ChargerFunctions.c **** float getLowestVoltage(float cellVoltage[numBoards][cellsPerBoard]);
+  66:Src/ChargerFunctions.c **** float getLowestVoltage(float cellVoltage[numBoards][cellsPerBoard]);
+  67:Src/ChargerFunctions.c **** void setChargerTxData();
+  68:Src/ChargerFunctions.c **** 
+  69:Src/ChargerFunctions.c **** /*
+  70:Src/ChargerFunctions.c **** 	@brief - when function returns, the array cellsDischarge will be modified based on the new data as
+  71:Src/ChargerFunctions.c **** 				-- Every cell: if the voltage is more than balancingDifference above the minimum cell voltage, 
+  72:Src/ChargerFunctions.c **** 				-- If any cell exceeds lowerVoltage_Threshold lower charge current to lowerCurrent and continue
+  73:Src/ChargerFunctions.c **** 				-- If any cell exceeds higherVoltage_Threshold: Set charge current to 0 and continue balancing
+  74:Src/ChargerFunctions.c **** 				-- If any cell exceeds BMSFault_Threshold: Throw BMS Fault
+  75:Src/ChargerFunctions.c **** 	@return - 1 if there is a BMS fault, 0 if not
+  76:Src/ChargerFunctions.c **** */
+  77:Src/ChargerFunctions.c **** int setChargeDischarge (bool cellsDischarge[numBoards][cellsPerBoard], int *chargeCurrent, float ce
+  78:Src/ChargerFunctions.c **** 	float lowestVoltage = getLowestVoltage(cellVoltage);			// get lowest voltage of all cells
+  79:Src/ChargerFunctions.c **** 	*chargeCurrent = 2;												// initialize the charging current to normal operation
+  80:Src/ChargerFunctions.c **** 	
+  81:Src/ChargerFunctions.c **** 	/* initialize cellsDischarge to all false */
+  82:Src/ChargerFunctions.c **** 	for (int board = 0; board < numBoards; board++) {
+  83:Src/ChargerFunctions.c **** 		for (int cell = 0; cell < cellsPerBoard; cell++) {
+  84:Src/ChargerFunctions.c **** 			cellsDischarge[board][cell] = false;
+  85:Src/ChargerFunctions.c **** 		}
+  86:Src/ChargerFunctions.c **** 	}
+  87:Src/ChargerFunctions.c **** 
+ARM GAS  /tmp/cc9WRhBl.s 			page 3
+
+
+  88:Src/ChargerFunctions.c **** 	/* iterate through every cell */
+  89:Src/ChargerFunctions.c **** 	for (int board = 0; board < numBoards; board++) {
+  90:Src/ChargerFunctions.c **** 		for (int cell = 0; cell < cellsPerBoard; cell++) {
+  91:Src/ChargerFunctions.c **** 			/* get the voltage of current cell */
+  92:Src/ChargerFunctions.c **** 			float voltage = cellVoltage[board][cell];
+  93:Src/ChargerFunctions.c **** 
+  94:Src/ChargerFunctions.c **** 			/* If any cell exceeds BMSFault_Threshold2 Throw BMS Fault */
+  95:Src/ChargerFunctions.c **** 			if (voltage > BMSFault_Threshold) {
+  96:Src/ChargerFunctions.c **** 				*chargeCurrent = 0;
+  97:Src/ChargerFunctions.c **** 				return 1;
+  98:Src/ChargerFunctions.c **** 			}
+  99:Src/ChargerFunctions.c **** 
+ 100:Src/ChargerFunctions.c **** 			/* Set balancing: if the cell voltage is more than the set balancingDifference above the minimum
+ 101:Src/ChargerFunctions.c **** 			if (voltage > (lowestVoltage + balancingDifference)) {
+ 102:Src/ChargerFunctions.c **** 				cellsDischarge[board][cell] = true;
+ 103:Src/ChargerFunctions.c **** 			}
+ 104:Src/ChargerFunctions.c **** 
+ 105:Src/ChargerFunctions.c **** 			/* If any cell exceeds higherVoltage_Threshold: Set charge current to 0 and continue balancing.
+ 106:Src/ChargerFunctions.c **** 			 * If any cell exceeds lowerVoltage_Threshold: lower charge current to lowerCurrent and continue
+ 107:Src/ChargerFunctions.c **** 			 */
+ 108:Src/ChargerFunctions.c **** 			if (voltage > higherVoltage_Threshold) {
+ 109:Src/ChargerFunctions.c **** 				*chargeCurrent = 0;
+ 110:Src/ChargerFunctions.c **** 			} else if (voltage > lowerVoltage_Threshold && chargeCurrent != 0) {
+ 111:Src/ChargerFunctions.c **** 				*chargeCurrent = 1;
+ 112:Src/ChargerFunctions.c **** 			}
+ 113:Src/ChargerFunctions.c **** 		}
+ 114:Src/ChargerFunctions.c **** 	 }
+ 115:Src/ChargerFunctions.c **** 
+ 116:Src/ChargerFunctions.c **** 	 return 0;
+ 117:Src/ChargerFunctions.c **** }
+ 118:Src/ChargerFunctions.c **** 
+ 119:Src/ChargerFunctions.c **** 
+ 120:Src/ChargerFunctions.c **** /*
+ 121:Src/ChargerFunctions.c **** 	@brief - finds and returns the lowest cell voltage
+ 122:Src/ChargerFunctions.c **** 	@return - the lowest voltage of all cells
+ 123:Src/ChargerFunctions.c **** */
+ 124:Src/ChargerFunctions.c **** float getLowestVoltage(float cellVoltage[numBoards][cellsPerBoard]) {
+  29              		.loc 1 124 69 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		.loc 1 124 69 is_stmt 0 view .LVU1
+  34 0000 2DE9F84F 		push	{r3, r4, r5, r6, r7, r8, r9, r10, fp, lr}
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 40
+  37              		.cfi_offset 3, -40
+  38              		.cfi_offset 4, -36
+  39              		.cfi_offset 5, -32
+  40              		.cfi_offset 6, -28
+  41              		.cfi_offset 7, -24
+  42              		.cfi_offset 8, -20
+  43              		.cfi_offset 9, -16
+  44              		.cfi_offset 10, -12
+  45              		.cfi_offset 11, -8
+  46              		.cfi_offset 14, -4
+  47 0004 8046     		mov	r8, r0
+  48              		.loc 1 124 30 view .LVU2
+ARM GAS  /tmp/cc9WRhBl.s 			page 4
+
+
+  49 0006 114B     		ldr	r3, .L11
+  50 0008 1F68     		ldr	r7, [r3]
+  51              	.LVL1:
+  52              		.loc 1 124 7 view .LVU3
+  53 000a B946     		mov	r9, r7
+  54              		.loc 1 124 1 view .LVU4
+  55 000c 104B     		ldr	r3, .L11+4
+  56 000e D3F800A0 		ldr	r10, [r3]
+ 125:Src/ChargerFunctions.c **** 	/* contains the current lowest voltage foud */
+ 126:Src/ChargerFunctions.c **** 	float low = cellVoltage[0][0];
+  57              		.loc 1 126 2 is_stmt 1 view .LVU5
+  58              		.loc 1 126 8 is_stmt 0 view .LVU6
+  59 0012 0568     		ldr	r5, [r0]	@ float
+  60              	.LVL2:
+ 127:Src/ChargerFunctions.c **** 
+ 128:Src/ChargerFunctions.c **** 	/* iterate through all cells and get the smallest voltage */
+ 129:Src/ChargerFunctions.c **** 	for (int i = 0; i < numBoards; i++) {
+  61              		.loc 1 129 2 is_stmt 1 view .LVU7
+  62              	.LBB2:
+  63              		.loc 1 129 7 view .LVU8
+  64              		.loc 1 129 11 is_stmt 0 view .LVU9
+  65 0014 0026     		movs	r6, #0
+  66              		.loc 1 129 2 view .LVU10
+  67 0016 11E0     		b	.L2
+  68              	.LVL3:
+  69              	.L3:
+  70              	.LBB3:
+ 130:Src/ChargerFunctions.c **** 		for (int j = 0; j < cellsPerBoard; j++) {
+  71              		.loc 1 130 39 discriminator 2 view .LVU11
+  72 0018 0134     		adds	r4, r4, #1
+  73              	.LVL4:
+  74              	.L5:
+  75              		.loc 1 130 3 discriminator 1 view .LVU12
+  76 001a BC42     		cmp	r4, r7
+  77 001c 0DDA     		bge	.L9
+ 131:Src/ChargerFunctions.c **** 			if (low > cellVoltage[i][j]) {
+  78              		.loc 1 131 4 is_stmt 1 view .LVU13
+  79              		.loc 1 131 25 is_stmt 0 view .LVU14
+  80 001e 09FB06F3 		mul	r3, r9, r6
+  81 0022 08EB8303 		add	r3, r8, r3, lsl #2
+  82              		.loc 1 131 28 view .LVU15
+  83 0026 53F824B0 		ldr	fp, [r3, r4, lsl #2]	@ float
+  84              		.loc 1 131 7 view .LVU16
+  85 002a 5946     		mov	r1, fp
+  86 002c 2846     		mov	r0, r5
+  87 002e FFF7FEFF 		bl	__aeabi_fcmpgt
+  88              	.LVL5:
+  89 0032 0028     		cmp	r0, #0
+  90 0034 F0D0     		beq	.L3
+ 132:Src/ChargerFunctions.c **** 				low = cellVoltage[i][j];
+  91              		.loc 1 132 9 view .LVU17
+  92 0036 5D46     		mov	r5, fp
+  93              	.LVL6:
+  94              		.loc 1 132 9 view .LVU18
+  95 0038 EEE7     		b	.L3
+  96              	.LVL7:
+  97              	.L9:
+ARM GAS  /tmp/cc9WRhBl.s 			page 5
+
+
+  98              		.loc 1 132 9 view .LVU19
+  99              	.LBE3:
+ 129:Src/ChargerFunctions.c **** 		for (int j = 0; j < cellsPerBoard; j++) {
+ 100              		.loc 1 129 34 discriminator 2 view .LVU20
+ 101 003a 0136     		adds	r6, r6, #1
+ 102              	.LVL8:
+ 103              	.L2:
+ 129:Src/ChargerFunctions.c **** 		for (int j = 0; j < cellsPerBoard; j++) {
+ 104              		.loc 1 129 2 discriminator 1 view .LVU21
+ 105 003c 5645     		cmp	r6, r10
+ 106 003e 01DA     		bge	.L10
+ 107              	.LBB4:
+ 130:Src/ChargerFunctions.c **** 			if (low > cellVoltage[i][j]) {
+ 108              		.loc 1 130 12 view .LVU22
+ 109 0040 0024     		movs	r4, #0
+ 110 0042 EAE7     		b	.L5
+ 111              	.L10:
+ 112              	.LBE4:
+ 113              	.LBE2:
+ 133:Src/ChargerFunctions.c **** 			}
+ 134:Src/ChargerFunctions.c **** 		}
+ 135:Src/ChargerFunctions.c **** 	}
+ 136:Src/ChargerFunctions.c **** 
+ 137:Src/ChargerFunctions.c **** 	return low;
+ 114              		.loc 1 137 2 is_stmt 1 view .LVU23
+ 138:Src/ChargerFunctions.c **** }
+ 115              		.loc 1 138 1 is_stmt 0 view .LVU24
+ 116 0044 2846     		mov	r0, r5
+ 117 0046 BDE8F88F 		pop	{r3, r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 118              	.LVL9:
+ 119              	.L12:
+ 120              		.loc 1 138 1 view .LVU25
+ 121 004a 00BF     		.align	2
+ 122              	.L11:
+ 123 004c 00000000 		.word	.LANCHOR0
+ 124 0050 00000000 		.word	.LANCHOR1
+ 125              		.cfi_endproc
+ 126              	.LFE1:
+ 128              		.global	__aeabi_fcmplt
+ 129              		.global	__aeabi_fadd
+ 130              		.section	.text.setChargeDischarge,"ax",%progbits
+ 131              		.align	1
+ 132              		.global	setChargeDischarge
+ 133              		.syntax unified
+ 134              		.thumb
+ 135              		.thumb_func
+ 136              		.fpu softvfp
+ 138              	setChargeDischarge:
+ 139              	.LVL10:
+ 140              	.LFB0:
+  77:Src/ChargerFunctions.c **** 	float lowestVoltage = getLowestVoltage(cellVoltage);			// get lowest voltage of all cells
+ 141              		.loc 1 77 137 is_stmt 1 view -0
+ 142              		.cfi_startproc
+ 143              		@ args = 0, pretend = 0, frame = 8
+ 144              		@ frame_needed = 0, uses_anonymous_args = 0
+  77:Src/ChargerFunctions.c **** 	float lowestVoltage = getLowestVoltage(cellVoltage);			// get lowest voltage of all cells
+ 145              		.loc 1 77 137 is_stmt 0 view .LVU27
+ARM GAS  /tmp/cc9WRhBl.s 			page 6
+
+
+ 146 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 147              	.LCFI1:
+ 148              		.cfi_def_cfa_offset 36
+ 149              		.cfi_offset 4, -36
+ 150              		.cfi_offset 5, -32
+ 151              		.cfi_offset 6, -28
+ 152              		.cfi_offset 7, -24
+ 153              		.cfi_offset 8, -20
+ 154              		.cfi_offset 9, -16
+ 155              		.cfi_offset 10, -12
+ 156              		.cfi_offset 11, -8
+ 157              		.cfi_offset 14, -4
+ 158 0004 83B0     		sub	sp, sp, #12
+ 159              	.LCFI2:
+ 160              		.cfi_def_cfa_offset 48
+ 161 0006 0546     		mov	r5, r0
+ 162 0008 8B46     		mov	fp, r1
+ 163 000a 9246     		mov	r10, r2
+  77:Src/ChargerFunctions.c **** 	float lowestVoltage = getLowestVoltage(cellVoltage);			// get lowest voltage of all cells
+ 164              		.loc 1 77 30 view .LVU28
+ 165 000c 324B     		ldr	r3, .L43
+ 166 000e 1C68     		ldr	r4, [r3]
+ 167              	.LVL11:
+  78:Src/ChargerFunctions.c **** 	*chargeCurrent = 2;												// initialize the charging current to normal operation
+ 168              		.loc 1 78 2 is_stmt 1 view .LVU29
+  78:Src/ChargerFunctions.c **** 	*chargeCurrent = 2;												// initialize the charging current to normal operation
+ 169              		.loc 1 78 24 is_stmt 0 view .LVU30
+ 170 0010 1046     		mov	r0, r2
+ 171              	.LVL12:
+  78:Src/ChargerFunctions.c **** 	*chargeCurrent = 2;												// initialize the charging current to normal operation
+ 172              		.loc 1 78 24 view .LVU31
+ 173 0012 FFF7FEFF 		bl	getLowestVoltage
+ 174              	.LVL13:
+  78:Src/ChargerFunctions.c **** 	*chargeCurrent = 2;												// initialize the charging current to normal operation
+ 175              		.loc 1 78 24 view .LVU32
+ 176 0016 0190     		str	r0, [sp, #4]	@ float
+ 177              	.LVL14:
+  79:Src/ChargerFunctions.c **** 	
+ 178              		.loc 1 79 2 is_stmt 1 view .LVU33
+  79:Src/ChargerFunctions.c **** 	
+ 179              		.loc 1 79 17 is_stmt 0 view .LVU34
+ 180 0018 0223     		movs	r3, #2
+ 181 001a CBF80030 		str	r3, [fp]
+  82:Src/ChargerFunctions.c **** 		for (int cell = 0; cell < cellsPerBoard; cell++) {
+ 182              		.loc 1 82 2 is_stmt 1 view .LVU35
+ 183              	.LBB5:
+  82:Src/ChargerFunctions.c **** 		for (int cell = 0; cell < cellsPerBoard; cell++) {
+ 184              		.loc 1 82 7 view .LVU36
+ 185              	.LVL15:
+  82:Src/ChargerFunctions.c **** 		for (int cell = 0; cell < cellsPerBoard; cell++) {
+ 186              		.loc 1 82 11 is_stmt 0 view .LVU37
+ 187 001e 0020     		movs	r0, #0
+ 188              	.LVL16:
+  82:Src/ChargerFunctions.c **** 		for (int cell = 0; cell < cellsPerBoard; cell++) {
+ 189              		.loc 1 82 2 view .LVU38
+ 190 0020 00E0     		b	.L14
+ 191              	.LVL17:
+ARM GAS  /tmp/cc9WRhBl.s 			page 7
+
+
+ 192              	.L39:
+  82:Src/ChargerFunctions.c **** 		for (int cell = 0; cell < cellsPerBoard; cell++) {
+ 193              		.loc 1 82 46 discriminator 2 view .LVU39
+ 194 0022 0130     		adds	r0, r0, #1
+ 195              	.LVL18:
+ 196              	.L14:
+  82:Src/ChargerFunctions.c **** 		for (int cell = 0; cell < cellsPerBoard; cell++) {
+ 197              		.loc 1 82 28 discriminator 1 view .LVU40
+ 198 0024 2D4B     		ldr	r3, .L43+4
+ 199 0026 1B68     		ldr	r3, [r3]
+  82:Src/ChargerFunctions.c **** 		for (int cell = 0; cell < cellsPerBoard; cell++) {
+ 200              		.loc 1 82 2 discriminator 1 view .LVU41
+ 201 0028 9842     		cmp	r0, r3
+ 202 002a 0ADA     		bge	.L38
+ 203              	.LBB6:
+  83:Src/ChargerFunctions.c **** 			cellsDischarge[board][cell] = false;
+ 204              		.loc 1 83 12 view .LVU42
+ 205 002c 0023     		movs	r3, #0
+ 206              	.L16:
+ 207              	.LVL19:
+  83:Src/ChargerFunctions.c **** 			cellsDischarge[board][cell] = false;
+ 208              		.loc 1 83 27 discriminator 1 view .LVU43
+ 209 002e 2A4A     		ldr	r2, .L43
+ 210 0030 1268     		ldr	r2, [r2]
+  83:Src/ChargerFunctions.c **** 			cellsDischarge[board][cell] = false;
+ 211              		.loc 1 83 3 discriminator 1 view .LVU44
+ 212 0032 9342     		cmp	r3, r2
+ 213 0034 F5DA     		bge	.L39
+  84:Src/ChargerFunctions.c **** 		}
+ 214              		.loc 1 84 4 is_stmt 1 discriminator 3 view .LVU45
+  84:Src/ChargerFunctions.c **** 		}
+ 215              		.loc 1 84 18 is_stmt 0 discriminator 3 view .LVU46
+ 216 0036 04FB0052 		mla	r2, r4, r0, r5
+  84:Src/ChargerFunctions.c **** 		}
+ 217              		.loc 1 84 32 discriminator 3 view .LVU47
+ 218 003a 0021     		movs	r1, #0
+ 219 003c D154     		strb	r1, [r2, r3]
+  83:Src/ChargerFunctions.c **** 			cellsDischarge[board][cell] = false;
+ 220              		.loc 1 83 48 discriminator 3 view .LVU48
+ 221 003e 0133     		adds	r3, r3, #1
+ 222              	.LVL20:
+  83:Src/ChargerFunctions.c **** 			cellsDischarge[board][cell] = false;
+ 223              		.loc 1 83 48 discriminator 3 view .LVU49
+ 224 0040 F5E7     		b	.L16
+ 225              	.LVL21:
+ 226              	.L38:
+  83:Src/ChargerFunctions.c **** 			cellsDischarge[board][cell] = false;
+ 227              		.loc 1 83 48 discriminator 3 view .LVU50
+ 228              	.LBE6:
+ 229              	.LBE5:
+ 230              	.LBB7:
+  89:Src/ChargerFunctions.c **** 		for (int cell = 0; cell < cellsPerBoard; cell++) {
+ 231              		.loc 1 89 11 view .LVU51
+ 232 0042 4FF00009 		mov	r9, #0
+ 233              	.LVL22:
+ 234              	.L17:
+  89:Src/ChargerFunctions.c **** 		for (int cell = 0; cell < cellsPerBoard; cell++) {
+ARM GAS  /tmp/cc9WRhBl.s 			page 8
+
+
+ 235              		.loc 1 89 28 discriminator 1 view .LVU52
+ 236 0046 254B     		ldr	r3, .L43+4
+ 237 0048 1B68     		ldr	r3, [r3]
+  89:Src/ChargerFunctions.c **** 		for (int cell = 0; cell < cellsPerBoard; cell++) {
+ 238              		.loc 1 89 2 discriminator 1 view .LVU53
+ 239 004a 9945     		cmp	r9, r3
+ 240 004c 41DA     		bge	.L40
+ 241              	.LBB8:
+  90:Src/ChargerFunctions.c **** 			/* get the voltage of current cell */
+ 242              		.loc 1 90 12 view .LVU54
+ 243 004e 0026     		movs	r6, #0
+ 244 0050 13E0     		b	.L28
+ 245              	.LVL23:
+ 246              	.L42:
+ 247              	.LBB9:
+  96:Src/ChargerFunctions.c **** 				return 1;
+ 248              		.loc 1 96 5 is_stmt 1 view .LVU55
+  96:Src/ChargerFunctions.c **** 				return 1;
+ 249              		.loc 1 96 20 is_stmt 0 view .LVU56
+ 250 0052 0023     		movs	r3, #0
+ 251 0054 CBF80030 		str	r3, [fp]
+  97:Src/ChargerFunctions.c **** 			}
+ 252              		.loc 1 97 5 is_stmt 1 view .LVU57
+  97:Src/ChargerFunctions.c **** 			}
+ 253              		.loc 1 97 12 is_stmt 0 view .LVU58
+ 254 0058 0120     		movs	r0, #1
+ 255              	.LVL24:
+ 256              	.L13:
+  97:Src/ChargerFunctions.c **** 			}
+ 257              		.loc 1 97 12 view .LVU59
+ 258              	.LBE9:
+ 259              	.LBE8:
+ 260              	.LBE7:
+ 117:Src/ChargerFunctions.c **** 
+ 261              		.loc 1 117 1 view .LVU60
+ 262 005a 03B0     		add	sp, sp, #12
+ 263              	.LCFI3:
+ 264              		.cfi_remember_state
+ 265              		.cfi_def_cfa_offset 36
+ 266              		@ sp needed
+ 267 005c BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 268              	.LVL25:
+ 269              	.L36:
+ 270              	.LCFI4:
+ 271              		.cfi_restore_state
+ 272              	.LBB13:
+ 273              	.LBB12:
+ 274              	.LBB10:
+ 110:Src/ChargerFunctions.c **** 				*chargeCurrent = 1;
+ 275              		.loc 1 110 11 is_stmt 1 view .LVU61
+ 110:Src/ChargerFunctions.c **** 				*chargeCurrent = 1;
+ 276              		.loc 1 110 14 is_stmt 0 view .LVU62
+ 277 0060 3946     		mov	r1, r7
+ 278 0062 1F4B     		ldr	r3, .L43+8
+ 279 0064 1868     		ldr	r0, [r3]	@ float
+ 280 0066 FFF7FEFF 		bl	__aeabi_fcmplt
+ 281              	.LVL26:
+ARM GAS  /tmp/cc9WRhBl.s 			page 9
+
+
+ 282 006a 28B1     		cbz	r0, .L25
+ 110:Src/ChargerFunctions.c **** 				*chargeCurrent = 1;
+ 283              		.loc 1 110 48 discriminator 1 view .LVU63
+ 284 006c BBF1000F 		cmp	fp, #0
+ 285 0070 02D0     		beq	.L25
+ 111:Src/ChargerFunctions.c **** 			}
+ 286              		.loc 1 111 5 is_stmt 1 view .LVU64
+ 111:Src/ChargerFunctions.c **** 			}
+ 287              		.loc 1 111 20 is_stmt 0 view .LVU65
+ 288 0072 0123     		movs	r3, #1
+ 289 0074 CBF80030 		str	r3, [fp]
+ 290              	.L25:
+ 111:Src/ChargerFunctions.c **** 			}
+ 291              		.loc 1 111 20 view .LVU66
+ 292              	.LBE10:
+  90:Src/ChargerFunctions.c **** 			/* get the voltage of current cell */
+ 293              		.loc 1 90 48 discriminator 2 view .LVU67
+ 294 0078 0136     		adds	r6, r6, #1
+ 295              	.LVL27:
+ 296              	.L28:
+  90:Src/ChargerFunctions.c **** 			/* get the voltage of current cell */
+ 297              		.loc 1 90 27 discriminator 1 view .LVU68
+ 298 007a 174B     		ldr	r3, .L43
+ 299 007c 1B68     		ldr	r3, [r3]
+  90:Src/ChargerFunctions.c **** 			/* get the voltage of current cell */
+ 300              		.loc 1 90 3 discriminator 1 view .LVU69
+ 301 007e 9E42     		cmp	r6, r3
+ 302 0080 24DA     		bge	.L41
+ 303              	.LBB11:
+  92:Src/ChargerFunctions.c **** 
+ 304              		.loc 1 92 4 is_stmt 1 view .LVU70
+  92:Src/ChargerFunctions.c **** 
+ 305              		.loc 1 92 31 is_stmt 0 view .LVU71
+ 306 0082 04FB09F8 		mul	r8, r4, r9
+ 307 0086 0AEB8803 		add	r3, r10, r8, lsl #2
+  92:Src/ChargerFunctions.c **** 
+ 308              		.loc 1 92 10 view .LVU72
+ 309 008a 53F82670 		ldr	r7, [r3, r6, lsl #2]	@ float
+ 310              	.LVL28:
+  95:Src/ChargerFunctions.c **** 				*chargeCurrent = 0;
+ 311              		.loc 1 95 4 is_stmt 1 view .LVU73
+  95:Src/ChargerFunctions.c **** 				*chargeCurrent = 0;
+ 312              		.loc 1 95 7 is_stmt 0 view .LVU74
+ 313 008e 3946     		mov	r1, r7
+ 314 0090 144B     		ldr	r3, .L43+12
+ 315 0092 1868     		ldr	r0, [r3]	@ float
+ 316 0094 FFF7FEFF 		bl	__aeabi_fcmplt
+ 317              	.LVL29:
+ 318 0098 0028     		cmp	r0, #0
+ 319 009a DAD1     		bne	.L42
+ 101:Src/ChargerFunctions.c **** 				cellsDischarge[board][cell] = true;
+ 320              		.loc 1 101 4 is_stmt 1 view .LVU75
+ 101:Src/ChargerFunctions.c **** 				cellsDischarge[board][cell] = true;
+ 321              		.loc 1 101 33 is_stmt 0 view .LVU76
+ 322 009c 124B     		ldr	r3, .L43+16
+ 323 009e 1968     		ldr	r1, [r3]	@ float
+ 324 00a0 0198     		ldr	r0, [sp, #4]	@ float
+ARM GAS  /tmp/cc9WRhBl.s 			page 10
+
+
+ 325 00a2 FFF7FEFF 		bl	__aeabi_fadd
+ 326              	.LVL30:
+ 101:Src/ChargerFunctions.c **** 				cellsDischarge[board][cell] = true;
+ 327              		.loc 1 101 7 view .LVU77
+ 328 00a6 3946     		mov	r1, r7
+ 329 00a8 FFF7FEFF 		bl	__aeabi_fcmplt
+ 330              	.LVL31:
+ 331 00ac 18B1     		cbz	r0, .L21
+ 102:Src/ChargerFunctions.c **** 			}
+ 332              		.loc 1 102 5 is_stmt 1 view .LVU78
+ 102:Src/ChargerFunctions.c **** 			}
+ 333              		.loc 1 102 19 is_stmt 0 view .LVU79
+ 334 00ae A844     		add	r8, r8, r5
+ 102:Src/ChargerFunctions.c **** 			}
+ 335              		.loc 1 102 33 view .LVU80
+ 336 00b0 0123     		movs	r3, #1
+ 337 00b2 08F80630 		strb	r3, [r8, r6]
+ 338              	.L21:
+ 108:Src/ChargerFunctions.c **** 				*chargeCurrent = 0;
+ 339              		.loc 1 108 4 is_stmt 1 view .LVU81
+ 108:Src/ChargerFunctions.c **** 				*chargeCurrent = 0;
+ 340              		.loc 1 108 7 is_stmt 0 view .LVU82
+ 341 00b6 3946     		mov	r1, r7
+ 342 00b8 0C4B     		ldr	r3, .L43+20
+ 343 00ba 1868     		ldr	r0, [r3]	@ float
+ 344 00bc FFF7FEFF 		bl	__aeabi_fcmplt
+ 345              	.LVL32:
+ 346 00c0 0028     		cmp	r0, #0
+ 347 00c2 CDD0     		beq	.L36
+ 109:Src/ChargerFunctions.c **** 			} else if (voltage > lowerVoltage_Threshold && chargeCurrent != 0) {
+ 348              		.loc 1 109 5 is_stmt 1 view .LVU83
+ 109:Src/ChargerFunctions.c **** 			} else if (voltage > lowerVoltage_Threshold && chargeCurrent != 0) {
+ 349              		.loc 1 109 20 is_stmt 0 view .LVU84
+ 350 00c4 0023     		movs	r3, #0
+ 351 00c6 CBF80030 		str	r3, [fp]
+ 352 00ca D5E7     		b	.L25
+ 353              	.LVL33:
+ 354              	.L41:
+ 109:Src/ChargerFunctions.c **** 			} else if (voltage > lowerVoltage_Threshold && chargeCurrent != 0) {
+ 355              		.loc 1 109 20 view .LVU85
+ 356              	.LBE11:
+ 357              	.LBE12:
+  89:Src/ChargerFunctions.c **** 		for (int cell = 0; cell < cellsPerBoard; cell++) {
+ 358              		.loc 1 89 46 discriminator 2 view .LVU86
+ 359 00cc 09F10109 		add	r9, r9, #1
+ 360              	.LVL34:
+  89:Src/ChargerFunctions.c **** 		for (int cell = 0; cell < cellsPerBoard; cell++) {
+ 361              		.loc 1 89 46 discriminator 2 view .LVU87
+ 362 00d0 B9E7     		b	.L17
+ 363              	.LVL35:
+ 364              	.L40:
+  89:Src/ChargerFunctions.c **** 		for (int cell = 0; cell < cellsPerBoard; cell++) {
+ 365              		.loc 1 89 46 discriminator 2 view .LVU88
+ 366              	.LBE13:
+ 116:Src/ChargerFunctions.c **** }
+ 367              		.loc 1 116 10 view .LVU89
+ 368 00d2 0020     		movs	r0, #0
+ARM GAS  /tmp/cc9WRhBl.s 			page 11
+
+
+ 369 00d4 C1E7     		b	.L13
+ 370              	.L44:
+ 371 00d6 00BF     		.align	2
+ 372              	.L43:
+ 373 00d8 00000000 		.word	.LANCHOR0
+ 374 00dc 00000000 		.word	.LANCHOR1
+ 375 00e0 00000000 		.word	.LANCHOR5
+ 376 00e4 00000000 		.word	.LANCHOR2
+ 377 00e8 00000000 		.word	.LANCHOR3
+ 378 00ec 00000000 		.word	.LANCHOR4
+ 379              		.cfi_endproc
+ 380              	.LFE0:
+ 382              		.section	.text.setChargerTxData,"ax",%progbits
+ 383              		.align	1
+ 384              		.global	setChargerTxData
+ 385              		.syntax unified
+ 386              		.thumb
+ 387              		.thumb_func
+ 388              		.fpu softvfp
+ 390              	setChargerTxData:
+ 391              	.LFB2:
+ 139:Src/ChargerFunctions.c **** 
+ 140:Src/ChargerFunctions.c **** /*
+ 141:Src/ChargerFunctions.c **** 	@brief - calculates and sets the CAN transmission data for the charger
+ 142:Src/ChargerFunctions.c **** */
+ 143:Src/ChargerFunctions.c **** void setChargerTxData() {
+ 392              		.loc 1 143 25 is_stmt 1 view -0
+ 393              		.cfi_startproc
+ 394              		@ args = 0, pretend = 0, frame = 0
+ 395              		@ frame_needed = 0, uses_anonymous_args = 0
+ 396              		@ link register save eliminated.
+ 144:Src/ChargerFunctions.c **** 	/* voltage data (hex value of desired voltage (V) times 10)*/
+ 145:Src/ChargerFunctions.c **** 	CANtx[0] = (uint8_t)(chargerVoltage >> 8);
+ 397              		.loc 1 145 2 view .LVU91
+ 398              		.loc 1 145 13 is_stmt 0 view .LVU92
+ 399 0000 124B     		ldr	r3, .L51
+ 400 0002 1A88     		ldrh	r2, [r3]
+ 401 0004 110A     		lsrs	r1, r2, #8
+ 402              		.loc 1 145 11 view .LVU93
+ 403 0006 124B     		ldr	r3, .L51+4
+ 404 0008 1970     		strb	r1, [r3]
+ 146:Src/ChargerFunctions.c **** 	CANtx[1] = (uint8_t)chargerVoltage;
+ 405              		.loc 1 146 2 is_stmt 1 view .LVU94
+ 406              		.loc 1 146 11 is_stmt 0 view .LVU95
+ 407 000a 5A70     		strb	r2, [r3, #1]
+ 147:Src/ChargerFunctions.c **** 
+ 148:Src/ChargerFunctions.c **** 	/* set the current data (hex value of desired current (A) times 10) */
+ 149:Src/ChargerFunctions.c **** 	switch (chargeCurrent) {
+ 408              		.loc 1 149 2 is_stmt 1 view .LVU96
+ 409 000c 114B     		ldr	r3, .L51+8
+ 410 000e 1B68     		ldr	r3, [r3]
+ 411 0010 012B     		cmp	r3, #1
+ 412 0012 06D0     		beq	.L46
+ 413 0014 022B     		cmp	r3, #2
+ 414 0016 11D0     		beq	.L47
+ 150:Src/ChargerFunctions.c **** 		case 1:
+ 151:Src/ChargerFunctions.c **** 			/* lower current */
+ARM GAS  /tmp/cc9WRhBl.s 			page 12
+
+
+ 152:Src/ChargerFunctions.c **** 			CANtx[2] = (uint8_t)(lowerCurrent >> 8);
+ 153:Src/ChargerFunctions.c **** 			CANtx[3] = (uint8_t)lowerCurrent;
+ 154:Src/ChargerFunctions.c **** 			break;
+ 155:Src/ChargerFunctions.c **** 
+ 156:Src/ChargerFunctions.c **** 		case 2:
+ 157:Src/ChargerFunctions.c **** 			/* normal current */
+ 158:Src/ChargerFunctions.c **** 			CANtx[2] = (uint8_t)(normalCurrent >> 8);
+ 159:Src/ChargerFunctions.c **** 			CANtx[3] = (uint8_t)normalCurrent;
+ 160:Src/ChargerFunctions.c **** 			break;
+ 161:Src/ChargerFunctions.c **** 
+ 162:Src/ChargerFunctions.c **** 		default:
+ 163:Src/ChargerFunctions.c **** 			/* no current */
+ 164:Src/ChargerFunctions.c **** 			CANtx[2] = 0x00;
+ 415              		.loc 1 164 4 view .LVU97
+ 416              		.loc 1 164 13 is_stmt 0 view .LVU98
+ 417 0018 0D4B     		ldr	r3, .L51+4
+ 418 001a 0022     		movs	r2, #0
+ 419 001c 9A70     		strb	r2, [r3, #2]
+ 165:Src/ChargerFunctions.c **** 			CANtx[3] = 0x00;
+ 420              		.loc 1 165 4 is_stmt 1 view .LVU99
+ 421              		.loc 1 165 13 is_stmt 0 view .LVU100
+ 422 001e DA70     		strb	r2, [r3, #3]
+ 423 0020 05E0     		b	.L49
+ 424              	.L46:
+ 152:Src/ChargerFunctions.c **** 			CANtx[3] = (uint8_t)lowerCurrent;
+ 425              		.loc 1 152 4 is_stmt 1 view .LVU101
+ 152:Src/ChargerFunctions.c **** 			CANtx[3] = (uint8_t)lowerCurrent;
+ 426              		.loc 1 152 15 is_stmt 0 view .LVU102
+ 427 0022 0D4B     		ldr	r3, .L51+12
+ 428 0024 1A88     		ldrh	r2, [r3]
+ 429 0026 110A     		lsrs	r1, r2, #8
+ 152:Src/ChargerFunctions.c **** 			CANtx[3] = (uint8_t)lowerCurrent;
+ 430              		.loc 1 152 13 view .LVU103
+ 431 0028 094B     		ldr	r3, .L51+4
+ 432 002a 9970     		strb	r1, [r3, #2]
+ 153:Src/ChargerFunctions.c **** 			break;
+ 433              		.loc 1 153 4 is_stmt 1 view .LVU104
+ 153:Src/ChargerFunctions.c **** 			break;
+ 434              		.loc 1 153 13 is_stmt 0 view .LVU105
+ 435 002c DA70     		strb	r2, [r3, #3]
+ 154:Src/ChargerFunctions.c **** 
+ 436              		.loc 1 154 4 is_stmt 1 view .LVU106
+ 437              	.L49:
+ 166:Src/ChargerFunctions.c **** 	}
+ 167:Src/ChargerFunctions.c **** 
+ 168:Src/ChargerFunctions.c **** 	/* these data bytes are not used */
+ 169:Src/ChargerFunctions.c **** 	CANtx[4] = 0x00;
+ 438              		.loc 1 169 2 view .LVU107
+ 439              		.loc 1 169 11 is_stmt 0 view .LVU108
+ 440 002e 084B     		ldr	r3, .L51+4
+ 441 0030 0022     		movs	r2, #0
+ 442 0032 1A71     		strb	r2, [r3, #4]
+ 170:Src/ChargerFunctions.c **** 	CANtx[5] = 0x00;
+ 443              		.loc 1 170 2 is_stmt 1 view .LVU109
+ 444              		.loc 1 170 11 is_stmt 0 view .LVU110
+ 445 0034 5A71     		strb	r2, [r3, #5]
+ 171:Src/ChargerFunctions.c **** 	CANtx[6] = 0x00;
+ARM GAS  /tmp/cc9WRhBl.s 			page 13
+
+
+ 446              		.loc 1 171 2 is_stmt 1 view .LVU111
+ 447              		.loc 1 171 11 is_stmt 0 view .LVU112
+ 448 0036 9A71     		strb	r2, [r3, #6]
+ 172:Src/ChargerFunctions.c **** 	CANtx[7] = 0x00;
+ 449              		.loc 1 172 2 is_stmt 1 view .LVU113
+ 450              		.loc 1 172 11 is_stmt 0 view .LVU114
+ 451 0038 DA71     		strb	r2, [r3, #7]
+ 173:Src/ChargerFunctions.c **** 
+ 174:Src/ChargerFunctions.c **** 	return;
+ 452              		.loc 1 174 2 is_stmt 1 view .LVU115
+ 175:Src/ChargerFunctions.c **** }...
+ 453              		.loc 1 175 1 is_stmt 0 view .LVU116
+ 454 003a 7047     		bx	lr
+ 455              	.L47:
+ 158:Src/ChargerFunctions.c **** 			CANtx[2] = (uint8_t)(normalCurrent >> 8);
+ 456              		.loc 1 158 4 is_stmt 1 view .LVU117
+ 158:Src/ChargerFunctions.c **** 			CANtx[2] = (uint8_t)(normalCurrent >> 8);
+ 457              		.loc 1 158 15 is_stmt 0 view .LVU118
+ 458 003c 074B     		ldr	r3, .L51+16
+ 459 003e 1A88     		ldrh	r2, [r3]
+ 460 0040 110A     		lsrs	r1, r2, #8
+ 158:Src/ChargerFunctions.c **** 			CANtx[2] = (uint8_t)(normalCurrent >> 8);
+ 461              		.loc 1 158 13 view .LVU119
+ 462 0042 034B     		ldr	r3, .L51+4
+ 463 0044 9970     		strb	r1, [r3, #2]
+ 159:Src/ChargerFunctions.c **** 			CANtx[3] = (uint8_t)normalCurrent;
+ 464              		.loc 1 159 4 is_stmt 1 view .LVU120
+ 159:Src/ChargerFunctions.c **** 			CANtx[3] = (uint8_t)normalCurrent;
+ 465              		.loc 1 159 13 is_stmt 0 view .LVU121
+ 466 0046 DA70     		strb	r2, [r3, #3]
+ 160:Src/ChargerFunctions.c **** 			break;
+ 467              		.loc 1 160 4 is_stmt 1 view .LVU122
+ 468 0048 F1E7     		b	.L49
+ 469              	.L52:
+ 470 004a 00BF     		.align	2
+ 471              	.L51:
+ 472 004c 00000000 		.word	.LANCHOR6
+ 473 0050 00000000 		.word	CANtx
+ 474 0054 00000000 		.word	chargeCurrent
+ 475 0058 00000000 		.word	.LANCHOR7
+ 476 005c 00000000 		.word	.LANCHOR8
+ 477              		.cfi_endproc
+ 478              	.LFE2:
+ 480              		.comm	CANtx,8,4
+ 481              		.comm	chargeCurrent,4,4
+ 482              		.comm	cellsDischarge,96,4
+ 483              		.global	cellsPerBoard
+ 484              		.global	numBoards
+ 485              		.global	chargerVoltage
+ 486              		.global	lowerCurrent
+ 487              		.global	normalCurrent
+ 488              		.global	balancingDifference
+ 489              		.global	higherVoltage_Threshold
+ 490              		.global	lowerVoltage_Threshold
+ 491              		.global	BMSFault_Threshold
+ 492              		.section	.data.BMSFault_Threshold,"aw"
+ 493              		.align	2
+ARM GAS  /tmp/cc9WRhBl.s 			page 14
+
+
+ 494              		.set	.LANCHOR2,. + 0
+ 497              	BMSFault_Threshold:
+ 498 0000 66668640 		.word	1082549862
+ 499              		.section	.data.balancingDifference,"aw"
+ 500              		.align	2
+ 501              		.set	.LANCHOR3,. + 0
+ 504              	balancingDifference:
+ 505 0000 CDCC4C3D 		.word	1028443341
+ 506              		.section	.data.cellsPerBoard,"aw"
+ 507              		.align	2
+ 508              		.set	.LANCHOR0,. + 0
+ 511              	cellsPerBoard:
+ 512 0000 08000000 		.word	8
+ 513              		.section	.data.chargerVoltage,"aw"
+ 514              		.align	1
+ 515              		.set	.LANCHOR6,. + 0
+ 518              	chargerVoltage:
+ 519 0000 A00F     		.short	4000
+ 520              		.section	.data.higherVoltage_Threshold,"aw"
+ 521              		.align	2
+ 522              		.set	.LANCHOR4,. + 0
+ 525              	higherVoltage_Threshold:
+ 526 0000 85EB8540 		.word	1082518405
+ 527              		.section	.data.lowerCurrent,"aw"
+ 528              		.align	1
+ 529              		.set	.LANCHOR7,. + 0
+ 532              	lowerCurrent:
+ 533 0000 0A00     		.short	10
+ 534              		.section	.data.lowerVoltage_Threshold,"aw"
+ 535              		.align	2
+ 536              		.set	.LANCHOR5,. + 0
+ 539              	lowerVoltage_Threshold:
+ 540 0000 33338340 		.word	1082340147
+ 541              		.section	.data.normalCurrent,"aw"
+ 542              		.align	1
+ 543              		.set	.LANCHOR8,. + 0
+ 546              	normalCurrent:
+ 547 0000 3E00     		.short	62
+ 548              		.section	.data.numBoards,"aw"
+ 549              		.align	2
+ 550              		.set	.LANCHOR1,. + 0
+ 553              	numBoards:
+ 554 0000 0C000000 		.word	12
+ 555              		.text
+ 556              	.Letext0:
+ 557              		.file 2 "/mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/arm-none-eabi/include/
+ 558              		.file 3 "/mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/arm-none-eabi/include/
+ 559              		.file 4 "Inc/ChargerFunctions.h"
+ARM GAS  /tmp/cc9WRhBl.s 			page 15
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 ChargerFunctions.c
+     /tmp/cc9WRhBl.s:17     .text.getLowestVoltage:0000000000000000 $t
+     /tmp/cc9WRhBl.s:25     .text.getLowestVoltage:0000000000000000 getLowestVoltage
+     /tmp/cc9WRhBl.s:123    .text.getLowestVoltage:000000000000004c $d
+     /tmp/cc9WRhBl.s:131    .text.setChargeDischarge:0000000000000000 $t
+     /tmp/cc9WRhBl.s:138    .text.setChargeDischarge:0000000000000000 setChargeDischarge
+     /tmp/cc9WRhBl.s:373    .text.setChargeDischarge:00000000000000d8 $d
+     /tmp/cc9WRhBl.s:383    .text.setChargerTxData:0000000000000000 $t
+     /tmp/cc9WRhBl.s:390    .text.setChargerTxData:0000000000000000 setChargerTxData
+     /tmp/cc9WRhBl.s:472    .text.setChargerTxData:000000000000004c $d
+                            *COM*:0000000000000008 CANtx
+                            *COM*:0000000000000004 chargeCurrent
+                            *COM*:0000000000000060 cellsDischarge
+     /tmp/cc9WRhBl.s:511    .data.cellsPerBoard:0000000000000000 cellsPerBoard
+     /tmp/cc9WRhBl.s:553    .data.numBoards:0000000000000000 numBoards
+     /tmp/cc9WRhBl.s:518    .data.chargerVoltage:0000000000000000 chargerVoltage
+     /tmp/cc9WRhBl.s:532    .data.lowerCurrent:0000000000000000 lowerCurrent
+     /tmp/cc9WRhBl.s:546    .data.normalCurrent:0000000000000000 normalCurrent
+     /tmp/cc9WRhBl.s:504    .data.balancingDifference:0000000000000000 balancingDifference
+     /tmp/cc9WRhBl.s:525    .data.higherVoltage_Threshold:0000000000000000 higherVoltage_Threshold
+     /tmp/cc9WRhBl.s:539    .data.lowerVoltage_Threshold:0000000000000000 lowerVoltage_Threshold
+     /tmp/cc9WRhBl.s:497    .data.BMSFault_Threshold:0000000000000000 BMSFault_Threshold
+     /tmp/cc9WRhBl.s:493    .data.BMSFault_Threshold:0000000000000000 $d
+     /tmp/cc9WRhBl.s:500    .data.balancingDifference:0000000000000000 $d
+     /tmp/cc9WRhBl.s:507    .data.cellsPerBoard:0000000000000000 $d
+     /tmp/cc9WRhBl.s:514    .data.chargerVoltage:0000000000000000 $d
+     /tmp/cc9WRhBl.s:521    .data.higherVoltage_Threshold:0000000000000000 $d
+     /tmp/cc9WRhBl.s:528    .data.lowerCurrent:0000000000000000 $d
+     /tmp/cc9WRhBl.s:535    .data.lowerVoltage_Threshold:0000000000000000 $d
+     /tmp/cc9WRhBl.s:542    .data.normalCurrent:0000000000000000 $d
+     /tmp/cc9WRhBl.s:549    .data.numBoards:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+__aeabi_fcmpgt
+__aeabi_fcmplt
+__aeabi_fadd

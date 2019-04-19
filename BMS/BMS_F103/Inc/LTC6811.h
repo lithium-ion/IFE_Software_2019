@@ -19,6 +19,7 @@ typedef enum {
 void initPECTable(void);
 void writeConfig(BMSconfigStructTypedef cfg, uint8_t total_ic);
 //bool readCellVoltage(uint8_t address, uint16_t cellVoltage[8]);
+void setDischarge(bool ctd[12], BMSconfigStructTypedef *cfg, uint8_t total_ic);
 bool readCellVoltage(uint8_t address, uint16_t cellVoltage[12]);
 bool readAllCellVoltages(uint16_t cellVoltage[12][12]);
 bool readCellTemp(uint8_t address, uint16_t cellTemp[4]);

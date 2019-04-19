@@ -1,4 +1,4 @@
-ARM GAS  C:\cygwin64\tmp\ccgqFKTP.s 			page 1
+ARM GAS  /tmp/ccFMzCD8.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\cygwin64\tmp\ccgqFKTP.s 			page 1
   12:Src/SPI.c     ****   SPIHandle.Init.Direction = SPI_DIRECTION_2LINES;
   45              		.loc 1 12 3 is_stmt 1 view .LVU5
   46              		.loc 1 12 28 is_stmt 0 view .LVU6
-ARM GAS  C:\cygwin64\tmp\ccgqFKTP.s 			page 2
+ARM GAS  /tmp/ccFMzCD8.s 			page 2
 
 
   47 000e 0023     		movs	r3, #0
@@ -118,7 +118,7 @@ ARM GAS  C:\cygwin64\tmp\ccgqFKTP.s 			page 1
   88              	.L3:
   89 0038 00000000 		.word	SPIHandle
   90 003c 00300140 		.word	1073819648
-ARM GAS  C:\cygwin64\tmp\ccgqFKTP.s 			page 3
+ARM GAS  /tmp/ccFMzCD8.s 			page 3
 
 
   91              		.cfi_endproc
@@ -178,7 +178,7 @@ ARM GAS  C:\cygwin64\tmp\ccgqFKTP.s 			page 1
  140 001a 0F48     		ldr	r0, .L8
  141              	.LVL5:
  142              		.loc 1 32 2 view .LVU34
-ARM GAS  C:\cygwin64\tmp\ccgqFKTP.s 			page 4
+ARM GAS  /tmp/ccFMzCD8.s 			page 4
 
 
  143 001c FFF7FEFF 		bl	HAL_GPIO_WritePin
@@ -238,7 +238,7 @@ ARM GAS  C:\cygwin64\tmp\ccgqFKTP.s 			page 1
  191 005c 00000000 		.word	SPIHandle
  192              		.cfi_endproc
  193              	.LFE67:
-ARM GAS  C:\cygwin64\tmp\ccgqFKTP.s 			page 5
+ARM GAS  /tmp/ccFMzCD8.s 			page 5
 
 
  195              		.section	.text.SPIWriteRead,"ax",%progbits
@@ -298,7 +298,7 @@ ARM GAS  C:\cygwin64\tmp\ccgqFKTP.s 			page 1
  243 001e 2146     		mov	r1, r4
  244 0020 0A48     		ldr	r0, .L13+4
  245 0022 FFF7FEFF 		bl	HAL_SPI_TransmitReceive
-ARM GAS  C:\cygwin64\tmp\ccgqFKTP.s 			page 6
+ARM GAS  /tmp/ccFMzCD8.s 			page 6
 
 
  246              	.LVL16:
@@ -346,38 +346,38 @@ ARM GAS  C:\cygwin64\tmp\ccgqFKTP.s 			page 1
  284              		.comm	SPIHandle,88,4
  285              		.text
  286              	.Letext0:
- 287              		.file 2 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\machine\\_default_types.h"
- 288              		.file 3 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 287              		.file 2 "/mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/arm-none-eabi/include/
+ 288              		.file 3 "/mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/arm-none-eabi/include/
  289              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
  290              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
  291              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
- 292              		.file 7 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\sys\\lock.h"
- 293              		.file 8 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\sys\\_types.h"
- 294              		.file 9 "c:\\arm-gcc\\8-2018-q4-major\\lib\\gcc\\arm-none-eabi\\8.2.1\\include\\stddef.h"
- 295              		.file 10 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\sys\\reent.h"
+ 292              		.file 7 "/mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/arm-none-eabi/include/
+ 293              		.file 8 "/mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/arm-none-eabi/include/
+ 294              		.file 9 "/mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/lib/gcc/arm-none-eabi/
+ 295              		.file 10 "/mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/arm-none-eabi/include
  296              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
  297              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
  298              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
-ARM GAS  C:\cygwin64\tmp\ccgqFKTP.s 			page 7
+ARM GAS  /tmp/ccFMzCD8.s 			page 7
 
 
  299              		.file 14 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h"
- 300              		.file 15 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\stdlib.h"
-ARM GAS  C:\cygwin64\tmp\ccgqFKTP.s 			page 8
+ 300              		.file 15 "/mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/arm-none-eabi/include
+ARM GAS  /tmp/ccFMzCD8.s 			page 8
 
 
 DEFINED SYMBOLS
-                            *ABS*:00000000 SPI.c
-C:\cygwin64\tmp\ccgqFKTP.s:16     .text.SPI_Init:00000000 $t
-C:\cygwin64\tmp\ccgqFKTP.s:24     .text.SPI_Init:00000000 SPI_Init
-C:\cygwin64\tmp\ccgqFKTP.s:89     .text.SPI_Init:00000038 $d
-                            *COM*:00000058 SPIHandle
-C:\cygwin64\tmp\ccgqFKTP.s:95     .text.SPIWrite:00000000 $t
-C:\cygwin64\tmp\ccgqFKTP.s:102    .text.SPIWrite:00000000 SPIWrite
-C:\cygwin64\tmp\ccgqFKTP.s:190    .text.SPIWrite:00000058 $d
-C:\cygwin64\tmp\ccgqFKTP.s:196    .text.SPIWriteRead:00000000 $t
-C:\cygwin64\tmp\ccgqFKTP.s:203    .text.SPIWriteRead:00000000 SPIWriteRead
-C:\cygwin64\tmp\ccgqFKTP.s:279    .text.SPIWriteRead:00000048 $d
+                            *ABS*:0000000000000000 SPI.c
+     /tmp/ccFMzCD8.s:16     .text.SPI_Init:0000000000000000 $t
+     /tmp/ccFMzCD8.s:24     .text.SPI_Init:0000000000000000 SPI_Init
+     /tmp/ccFMzCD8.s:89     .text.SPI_Init:0000000000000038 $d
+                            *COM*:0000000000000058 SPIHandle
+     /tmp/ccFMzCD8.s:95     .text.SPIWrite:0000000000000000 $t
+     /tmp/ccFMzCD8.s:102    .text.SPIWrite:0000000000000000 SPIWrite
+     /tmp/ccFMzCD8.s:190    .text.SPIWrite:0000000000000058 $d
+     /tmp/ccFMzCD8.s:196    .text.SPIWriteRead:0000000000000000 $t
+     /tmp/ccFMzCD8.s:203    .text.SPIWriteRead:0000000000000000 SPIWriteRead
+     /tmp/ccFMzCD8.s:279    .text.SPIWriteRead:0000000000000048 $d
 
 UNDEFINED SYMBOLS
 HAL_SPI_Init

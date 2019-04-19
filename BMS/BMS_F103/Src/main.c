@@ -45,6 +45,7 @@
 /* USER CODE BEGIN Includes */
 //#include "SPI.h"
 #include "LTC6811.h"
+#include "ChargerFunctions.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -141,7 +142,7 @@ int main(void)
   bool connection[12];
   uint8_t rdcfg[6];
   uint8_t printbuffer[16];
-
+  bool discharging[12] = {false, false, false, false, false, false, false, false, false, false, false, false};
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -201,6 +202,33 @@ int main(void)
 	//SerialPrint(printbuffer, 8);
 	//SerialPrint(printbuffer + 8, 8);
 	
+	/*** Charging  ***/
+	// Charger functions assume voltage data from every cell has already been receieved
+	/*
+	setChargeDischarge(cellsDischarge, &chargeCurrent, cellVoltage);
+	setChargerTxData();
+	
+	if (HAL_CAN_AddTxMessage(&hcan, &TxHeader2, CANtx, &TxMailbox) == HAL_OK) {
+		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+	}
+	*/
+	/*** End Charging ***/
+
+	/*** Set which cells to discharge ***/
+	// cellsDischarge[boardNumber][cell]
+	discharging[0] = cellsDischarge[0][0];
+	discharging[1] = cellsDischarge[0][1];
+	discharging[2] = cellsDischarge[0][2];
+	discharging[3] = cellsDischarge[0][3];
+	discharging[6] = cellsDischarge[0][4];
+	discharging[7] = cellsDischarge[0][5];
+	discharging[8] = cellsDischarge[0][6];
+	discharging[9] = cellsDischarge[0][7];
+
+	setDischarge(discharging, &BMSconfig, 1);
+	/*** End Set which cells to discharge ***/
+
+
 	HAL_Delay(500);
 	
     /* USER CODE END WHILE */

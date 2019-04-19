@@ -1,7 +1,7 @@
 /*
 	LTC6811 Command Functions
-	Matt Vlasaty
-	March 29th, 2019
+	Matt Vlasaty and ya boi Evan Chen
+	April 18th, 2019
 	
 	General Functions
 		sendBroadcastCommand: void sendBroadcastCommand(CommandCodeTypedef command);
@@ -23,7 +23,19 @@
 			- uses general readRegister function to check current state of LTC configuration register
 			- this is mostly for testing purposes
 			- returns true if received PEC matches calculated PEC (same as readRegister)
-		
+	
+	Set Cell Discharge Functions
+		void setDischarge(bool ctd[12], BMSconfigStructTypedef *cfg, uint8_t total_ic);
+			 - not tested
+			 - Enables discharging on the requested cells.
+			 - Parameters:
+				> The cells to discharge (ctd) are stored in bool ctd[12]. True = discharge. Else don't discharge.
+				  Note that the used cells may not be contiguous in order. For Apollo used cells are 1, 2, 3, 4, 7, 8, 9, 10.
+				  **Subtract one from the cell number to get the corresponding array index.**
+				> BMSconfigStructTypedef cfg is the original config struct used when initializing configuration registers.
+				  Should be the same variable as the first writeConfig parameter in main.
+				> uint8_t total_ic is the number of ICs connected. Should be the same variable as the first writeConfig parameter in main.
+
 	Cell Voltage Functions
 		readCellVoltage: bool readCellVoltage(uint8_t address, uint16_t cellVoltage[12]);
 			- sends ADCV command that begins conversion for every cell to specified LTC
@@ -72,9 +84,8 @@
 			- returns uint16_t PEC value
 			
 	TODO:
-		- test readCellTemp and checkCellConnection with BMS slave board
+		- test readCellTemp, setDischarge and checkCellConnection with BMS slave board
 		- resolve issue with writeConfig not changing every bit in the first register group
-		- write function for discharging cells (using writeConfig?)
 		- test functions used to read from every board
 		- minor changes (using more user-defined constants, changing return values)
 */
@@ -159,6 +170,55 @@ void writeConfig(BMSconfigStructTypedef cfg, uint8_t total_ic) {
 	free(cmd);
 	
 };
+
+/*
+ - Enables discharging on the requested cells.
+ - Parameters:
+	> The cells to discharge (ctd) are stored in bool ctd[12]. True = discharge. Else don't discharge.
+	  Note that the used cells may not be contiguous in order. For Apollo 18-19, used cells are 1, 2, 3, 4, 7, 8, 9, 10.
+	> BMSconfigStructTypedef cfg is the original config struct used when initializing configuration registers.
+	  Should be the same variable as the first writeConfig parameter in main.
+	> uint8_t total_ic is the number of ICs connected. Should be the same variable as the first writeConfig parameter in main.
+*/
+void setDischarge(bool ctd[12], BMSconfigStructTypedef *cfg, uint8_t total_ic) {
+	if (ctd[0] == true) { cfg->DischargeCell1 = 1; }
+	else				{ cfg->DischargeCell1 = 0; }
+	
+	if (ctd[1] == true) { cfg->DischargeCell2 = 1; }
+	else				{ cfg->DischargeCell2 = 0; }
+
+	if (ctd[2] == true) { cfg->DischargeCell3 = 1; }
+	else				{ cfg->DischargeCell3 = 0; }
+	
+	if (ctd[3] == true) { cfg->DischargeCell4 = 1; }
+	else				{ cfg->DischargeCell4 = 0; }
+	
+	if (ctd[4] == true) { cfg->DischargeCell5 = 1; }
+	else				{ cfg->DischargeCell5 = 0; }
+
+	if (ctd[5] == true) { cfg->DischargeCell6 = 1; }
+	else				{ cfg->DischargeCell6 = 0; }
+
+	if (ctd[6] == true) { cfg->DischargeCell7 = 1; }
+	else				{ cfg->DischargeCell7 = 0; }
+	
+	if (ctd[7] == true) { cfg->DischargeCell8 = 1; }
+	else				{ cfg->DischargeCell8 = 0; }
+
+	if (ctd[8] == true) { cfg->DischargeCell9 = 1; }
+	else				{ cfg->DischargeCell9 = 0; }
+
+	if (ctd[9] == true) { cfg->DischargeCell10 = 1; }
+	else				{ cfg->DischargeCell10 = 0; }
+	
+	if (ctd[10] == true) { cfg->DischargeCell11 = 1; }
+	else				 { cfg->DischargeCell11 = 0; }
+
+	if (ctd[11] == true) { cfg->DischargeCell12 = 1; }
+	else				 { cfg->DischargeCell12 = 0; }
+		
+	writeConfig(*cfg, total_ic);
+}
 
 bool readCellVoltage(uint8_t address, uint16_t cellVoltage[12]) {
 	

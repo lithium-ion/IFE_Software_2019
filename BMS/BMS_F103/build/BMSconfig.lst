@@ -1,4 +1,4 @@
-ARM GAS  C:\cygwin64\tmp\ccZzhG2E.s 			page 1
+ARM GAS  /tmp/cc51FyGZ.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\cygwin64\tmp\ccZzhG2E.s 			page 1
   46 000a 4270     		strb	r2, [r0, #1]
   11:Src/BMSconfig.c **** 	cfg->GPIO3PulldownOff = 1;
   47              		.loc 1 11 2 is_stmt 1 view .LVU9
-ARM GAS  C:\cygwin64\tmp\ccZzhG2E.s 			page 2
+ARM GAS  /tmp/cc51FyGZ.s 			page 2
 
 
   48              		.loc 1 11 24 is_stmt 0 view .LVU10
@@ -118,7 +118,7 @@ ARM GAS  C:\cygwin64\tmp\ccZzhG2E.s 			page 1
   86              		.loc 1 27 2 is_stmt 1 view .LVU35
   87              		.loc 1 27 22 is_stmt 0 view .LVU36
   88 0026 C374     		strb	r3, [r0, #19]
-ARM GAS  C:\cygwin64\tmp\ccZzhG2E.s 			page 3
+ARM GAS  /tmp/cc51FyGZ.s 			page 3
 
 
   28:Src/BMSconfig.c **** 	cfg->DischargeCell9 = 0;
@@ -149,22 +149,22 @@ ARM GAS  C:\cygwin64\tmp\ccZzhG2E.s 			page 1
  107              	.LFE66:
  109              		.text
  110              	.Letext0:
- 111              		.file 2 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\machine\\_default_types.h"
- 112              		.file 3 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 111              		.file 2 "/mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/arm-none-eabi/include/
+ 112              		.file 3 "/mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/arm-none-eabi/include/
  113              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
  114              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
- 115              		.file 6 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\sys\\lock.h"
- 116              		.file 7 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\sys\\_types.h"
- 117              		.file 8 "c:\\arm-gcc\\8-2018-q4-major\\lib\\gcc\\arm-none-eabi\\8.2.1\\include\\stddef.h"
- 118              		.file 9 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\sys\\reent.h"
- 119              		.file 10 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\stdlib.h"
+ 115              		.file 6 "/mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/arm-none-eabi/include/
+ 116              		.file 7 "/mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/arm-none-eabi/include/
+ 117              		.file 8 "/mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/lib/gcc/arm-none-eabi/
+ 118              		.file 9 "/mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/arm-none-eabi/include/
+ 119              		.file 10 "/mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/arm-none-eabi/include
  120              		.file 11 "Inc/BMSconfig.h"
-ARM GAS  C:\cygwin64\tmp\ccZzhG2E.s 			page 4
+ARM GAS  /tmp/cc51FyGZ.s 			page 4
 
 
 DEFINED SYMBOLS
-                            *ABS*:00000000 BMSconfig.c
-C:\cygwin64\tmp\ccZzhG2E.s:16     .text.loadConfig:00000000 $t
-C:\cygwin64\tmp\ccZzhG2E.s:24     .text.loadConfig:00000000 loadConfig
+                            *ABS*:0000000000000000 BMSconfig.c
+     /tmp/cc51FyGZ.s:16     .text.loadConfig:0000000000000000 $t
+     /tmp/cc51FyGZ.s:24     .text.loadConfig:0000000000000000 loadConfig
 
 NO UNDEFINED SYMBOLS
