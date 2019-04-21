@@ -67,6 +67,7 @@ uint8_t               CELLVAL_DATA[6];
 uint8_t               BMSSTAT_DATA[6];
 uint8_t               BMSVINF_DATA[8];
 uint8_t               BMSTINF_DATA[8];
+uint8_t				  CHARGER_DATA[8];
 
 /* USER CODE END PV */
 
@@ -249,7 +250,15 @@ int main(void)
 
     if (vreturn == 1) HAL_GPIO_TogglePin(GPIOC, DEBUG_Pin);
 
-    
+    /*** Charging ***/
+	setDischarge(BMSconfig, voltage, connection, discharge, &chargerate);
+	setChargerTxData(CHARGER_DATA, chargerate, BMSconfig.chargerVoltage, BMSconfig.lowerCurrent, BMSconfig.normalCurrent);
+	TxHeader.IDE = CAN_ID_EXT;
+	HAL_CAN_AddTxMessage(&hcan, &TxHeader, CHARGER_DATA, &TxMailbox);
+
+	// reset the ID type to standard for CAN
+	TxHeader.IDE = CAN_ID_STD;
+	/*** End Charging ***/
 
     /*uint8_t rdcfg[8];
     writeConfigAll(BMSconfig);
@@ -384,7 +393,7 @@ static void MX_CAN_Init(void)
   }
   /* USER CODE BEGIN CAN_Init 2 */
   TxHeader.StdId = 0x321; 				// CAN standard ID
-	TxHeader.ExtId = 0x01; 					// CAN extended ID
+	TxHeader.ExtId = 0x1806E5F4;		// CAN extended ID
 	TxHeader.RTR = CAN_RTR_DATA; 			// CAN frame type
 	TxHeader.IDE = CAN_ID_STD; 				// CAN ID type
 	TxHeader.DLC = 8; 						// CAN frame length in bytes

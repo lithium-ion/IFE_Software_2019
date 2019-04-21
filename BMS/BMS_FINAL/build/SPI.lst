@@ -1,4 +1,4 @@
-ARM GAS  C:\cygwin64\tmp\ccD05M9e.s 			page 1
+ARM GAS  /tmp/ccEYzxQS.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\cygwin64\tmp\ccD05M9e.s 			page 1
   12:Src/SPI.c     ****   SPIHandle.Init.Direction = SPI_DIRECTION_2LINES;
   45              		.loc 1 12 3 is_stmt 1 view .LVU5
   46              		.loc 1 12 28 is_stmt 0 view .LVU6
-ARM GAS  C:\cygwin64\tmp\ccD05M9e.s 			page 2
+ARM GAS  /tmp/ccEYzxQS.s 			page 2
 
 
   47 000e 0023     		movs	r3, #0
@@ -118,7 +118,7 @@ ARM GAS  C:\cygwin64\tmp\ccD05M9e.s 			page 1
   88              	.L3:
   89 0038 00000000 		.word	SPIHandle
   90 003c 00300140 		.word	1073819648
-ARM GAS  C:\cygwin64\tmp\ccD05M9e.s 			page 3
+ARM GAS  /tmp/ccEYzxQS.s 			page 3
 
 
   91              		.cfi_endproc
@@ -178,7 +178,7 @@ ARM GAS  C:\cygwin64\tmp\ccD05M9e.s 			page 1
  140 001a 1248     		ldr	r0, .L8
  141              	.LVL5:
  142              		.loc 1 32 2 view .LVU34
-ARM GAS  C:\cygwin64\tmp\ccD05M9e.s 			page 4
+ARM GAS  /tmp/ccEYzxQS.s 			page 4
 
 
  143 001c FFF7FEFF 		bl	HAL_GPIO_WritePin
@@ -238,7 +238,7 @@ ARM GAS  C:\cygwin64\tmp\ccD05M9e.s 			page 1
  189              	.LCFI5:
  190              		.cfi_def_cfa_register 13
  191              		@ sp needed
-ARM GAS  C:\cygwin64\tmp\ccD05M9e.s 			page 5
+ARM GAS  /tmp/ccEYzxQS.s 			page 5
 
 
  192 0060 F0BD     		pop	{r4, r5, r6, r7, pc}
@@ -298,7 +298,7 @@ ARM GAS  C:\cygwin64\tmp\ccD05M9e.s 			page 1
  242              		.loc 1 46 2 view .LVU53
  243 0010 FFF7FEFF 		bl	HAL_GPIO_WritePin
  244              	.LVL17:
-ARM GAS  C:\cygwin64\tmp\ccD05M9e.s 			page 6
+ARM GAS  /tmp/ccEYzxQS.s 			page 6
 
 
   47:Src/SPI.c     **** 	HAL_Delay(10);
@@ -358,7 +358,7 @@ ARM GAS  C:\cygwin64\tmp\ccD05M9e.s 			page 1
  291              	.L14:
  292              		.loc 1 54 1 view .LVU65
  293              		.align	2
-ARM GAS  C:\cygwin64\tmp\ccD05M9e.s 			page 7
+ARM GAS  /tmp/ccEYzxQS.s 			page 7
 
 
  294              	.L13:
@@ -369,36 +369,36 @@ ARM GAS  C:\cygwin64\tmp\ccD05M9e.s 			page 1
  300              		.comm	SPIHandle,88,4
  301              		.text
  302              	.Letext0:
- 303              		.file 2 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\machine\\_default_types.h"
- 304              		.file 3 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 303              		.file 2 "/mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/arm-none-eabi/include/
+ 304              		.file 3 "/mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/arm-none-eabi/include/
  305              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
  306              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
  307              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
- 308              		.file 7 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\sys\\lock.h"
- 309              		.file 8 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\sys\\_types.h"
- 310              		.file 9 "c:\\arm-gcc\\8-2018-q4-major\\lib\\gcc\\arm-none-eabi\\8.2.1\\include\\stddef.h"
- 311              		.file 10 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\sys\\reent.h"
+ 308              		.file 7 "/mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/arm-none-eabi/include/
+ 309              		.file 8 "/mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/arm-none-eabi/include/
+ 310              		.file 9 "/mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/lib/gcc/arm-none-eabi/
+ 311              		.file 10 "/mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/arm-none-eabi/include
  312              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
  313              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
  314              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
  315              		.file 14 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h"
  316              		.file 15 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
- 317              		.file 16 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\stdlib.h"
-ARM GAS  C:\cygwin64\tmp\ccD05M9e.s 			page 8
+ 317              		.file 16 "/mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/arm-none-eabi/include
+ARM GAS  /tmp/ccEYzxQS.s 			page 8
 
 
 DEFINED SYMBOLS
-                            *ABS*:00000000 SPI.c
-C:\cygwin64\tmp\ccD05M9e.s:16     .text.SPI_Init:00000000 $t
-C:\cygwin64\tmp\ccD05M9e.s:24     .text.SPI_Init:00000000 SPI_Init
-C:\cygwin64\tmp\ccD05M9e.s:89     .text.SPI_Init:00000038 $d
-                            *COM*:00000058 SPIHandle
-C:\cygwin64\tmp\ccD05M9e.s:95     .text.SPIWrite:00000000 $t
-C:\cygwin64\tmp\ccD05M9e.s:102    .text.SPIWrite:00000000 SPIWrite
-C:\cygwin64\tmp\ccD05M9e.s:198    .text.SPIWrite:00000064 $d
-C:\cygwin64\tmp\ccD05M9e.s:204    .text.SPIWriteRead:00000000 $t
-C:\cygwin64\tmp\ccD05M9e.s:211    .text.SPIWriteRead:00000000 SPIWriteRead
-C:\cygwin64\tmp\ccD05M9e.s:295    .text.SPIWriteRead:00000054 $d
+                            *ABS*:0000000000000000 SPI.c
+     /tmp/ccEYzxQS.s:16     .text.SPI_Init:0000000000000000 $t
+     /tmp/ccEYzxQS.s:24     .text.SPI_Init:0000000000000000 SPI_Init
+     /tmp/ccEYzxQS.s:89     .text.SPI_Init:0000000000000038 $d
+                            *COM*:0000000000000058 SPIHandle
+     /tmp/ccEYzxQS.s:95     .text.SPIWrite:0000000000000000 $t
+     /tmp/ccEYzxQS.s:102    .text.SPIWrite:0000000000000000 SPIWrite
+     /tmp/ccEYzxQS.s:198    .text.SPIWrite:0000000000000064 $d
+     /tmp/ccEYzxQS.s:204    .text.SPIWriteRead:0000000000000000 $t
+     /tmp/ccEYzxQS.s:211    .text.SPIWriteRead:0000000000000000 SPIWriteRead
+     /tmp/ccEYzxQS.s:295    .text.SPIWriteRead:0000000000000054 $d
 
 UNDEFINED SYMBOLS
 HAL_SPI_Init

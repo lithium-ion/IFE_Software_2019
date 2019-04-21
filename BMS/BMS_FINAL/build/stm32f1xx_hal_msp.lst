@@ -1,4 +1,4 @@
-ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 1
+ARM GAS  /tmp/ccipyp1v.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 1
   30:Src/stm32f1xx_hal_msp.c **** 
   31:Src/stm32f1xx_hal_msp.c **** /* USER CODE END TD */
   32:Src/stm32f1xx_hal_msp.c **** 
-ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 2
+ARM GAS  /tmp/ccipyp1v.s 			page 2
 
 
   33:Src/stm32f1xx_hal_msp.c **** /* Private define ------------------------------------------------------------*/
@@ -118,7 +118,7 @@ ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 1
   43              		.loc 1 70 3 view .LVU4
   44 000c 9A69     		ldr	r2, [r3, #24]
   45 000e 02F00102 		and	r2, r2, #1
-ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 3
+ARM GAS  /tmp/ccipyp1v.s 			page 3
 
 
   46 0012 0092     		str	r2, [sp]
@@ -178,7 +178,7 @@ ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 1
   88 003c 00100240 		.word	1073876992
   89 0040 00000140 		.word	1073807360
   90              		.cfi_endproc
-ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 4
+ARM GAS  /tmp/ccipyp1v.s 			page 4
 
 
   91              	.LFE66:
@@ -238,7 +238,7 @@ ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 1
   98:Src/stm32f1xx_hal_msp.c ****     /* Peripheral clock enable */
   99:Src/stm32f1xx_hal_msp.c ****     __HAL_RCC_ADC1_CLK_ENABLE();
  100:Src/stm32f1xx_hal_msp.c ****   
-ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 5
+ARM GAS  /tmp/ccipyp1v.s 			page 5
 
 
  101:Src/stm32f1xx_hal_msp.c ****     __HAL_RCC_GPIOB_CLK_ENABLE();
@@ -298,7 +298,7 @@ ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 1
  163 0034 42F00802 		orr	r2, r2, #8
  164 0038 9A61     		str	r2, [r3, #24]
  101:Src/stm32f1xx_hal_msp.c ****     /**ADC1 GPIO Configuration    
-ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 6
+ARM GAS  /tmp/ccipyp1v.s 			page 6
 
 
  165              		.loc 1 101 5 view .LVU33
@@ -358,7 +358,7 @@ ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 1
  123:Src/stm32f1xx_hal_msp.c **** void HAL_ADC_MspDeInit(ADC_HandleTypeDef* hadc)
  124:Src/stm32f1xx_hal_msp.c **** {
  207              		.loc 1 124 1 is_stmt 1 view -0
-ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 7
+ARM GAS  /tmp/ccipyp1v.s 			page 7
 
 
  208              		.cfi_startproc
@@ -418,7 +418,7 @@ ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 1
  239              		.loc 1 137 5 is_stmt 0 view .LVU50
  240 001a FFF7FEFF 		bl	HAL_GPIO_DeInit
  241              	.LVL12:
-ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 8
+ARM GAS  /tmp/ccipyp1v.s 			page 8
 
 
  242              		.loc 1 144 1 view .LVU51
@@ -478,7 +478,7 @@ ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 1
  287              		.loc 1 155 5 view .LVU58
  288 0010 1A4B     		ldr	r3, .L21
  289 0012 9A42     		cmp	r2, r3
-ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 9
+ARM GAS  /tmp/ccipyp1v.s 			page 9
 
 
  290 0014 01D0     		beq	.L20
@@ -538,7 +538,7 @@ ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 1
  310 0020 42F00072 		orr	r2, r2, #33554432
  311 0024 DA61     		str	r2, [r3, #28]
  161:Src/stm32f1xx_hal_msp.c ****   
-ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 10
+ARM GAS  /tmp/ccipyp1v.s 			page 10
 
 
  312              		.loc 1 161 5 view .LVU63
@@ -598,7 +598,7 @@ ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 1
  351              		.loc 1 174 5 is_stmt 1 view .LVU78
  174:Src/stm32f1xx_hal_msp.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
  352              		.loc 1 174 26 is_stmt 0 view .LVU79
-ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 11
+ARM GAS  /tmp/ccipyp1v.s 			page 11
 
 
  353 0058 0223     		movs	r3, #2
@@ -658,7 +658,7 @@ ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 1
  395              		.loc 1 195 1 is_stmt 1 view -0
  396              		.cfi_startproc
  397              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 12
+ARM GAS  /tmp/ccipyp1v.s 			page 12
 
 
  398              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -718,7 +718,7 @@ ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 1
  427              		.loc 1 208 5 is_stmt 0 view .LVU94
  428 001c FFF7FEFF 		bl	HAL_GPIO_DeInit
  429              	.LVL25:
-ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 13
+ARM GAS  /tmp/ccipyp1v.s 			page 13
 
 
  211:Src/stm32f1xx_hal_msp.c ****   /* USER CODE BEGIN CAN1_MspDeInit 1 */
@@ -778,7 +778,7 @@ ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 1
  475 000c 0593     		str	r3, [sp, #20]
  228:Src/stm32f1xx_hal_msp.c ****   if(hspi->Instance==SPI1)
  476              		.loc 1 228 3 is_stmt 1 view .LVU101
-ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 14
+ARM GAS  /tmp/ccipyp1v.s 			page 14
 
 
  477              		.loc 1 228 10 is_stmt 0 view .LVU102
@@ -838,7 +838,7 @@ ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 1
  499              		.loc 1 234 5 view .LVU107
  500 001a 03F56043 		add	r3, r3, #57344
  501 001e 9A69     		ldr	r2, [r3, #24]
-ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 15
+ARM GAS  /tmp/ccipyp1v.s 			page 15
 
 
  502 0020 42F48052 		orr	r2, r2, #4096
@@ -898,7 +898,7 @@ ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 1
  245:Src/stm32f1xx_hal_msp.c **** 
  542              		.loc 1 245 5 is_stmt 0 view .LVU122
  543 0054 FFF7FEFF 		bl	HAL_GPIO_Init
-ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 16
+ARM GAS  /tmp/ccipyp1v.s 			page 16
 
 
  544              	.LVL31:
@@ -958,7 +958,7 @@ ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 1
  584              		@ args = 0, pretend = 0, frame = 0
  585              		@ frame_needed = 0, uses_anonymous_args = 0
  586              		.loc 1 266 1 is_stmt 0 view .LVU132
-ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 17
+ARM GAS  /tmp/ccipyp1v.s 			page 17
 
 
  587 0000 08B5     		push	{r3, lr}
@@ -1018,7 +1018,7 @@ ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 1
  617              		.loc 1 287 1 view .LVU140
  618 001e F4E7     		b	.L35
  619              	.L40:
-ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 18
+ARM GAS  /tmp/ccipyp1v.s 			page 18
 
 
  620              		.align	2
@@ -1078,7 +1078,7 @@ ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 1
  659              		.loc 1 303 5 view .LVU148
  660 000c 03F50433 		add	r3, r3, #135168
  661 0010 DA69     		ldr	r2, [r3, #28]
-ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 19
+ARM GAS  /tmp/ccipyp1v.s 			page 19
 
 
  662 0012 42F00102 		orr	r2, r2, #1
@@ -1138,7 +1138,7 @@ ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 1
  702              	.L48:
  320:Src/stm32f1xx_hal_msp.c ****   {
  321:Src/stm32f1xx_hal_msp.c ****   /* USER CODE BEGIN TIM2_MspDeInit 0 */
-ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 20
+ARM GAS  /tmp/ccipyp1v.s 			page 20
 
 
  322:Src/stm32f1xx_hal_msp.c **** 
@@ -1170,16 +1170,16 @@ ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 1
  718              	.LFE74:
  720              		.text
  721              	.Letext0:
- 722              		.file 2 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\machine\\_default_types.h"
- 723              		.file 3 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 722              		.file 2 "/mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/arm-none-eabi/include/
+ 723              		.file 3 "/mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/arm-none-eabi/include/
  724              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
  725              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
  726              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
  727              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h"
- 728              		.file 8 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\sys\\lock.h"
- 729              		.file 9 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\sys\\_types.h"
- 730              		.file 10 "c:\\arm-gcc\\8-2018-q4-major\\lib\\gcc\\arm-none-eabi\\8.2.1\\include\\stddef.h"
- 731              		.file 11 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\sys\\reent.h"
+ 728              		.file 8 "/mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/arm-none-eabi/include/
+ 729              		.file 9 "/mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/arm-none-eabi/include/
+ 730              		.file 10 "/mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/lib/gcc/arm-none-eabi
+ 731              		.file 11 "/mnt/c/Users/evanc/Documents/IFE/gcc-arm-none-eabi-8-2018-q4-major/arm-none-eabi/include
  732              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
  733              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
  734              		.file 14 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
@@ -1189,37 +1189,37 @@ ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 1
  738              		.file 18 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
  739              		.file 19 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
  740              		.file 20 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h"
-ARM GAS  C:\cygwin64\tmp\ccUC54Cl.s 			page 21
+ARM GAS  /tmp/ccipyp1v.s 			page 21
 
 
 DEFINED SYMBOLS
-                            *ABS*:00000000 stm32f1xx_hal_msp.c
-C:\cygwin64\tmp\ccUC54Cl.s:16     .text.HAL_MspInit:00000000 $t
-C:\cygwin64\tmp\ccUC54Cl.s:24     .text.HAL_MspInit:00000000 HAL_MspInit
-C:\cygwin64\tmp\ccUC54Cl.s:88     .text.HAL_MspInit:0000003c $d
-C:\cygwin64\tmp\ccUC54Cl.s:94     .text.HAL_ADC_MspInit:00000000 $t
-C:\cygwin64\tmp\ccUC54Cl.s:101    .text.HAL_ADC_MspInit:00000000 HAL_ADC_MspInit
-C:\cygwin64\tmp\ccUC54Cl.s:191    .text.HAL_ADC_MspInit:00000054 $d
-C:\cygwin64\tmp\ccUC54Cl.s:197    .text.HAL_ADC_MspDeInit:00000000 $t
-C:\cygwin64\tmp\ccUC54Cl.s:204    .text.HAL_ADC_MspDeInit:00000000 HAL_ADC_MspDeInit
-C:\cygwin64\tmp\ccUC54Cl.s:247    .text.HAL_ADC_MspDeInit:00000020 $d
-C:\cygwin64\tmp\ccUC54Cl.s:254    .text.HAL_CAN_MspInit:00000000 $t
-C:\cygwin64\tmp\ccUC54Cl.s:261    .text.HAL_CAN_MspInit:00000000 HAL_CAN_MspInit
-C:\cygwin64\tmp\ccUC54Cl.s:379    .text.HAL_CAN_MspInit:0000007c $d
-C:\cygwin64\tmp\ccUC54Cl.s:385    .text.HAL_CAN_MspDeInit:00000000 $t
-C:\cygwin64\tmp\ccUC54Cl.s:392    .text.HAL_CAN_MspDeInit:00000000 HAL_CAN_MspDeInit
-C:\cygwin64\tmp\ccUC54Cl.s:439    .text.HAL_CAN_MspDeInit:00000028 $d
-C:\cygwin64\tmp\ccUC54Cl.s:446    .text.HAL_SPI_MspInit:00000000 $t
-C:\cygwin64\tmp\ccUC54Cl.s:453    .text.HAL_SPI_MspInit:00000000 HAL_SPI_MspInit
-C:\cygwin64\tmp\ccUC54Cl.s:566    .text.HAL_SPI_MspInit:0000006c $d
-C:\cygwin64\tmp\ccUC54Cl.s:572    .text.HAL_SPI_MspDeInit:00000000 $t
-C:\cygwin64\tmp\ccUC54Cl.s:579    .text.HAL_SPI_MspDeInit:00000000 HAL_SPI_MspDeInit
-C:\cygwin64\tmp\ccUC54Cl.s:622    .text.HAL_SPI_MspDeInit:00000020 $d
-C:\cygwin64\tmp\ccUC54Cl.s:629    .text.HAL_TIM_Base_MspInit:00000000 $t
-C:\cygwin64\tmp\ccUC54Cl.s:636    .text.HAL_TIM_Base_MspInit:00000000 HAL_TIM_Base_MspInit
-C:\cygwin64\tmp\ccUC54Cl.s:681    .text.HAL_TIM_Base_MspDeInit:00000000 $t
-C:\cygwin64\tmp\ccUC54Cl.s:688    .text.HAL_TIM_Base_MspDeInit:00000000 HAL_TIM_Base_MspDeInit
-C:\cygwin64\tmp\ccUC54Cl.s:716    .text.HAL_TIM_Base_MspDeInit:00000018 $d
+                            *ABS*:0000000000000000 stm32f1xx_hal_msp.c
+     /tmp/ccipyp1v.s:16     .text.HAL_MspInit:0000000000000000 $t
+     /tmp/ccipyp1v.s:24     .text.HAL_MspInit:0000000000000000 HAL_MspInit
+     /tmp/ccipyp1v.s:88     .text.HAL_MspInit:000000000000003c $d
+     /tmp/ccipyp1v.s:94     .text.HAL_ADC_MspInit:0000000000000000 $t
+     /tmp/ccipyp1v.s:101    .text.HAL_ADC_MspInit:0000000000000000 HAL_ADC_MspInit
+     /tmp/ccipyp1v.s:191    .text.HAL_ADC_MspInit:0000000000000054 $d
+     /tmp/ccipyp1v.s:197    .text.HAL_ADC_MspDeInit:0000000000000000 $t
+     /tmp/ccipyp1v.s:204    .text.HAL_ADC_MspDeInit:0000000000000000 HAL_ADC_MspDeInit
+     /tmp/ccipyp1v.s:247    .text.HAL_ADC_MspDeInit:0000000000000020 $d
+     /tmp/ccipyp1v.s:254    .text.HAL_CAN_MspInit:0000000000000000 $t
+     /tmp/ccipyp1v.s:261    .text.HAL_CAN_MspInit:0000000000000000 HAL_CAN_MspInit
+     /tmp/ccipyp1v.s:379    .text.HAL_CAN_MspInit:000000000000007c $d
+     /tmp/ccipyp1v.s:385    .text.HAL_CAN_MspDeInit:0000000000000000 $t
+     /tmp/ccipyp1v.s:392    .text.HAL_CAN_MspDeInit:0000000000000000 HAL_CAN_MspDeInit
+     /tmp/ccipyp1v.s:439    .text.HAL_CAN_MspDeInit:0000000000000028 $d
+     /tmp/ccipyp1v.s:446    .text.HAL_SPI_MspInit:0000000000000000 $t
+     /tmp/ccipyp1v.s:453    .text.HAL_SPI_MspInit:0000000000000000 HAL_SPI_MspInit
+     /tmp/ccipyp1v.s:566    .text.HAL_SPI_MspInit:000000000000006c $d
+     /tmp/ccipyp1v.s:572    .text.HAL_SPI_MspDeInit:0000000000000000 $t
+     /tmp/ccipyp1v.s:579    .text.HAL_SPI_MspDeInit:0000000000000000 HAL_SPI_MspDeInit
+     /tmp/ccipyp1v.s:622    .text.HAL_SPI_MspDeInit:0000000000000020 $d
+     /tmp/ccipyp1v.s:629    .text.HAL_TIM_Base_MspInit:0000000000000000 $t
+     /tmp/ccipyp1v.s:636    .text.HAL_TIM_Base_MspInit:0000000000000000 HAL_TIM_Base_MspInit
+     /tmp/ccipyp1v.s:681    .text.HAL_TIM_Base_MspDeInit:0000000000000000 $t
+     /tmp/ccipyp1v.s:688    .text.HAL_TIM_Base_MspDeInit:0000000000000000 HAL_TIM_Base_MspDeInit
+     /tmp/ccipyp1v.s:716    .text.HAL_TIM_Base_MspDeInit:0000000000000018 $d
 
 UNDEFINED SYMBOLS
 HAL_GPIO_Init

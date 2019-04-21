@@ -18,6 +18,17 @@ typedef struct {
 	uint16_t stopCharge_threshold;
 	uint16_t balancing_difference;
 	
+/*************** Charging Settings ********************/
+	/* hex value of ten times the current (A) in normal operation(when no cell is above lowerVoltage_Threshold) */
+	uint16_t normalCurrent;			// 6.2 A
+
+	/* hex value of ten times the current (A) when any cell exceeds lowerVoltage_Threshold */
+	uint16_t lowerCurrent;			// 1 A
+
+	/* hex value of ten times the voltage (V) of the charger */
+	uint16_t chargerVoltage;		// 400 V
+/************** End Charging Settings *****************/
+	
 	// LTC configuration
 	bool GPIO5PulldownOff;
 	bool GPIO4PulldownOff;

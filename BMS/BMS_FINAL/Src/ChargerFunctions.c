@@ -1,6 +1,6 @@
 #include "ChargerFunctions.h"
 
-void setDischarge(BMSconfigStructTypedef cfg, uint16_t allVoltage[12][12], bool allConnection[12][12], bool cellDischarge[12][8], uint8_t chargeRate) {
+void setDischarge(BMSconfigStructTypedef cfg, uint16_t allVoltage[12][12], bool allConnection[12][12], bool cellDischarge[12][8], uint8_t *chargeRate) {
 
 	uint16_t lowestVoltage = getLowestVoltage(cfg, allVoltage); // gets lowest voltage of all cells
 	chargeRate = 2;												// initialize the charging current to normal operation
@@ -46,4 +46,41 @@ uint16_t getLowestVoltage(BMSconfigStructTypedef cfg, uint16_t cellVoltage[12][8
 		}
 	}
 	return low;
+}
+
+/*
+	@brief - calculates and sets the CAN transmission data for the charger
+*/
+void setChargerTxData(uint8_t CANtx[8], uint8_t chargeCurrent, uint16_t chargerVoltage, uint16_t lowerCurrent, uint16_t normalCurrent) {
+	/* voltage data (hex value of desired voltage (V) times 10)*/
+	CANtx[0] = (uint8_t)(chargerVoltage >> 8);
+	CANtx[1] = (uint8_t)chargerVoltage;
+
+	/* set the current data (hex value of desired current (A) times 10) */
+	switch (chargeCurrent) {
+		case 1:
+			/* lower current */
+			CANtx[2] = (uint8_t)(lowerCurrent >> 8);
+			CANtx[3] = (uint8_t)lowerCurrent;
+			break;
+
+		case 2:
+			/* normal current */
+			CANtx[2] = (uint8_t)(normalCurrent >> 8);
+			CANtx[3] = (uint8_t)normalCurrent;
+			break;
+
+		default:
+			/* no current */
+			CANtx[2] = 0x00;
+			CANtx[3] = 0x00;
+	}
+
+	/* these data bytes are not used */
+	CANtx[4] = 0x00;
+	CANtx[5] = 0x00;
+	CANtx[6] = 0x00;
+	CANtx[7] = 0x00;
+
+	return;
 }
