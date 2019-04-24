@@ -65,3 +65,13 @@
 //
 #define 	BMSTINF		0x00A
 
+// 4 bytes, 1Hz, Pack Voltage H|Pack Voltage L|Pack Current H|Pack Current L
+//
+// This message contains status information for the entire battery pack
+//
+// The voltage is a short int (16bits) split as a High and Low byte.
+// The current is a short int (16bits) split as a High and Low byte.
+// Actual voltage in V is obtained by (65*x/10000)  min - 0,  max - 426
+// Actual current in A is obtained by  (8*x/65536)  min - 0,  max - 8
+//
+#define		BMSPACKSTAT	0x00B

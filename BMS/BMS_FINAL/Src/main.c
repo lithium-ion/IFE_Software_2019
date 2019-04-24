@@ -65,9 +65,10 @@ uint32_t              TxMailbox;
 
 uint8_t               CELLVAL_DATA[6];
 uint8_t               BMSSTAT_DATA[6];
-uint8_t               BMSVINF_DATA[8];
+//uint8_t               BMSVINF_DATA[8];
 uint8_t               BMSTINF_DATA[8];
-uint8_t				  CHARGER_DATA[8];
+
+uint16_t              minimum;
 
 /* USER CODE END PV */
 
@@ -79,10 +80,13 @@ static void MX_CAN_Init(void);
 static void MX_SPI1_Init(void);
 static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
-void VOLTAGE_sort(uint16_t voltage[12][12]);
-void CONNECTION_sort(bool connection[12][12]);
+void VOLTAGE_sort(BMSconfigStructTypedef cfg, uint16_t voltage[12][12]);
+void CONNECTION_sort(BMSconfigStructTypedef cfg, bool connection[12][12]);
 void FAULT_check(BMSconfigStructTypedef cfg, uint16_t cellVoltage[12][12], bool tempFault[12][4], bool dcFault[12][4], bool cellConnection[12][12], uint8_t cellNumber[5], bool faultType[5]);
+void setDischarge(BMSconfigStructTypedef cfg, uint16_t cellVoltage[12][12], bool cellDischarge[12][8], uint8_t chargeRate);
 void CELLVAL_message(BMSconfigStructTypedef cfg, uint16_t cellVoltage[12][12], uint16_t cellTemp[12][4], bool cellConnection[12][12], bool cellDischarge[12][8], bool dcFault[12][4], bool vreturn);
+void BMSVINF_message(BMSconfigStructTypedef cfg, uint16_t cellVoltage[12][12]);
+void BMSTINF_message(BMSconfigStructTypedef cfg, uint16_t cellTemp[12][4]);
 void BMSSTAT_message(BMSconfigStructTypedef cfg, uint8_t cellNumber[5], bool faultType[5]);
 /* USER CODE END PFP */
 
@@ -127,7 +131,6 @@ int main(void)
   SPI_Init();
   initPECTable();
   loadConfig(&BMSconfig); // loads configuration settings from config.c
-  // set trigger high momentarily 
   writeConfigAll(BMSconfig);
 
   uint16_t voltage[BMSconfig.numOfICs][BMSconfig.numOfCellInputs];        //12, 12
@@ -135,7 +138,8 @@ int main(void)
   bool tempdisconnect[BMSconfig.numOfICs][BMSconfig.numOfTempPerIC];      //12, 4
   bool overtemp[BMSconfig.numOfICs][BMSconfig.numOfTempPerIC];            //12, 4
   bool connection[BMSconfig.numOfICs][BMSconfig.numOfCellInputs];         //12, 12
-  bool discharge[BMSconfig.numOfICs][BMSconfig.numOfCellsPerIC];          //12, 8 
+  bool discharge[BMSconfig.numOfICs][BMSconfig.numOfCellsPerIC];          //12, 8
+  uint8_t dischargetimer[BMSconfig.numOfICs][BMSconfig.numOfCellsPerIC];  //12, 8
 
   bool vreturn = false;
   bool treturn = false;
@@ -149,12 +153,12 @@ int main(void)
   bool AIR;
   bool CHARGE_EN;
 
-  uint16_t testVoltage[12];
-  uint8_t testData[2];
-  uint16_t testTemp[4];
-  bool testDC[4];
-  bool testOT[4];
-  bool testConnection[12];
+  /*discharge[0][0] = 1;
+  dischargeCellGroups(BMSconfig, discharge);
+  HAL_Delay(1000);
+  discharge[0][0] = 0;
+  dischargeCellGroups(BMSconfig, discharge);*/
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -165,110 +169,58 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
-    // read all cell voltages and temperatures and check for disconnected cells
-    /*vreturn = readAllCellVoltages(BMSconfig, voltage);
-    VOLTAGE_sort(voltage); // puts relevant voltages into first 8 positions
-    treturn = readAllCellTemps(BMSconfig, temp, overtemp, tempdisconnect);
-    checkAllCellConnections(BMSconfig, voltage, connection, disconnectedCell);
-    CONNECTION_sort(connection); // puts relevant cell connections into first 8 positions
+    writeConfigAddress(BMSconfig, 1);
 
-    AIR = HAL_GPIO_ReadPin(GPIOB, AIR_Pin);
+    vreturn = readAllCellVoltages(BMSconfig, voltage);
+    VOLTAGE_sort(BMSconfig, voltage);
+    BMSVINF_message(BMSconfig, voltage);
+
+    treturn = readAllCellTemps(BMSconfig, temp, tempdisconnect, overtemp);
+    BMSTINF_message(BMSconfig, temp);
+
+    //checkAllCellConnections(BMSconfig, voltage, connection);
+    //CONNECTION_sort(BMSconfig, connection);
+
+    /*AIR = HAL_GPIO_ReadPin(GPIOB, AIR_Pin);
     CHARGE_EN = HAL_GPIO_ReadPin(GPIOB, CHARGE_EN_Pin);
 
     if ((AIR == 0) && (CHARGE_EN == 0)) {
       setDischarge(BMSconfig, voltage, connection, discharge, chargerate);
-      // send charger CAN message
-    }
+      //dischargeCellGroups(BMSconfig, discharge);
+      //send charger CAN message
+    }*/
 
-    FAULT_check(BMSconfig, voltage, overtemp, tempdisconnect, connection, number, faults);
+    setDischarge(BMSconfig, voltage, discharge, chargerate);
+    dischargeCellGroups(BMSconfig, discharge);
 
-    // send CAN messages
-    CELLVAL_message(BMSconfig, voltage, temp, connection, discharge, tempdisconnect, vreturn);
-    //BMSSTAT_message(BMSconfig, number, faults);*/
+    HAL_Delay(500);
 
-    //discharge[0][0] = 1;
-    //dischargeCellGroups(BMSconfig, discharge);
-    
-    vreturn = readAllCellVoltages(BMSconfig, voltage);
+    discharge[0][0] = 0;
+    discharge[0][1] = 0;
+    discharge[0][2] = 0;
+    discharge[0][3] = 0;
+    discharge[0][4] = 0;
+    discharge[0][5] = 0;
+    discharge[0][6] = 0;
+    discharge[0][7] = 0;
+    dischargeCellGroups(BMSconfig, discharge);
 
-    voltage[0][4] = voltage[0][6];
-    voltage[0][5] = voltage[0][7];
-    voltage[0][6] = voltage[0][8];
-    voltage[0][7] = voltage[0][9];
-
-    checkCellConnection(voltage[0], testConnection);
-
-    connection[0][4] = connection[0][6];
-    connection[0][5] = connection[0][7];
-    connection[0][6] = connection[0][8];
-    connection[0][7] = connection[0][9];
-
-    //VOLTAGE_sort(voltage);
-    //readCellTemp(0, testTemp, testDC, testOT);
-    //writeConfigAll(BMSconfig);
-    //vreturn = readCellVoltage(0, testVoltage);
-    //HAL_GPIO_TogglePin(GPIOC, DEBUG_Pin);
-    //HAL_GPIO_TogglePin(GPIOB, BMS_FLT_Pin);
-
-    /*TxHeader.StdId = 100;
-    TxHeader.DLC = 8;
-
-    testData[0] = (uint8_t) ((testVoltage[0] >> 8) & 0xFF);
-    testData[1] = (uint8_t) (testVoltage[0] & 0xFF);
-    testData[2] = (uint8_t) ((testVoltage[1] >> 8) & 0xFF);
-    testData[3] = (uint8_t) (testVoltage[1] & 0xFF);
-    testData[4] = (uint8_t) ((testVoltage[2] >> 8) & 0xFF);
-    testData[5] = (uint8_t) (testVoltage[2] & 0xFF);
-    testData[6] = (uint8_t) ((testVoltage[3] >> 8) & 0xFF);
-    testData[7] = (uint8_t) (testVoltage[3] & 0xFF);
-
-    HAL_CAN_AddTxMessage(&hcan, &TxHeader, testData, &TxMailbox);
-
-    testData[0] = (uint8_t) ((testVoltage[4] >> 8) & 0xFF);
-    testData[1] = (uint8_t) (testVoltage[4] & 0xFF);
-    testData[2] = (uint8_t) ((testVoltage[5] >> 8) & 0xFF);
-    testData[3] = (uint8_t) (testVoltage[5] & 0xFF);
-    testData[4] = (uint8_t) ((testVoltage[6] >> 8) & 0xFF);
-    testData[5] = (uint8_t) (testVoltage[6] & 0xFF);
-    testData[6] = (uint8_t) ((testVoltage[7] >> 8) & 0xFF);
-    testData[7] = (uint8_t) (testVoltage[7] & 0xFF);
-
-    HAL_CAN_AddTxMessage(&hcan, &TxHeader, testData, &TxMailbox);
-
-    testData[0] = (uint8_t) ((testVoltage[8] >> 8) & 0xFF);
-    testData[1] = (uint8_t) (testVoltage[8] & 0xFF);
-    testData[2] = (uint8_t) ((testVoltage[9] >> 8) & 0xFF);
-    testData[3] = (uint8_t) (testVoltage[9] & 0xFF);
-    testData[4] = (uint8_t) ((testVoltage[10] >> 8) & 0xFF);
-    testData[5] = (uint8_t) (testVoltage[10] & 0xFF);
-    testData[6] = (uint8_t) ((testVoltage[11] >> 8) & 0xFF);
-    testData[7] = (uint8_t) (testVoltage[11] & 0xFF);
-
-    HAL_CAN_AddTxMessage(&hcan, &TxHeader, testData, &TxMailbox);*/
+    //FAULT_check(BMSconfig, voltage, overtemp, tempdisconnect, connection, number, faults);
 
     CELLVAL_message(BMSconfig, voltage, temp, connection, discharge, tempdisconnect, vreturn);
+    //BMSSTAT_message(BMSconfig, number, faults);
 
     if (vreturn == 1) HAL_GPIO_TogglePin(GPIOC, DEBUG_Pin);
 
-    /*** Charging ***/
-	setDischarge(BMSconfig, voltage, connection, discharge, &chargerate);
-	setChargerTxData(CHARGER_DATA, chargerate, BMSconfig.chargerVoltage, BMSconfig.lowerCurrent, BMSconfig.normalCurrent);
-	TxHeader.IDE = CAN_ID_EXT;
-	HAL_CAN_AddTxMessage(&hcan, &TxHeader, CHARGER_DATA, &TxMailbox);
-
-	// reset the ID type to standard for CAN
-	TxHeader.IDE = CAN_ID_STD;
-	/*** End Charging ***/
-
     /*uint8_t rdcfg[8];
     writeConfigAll(BMSconfig);
-    readConfig(0, rdcfg);
+    readConfig(1, rdcfg);
 
     TxHeader.StdId = 200;
     TxHeader.DLC = 8;
     HAL_CAN_AddTxMessage(&hcan, &TxHeader, rdcfg, &TxMailbox);*/
 
-    HAL_Delay(500);
+    HAL_Delay(100);
 
   }
   /* USER CODE END 3 */
@@ -393,7 +345,7 @@ static void MX_CAN_Init(void)
   }
   /* USER CODE BEGIN CAN_Init 2 */
   TxHeader.StdId = 0x321; 				// CAN standard ID
-	TxHeader.ExtId = 0x1806E5F4;		// CAN extended ID
+	TxHeader.ExtId = 0x01; 					// CAN extended ID
 	TxHeader.RTR = CAN_RTR_DATA; 			// CAN frame type
 	TxHeader.IDE = CAN_ID_STD; 				// CAN ID type
 	TxHeader.DLC = 8; 						// CAN frame length in bytes
@@ -542,8 +494,8 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
-void VOLTAGE_sort(uint16_t voltage[12][12]) {
-  for (uint8_t i = 0; i < 12; i++) {
+void VOLTAGE_sort(BMSconfigStructTypedef cfg, uint16_t voltage[12][12]) {
+  for (uint8_t i = 0; i < cfg.numOfICs; i++) {
     voltage[i][4] = voltage[i][6];
     voltage[i][5] = voltage[i][7];
     voltage[i][6] = voltage[i][8];
@@ -551,8 +503,8 @@ void VOLTAGE_sort(uint16_t voltage[12][12]) {
   }
 }
 
-void CONNECTION_sort(bool connection[12][12]) {
-  for (uint8_t i = 0; i < 12; i++) {
+void CONNECTION_sort(BMSconfigStructTypedef cfg, bool connection[12][12]) {
+  for (uint8_t i = 0; i < cfg.numOfICs; i++) {
     connection[i][4] = connection[i][6];
     connection[i][5] = connection[i][7];
     connection[i][6] = connection[i][8];
@@ -610,7 +562,36 @@ void FAULT_check(BMSconfigStructTypedef cfg, uint16_t cellVoltage[12][12], bool 
     HAL_GPIO_WritePin(GPIOB, BMS_FLT_Pin, GPIO_PIN_RESET);
   if (BMS_FAULT == true)
     HAL_GPIO_WritePin(GPIOB, BMS_FLT_Pin, GPIO_PIN_SET);
+}
 
+void setDischarge(BMSconfigStructTypedef cfg, uint16_t cellVoltage[12][12], bool cellDischarge[12][8], uint8_t chargeRate) {
+
+	chargeRate = 2;												// initialize the charging current to normal operation
+	
+	/* iterate through every cell */
+	for (int board = 0; board < cfg.numOfICs; board++) {
+		for (int cell = 0; cell < cfg.numOfCellsPerIC; cell++) {
+
+			/* If any cell exceeds BMSFault_Threshold2 Throw BMS Fault */
+			if (cellVoltage[board][cell] > cfg.OV_threshold)
+				chargeRate = 0;
+
+			/* Set balancing: if the cell voltage is more than the set balancingDifference above the minimum cell voltage, set to discharge */
+			if (cellVoltage[board][cell] > (minimum + cfg.balancing_difference))
+				cellDischarge[board][cell] = 1;
+      else
+        cellDischarge[board][cell] = 0;
+      
+
+			/* If any cell exceeds higherVoltage_Threshold: Set charge current to 0 and continue balancing.
+			 * If any cell exceeds lowerVoltage_Threshold: lower charge current to lowerCurrent and continue balancing
+			 */
+			if (cellVoltage[board][cell] > cfg.stopCharge_threshold)
+				chargeRate = 0;
+			else if ((cellVoltage[board][cell] > cfg.slowCharge_threshold) && (chargeRate != 0))
+				chargeRate = 1;
+		}
+	 }
 }
 
 void CELLVAL_message(BMSconfigStructTypedef cfg, uint16_t cellVoltage[12][12], uint16_t cellTemp[12][4], bool cellConnection[12][12], bool cellDischarge[12][8], bool dcFault[12][4], bool vreturn) {
@@ -623,12 +604,16 @@ void CELLVAL_message(BMSconfigStructTypedef cfg, uint16_t cellVoltage[12][12], u
 
   for (uint8_t i = 0; i < cfg.numOfICs; i++) {
     for (uint8_t j = 0; j < cfg.numOfCellsPerIC; j++) {
-      CELLVAL_DATA[0] = i * cfg.numOfCellsPerIC + j + 1; // cell number 
-      CELLVAL_DATA[1] = (uint8_t) cellConnection[i][j] & 0x01;
+      CELLVAL_DATA[0] = i * cfg.numOfCellsPerIC + j + 1; // cell number
+      if (cellDischarge[i][j] == 1)
+        CELLVAL_DATA[1] = 0xFF;
+      else
+        CELLVAL_DATA[1] = 0x00;
+      //CELLVAL_DATA[1] = (uint8_t) cellConnection[i][j] & 0x01;
       //CELLVAL_DATA[1] = (uint8_t) ((dcFault[i][(uint8_t) j/2] & 0x08) | (cellDischarge[i][j] & 0x04) | (vreturn & 0x02) | (cellConnection[i][j] & 0x01));
       CELLVAL_DATA[2] = (uint8_t) ((cellVoltage[i][j] >> 8) & 0xFF);
       CELLVAL_DATA[3] = (uint8_t) (cellVoltage[i][j] & 0xFF);
-      CELLVAL_DATA[4] = (uint8_t) ((cellTemp[i][(uint8_t) j/2] > 8) & 0xFF); // figure out how temp sensors should map to cells
+      CELLVAL_DATA[4] = (uint8_t) ((cellTemp[i][(uint8_t) j/2] >> 8) & 0xFF); // figure out how temp sensors should map to cells
       CELLVAL_DATA[5] = (uint8_t) (cellTemp[i][(uint8_t) j/2] & 0xFF);
 
       HAL_CAN_AddTxMessage(&hcan, &TxHeader, CELLVAL_DATA, &TxMailbox);
@@ -652,9 +637,108 @@ void BMSSTAT_message(BMSconfigStructTypedef cfg, uint8_t cellNumber[5], bool fau
   HAL_CAN_AddTxMessage(&hcan, &TxHeader, BMSSTAT_DATA, &TxMailbox);
 }
 
-//void BMSVINF_message()
+void BMSVINF_message(BMSconfigStructTypedef cfg, uint16_t cellVoltage[12][12]) {
 
-//void BMSTINF_message()
+  uint16_t minV;
+  uint8_t minCell;
+  uint16_t maxV;
+  uint8_t maxCell;
+  uint16_t averageV;
+  uint32_t sum = 0;
+
+  minV = cellVoltage[0][0];
+  minCell = 1;
+  maxV = cellVoltage[0][0];
+  maxCell = 1;
+
+  for (int i = 0; i < cfg.numOfICs; i++) {
+		for (int j = 0; j < cfg.numOfCellsPerIC; j++) {
+
+			if (cellVoltage[i][j] < minV) {
+        minV = cellVoltage[i][j];
+        minCell = i * cfg.numOfCellsPerIC + j + 1;
+      }
+
+      if (cellVoltage[i][j] > maxV) {
+        maxV = cellVoltage[i][j];
+        maxCell = i * cfg.numOfCellsPerIC + j + 1;
+      }
+
+      sum = sum + cellVoltage[i][j];
+
+		}
+  }
+
+  minimum = minV;
+  averageV = (uint16_t) (sum / (cfg.numOfICs * cfg.numOfCellsPerIC));
+
+  TxHeader.StdId = BMSVINF_ID;
+  TxHeader.DLC = 8;
+  uint8_t BMSVINF_DATA[8];
+
+  BMSVINF_DATA[0] = (uint8_t) ((maxV >> 8) & 0xFF);
+  BMSVINF_DATA[1] = (uint8_t) (maxV & 0xFF);
+  BMSVINF_DATA[2] = maxCell;
+  BMSVINF_DATA[3] = (uint8_t) ((minV >> 8) & 0xFF);
+  BMSVINF_DATA[4] = (uint8_t) (minV & 0xFF);
+  BMSVINF_DATA[5] = minCell;
+  BMSVINF_DATA[6] = (uint8_t) ((averageV >> 8) & 0xFF);
+  BMSVINF_DATA[7] = (uint8_t) (averageV & 0xFF);
+
+  HAL_CAN_AddTxMessage(&hcan, &TxHeader, BMSVINF_DATA, &TxMailbox);
+
+}
+
+void BMSTINF_message(BMSconfigStructTypedef cfg, uint16_t cellTemp[12][4]) {
+
+  uint16_t minT;
+  uint8_t minCell;
+  uint16_t maxT;
+  uint8_t maxCell;
+  uint16_t averageT;
+  uint32_t sum = 0;
+
+  minT = cellTemp[0][0];
+  minCell = 1;
+  maxT = cellTemp[0][0];
+  maxCell = 1;
+
+  for (int i = 0; i < cfg.numOfICs; i++) {
+		for (int j = 0; j < cfg.numOfTempPerIC; j++) {
+
+			if (cellTemp[i][j] < minT) {
+        minT = cellTemp[i][j];
+        minCell = i * cfg.numOfTempPerIC + j + 1;
+      }
+
+      if (cellTemp[i][j] > maxT) {
+        maxT = cellTemp[i][j];
+        maxCell = i * cfg.numOfTempPerIC + j + 1;
+      }
+
+      sum = sum + cellTemp[i][j];
+
+		}
+  }
+
+  averageT = (uint16_t) (sum / (cfg.numOfICs * cfg.numOfTempPerIC));
+
+  TxHeader.StdId = BMSTINF_ID;
+  TxHeader.DLC = 8;
+  uint8_t BMSTINF_DATA[8];
+
+  BMSTINF_DATA[0] = (uint8_t) ((maxT >> 8) & 0xFF);
+  BMSTINF_DATA[1] = (uint8_t) (maxT & 0xFF);
+  BMSTINF_DATA[2] = maxCell;
+  BMSTINF_DATA[3] = (uint8_t) ((minT >> 8) & 0xFF);
+  BMSTINF_DATA[4] = (uint8_t) (minT & 0xFF);
+  BMSTINF_DATA[5] = minCell;
+  BMSTINF_DATA[6] = (uint8_t) ((averageT >> 8) & 0xFF);
+  BMSTINF_DATA[7] = (uint8_t) (averageT & 0xFF);
+
+  HAL_CAN_AddTxMessage(&hcan, &TxHeader, BMSTINF_DATA, &TxMailbox);  
+
+};
 
 /* USER CODE END 4 */
 

@@ -24,7 +24,7 @@ bool readAllCellVoltages(BMSconfigStructTypedef cfg, uint16_t cellVoltage[12][12
 bool readCellTemp(uint8_t address, uint16_t cellTemp[4], bool dcFault[4], bool tempFault[4]);
 bool readAllCellTemps(BMSconfigStructTypedef cfg, uint16_t cellTemp[12][4], bool dcFault[12][4], bool tempFault[12][4]);
 bool checkCellConnection(uint16_t cellVoltage[12], bool cellConnection[12]);
-bool checkAllCellConnections(BMSconfigStructTypedef cfg, uint16_t cellVoltage[12][12], bool cellConnection[12][12], uint8_t dcCell);
+bool checkAllCellConnections(BMSconfigStructTypedef cfg, uint16_t cellVoltage[12][12], bool cellConnection[12][12]);
 bool dischargeCellGroups(BMSconfigStructTypedef cfg, bool cellDischarge[12][8]);
 //bool dischargeCell(BMSconfigStructTypedef config, bool cellDischarge[8]);
 bool readConfig(uint8_t address, uint8_t cfg[8]);

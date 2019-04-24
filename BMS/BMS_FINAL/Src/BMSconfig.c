@@ -4,30 +4,35 @@ void loadConfig(BMSconfigStructTypedef* cfg) {
 		
 	cfg->numOfICs = 1;
 	cfg->address[0] = 0;
+	//cfg->address[1] = 1;
 
-	cfg->numOfCellInputs = 12; // this should never change
+	cfg->numOfCellInputs = 12; // this should never changes
 	cfg->numOfCellsPerIC = 8;
 	cfg->numOfTempPerIC = 4;
 
 	cfg->OV_threshold = 42000;
+	//charge to 4.16V, lower charge current, discharge cell above 4.16
+	//exceed 4.18V, stop charging entirely, discharge to 4.15V
+	//exceed 4.2V, fault prevents discharging
+
+	//cell voltage limit 4.16V
+	//full current or no current
+	//exceed 4.17 on any cell, stop charging, discharge that one cell to 4.15
+	//start charging again 
+
+	// if there is a big enough delta above minimum, stop charging so that you can actually lower voltage 
+
+	//UV FAULT 2.5, check ESF
+	//if cells are below 3, don't balance
+
 	cfg->slowCharge_threshold = 41000;
 	cfg->stopCharge_threshold = 41850;
-	
-/*************** Charging Settings ********************/
-	/* hex value of ten times the current (A) in normal operation(when no cell is above lowerVoltage_Threshold) */
-	uint16_t normalCurrent = 0x003E;		// 6.2 A
-
-	/* hex value of ten times the current (A) when any cell exceeds lowerVoltage_Threshold */
-	uint16_t lowerCurrent = 0x000A;			// 1 A
-
-	/* hex value of ten times the voltage (V) of the charger */
-	uint16_t chargerVoltage = 0x0FA0;		// 400 V
-/************** End Charging Settings *****************/
+	cfg->balancing_difference = 500; 
 	
 	// 0: 422Hz, 1: 27kHz, 2: 7kHz, 3: 26Hz, 4: 1kHz, 5: 14kHz, 6: 3kHz, 7: 2kHz
 	cfg->ADCConversionRate = 0;
 
-	cfg->ADCModeOption = 0;
+	cfg->ADCModeOption = 1;
 	
 	// chip and code should share OV and UV thresholds
 	

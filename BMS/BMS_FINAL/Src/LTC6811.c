@@ -154,55 +154,10 @@ void writeConfigAddress(BMSconfigStructTypedef cfg, uint8_t address) {
 };
 
 void writeConfigAll(BMSconfigStructTypedef cfg) {
-	
-	uint8_t config[6];
-	uint8_t *cmd;
-	uint8_t cmd_len = 12;
-	uint16_t PEC_return;
-	
-	cmd = (uint8_t *)malloc(cmd_len*sizeof(uint8_t));
-	/*
-	config[0] = (uint8_t) (cfg.GPIO5PulldownOff << 7) | (cfg.GPIO4PulldownOff << 6) | (cfg.GPIO3PulldownOff << 5) | (cfg.GPIO2PulldownOff << 4) | (cfg.GPIO1PulldownOff << 3) | (cfg.ReferenceOn << 2) | (cfg.ADCModeOption);
-	config[1] = (uint8_t) (cfg.UndervoltageComparisonVoltage & 0xFF);
-	config[2] = (uint8_t) ((cfg.OvervoltageComparisonVoltage << 4) & 0xF0) | ((cfg.UndervoltageComparisonVoltage >> 8) & 0x0F);
-	config[3] = (uint8_t) ((cfg.OvervoltageComparisonVoltage >> 4) & 0xFF);
-	config[4] = (uint8_t) (cfg.DischargeCell8 << 7) | (cfg.DischargeCell7 << 6) | (cfg.DischargeCell6 << 5) | (cfg.DischargeCell5 << 4) | (cfg.DischargeCell4 << 3) | (cfg.DischargeCell3 << 2) | (cfg.DischargeCell2 << 1) | (cfg.DischargeCell1);
-	config[5] = (uint8_t) ((cfg.DischargeTimeoutValue << 4) & 0xF0) | (cfg.DischargeCell12 << 3) | (cfg.DischargeCell11 << 2) | (cfg.DischargeCell10 << 1) | (cfg.DischargeCell9);
-	*/
-	config[0] = 0;
-	config[1] = 0;
-	config[2] = 0;
-	config[3] = 0;
-	config[4] = 0;
-	config[5] = 0;
 
 	for (uint8_t i = 0; i < cfg.numOfICs; i++) {
-	
-		cmd[0] = (uint8_t) (0x80 | ((cfg.addressesofICs[i] << 3) & 0x78) | ((WriteConfigurationRegisterGroup >> 8) & 0x07));
-		cmd[1] = (uint8_t) (WriteConfigurationRegisterGroup & 0xFF);
-		
-		PEC_return = calculatePEC(2, cmd);
-		
-		cmd[2] = (PEC_return >> 8) & 0xFF;
-		cmd[3] = PEC_return & 0xFF;
-	
-		cmd[4] = config[0];
-		cmd[5] = config[1];
-		cmd[6] = config[2];
-		cmd[7] = config[3];
-		cmd[8] = config[4];
-		cmd[9] = config[5];
-		
-		PEC_return = calculatePEC(6, cmd + 4);
-	
-		cmd[10] = (PEC_return >> 8) & 0xFF;
-		cmd[11] = PEC_return & 0xFF;
-		
-		SPIWrite(cmd, cmd_len);
+		writeConfigAddress(cfg, cfg.address[i]);
 	}
-	
-	free(cmd);
-	
 };
 
 bool readCellVoltage(uint8_t address, uint16_t cellVoltage[12]) {
@@ -218,12 +173,14 @@ bool readCellVoltage(uint8_t address, uint16_t cellVoltage[12]) {
 	HAL_Delay(50); // conversion time is 12.8ms at 422Hz, so wait 15ms
 	
 	PEC_check = readRegister(ReadCellVoltageRegisterGroup1to3, address, voltage);
-	dataValid = dataValid & PEC_check;
+	//dataValid = dataValid & PEC_check;
 	PEC_check = readRegister(ReadCellVoltageRegisterGroup4to6, address, voltage);
 	dataValid = dataValid & PEC_check;
 	PEC_check = readRegister(ReadCellVoltageRegisterGroup7to9, address, voltage);
 	dataValid = dataValid & PEC_check;
 	PEC_check = readRegister(ReadCellVoltageRegisterGroup10to12, address, voltage);
+	dataValid = dataValid & PEC_check;
+	PEC_check = readRegister(ReadCellVoltageRegisterGroup1to3, address, voltage);
 	dataValid = dataValid & PEC_check;
 	
 	for (uint8_t i = 0; i < 12; i++) {
@@ -289,12 +246,22 @@ bool readCellTemp(uint8_t address, uint16_t cellTemp[4], bool dcFault[4], bool t
 	
 	sendAddressCommand(StartCellTempVoltageADCConversionAll, address);
 	
-	HAL_Delay(15); // conversion time is 12.8ms at 422Hz, so wait 15ms
+	HAL_Delay(50); // conversion time is 12.8ms at 422Hz, so wait 15ms
 	
 	PEC_check = readRegister(ReadAuxiliaryGroupA, address, temp);
 	dataValid = dataValid & PEC_check;
 	PEC_check = readRegister(ReadAuxiliaryGroupB, address, temp);
 	dataValid = dataValid & PEC_check;
+	PEC_check = readRegister(ReadAuxiliaryGroupA, address, temp);
+	dataValid = dataValid & PEC_check;
+
+	/*for (uint8_t i = 0; i < 4; i++) {
+
+		cellTemp[i] = temp[i];
+		dcFault[i] = false;
+		tempFault[i] = false;
+
+	}*/
 	
 	for (uint8_t i = 0; i < 4; i++) {
 		if ((temp[i] > 24400) || (temp[i] < 13000)) {
@@ -329,7 +296,7 @@ bool readCellTemp(uint8_t address, uint16_t cellTemp[4], bool dcFault[4], bool t
 
 bool readAllCellTemps(BMSconfigStructTypedef cfg, uint16_t cellTemp[12][4], bool dcFault[12][4], bool tempFault[12][4]) {
 	
-	uint16_t boardTemp[cfg.numOfTempPerIC];
+	/*uint16_t boardTemp[cfg.numOfTempPerIC];
 	bool boardDCFault[cfg.numOfTempPerIC];
 	bool boardTempFault[cfg.numOfTempPerIC];
 	bool PEC_check[cfg.numOfICs];
@@ -348,7 +315,23 @@ bool readAllCellTemps(BMSconfigStructTypedef cfg, uint16_t cellTemp[12][4], bool
 	for (uint8_t k = 0; k < cfg.numOfICs; k++) {
 		if (PEC_check[k] == 0)
 			dataValid = false;
-	}	
+	}*/
+
+	uint16_t boardTemp[4];
+	bool boardDCFault[4];
+	bool boardTempFault[4];
+	bool dataValid = true;
+
+	for (uint8_t i = 0; i < cfg.numOfICs; i++) {
+		
+		dataValid = readCellTemp(cfg.address[i], boardTemp, boardDCFault, boardTempFault);
+
+		for (uint8_t j = 0; j < 4; j++) {
+			cellTemp[i][j] = boardTemp[j];
+			dcFault[i][j] = boardDCFault[j];
+			tempFault[i][j] = boardTempFault[j];
+		}
+	}
 	
 	return dataValid;
 }
@@ -382,9 +365,17 @@ bool checkCellConnection(uint16_t cellVoltage[12], bool cellConnection[12]) {
 	//add more if necessary
 	sendBroadcastCommand(StartOpenWireConversionPulldown);
 	sendBroadcastCommand(StartOpenWireConversionPulldown);
+	sendBroadcastCommand(StartOpenWireConversionPulldown);
+	sendBroadcastCommand(StartOpenWireConversionPulldown);
+	sendBroadcastCommand(StartOpenWireConversionPulldown);
+	sendBroadcastCommand(StartOpenWireConversionPulldown);
+	sendBroadcastCommand(StartOpenWireConversionPulldown);
+	sendBroadcastCommand(StartOpenWireConversionPulldown);
+
+	HAL_Delay(50);
 	
-	HAL_Delay(15);
-	
+	readCellVoltage(0, ADOWvoltage);
+	readCellVoltage(0, ADOWvoltage);
 	readCellVoltage(0, ADOWvoltage);
 	
 	for (uint8_t i = 0; i < 12; i++) {
@@ -400,7 +391,7 @@ bool checkCellConnection(uint16_t cellVoltage[12], bool cellConnection[12]) {
 	return disconnect;
 }
 
-bool checkAllCellConnections(BMSconfigStructTypedef cfg, uint16_t cellVoltage[12][12], bool cellConnection[12][12], uint8_t dcCell) {
+bool checkAllCellConnections(BMSconfigStructTypedef cfg, uint16_t cellVoltage[12][12], bool cellConnection[12][12]) {
 	
 	uint16_t voltageBuffer[12];
 	bool connectionBuffer[12];
@@ -417,20 +408,43 @@ bool checkAllCellConnections(BMSconfigStructTypedef cfg, uint16_t cellVoltage[12
 
 		for (uint8_t j = 0; j < 12; j++) {
 			cellConnection[i][j] = connectionBuffer[j];
-			if (connectionBuffer[j] == 0)
-				dcCell = (i * 12) + j;
 		}
 	}
+
+	return disconnect;
 }
 
 bool dischargeCellGroups(BMSconfigStructTypedef config, bool cellDischarge[12][8]) {
 	
 	BMSconfigStructTypedef *cfg;
 	cfg = &config;
+	uint8_t dummy[8];
+
+	cfg->DischargeCell1 = cellDischarge[0][0];
+	cfg->DischargeCell2 = cellDischarge[0][1];
+	cfg->DischargeCell3 = cellDischarge[0][2];
+	cfg->DischargeCell4 = cellDischarge[0][3];
+	cfg->DischargeCell7 = cellDischarge[0][4];
+	cfg->DischargeCell8 = cellDischarge[0][5];
+	cfg->DischargeCell9 = cellDischarge[0][6];
+	cfg->DischargeCell10 = cellDischarge[0][7];
+
+	readConfig(0, dummy);
+	writeConfigAddress(config, 0);
+	readConfig(0, dummy);
+
+	cfg->DischargeCell1 = 0;
+	cfg->DischargeCell2 = 0;
+	cfg->DischargeCell3 = 0;
+	cfg->DischargeCell4 = 0;
+	cfg->DischargeCell7 = 0;
+	cfg->DischargeCell8 = 0;
+	cfg->DischargeCell9 = 0;
+	cfg->DischargeCell10 = 0;
 	
-	/*
+	
 	// i < config.numOfICs
-	for (uint8_t i = 0; i < 1; i++) {
+	/*for (uint8_t i = 0; i < config.numOfICs; i++) {
 		
 		cfg->DischargeCell1 = cellDischarge[i][0];
 		cfg->DischargeCell2 = cellDischarge[i][1];
@@ -441,9 +455,8 @@ bool dischargeCellGroups(BMSconfigStructTypedef config, bool cellDischarge[12][8
 		cfg->DischargeCell9 = cellDischarge[i][6];
 		cfg->DischargeCell10 = cellDischarge[i][7];
 
-		//writeConfigAddress(config, config.addressesofICs[i]);
-		writeConfigAddress(config, 0);
-		
+		writeConfigAddress(config, config.address[i]);
+
 		cfg->DischargeCell1 = 0;
 		cfg->DischargeCell2 = 0;
 		cfg->DischargeCell3 = 0;
@@ -452,19 +465,7 @@ bool dischargeCellGroups(BMSconfigStructTypedef config, bool cellDischarge[12][8
 		cfg->DischargeCell8 = 0;
 		cfg->DischargeCell9 = 0;
 		cfg->DischargeCell10 = 0;
-	}
-	*/
-
-	cfg->DischargeCell1 = 1;
-	cfg->DischargeCell2 = 1;
-	cfg->DischargeCell3 = 1;
-	cfg->DischargeCell4 = 1;
-	cfg->DischargeCell7 = 1;
-	cfg->DischargeCell8 = 1;
-	cfg->DischargeCell9 = 1;
-	cfg->DischargeCell10 = 1;
-	writeConfigAddress(config, 0);
-
+	}*/
 
 	return 0;
 	
