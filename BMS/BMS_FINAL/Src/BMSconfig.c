@@ -35,7 +35,7 @@ void loadConfig(BMSconfigStructTypedef* cfg) {
 	cfg->stop_scaling = 41600;
 	cfg->scale_to = 100;
 
-	cfg->invalidPECcount = 3;
+	cfg->invalidPECcount = 5;
 
 	cfg->dischargeTime = 500; // ms
 

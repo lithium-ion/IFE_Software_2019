@@ -1,4 +1,4 @@
-ARM GAS  C:\cygwin64\tmp\ccnzjZCo.s 			page 1
+ARM GAS  C:\cygwin64\tmp\ccwWpZ3O.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\cygwin64\tmp\ccnzjZCo.s 			page 1
   48 000a 0122     		movs	r2, #1
   49 000c 8270     		strb	r2, [r0, #2]
    9:Src/BMSconfig.c **** 
-ARM GAS  C:\cygwin64\tmp\ccnzjZCo.s 			page 2
+ARM GAS  C:\cygwin64\tmp\ccwWpZ3O.s 			page 2
 
 
   10:Src/BMSconfig.c **** 	cfg->numOfCellInputs = 12; 
@@ -118,7 +118,7 @@ ARM GAS  C:\cygwin64\tmp\ccnzjZCo.s 			page 1
   81 003c C185     		strh	r1, [r0, #46]	@ movhi
   33:Src/BMSconfig.c **** 	cfg->balancing_difference = 500;
   82              		.loc 1 33 2 is_stmt 1 view .LVU24
-ARM GAS  C:\cygwin64\tmp\ccnzjZCo.s 			page 3
+ARM GAS  C:\cygwin64\tmp\ccwWpZ3O.s 			page 3
 
 
   83              		.loc 1 33 28 is_stmt 0 view .LVU25
@@ -140,10 +140,10 @@ ARM GAS  C:\cygwin64\tmp\ccnzjZCo.s 			page 1
   96 0050 6424     		movs	r4, #100
   97 0052 4487     		strh	r4, [r0, #58]	@ movhi
   37:Src/BMSconfig.c **** 
-  38:Src/BMSconfig.c **** 	cfg->invalidPECcount = 3;
+  38:Src/BMSconfig.c **** 	cfg->invalidPECcount = 5;
   98              		.loc 1 38 2 is_stmt 1 view .LVU32
   99              		.loc 1 38 23 is_stmt 0 view .LVU33
- 100 0054 0324     		movs	r4, #3
+ 100 0054 0524     		movs	r4, #5
  101 0056 80F83240 		strb	r4, [r0, #50]
   39:Src/BMSconfig.c **** 
   40:Src/BMSconfig.c **** 	cfg->dischargeTime = 500; // ms
@@ -178,7 +178,7 @@ ARM GAS  C:\cygwin64\tmp\ccnzjZCo.s 			page 1
  121              		.loc 1 49 21 is_stmt 0 view .LVU45
  122 0070 80F84820 		strb	r2, [r0, #72]
   50:Src/BMSconfig.c **** 	
-ARM GAS  C:\cygwin64\tmp\ccnzjZCo.s 			page 4
+ARM GAS  C:\cygwin64\tmp\ccwWpZ3O.s 			page 4
 
 
   51:Src/BMSconfig.c **** 	// chip and code should share OV and UV thresholds
@@ -238,7 +238,7 @@ ARM GAS  C:\cygwin64\tmp\ccnzjZCo.s 			page 1
  157              		.loc 1 70 22 is_stmt 0 view .LVU69
  158 00a0 80F85130 		strb	r3, [r0, #81]
   71:Src/BMSconfig.c **** 	cfg->DischargeCell5 = 0;
-ARM GAS  C:\cygwin64\tmp\ccnzjZCo.s 			page 5
+ARM GAS  C:\cygwin64\tmp\ccwWpZ3O.s 			page 5
 
 
  159              		.loc 1 71 2 is_stmt 1 view .LVU70
@@ -298,16 +298,16 @@ ARM GAS  C:\cygwin64\tmp\ccnzjZCo.s 			page 1
  204              		.file 9 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\sys\\reent.h"
  205              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
  206              		.file 11 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\stdlib.h"
-ARM GAS  C:\cygwin64\tmp\ccnzjZCo.s 			page 6
+ARM GAS  C:\cygwin64\tmp\ccwWpZ3O.s 			page 6
 
 
  207              		.file 12 "Inc/BMSconfig.h"
-ARM GAS  C:\cygwin64\tmp\ccnzjZCo.s 			page 7
+ARM GAS  C:\cygwin64\tmp\ccwWpZ3O.s 			page 7
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 BMSconfig.c
-C:\cygwin64\tmp\ccnzjZCo.s:16     .text.loadConfig:00000000 $t
-C:\cygwin64\tmp\ccnzjZCo.s:24     .text.loadConfig:00000000 loadConfig
+C:\cygwin64\tmp\ccwWpZ3O.s:16     .text.loadConfig:00000000 $t
+C:\cygwin64\tmp\ccwWpZ3O.s:24     .text.loadConfig:00000000 loadConfig
 
 NO UNDEFINED SYMBOLS

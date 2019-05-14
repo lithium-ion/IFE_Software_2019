@@ -401,12 +401,12 @@ bool checkAllCellConnections(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6])
 			cellVoltage = 0;
 			cellVoltage = (uint16_t) (bmsData[(board * cfg.numOfCellsPerIC) + cell][2]);
 			cellVoltage = cellVoltage << 8;
-			cellVoltage |= (uint16_t) (bmsData[(board * cfg.numOfCellsPerIC) + cell][3]);
+			cellVoltage += (uint16_t) (bmsData[(board * cfg.numOfCellsPerIC) + cell][3]);
 
 			if ((cellVoltage - ADOWvoltage[cell]) > 1000)
-				bmsData[(board * cfg.numOfCellsPerIC) + cell][1] |= 0x01;
-			else
 				bmsData[(board * cfg.numOfCellsPerIC) + cell][1] &= 0xFE;
+			else
+				bmsData[(board * cfg.numOfCellsPerIC) + cell][1] |= 0x01;
 		}
 	}
 

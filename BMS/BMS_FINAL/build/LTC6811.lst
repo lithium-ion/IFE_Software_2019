@@ -1,4 +1,4 @@
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
   30:Src/LTC6811.c **** 	Cell Voltage Functions
   31:Src/LTC6811.c **** 		readCellVoltage: bool readCellVoltage(uint8_t address, uint16_t cellVoltage[12]);
   32:Src/LTC6811.c **** 			- sends ADCV command that begins conversion for every cell to specified LTC
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 2
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 2
 
 
   33:Src/LTC6811.c **** 			- reads all cell voltage registers using general readRegister function
@@ -118,7 +118,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
   87:Src/LTC6811.c **** 
   88:Src/LTC6811.c **** #include "LTC6811.h"
   89:Src/LTC6811.c **** 
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 3
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 3
 
 
   90:Src/LTC6811.c **** uint16_t pec15Table[256];
@@ -178,7 +178,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
   61 000e 13F4804F 		tst	r3, #16384
   62 0012 F7D0     		beq	.L4
  101:Src/LTC6811.c **** 				remainder = (remainder ^ CRC15_POLY);
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 4
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 4
 
 
   63              		.loc 1 101 5 is_stmt 1 view .LVU13
@@ -238,7 +238,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  102              	.LBB4:
   99:Src/LTC6811.c **** 			if (remainder & 0x4000) {
  103              		.loc 1 99 8 view .LVU29
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 5
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 5
 
 
   99:Src/LTC6811.c **** 			if (remainder & 0x4000) {
@@ -298,7 +298,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  132:Src/LTC6811.c **** 	cmd[1] = (uint8_t) (WriteConfigurationRegisterGroup & 0xFF);
  133:Src/LTC6811.c **** 	
  134:Src/LTC6811.c **** 	PEC_return = calculatePEC(2, cmd);
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 6
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 6
 
 
  135:Src/LTC6811.c **** 	
@@ -358,7 +358,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  189:Src/LTC6811.c **** 	for (uint8_t i = 0; i < 12; i++) {
  190:Src/LTC6811.c **** 		cellVoltage[i] = voltage[i];
  191:Src/LTC6811.c **** 	}
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 7
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 7
 
 
  192:Src/LTC6811.c **** 	
@@ -418,7 +418,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  246:Src/LTC6811.c **** 	bool PEC_check = false;
  247:Src/LTC6811.c **** 	bool dataValid = true;
  248:Src/LTC6811.c **** 	uint16_t *temp;
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 8
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 8
 
 
  249:Src/LTC6811.c **** 	double dummy[4];
@@ -478,7 +478,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  303:Src/LTC6811.c **** 	for (uint8_t board = 0; board < cfg.numOfICs; board++) {
  304:Src/LTC6811.c **** 
  305:Src/LTC6811.c **** 		//read temperature, check for OT and temp DC
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 9
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 9
 
 
  306:Src/LTC6811.c **** 		PEC_check[board] = readCellTemp(cfg.address[board], boardTemp, boardDCFault, boardTempFault);
@@ -538,7 +538,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  360:Src/LTC6811.c **** 	return dataValid;
  361:Src/LTC6811.c **** }
  362:Src/LTC6811.c **** 
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 10
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 10
 
 
  363:Src/LTC6811.c **** /*bool checkCellConnection(uint8_t address, uint16_t cellVoltage[12], bool cellConnection[12]) {
@@ -582,12 +582,12 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  401:Src/LTC6811.c **** 			cellVoltage = 0;
  402:Src/LTC6811.c **** 			cellVoltage = (uint16_t) (bmsData[(board * cfg.numOfCellsPerIC) + cell][2]);
  403:Src/LTC6811.c **** 			cellVoltage = cellVoltage << 8;
- 404:Src/LTC6811.c **** 			cellVoltage |= (uint16_t) (bmsData[(board * cfg.numOfCellsPerIC) + cell][3]);
+ 404:Src/LTC6811.c **** 			cellVoltage += (uint16_t) (bmsData[(board * cfg.numOfCellsPerIC) + cell][3]);
  405:Src/LTC6811.c **** 
  406:Src/LTC6811.c **** 			if ((cellVoltage - ADOWvoltage[cell]) > 1000)
- 407:Src/LTC6811.c **** 				bmsData[(board * cfg.numOfCellsPerIC) + cell][1] |= 0x01;
+ 407:Src/LTC6811.c **** 				bmsData[(board * cfg.numOfCellsPerIC) + cell][1] &= 0xFE;
  408:Src/LTC6811.c **** 			else
- 409:Src/LTC6811.c **** 				bmsData[(board * cfg.numOfCellsPerIC) + cell][1] &= 0xFE;
+ 409:Src/LTC6811.c **** 				bmsData[(board * cfg.numOfCellsPerIC) + cell][1] |= 0x01;
  410:Src/LTC6811.c **** 		}
  411:Src/LTC6811.c **** 	}
  412:Src/LTC6811.c **** 
@@ -598,7 +598,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  417:Src/LTC6811.c **** 	
  418:Src/LTC6811.c **** 	BMSconfigStructTypedef *cfg;
  419:Src/LTC6811.c **** 
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 11
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 11
 
 
  420:Src/LTC6811.c **** 	cfg = &config;
@@ -658,7 +658,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  474:Src/LTC6811.c **** 	uint16_t PEC_return;
  475:Src/LTC6811.c **** 	uint8_t *PEC_send;
  476:Src/LTC6811.c **** 	bool dataValid = true;
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 12
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 12
 
 
  477:Src/LTC6811.c **** 
@@ -718,7 +718,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  531:Src/LTC6811.c **** 	}
  532:Src/LTC6811.c **** 	
  533:Src/LTC6811.c **** 	if (command == ReadCellVoltageRegisterGroup7to9) {
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 13
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 13
 
 
  534:Src/LTC6811.c **** 		
@@ -778,7 +778,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  588:Src/LTC6811.c **** 	uint16_t PEC_return;
  589:Src/LTC6811.c **** 	uint8_t *msbytes;
  590:Src/LTC6811.c **** 	
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 14
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 14
 
 
  591:Src/LTC6811.c **** 	msbytes = (uint8_t *)malloc(2*sizeof(uint8_t));
@@ -838,7 +838,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  162              		.loc 1 615 3 is_stmt 1 discriminator 3 view .LVU43
  163              		.loc 1 615 37 is_stmt 0 discriminator 3 view .LVU44
  164 000a 0B5D     		ldrb	r3, [r1, r4]	@ zero_extendqisi2
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 15
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 15
 
 
  165              		.loc 1 615 31 discriminator 3 view .LVU45
@@ -898,7 +898,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  212              		.align	1
  213              		.global	readRegister
  214              		.syntax unified
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 16
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 16
 
 
  215              		.thumb
@@ -958,7 +958,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  480:Src/LTC6811.c **** 	PEC_send[1] = (uint8_t) (command & 0xFF);
  258              		.loc 1 480 44 is_stmt 0 view .LVU71
  259 0012 E300     		lsls	r3, r4, #3
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 17
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 17
 
 
  480:Src/LTC6811.c **** 	PEC_send[1] = (uint8_t) (command & 0xFF);
@@ -1018,7 +1018,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  295              		.loc 1 489 2 is_stmt 1 view .LVU90
  489:Src/LTC6811.c **** 	
  296              		.loc 1 489 9 is_stmt 0 view .LVU91
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 18
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 18
 
 
  297 0040 8DF80F00 		strb	r0, [sp, #15]
@@ -1078,7 +1078,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  503:Src/LTC6811.c **** 	PEC_send[1] = rx_data[5]; // cell 1 voltage high bytes
  332              		.loc 1 503 23 is_stmt 0 view .LVU111
  333 0072 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 19
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 19
 
 
  503:Src/LTC6811.c **** 	PEC_send[1] = rx_data[5]; // cell 1 voltage high bytes
@@ -1138,7 +1138,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  368              		.loc 1 513 30 is_stmt 0 view .LVU131
  369 009e 9DF80A20 		ldrb	r2, [sp, #10]	@ zero_extendqisi2
  513:Src/LTC6811.c **** 		dataValid = false;
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 20
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 20
 
 
  370              		.loc 1 513 61 view .LVU132
@@ -1198,7 +1198,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  409 00c6 00F08480 		beq	.L36
  410              	.L26:
  558:Src/LTC6811.c **** 		data[0] = (uint16_t) ((rx_data[4] << 8) & 0xFF00) | (rx_data[5] & 0x00FF);
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 21
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 21
 
 
  411              		.loc 1 558 2 is_stmt 1 view .LVU148
@@ -1258,7 +1258,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  520:Src/LTC6811.c **** 		data[2] = (uint16_t) ((rx_data[9] << 8) & 0xFF00) | (rx_data[8] & 0x00FF);
  451              		.loc 1 520 37 view .LVU163
  452 00ec 1B02     		lsls	r3, r3, #8
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 22
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 22
 
 
  520:Src/LTC6811.c **** 		data[2] = (uint16_t) ((rx_data[9] << 8) & 0xFF00) | (rx_data[8] & 0x00FF);
@@ -1318,7 +1318,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  529:Src/LTC6811.c **** 		data[5] = (uint16_t) ((rx_data[9] << 8) & 0xFF00) | (rx_data[8] & 0x00FF);
  489              		.loc 1 529 3 is_stmt 1 view .LVU182
  529:Src/LTC6811.c **** 		data[5] = (uint16_t) ((rx_data[9] << 8) & 0xFF00) | (rx_data[8] & 0x00FF);
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 23
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 23
 
 
  490              		.loc 1 529 33 is_stmt 0 view .LVU183
@@ -1378,7 +1378,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  526              		.loc 1 535 53 view .LVU201
  527 0148 1343     		orrs	r3, r3, r2
  535:Src/LTC6811.c **** 		data[7] = (uint16_t) ((rx_data[7] << 8) & 0xFF00) | (rx_data[6] & 0x00FF);
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 24
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 24
 
 
  528              		.loc 1 535 11 view .LVU202
@@ -1438,7 +1438,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  564 0174 1BB2     		sxth	r3, r3
  542:Src/LTC6811.c **** 		data[10] = (uint16_t) ((rx_data[7] << 8) & 0xFF00) | (rx_data[6] & 0x00FF);
  565              		.loc 1 542 63 view .LVU221
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 25
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 25
 
 
  566 0176 9DF80420 		ldrb	r2, [sp, #4]	@ zero_extendqisi2
@@ -1498,7 +1498,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  549:Src/LTC6811.c **** 		data[1] = (uint16_t) ((rx_data[7] << 8) & 0xFF00) | (rx_data[6] & 0x00FF);
  602              		.loc 1 549 37 view .LVU240
  603 01a4 1B02     		lsls	r3, r3, #8
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 26
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 26
 
 
  549:Src/LTC6811.c **** 		data[1] = (uint16_t) ((rx_data[7] << 8) & 0xFF00) | (rx_data[6] & 0x00FF);
@@ -1558,7 +1558,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  555:Src/LTC6811.c **** 	}
  640              		.loc 1 555 3 is_stmt 1 view .LVU259
  555:Src/LTC6811.c **** 	}
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 27
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 27
 
 
  641              		.loc 1 555 33 is_stmt 0 view .LVU260
@@ -1618,7 +1618,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  677              		.loc 1 560 53 view .LVU278
  678 0200 1343     		orrs	r3, r3, r2
  560:Src/LTC6811.c **** 		data[2] = (uint16_t) ((rx_data[8] << 8) & 0xFF00) | (rx_data[9] & 0x00FF);
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 28
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 28
 
 
  679              		.loc 1 560 11 view .LVU279
@@ -1678,7 +1678,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  721              	.LFB73:
  342:Src/LTC6811.c **** 	
  722              		.loc 1 342 50 is_stmt 1 view -0
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 29
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 29
 
 
  723              		.cfi_startproc
@@ -1738,7 +1738,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  763              		.loc 1 351 9 view .LVU308
  764 001c 2270     		strb	r2, [r4]
  352:Src/LTC6811.c **** 	cfg[2] = (uint8_t) ((config[1] >> 8) & 0xFF);
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 30
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 30
 
 
  765              		.loc 1 352 2 is_stmt 1 view .LVU309
@@ -1798,7 +1798,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  361:Src/LTC6811.c **** 
  799              		.loc 1 361 1 is_stmt 0 view .LVU330
  800 0038 70BD     		pop	{r4, r5, r6, pc}
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 31
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 31
 
 
  361:Src/LTC6811.c **** 
@@ -1858,7 +1858,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  848              		.loc 1 120 2 view .LVU339
  849 0012 6946     		mov	r1, sp
  850 0014 4846     		mov	r0, r9
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 32
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 32
 
 
  851 0016 FFF7FEFF 		bl	readConfig
@@ -1918,7 +1918,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  890 005a 6DB2     		sxtb	r5, r5
  124:Src/LTC6811.c **** 	config[1] = (uint8_t) (cfg.UndervoltageComparisonVoltage & 0xFF);
  891              		.loc 1 124 203 view .LVU355
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 33
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 33
 
 
  892 005c 9DF97830 		ldrsb	r3, [sp, #120]
@@ -1978,7 +1978,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  928 0094 9DF88330 		ldrb	r3, [sp, #131]	@ zero_extendqisi2
  128:Src/LTC6811.c **** 	config[5] = (uint8_t) ((cfg.DischargeTimeoutValue << 4) & 0xF0) | (cfg.DischargeCell12 << 3) | (cf
  929              		.loc 1 128 78 view .LVU374
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 34
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 34
 
 
  930 0098 44EA4314 		orr	r4, r4, r3, lsl #5
@@ -2038,7 +2038,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  968 00e2 4FFA8BFB 		sxtb	fp, fp
  129:Src/LTC6811.c **** 	
  969              		.loc 1 129 101 view .LVU391
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 35
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 35
 
 
  970 00e6 9DF88830 		ldrb	r3, [sp, #136]	@ zero_extendqisi2
@@ -2098,7 +2098,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  1007 0124 030A     		lsrs	r3, r0, #8
  1008 0126 B370     		strb	r3, [r6, #2]
  137:Src/LTC6811.c **** 
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 36
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 36
 
 
  1009              		.loc 1 137 2 is_stmt 1 view .LVU409
@@ -2158,7 +2158,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  1043              		.loc 1 149 10 is_stmt 0 view .LVU429
  1044 0148 F072     		strb	r0, [r6, #11]
  151:Src/LTC6811.c **** 
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 37
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 37
 
 
  1045              		.loc 1 151 2 is_stmt 1 view .LVU430
@@ -2218,7 +2218,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  1096              	.LFB68:
  159:Src/LTC6811.c **** 
  1097              		.loc 1 159 49 is_stmt 1 view -0
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 38
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 38
 
 
  1098              		.cfi_startproc
@@ -2278,7 +2278,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  1144              		.loc 1 161 41 discriminator 3 view .LVU444
  1145 0032 E4B2     		uxtb	r4, r4
  1146              	.LVL62:
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 39
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 39
 
 
  161:Src/LTC6811.c **** 		writeConfigAddress(cfg, cfg.address[i]);
@@ -2338,7 +2338,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  1197              	.LCFI21:
  1198              		.cfi_def_cfa_offset 120
  1199 0006 1AAC     		add	r4, sp, #104
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 40
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 40
 
 
  1200 0008 84E80F00 		stm	r4, {r0, r1, r2, r3}
@@ -2398,7 +2398,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  1235              		.loc 1 427 41 is_stmt 0 discriminator 3 view .LVU469
  1236 0030 DA78     		ldrb	r2, [r3, #3]	@ zero_extendqisi2
  427:Src/LTC6811.c **** 		cfg->DischargeCell7 = cellDischarge[i][4];
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 41
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 41
 
 
  1237              		.loc 1 427 23 discriminator 3 view .LVU470
@@ -2458,7 +2458,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  1275              		.loc 1 433 3 discriminator 3 view .LVU486
  1276 0062 0FCB     		ldm	r3, {r0, r1, r2, r3}
  1277              	.LVL71:
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 42
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 42
 
 
  433:Src/LTC6811.c **** 
@@ -2518,7 +2518,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  1316              	.LCFI24:
  1317              		.cfi_def_cfa_offset 0
  1318              	.LVL76:
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 43
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 43
 
 
  448:Src/LTC6811.c **** 
@@ -2578,7 +2578,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  1362              		.loc 1 577 15 view .LVU515
  1363 0014 FFF7FEFF 		bl	calculatePEC
  1364              	.LVL79:
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 44
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 44
 
 
  579:Src/LTC6811.c **** 	cmd[3] = PEC_return & 0xFF;
@@ -2638,7 +2638,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  1412              	.LCFI29:
  1413              		.cfi_def_cfa_offset 24
  1414 0004 0546     		mov	r5, r0
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 45
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 45
 
 
  1415 0006 0C46     		mov	r4, r1
@@ -2698,7 +2698,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  596:Src/LTC6811.c **** 	cmd[1] = msbytes[1];
  1450              		.loc 1 596 9 is_stmt 0 view .LVU544
  1451 0028 8DF80430 		strb	r3, [sp, #4]
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 46
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 46
 
 
  597:Src/LTC6811.c **** 	
@@ -2758,7 +2758,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  1493              		.global	readCellVoltage
  1494              		.syntax unified
  1495              		.thumb
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 47
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 47
 
 
  1496              		.thumb_func
@@ -2818,7 +2818,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  1539              		.loc 1 176 2 is_stmt 1 view .LVU570
  1540 0018 0F20     		movs	r0, #15
  1541 001a FFF7FEFF 		bl	HAL_Delay
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 48
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 48
 
 
  1542              	.LVL98:
@@ -2878,7 +2878,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  1583 004c 0640     		ands	r6, r6, r0
  1584              	.LVL107:
  186:Src/LTC6811.c **** 	dataValid = dataValid & PEC_check;
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 49
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 49
 
 
  1585              		.loc 1 186 2 view .LVU584
@@ -2938,7 +2938,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  1624 006e 2046     		mov	r0, r4
  1625              	.LVL114:
  193:Src/LTC6811.c **** 	
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 50
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 50
 
 
  1626              		.loc 1 193 2 is_stmt 0 view .LVU600
@@ -2998,7 +2998,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  1675 0014 97F84130 		ldrb	r3, [r7, #65]	@ zero_extendqisi2
  1676              	.LVL117:
  201:Src/LTC6811.c **** 	bool PEC_check[cfg.numOfICs];
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 51
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 51
 
 
  1677              		.loc 1 201 11 view .LVU608
@@ -3058,7 +3058,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  1717 004c 090A     		lsrs	r1, r1, #8
  217:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 0][3] = (uint8_t) (boardVoltage[0] & 0xFF); //cell 1, vol
  1718              		.loc 1 217 49 discriminator 2 view .LVU623
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 52
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 52
 
 
  1719 004e 8170     		strb	r1, [r0, #2]
@@ -3118,7 +3118,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  222:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 3][2] = (uint8_t) ((boardVoltage[3] >> 8) & 0xFF); //cell
  1755              		.loc 1 222 49 discriminator 2 view .LVU642
  1756 0076 D970     		strb	r1, [r3, #3]
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 53
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 53
 
 
  223:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 3][3] = (uint8_t) (boardVoltage[3] & 0xFF); //cell 4, vol
@@ -3178,7 +3178,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  1792 009e 2344     		add	r3, r3, r4
  227:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 5][3] = (uint8_t) (boardVoltage[7] & 0xFF); //cell 8, vol
  1793              		.loc 1 227 51 discriminator 2 view .LVU662
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 54
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 54
 
 
  1794 00a0 090A     		lsrs	r1, r1, #8
@@ -3238,7 +3238,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  1829 00c2 B37C     		ldrb	r3, [r6, #18]	@ zero_extendqisi2
  232:Src/LTC6811.c **** 	
  1830              		.loc 1 232 49 discriminator 2 view .LVU682
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 55
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 55
 
 
  1831 00c4 D370     		strb	r3, [r2, #3]
@@ -3298,7 +3298,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  1871 00f6 0A44     		add	r2, r2, r1
  1872 00f8 D2B2     		uxtb	r2, r2
  212:Src/LTC6811.c **** 			bmsData[(board * cfg.numOfCellsPerIC) + cell][1] = (uint8_t) (0x02 & (PEC_check[board] << 1)); /
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 56
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 56
 
 
  1873              		.loc 1 212 42 discriminator 3 view .LVU697
@@ -3358,7 +3358,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  1913              	.L67:
  1914              	.LBB13:
  236:Src/LTC6811.c **** 		if (PEC_check[board] == 0)
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 57
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 57
 
 
  1915              		.loc 1 236 53 discriminator 2 view .LVU712
@@ -3418,7 +3418,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  1959              	.LCFI37:
  1960              		.cfi_def_cfa_offset 0
  1961 0144 7047     		bx	lr
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 58
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 58
 
 
  1962              		.cfi_endproc
@@ -3478,7 +3478,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  383:Src/LTC6811.c **** 	bool disconnect = false;
  2012              		.loc 1 383 2 is_stmt 1 view .LVU729
  384:Src/LTC6811.c **** 
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 59
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 59
 
 
  2013              		.loc 1 384 2 view .LVU730
@@ -3522,7 +3522,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  2042 0052 4FF00008 		mov	r8, #0
  395:Src/LTC6811.c **** 
  2043              		.loc 1 395 2 view .LVU740
- 2044 0056 22E0     		b	.L75
+ 2044 0056 23E0     		b	.L75
  2045              	.LVL148:
  2046              	.L77:
  2047              	.LBB15:
@@ -3531,14 +3531,14 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  409:Src/LTC6811.c **** 		}
  2049              		.loc 1 409 54 is_stmt 0 view .LVU742
  2050 0058 5A78     		ldrb	r2, [r3, #1]	@ zero_extendqisi2
- 2051 005a 22F00102 		bic	r2, r2, #1
+ 2051 005a 42F00102 		orr	r2, r2, #1
  2052 005e 5A70     		strb	r2, [r3, #1]
  2053              	.LVL149:
  2054              	.L78:
  399:Src/LTC6811.c **** 
  2055              		.loc 1 399 58 discriminator 2 view .LVU743
  2056 0060 0131     		adds	r1, r1, #1
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 60
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 60
 
 
  2057              	.LVL150:
@@ -3553,7 +3553,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  399:Src/LTC6811.c **** 
  2064              		.loc 1 399 3 discriminator 1 view .LVU746
  2065 0068 9942     		cmp	r1, r3
- 2066 006a 14D2     		bcs	.L82
+ 2066 006a 15D2     		bcs	.L82
  401:Src/LTC6811.c **** 			cellVoltage = (uint16_t) (bmsData[(board * cfg.numOfCellsPerIC) + cell][2]);
  2067              		.loc 1 401 4 is_stmt 1 view .LVU747
  2068              	.LVL152:
@@ -3571,7 +3571,7 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  2076              		.loc 1 402 16 view .LVU751
  2077 0078 9878     		ldrb	r0, [r3, #2]	@ zero_extendqisi2
  2078              	.LVL153:
- 403:Src/LTC6811.c **** 			cellVoltage |= (uint16_t) (bmsData[(board * cfg.numOfCellsPerIC) + cell][3]);
+ 403:Src/LTC6811.c **** 			cellVoltage += (uint16_t) (bmsData[(board * cfg.numOfCellsPerIC) + cell][3]);
  2079              		.loc 1 403 4 is_stmt 1 view .LVU752
  404:Src/LTC6811.c **** 
  2080              		.loc 1 404 4 view .LVU753
@@ -3580,1160 +3580,1161 @@ ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 1
  2082 007a DA78     		ldrb	r2, [r3, #3]	@ zero_extendqisi2
  404:Src/LTC6811.c **** 
  2083              		.loc 1 404 16 view .LVU755
- 2084 007c 42EA0022 		orr	r2, r2, r0, lsl #8
- 2085              	.LVL154:
- 406:Src/LTC6811.c **** 				bmsData[(board * cfg.numOfCellsPerIC) + cell][1] |= 0x01;
- 2086              		.loc 1 406 4 is_stmt 1 view .LVU756
- 406:Src/LTC6811.c **** 				bmsData[(board * cfg.numOfCellsPerIC) + cell][1] |= 0x01;
- 2087              		.loc 1 406 34 is_stmt 0 view .LVU757
- 2088 0080 34F81100 		ldrh	r0, [r4, r1, lsl #1]
- 406:Src/LTC6811.c **** 				bmsData[(board * cfg.numOfCellsPerIC) + cell][1] |= 0x01;
- 2089              		.loc 1 406 21 view .LVU758
- 2090 0084 121A     		subs	r2, r2, r0
- 2091              	.LVL155:
- 406:Src/LTC6811.c **** 				bmsData[(board * cfg.numOfCellsPerIC) + cell][1] |= 0x01;
- 2092              		.loc 1 406 7 view .LVU759
- 2093 0086 B2F57A7F 		cmp	r2, #1000
- 2094 008a E5DD     		ble	.L77
+ 2084 007c 02EB0022 		add	r2, r2, r0, lsl #8
+ 2085 0080 92B2     		uxth	r2, r2
+ 2086              	.LVL154:
+ 406:Src/LTC6811.c **** 				bmsData[(board * cfg.numOfCellsPerIC) + cell][1] &= 0xFE;
+ 2087              		.loc 1 406 4 is_stmt 1 view .LVU756
+ 406:Src/LTC6811.c **** 				bmsData[(board * cfg.numOfCellsPerIC) + cell][1] &= 0xFE;
+ 2088              		.loc 1 406 34 is_stmt 0 view .LVU757
+ 2089 0082 34F81100 		ldrh	r0, [r4, r1, lsl #1]
+ 406:Src/LTC6811.c **** 				bmsData[(board * cfg.numOfCellsPerIC) + cell][1] &= 0xFE;
+ 2090              		.loc 1 406 21 view .LVU758
+ 2091 0086 121A     		subs	r2, r2, r0
+ 2092              	.LVL155:
+ 406:Src/LTC6811.c **** 				bmsData[(board * cfg.numOfCellsPerIC) + cell][1] &= 0xFE;
+ 2093              		.loc 1 406 7 view .LVU759
+ 2094 0088 B2F57A7F 		cmp	r2, #1000
+ 2095 008c E4DD     		ble	.L77
  407:Src/LTC6811.c **** 			else
- 2095              		.loc 1 407 5 is_stmt 1 view .LVU760
- 407:Src/LTC6811.c **** 			else
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 61
+ 2096              		.loc 1 407 5 is_stmt 1 view .LVU760
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 61
 
 
- 2096              		.loc 1 407 54 is_stmt 0 view .LVU761
- 2097 008c 5A78     		ldrb	r2, [r3, #1]	@ zero_extendqisi2
- 2098 008e 42F00102 		orr	r2, r2, #1
- 2099 0092 5A70     		strb	r2, [r3, #1]
- 2100 0094 E4E7     		b	.L78
- 2101              	.LVL156:
- 2102              	.L82:
  407:Src/LTC6811.c **** 			else
- 2103              		.loc 1 407 54 view .LVU762
- 2104              	.LBE15:
+ 2097              		.loc 1 407 54 is_stmt 0 view .LVU761
+ 2098 008e 5A78     		ldrb	r2, [r3, #1]	@ zero_extendqisi2
+ 2099 0090 22F00102 		bic	r2, r2, #1
+ 2100 0094 5A70     		strb	r2, [r3, #1]
+ 2101 0096 E3E7     		b	.L78
+ 2102              	.LVL156:
+ 2103              	.L82:
+ 407:Src/LTC6811.c **** 			else
+ 2104              		.loc 1 407 54 view .LVU762
+ 2105              	.LBE15:
  395:Src/LTC6811.c **** 
- 2105              		.loc 1 395 53 discriminator 2 view .LVU763
- 2106 0096 08F10108 		add	r8, r8, #1
- 2107              	.LVL157:
+ 2106              		.loc 1 395 53 discriminator 2 view .LVU763
+ 2107 0098 08F10108 		add	r8, r8, #1
+ 2108              	.LVL157:
  395:Src/LTC6811.c **** 
- 2108              		.loc 1 395 53 discriminator 2 view .LVU764
- 2109 009a 5FFA88F8 		uxtb	r8, r8
- 2110              	.LVL158:
- 2111              	.L75:
+ 2109              		.loc 1 395 53 discriminator 2 view .LVU764
+ 2110 009c 5FFA88F8 		uxtb	r8, r8
+ 2111              	.LVL158:
+ 2112              	.L75:
  395:Src/LTC6811.c **** 
- 2112              		.loc 1 395 37 discriminator 1 view .LVU765
- 2113 009e 3B7E     		ldrb	r3, [r7, #24]	@ zero_extendqisi2
+ 2113              		.loc 1 395 37 discriminator 1 view .LVU765
+ 2114 00a0 3B7E     		ldrb	r3, [r7, #24]	@ zero_extendqisi2
  395:Src/LTC6811.c **** 
- 2114              		.loc 1 395 2 discriminator 1 view .LVU766
- 2115 00a0 9845     		cmp	r8, r3
- 2116 00a2 09D2     		bcs	.L83
+ 2115              		.loc 1 395 2 discriminator 1 view .LVU766
+ 2116 00a2 9845     		cmp	r8, r3
+ 2117 00a4 09D2     		bcs	.L83
  397:Src/LTC6811.c **** 
- 2117              		.loc 1 397 3 is_stmt 1 view .LVU767
- 2118 00a4 4546     		mov	r5, r8
- 2119 00a6 07F11803 		add	r3, r7, #24
- 2120 00aa 4344     		add	r3, r3, r8
- 2121 00ac 2146     		mov	r1, r4
- 2122 00ae 5878     		ldrb	r0, [r3, #1]	@ zero_extendqisi2
- 2123 00b0 FFF7FEFF 		bl	readCellVoltage
- 2124              	.LVL159:
+ 2118              		.loc 1 397 3 is_stmt 1 view .LVU767
+ 2119 00a6 4546     		mov	r5, r8
+ 2120 00a8 07F11803 		add	r3, r7, #24
+ 2121 00ac 4344     		add	r3, r3, r8
+ 2122 00ae 2146     		mov	r1, r4
+ 2123 00b0 5878     		ldrb	r0, [r3, #1]	@ zero_extendqisi2
+ 2124 00b2 FFF7FEFF 		bl	readCellVoltage
+ 2125              	.LVL159:
  399:Src/LTC6811.c **** 
- 2125              		.loc 1 399 3 view .LVU768
- 2126              	.LBB16:
+ 2126              		.loc 1 399 3 view .LVU768
+ 2127              	.LBB16:
  399:Src/LTC6811.c **** 
- 2127              		.loc 1 399 8 view .LVU769
+ 2128              		.loc 1 399 8 view .LVU769
  399:Src/LTC6811.c **** 
- 2128              		.loc 1 399 16 is_stmt 0 view .LVU770
- 2129 00b4 0021     		movs	r1, #0
+ 2129              		.loc 1 399 16 is_stmt 0 view .LVU770
+ 2130 00b6 0021     		movs	r1, #0
  399:Src/LTC6811.c **** 
- 2130              		.loc 1 399 3 view .LVU771
- 2131 00b6 D5E7     		b	.L76
- 2132              	.LVL160:
- 2133              	.L83:
+ 2131              		.loc 1 399 3 view .LVU771
+ 2132 00b8 D4E7     		b	.L76
+ 2133              	.LVL160:
+ 2134              	.L83:
  399:Src/LTC6811.c **** 
- 2134              		.loc 1 399 3 view .LVU772
- 2135              	.LBE16:
- 2136              	.LBE14:
+ 2135              		.loc 1 399 3 view .LVU772
+ 2136              	.LBE16:
+ 2137              	.LBE14:
  413:Src/LTC6811.c **** }
- 2137              		.loc 1 413 2 is_stmt 1 view .LVU773
+ 2138              		.loc 1 413 2 is_stmt 1 view .LVU773
  414:Src/LTC6811.c **** 
- 2138              		.loc 1 414 1 is_stmt 0 view .LVU774
- 2139 00b8 0020     		movs	r0, #0
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 62
+ 2139              		.loc 1 414 1 is_stmt 0 view .LVU774
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 62
 
 
- 2140 00ba BD46     		mov	sp, r7
- 2141              	.LCFI41:
- 2142              		.cfi_def_cfa_register 13
- 2143              		@ sp needed
- 2144 00bc BDE8F041 		pop	{r4, r5, r6, r7, r8, lr}
- 2145              	.LCFI42:
- 2146              		.cfi_restore 14
- 2147              		.cfi_restore 8
- 2148              		.cfi_restore 7
- 2149              		.cfi_restore 6
- 2150              		.cfi_restore 5
- 2151              		.cfi_restore 4
- 2152              		.cfi_def_cfa_offset 16
- 2153              	.LVL161:
+ 2140 00ba 0020     		movs	r0, #0
+ 2141 00bc BD46     		mov	sp, r7
+ 2142              	.LCFI41:
+ 2143              		.cfi_def_cfa_register 13
+ 2144              		@ sp needed
+ 2145 00be BDE8F041 		pop	{r4, r5, r6, r7, r8, lr}
+ 2146              	.LCFI42:
+ 2147              		.cfi_restore 14
+ 2148              		.cfi_restore 8
+ 2149              		.cfi_restore 7
+ 2150              		.cfi_restore 6
+ 2151              		.cfi_restore 5
+ 2152              		.cfi_restore 4
+ 2153              		.cfi_def_cfa_offset 16
+ 2154              	.LVL161:
  414:Src/LTC6811.c **** 
- 2154              		.loc 1 414 1 view .LVU775
- 2155 00c0 04B0     		add	sp, sp, #16
- 2156              	.LCFI43:
- 2157              		.cfi_def_cfa_offset 0
- 2158 00c2 7047     		bx	lr
- 2159              		.cfi_endproc
- 2160              	.LFE74:
- 2162              		.global	__aeabi_ui2d
- 2163              		.global	__aeabi_ddiv
- 2164              		.global	__aeabi_dmul
- 2165              		.global	__aeabi_dsub
- 2166              		.global	__aeabi_dadd
- 2167              		.global	__aeabi_d2uiz
- 2168              		.section	.text.readCellTemp,"ax",%progbits
- 2169              		.align	1
- 2170              		.global	readCellTemp
- 2171              		.syntax unified
- 2172              		.thumb
- 2173              		.thumb_func
- 2174              		.fpu softvfp
- 2176              	readCellTemp:
- 2177              	.LVL162:
- 2178              	.LFB71:
+ 2155              		.loc 1 414 1 view .LVU775
+ 2156 00c2 04B0     		add	sp, sp, #16
+ 2157              	.LCFI43:
+ 2158              		.cfi_def_cfa_offset 0
+ 2159 00c4 7047     		bx	lr
+ 2160              		.cfi_endproc
+ 2161              	.LFE74:
+ 2163              		.global	__aeabi_ui2d
+ 2164              		.global	__aeabi_ddiv
+ 2165              		.global	__aeabi_dmul
+ 2166              		.global	__aeabi_dsub
+ 2167              		.global	__aeabi_dadd
+ 2168              		.global	__aeabi_d2uiz
+ 2169              		.section	.text.readCellTemp,"ax",%progbits
+ 2170              		.align	1
+ 2171              		.global	readCellTemp
+ 2172              		.syntax unified
+ 2173              		.thumb
+ 2174              		.thumb_func
+ 2175              		.fpu softvfp
+ 2177              	readCellTemp:
+ 2178              	.LVL162:
+ 2179              	.LFB71:
  244:Src/LTC6811.c **** 	
- 2179              		.loc 1 244 94 is_stmt 1 view -0
- 2180              		.cfi_startproc
- 2181              		@ args = 0, pretend = 0, frame = 16
- 2182              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2180              		.loc 1 244 94 is_stmt 1 view -0
+ 2181              		.cfi_startproc
+ 2182              		@ args = 0, pretend = 0, frame = 16
+ 2183              		@ frame_needed = 0, uses_anonymous_args = 0
  244:Src/LTC6811.c **** 	
- 2183              		.loc 1 244 94 is_stmt 0 view .LVU777
- 2184 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
- 2185              	.LCFI44:
- 2186              		.cfi_def_cfa_offset 36
- 2187              		.cfi_offset 4, -36
- 2188              		.cfi_offset 5, -32
- 2189              		.cfi_offset 6, -28
- 2190              		.cfi_offset 7, -24
- 2191              		.cfi_offset 8, -20
- 2192              		.cfi_offset 9, -16
- 2193              		.cfi_offset 10, -12
- 2194              		.cfi_offset 11, -8
- 2195              		.cfi_offset 14, -4
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 63
+ 2184              		.loc 1 244 94 is_stmt 0 view .LVU777
+ 2185 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 2186              	.LCFI44:
+ 2187              		.cfi_def_cfa_offset 36
+ 2188              		.cfi_offset 4, -36
+ 2189              		.cfi_offset 5, -32
+ 2190              		.cfi_offset 6, -28
+ 2191              		.cfi_offset 7, -24
+ 2192              		.cfi_offset 8, -20
+ 2193              		.cfi_offset 9, -16
+ 2194              		.cfi_offset 10, -12
+ 2195              		.cfi_offset 11, -8
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 63
 
 
- 2196 0004 85B0     		sub	sp, sp, #20
- 2197              	.LCFI45:
- 2198              		.cfi_def_cfa_offset 56
- 2199 0006 0446     		mov	r4, r0
- 2200 0008 8B46     		mov	fp, r1
- 2201 000a 1646     		mov	r6, r2
- 2202 000c 1F46     		mov	r7, r3
+ 2196              		.cfi_offset 14, -4
+ 2197 0004 85B0     		sub	sp, sp, #20
+ 2198              	.LCFI45:
+ 2199              		.cfi_def_cfa_offset 56
+ 2200 0006 0446     		mov	r4, r0
+ 2201 0008 8B46     		mov	fp, r1
+ 2202 000a 1646     		mov	r6, r2
+ 2203 000c 1F46     		mov	r7, r3
  246:Src/LTC6811.c **** 	bool dataValid = true;
- 2203              		.loc 1 246 2 is_stmt 1 view .LVU778
- 2204              	.LVL163:
+ 2204              		.loc 1 246 2 is_stmt 1 view .LVU778
+ 2205              	.LVL163:
  247:Src/LTC6811.c **** 	uint16_t *temp;
- 2205              		.loc 1 247 2 view .LVU779
+ 2206              		.loc 1 247 2 view .LVU779
  248:Src/LTC6811.c **** 	double dummy[4];
- 2206              		.loc 1 248 2 view .LVU780
+ 2207              		.loc 1 248 2 view .LVU780
  249:Src/LTC6811.c **** 	double conversion[4];
- 2207              		.loc 1 249 2 view .LVU781
+ 2208              		.loc 1 249 2 view .LVU781
  250:Src/LTC6811.c **** 	
- 2208              		.loc 1 250 2 view .LVU782
+ 2209              		.loc 1 250 2 view .LVU782
  252:Src/LTC6811.c **** 	
- 2209              		.loc 1 252 2 view .LVU783
+ 2210              		.loc 1 252 2 view .LVU783
  252:Src/LTC6811.c **** 	
- 2210              		.loc 1 252 21 is_stmt 0 view .LVU784
- 2211 000e 0820     		movs	r0, #8
- 2212              	.LVL164:
+ 2211              		.loc 1 252 21 is_stmt 0 view .LVU784
+ 2212 000e 0820     		movs	r0, #8
+ 2213              	.LVL164:
  252:Src/LTC6811.c **** 	
- 2213              		.loc 1 252 21 view .LVU785
- 2214 0010 FFF7FEFF 		bl	malloc
- 2215              	.LVL165:
+ 2214              		.loc 1 252 21 view .LVU785
+ 2215 0010 FFF7FEFF 		bl	malloc
+ 2216              	.LVL165:
  252:Src/LTC6811.c **** 	
- 2216              		.loc 1 252 21 view .LVU786
- 2217 0014 8246     		mov	r10, r0
- 2218              	.LVL166:
+ 2217              		.loc 1 252 21 view .LVU786
+ 2218 0014 8246     		mov	r10, r0
+ 2219              	.LVL166:
  254:Src/LTC6811.c **** 	
- 2219              		.loc 1 254 2 is_stmt 1 view .LVU787
- 2220 0016 2146     		mov	r1, r4
- 2221 0018 4FF48C60 		mov	r0, #1120
- 2222              	.LVL167:
+ 2220              		.loc 1 254 2 is_stmt 1 view .LVU787
+ 2221 0016 2146     		mov	r1, r4
+ 2222 0018 4FF48C60 		mov	r0, #1120
+ 2223              	.LVL167:
  254:Src/LTC6811.c **** 	
- 2223              		.loc 1 254 2 is_stmt 0 view .LVU788
- 2224 001c FFF7FEFF 		bl	sendAddressCommand
- 2225              	.LVL168:
+ 2224              		.loc 1 254 2 is_stmt 0 view .LVU788
+ 2225 001c FFF7FEFF 		bl	sendAddressCommand
+ 2226              	.LVL168:
  256:Src/LTC6811.c **** 	
- 2226              		.loc 1 256 2 is_stmt 1 view .LVU789
- 2227 0020 0F20     		movs	r0, #15
- 2228 0022 FFF7FEFF 		bl	HAL_Delay
- 2229              	.LVL169:
+ 2227              		.loc 1 256 2 is_stmt 1 view .LVU789
+ 2228 0020 0F20     		movs	r0, #15
+ 2229 0022 FFF7FEFF 		bl	HAL_Delay
+ 2230              	.LVL169:
  258:Src/LTC6811.c **** 	//dataValid = dataValid & PEC_check;
- 2230              		.loc 1 258 2 view .LVU790
+ 2231              		.loc 1 258 2 view .LVU790
  258:Src/LTC6811.c **** 	//dataValid = dataValid & PEC_check;
- 2231              		.loc 1 258 14 is_stmt 0 view .LVU791
- 2232 0026 5246     		mov	r2, r10
- 2233 0028 2146     		mov	r1, r4
- 2234 002a 0C20     		movs	r0, #12
- 2235 002c FFF7FEFF 		bl	readRegister
- 2236              	.LVL170:
+ 2232              		.loc 1 258 14 is_stmt 0 view .LVU791
+ 2233 0026 5246     		mov	r2, r10
+ 2234 0028 2146     		mov	r1, r4
+ 2235 002a 0C20     		movs	r0, #12
+ 2236 002c FFF7FEFF 		bl	readRegister
+ 2237              	.LVL170:
  260:Src/LTC6811.c **** 	dataValid = dataValid & PEC_check;
- 2237              		.loc 1 260 2 is_stmt 1 view .LVU792
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 64
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 64
 
 
+ 2238              		.loc 1 260 2 is_stmt 1 view .LVU792
  260:Src/LTC6811.c **** 	dataValid = dataValid & PEC_check;
- 2238              		.loc 1 260 14 is_stmt 0 view .LVU793
- 2239 0030 5246     		mov	r2, r10
- 2240 0032 2146     		mov	r1, r4
- 2241 0034 0E20     		movs	r0, #14
- 2242 0036 FFF7FEFF 		bl	readRegister
- 2243              	.LVL171:
- 2244 003a 0546     		mov	r5, r0
- 2245              	.LVL172:
+ 2239              		.loc 1 260 14 is_stmt 0 view .LVU793
+ 2240 0030 5246     		mov	r2, r10
+ 2241 0032 2146     		mov	r1, r4
+ 2242 0034 0E20     		movs	r0, #14
+ 2243 0036 FFF7FEFF 		bl	readRegister
+ 2244              	.LVL171:
+ 2245 003a 0546     		mov	r5, r0
+ 2246              	.LVL172:
  261:Src/LTC6811.c **** 	PEC_check = readRegister(ReadAuxiliaryGroupA, address, temp);
- 2246              		.loc 1 261 2 is_stmt 1 view .LVU794
+ 2247              		.loc 1 261 2 is_stmt 1 view .LVU794
  262:Src/LTC6811.c **** 	dataValid = dataValid & PEC_check;
- 2247              		.loc 1 262 2 view .LVU795
+ 2248              		.loc 1 262 2 view .LVU795
  262:Src/LTC6811.c **** 	dataValid = dataValid & PEC_check;
- 2248              		.loc 1 262 14 is_stmt 0 view .LVU796
- 2249 003c 5246     		mov	r2, r10
- 2250 003e 2146     		mov	r1, r4
- 2251 0040 0C20     		movs	r0, #12
- 2252 0042 FFF7FEFF 		bl	readRegister
- 2253              	.LVL173:
+ 2249              		.loc 1 262 14 is_stmt 0 view .LVU796
+ 2250 003c 5246     		mov	r2, r10
+ 2251 003e 2146     		mov	r1, r4
+ 2252 0040 0C20     		movs	r0, #12
+ 2253 0042 FFF7FEFF 		bl	readRegister
+ 2254              	.LVL173:
  263:Src/LTC6811.c **** 	
- 2254              		.loc 1 263 2 is_stmt 1 view .LVU797
- 2255 0046 2840     		ands	r0, r0, r5
- 2256              	.LVL174:
+ 2255              		.loc 1 263 2 is_stmt 1 view .LVU797
+ 2256 0046 2840     		ands	r0, r0, r5
+ 2257              	.LVL174:
  263:Src/LTC6811.c **** 	
- 2257              		.loc 1 263 2 is_stmt 0 view .LVU798
- 2258 0048 C3B2     		uxtb	r3, r0
- 2259 004a 0393     		str	r3, [sp, #12]
- 2260              	.LVL175:
+ 2258              		.loc 1 263 2 is_stmt 0 view .LVU798
+ 2259 0048 C3B2     		uxtb	r3, r0
+ 2260 004a 0393     		str	r3, [sp, #12]
+ 2261              	.LVL175:
  265:Src/LTC6811.c **** 		if ((temp[i] > 24400) || (temp[i] < 13000)) {
- 2261              		.loc 1 265 2 is_stmt 1 view .LVU799
- 2262              	.LBB17:
+ 2262              		.loc 1 265 2 is_stmt 1 view .LVU799
+ 2263              	.LBB17:
  265:Src/LTC6811.c **** 		if ((temp[i] > 24400) || (temp[i] < 13000)) {
- 2263              		.loc 1 265 7 view .LVU800
+ 2264              		.loc 1 265 7 view .LVU800
  265:Src/LTC6811.c **** 		if ((temp[i] > 24400) || (temp[i] < 13000)) {
- 2264              		.loc 1 265 15 is_stmt 0 view .LVU801
- 2265 004c 0025     		movs	r5, #0
+ 2265              		.loc 1 265 15 is_stmt 0 view .LVU801
+ 2266 004c 0025     		movs	r5, #0
  265:Src/LTC6811.c **** 		if ((temp[i] > 24400) || (temp[i] < 13000)) {
- 2266              		.loc 1 265 2 view .LVU802
- 2267 004e 10E0     		b	.L85
- 2268              	.LVL176:
- 2269              	.L86:
+ 2267              		.loc 1 265 2 view .LVU802
+ 2268 004e 10E0     		b	.L85
+ 2269              	.LVL176:
+ 2270              	.L86:
  271:Src/LTC6811.c **** 		
- 2270              		.loc 1 271 4 is_stmt 1 view .LVU803
+ 2271              		.loc 1 271 4 is_stmt 1 view .LVU803
  271:Src/LTC6811.c **** 		
- 2271              		.loc 1 271 15 is_stmt 0 view .LVU804
- 2272 0050 0023     		movs	r3, #0
- 2273 0052 7355     		strb	r3, [r6, r5]
- 2274 0054 21E0     		b	.L87
- 2275              	.L88:
+ 2272              		.loc 1 271 15 is_stmt 0 view .LVU804
+ 2273 0050 0023     		movs	r3, #0
+ 2274 0052 7355     		strb	r3, [r6, r5]
+ 2275 0054 21E0     		b	.L87
+ 2276              	.L88:
  278:Src/LTC6811.c **** 		
- 2276              		.loc 1 278 4 is_stmt 1 view .LVU805
+ 2277              		.loc 1 278 4 is_stmt 1 view .LVU805
  278:Src/LTC6811.c **** 		
- 2277              		.loc 1 278 17 is_stmt 0 view .LVU806
- 2278 0056 0023     		movs	r3, #0
- 2279 0058 BB54     		strb	r3, [r7, r2]
- 2280              	.L89:
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 65
+ 2278              		.loc 1 278 17 is_stmt 0 view .LVU806
+ 2279 0056 0023     		movs	r3, #0
+ 2280 0058 BB54     		strb	r3, [r7, r2]
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 65
 
 
+ 2281              	.L89:
  280:Src/LTC6811.c **** 			dummy[i] = (double) temp[i] / 10000; // convert from ADC value to voltage
- 2281              		.loc 1 280 3 is_stmt 1 view .LVU807
+ 2282              		.loc 1 280 3 is_stmt 1 view .LVU807
  280:Src/LTC6811.c **** 			dummy[i] = (double) temp[i] / 10000; // convert from ADC value to voltage
- 2282              		.loc 1 280 12 is_stmt 0 view .LVU808
- 2283 005a 3AF80400 		ldrh	r0, [r10, r4]
+ 2283              		.loc 1 280 12 is_stmt 0 view .LVU808
+ 2284 005a 3AF80400 		ldrh	r0, [r10, r4]
  280:Src/LTC6811.c **** 			dummy[i] = (double) temp[i] / 10000; // convert from ADC value to voltage
- 2284              		.loc 1 280 26 view .LVU809
- 2285 005e A0F56B53 		sub	r3, r0, #15040
- 2286 0062 3C3B     		subs	r3, r3, #60
- 2287 0064 9BB2     		uxth	r3, r3
+ 2285              		.loc 1 280 26 view .LVU809
+ 2286 005e A0F56B53 		sub	r3, r0, #15040
+ 2287 0062 3C3B     		subs	r3, r3, #60
+ 2288 0064 9BB2     		uxth	r3, r3
  280:Src/LTC6811.c **** 			dummy[i] = (double) temp[i] / 10000; // convert from ADC value to voltage
- 2288              		.loc 1 280 6 view .LVU810
- 2289 0066 42F25442 		movw	r2, #9300
- 2290 006a 9342     		cmp	r3, r2
- 2291 006c 26D9     		bls	.L93
- 2292              	.L90:
+ 2289              		.loc 1 280 6 view .LVU810
+ 2290 0066 42F25442 		movw	r2, #9300
+ 2291 006a 9342     		cmp	r3, r2
+ 2292 006c 26D9     		bls	.L93
+ 2293              	.L90:
  265:Src/LTC6811.c **** 		if ((temp[i] > 24400) || (temp[i] < 13000)) {
- 2293              		.loc 1 265 30 discriminator 2 view .LVU811
- 2294 006e 0135     		adds	r5, r5, #1
- 2295              	.LVL177:
+ 2294              		.loc 1 265 30 discriminator 2 view .LVU811
+ 2295 006e 0135     		adds	r5, r5, #1
+ 2296              	.LVL177:
  265:Src/LTC6811.c **** 		if ((temp[i] > 24400) || (temp[i] < 13000)) {
- 2296              		.loc 1 265 30 discriminator 2 view .LVU812
- 2297 0070 EDB2     		uxtb	r5, r5
- 2298              	.LVL178:
- 2299              	.L85:
+ 2297              		.loc 1 265 30 discriminator 2 view .LVU812
+ 2298 0070 EDB2     		uxtb	r5, r5
+ 2299              	.LVL178:
+ 2300              	.L85:
  265:Src/LTC6811.c **** 		if ((temp[i] > 24400) || (temp[i] < 13000)) {
- 2300              		.loc 1 265 2 discriminator 1 view .LVU813
- 2301 0072 032D     		cmp	r5, #3
- 2302 0074 00F2A480 		bhi	.L94
+ 2301              		.loc 1 265 2 discriminator 1 view .LVU813
+ 2302 0072 032D     		cmp	r5, #3
+ 2303 0074 00F2A480 		bhi	.L94
  266:Src/LTC6811.c **** 			dcFault[i] = true;
- 2303              		.loc 1 266 3 is_stmt 1 view .LVU814
+ 2304              		.loc 1 266 3 is_stmt 1 view .LVU814
  266:Src/LTC6811.c **** 			dcFault[i] = true;
- 2304              		.loc 1 266 12 is_stmt 0 view .LVU815
- 2305 0078 2A46     		mov	r2, r5
- 2306 007a 6C00     		lsls	r4, r5, #1
- 2307 007c 3AF81530 		ldrh	r3, [r10, r5, lsl #1]
+ 2305              		.loc 1 266 12 is_stmt 0 view .LVU815
+ 2306 0078 2A46     		mov	r2, r5
+ 2307 007a 6C00     		lsls	r4, r5, #1
+ 2308 007c 3AF81530 		ldrh	r3, [r10, r5, lsl #1]
  266:Src/LTC6811.c **** 			dcFault[i] = true;
- 2308              		.loc 1 266 25 view .LVU816
- 2309 0080 A3F54B53 		sub	r3, r3, #12992
- 2310 0084 083B     		subs	r3, r3, #8
- 2311 0086 9BB2     		uxth	r3, r3
+ 2309              		.loc 1 266 25 view .LVU816
+ 2310 0080 A3F54B53 		sub	r3, r3, #12992
+ 2311 0084 083B     		subs	r3, r3, #8
+ 2312 0086 9BB2     		uxth	r3, r3
  266:Src/LTC6811.c **** 			dcFault[i] = true;
- 2312              		.loc 1 266 6 view .LVU817
- 2313 0088 42F68841 		movw	r1, #11400
- 2314 008c 8B42     		cmp	r3, r1
- 2315 008e DFD9     		bls	.L86
+ 2313              		.loc 1 266 6 view .LVU817
+ 2314 0088 42F68841 		movw	r1, #11400
+ 2315 008c 8B42     		cmp	r3, r1
+ 2316 008e DFD9     		bls	.L86
  267:Src/LTC6811.c **** 			cellTemp[i] = 0x0000;
- 2316              		.loc 1 267 4 is_stmt 1 view .LVU818
+ 2317              		.loc 1 267 4 is_stmt 1 view .LVU818
  267:Src/LTC6811.c **** 			cellTemp[i] = 0x0000;
- 2317              		.loc 1 267 15 is_stmt 0 view .LVU819
- 2318 0090 0123     		movs	r3, #1
- 2319 0092 7355     		strb	r3, [r6, r5]
+ 2318              		.loc 1 267 15 is_stmt 0 view .LVU819
+ 2319 0090 0123     		movs	r3, #1
+ 2320 0092 7355     		strb	r3, [r6, r5]
  268:Src/LTC6811.c **** 		}
- 2320              		.loc 1 268 4 is_stmt 1 view .LVU820
+ 2321              		.loc 1 268 4 is_stmt 1 view .LVU820
  268:Src/LTC6811.c **** 		}
- 2321              		.loc 1 268 16 is_stmt 0 view .LVU821
- 2322 0094 0023     		movs	r3, #0
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 66
+ 2322              		.loc 1 268 16 is_stmt 0 view .LVU821
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 66
 
 
- 2323 0096 2BF81530 		strh	r3, [fp, r5, lsl #1]	@ movhi
- 2324              	.L87:
+ 2323 0094 0023     		movs	r3, #0
+ 2324 0096 2BF81530 		strh	r3, [fp, r5, lsl #1]	@ movhi
+ 2325              	.L87:
  273:Src/LTC6811.c **** 			tempFault[i] = true;
- 2325              		.loc 1 273 3 is_stmt 1 view .LVU822
+ 2326              		.loc 1 273 3 is_stmt 1 view .LVU822
  273:Src/LTC6811.c **** 			tempFault[i] = true;
- 2326              		.loc 1 273 12 is_stmt 0 view .LVU823
- 2327 009a 3AF80430 		ldrh	r3, [r10, r4]
+ 2327              		.loc 1 273 12 is_stmt 0 view .LVU823
+ 2328 009a 3AF80430 		ldrh	r3, [r10, r4]
  273:Src/LTC6811.c **** 			tempFault[i] = true;
- 2328              		.loc 1 273 26 view .LVU824
- 2329 009e A3F54B53 		sub	r3, r3, #12992
- 2330 00a2 083B     		subs	r3, r3, #8
- 2331 00a4 9BB2     		uxth	r3, r3
+ 2329              		.loc 1 273 26 view .LVU824
+ 2330 009e A3F54B53 		sub	r3, r3, #12992
+ 2331 00a2 083B     		subs	r3, r3, #8
+ 2332 00a4 9BB2     		uxth	r3, r3
  273:Src/LTC6811.c **** 			tempFault[i] = true;
- 2332              		.loc 1 273 6 view .LVU825
- 2333 00a6 40F63301 		movw	r1, #2099
- 2334 00aa 8B42     		cmp	r3, r1
- 2335 00ac D3D8     		bhi	.L88
+ 2333              		.loc 1 273 6 view .LVU825
+ 2334 00a6 40F63301 		movw	r1, #2099
+ 2335 00aa 8B42     		cmp	r3, r1
+ 2336 00ac D3D8     		bhi	.L88
  274:Src/LTC6811.c **** 			cellTemp[i] = 0xFFFF;
- 2336              		.loc 1 274 4 is_stmt 1 view .LVU826
+ 2337              		.loc 1 274 4 is_stmt 1 view .LVU826
  274:Src/LTC6811.c **** 			cellTemp[i] = 0xFFFF;
- 2337              		.loc 1 274 17 is_stmt 0 view .LVU827
- 2338 00ae 0123     		movs	r3, #1
- 2339 00b0 BB54     		strb	r3, [r7, r2]
+ 2338              		.loc 1 274 17 is_stmt 0 view .LVU827
+ 2339 00ae 0123     		movs	r3, #1
+ 2340 00b0 BB54     		strb	r3, [r7, r2]
  275:Src/LTC6811.c **** 		}
- 2340              		.loc 1 275 4 is_stmt 1 view .LVU828
+ 2341              		.loc 1 275 4 is_stmt 1 view .LVU828
  275:Src/LTC6811.c **** 		}
- 2341              		.loc 1 275 16 is_stmt 0 view .LVU829
- 2342 00b2 4FF6FF73 		movw	r3, #65535
- 2343 00b6 2BF80430 		strh	r3, [fp, r4]	@ movhi
- 2344 00ba CEE7     		b	.L89
- 2345              	.L93:
+ 2342              		.loc 1 275 16 is_stmt 0 view .LVU829
+ 2343 00b2 4FF6FF73 		movw	r3, #65535
+ 2344 00b6 2BF80430 		strh	r3, [fp, r4]	@ movhi
+ 2345 00ba CEE7     		b	.L89
+ 2346              	.L93:
  281:Src/LTC6811.c **** 			// convert from voltage to temperature
- 2346              		.loc 1 281 4 is_stmt 1 view .LVU830
+ 2347              		.loc 1 281 4 is_stmt 1 view .LVU830
  281:Src/LTC6811.c **** 			// convert from voltage to temperature
- 2347              		.loc 1 281 15 is_stmt 0 view .LVU831
- 2348 00bc FFF7FEFF 		bl	__aeabi_ui2d
- 2349              	.LVL179:
+ 2348              		.loc 1 281 15 is_stmt 0 view .LVU831
+ 2349 00bc FFF7FEFF 		bl	__aeabi_ui2d
+ 2350              	.LVL179:
  281:Src/LTC6811.c **** 			// convert from voltage to temperature
- 2350              		.loc 1 281 32 view .LVU832
- 2351 00c0 43A3     		adr	r3, .L95
- 2352 00c2 D3E90023 		ldrd	r2, [r3]
- 2353 00c6 FFF7FEFF 		bl	__aeabi_ddiv
- 2354              	.LVL180:
- 2355 00ca CDE90001 		strd	r0, [sp]
+ 2351              		.loc 1 281 32 view .LVU832
+ 2352 00c0 43A3     		adr	r3, .L95
+ 2353 00c2 D3E90023 		ldrd	r2, [r3]
+ 2354 00c6 FFF7FEFF 		bl	__aeabi_ddiv
+ 2355              	.LVL180:
+ 2356 00ca CDE90001 		strd	r0, [sp]
  283:Src/LTC6811.c **** 			conversion[i] = 500 * (conversion[i] + 20); // map value to larger range
- 2356              		.loc 1 283 4 is_stmt 1 view .LVU833
+ 2357              		.loc 1 283 4 is_stmt 1 view .LVU833
  283:Src/LTC6811.c **** 			conversion[i] = 500 * (conversion[i] + 20); // map value to larger range
- 2357              		.loc 1 283 35 is_stmt 0 view .LVU834
- 2358 00ce 42A3     		adr	r3, .L95+8
- 2359 00d0 D3E90023 		ldrd	r2, [r3]
- 2360 00d4 FFF7FEFF 		bl	__aeabi_dmul
- 2361              	.LVL181:
+ 2358              		.loc 1 283 35 is_stmt 0 view .LVU834
+ 2359 00ce 42A3     		adr	r3, .L95+8
+ 2360 00d0 D3E90023 		ldrd	r2, [r3]
+ 2361 00d4 FFF7FEFF 		bl	__aeabi_dmul
+ 2362              	.LVL181:
  283:Src/LTC6811.c **** 			conversion[i] = 500 * (conversion[i] + 20); // map value to larger range
- 2362              		.loc 1 283 26 view .LVU835
- 2363 00d8 0246     		mov	r2, r0
- 2364 00da 0B46     		mov	r3, r1
- 2365 00dc 40A1     		adr	r1, .L95+16
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 67
+ 2363              		.loc 1 283 26 view .LVU835
+ 2364 00d8 0246     		mov	r2, r0
+ 2365 00da 0B46     		mov	r3, r1
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 67
 
 
- 2366 00de D1E90001 		ldrd	r0, [r1]
- 2367 00e2 FFF7FEFF 		bl	__aeabi_dsub
- 2368              	.LVL182:
- 2369 00e6 8046     		mov	r8, r0
- 2370 00e8 8946     		mov	r9, r1
+ 2366 00dc 40A1     		adr	r1, .L95+16
+ 2367 00de D1E90001 		ldrd	r0, [r1]
+ 2368 00e2 FFF7FEFF 		bl	__aeabi_dsub
+ 2369              	.LVL182:
+ 2370 00e6 8046     		mov	r8, r0
+ 2371 00e8 8946     		mov	r9, r1
  283:Src/LTC6811.c **** 			conversion[i] = 500 * (conversion[i] + 20); // map value to larger range
- 2371              		.loc 1 283 57 view .LVU836
- 2372 00ea 0022     		movs	r2, #0
- 2373 00ec 4FF08043 		mov	r3, #1073741824
- 2374 00f0 DDE90001 		ldrd	r0, [sp]
- 2375 00f4 FFF7FEFF 		bl	pow
- 2376              	.LVL183:
+ 2372              		.loc 1 283 57 view .LVU836
+ 2373 00ea 0022     		movs	r2, #0
+ 2374 00ec 4FF08043 		mov	r3, #1073741824
+ 2375 00f0 DDE90001 		ldrd	r0, [sp]
+ 2376 00f4 FFF7FEFF 		bl	pow
+ 2377              	.LVL183:
  283:Src/LTC6811.c **** 			conversion[i] = 500 * (conversion[i] + 20); // map value to larger range
- 2377              		.loc 1 283 55 view .LVU837
- 2378 00f8 3BA3     		adr	r3, .L95+24
- 2379 00fa D3E90023 		ldrd	r2, [r3]
- 2380 00fe FFF7FEFF 		bl	__aeabi_dmul
- 2381              	.LVL184:
+ 2378              		.loc 1 283 55 view .LVU837
+ 2379 00f8 3BA3     		adr	r3, .L95+24
+ 2380 00fa D3E90023 		ldrd	r2, [r3]
+ 2381 00fe FFF7FEFF 		bl	__aeabi_dmul
+ 2382              	.LVL184:
  283:Src/LTC6811.c **** 			conversion[i] = 500 * (conversion[i] + 20); // map value to larger range
- 2382              		.loc 1 283 46 view .LVU838
- 2383 0102 0246     		mov	r2, r0
- 2384 0104 0B46     		mov	r3, r1
- 2385 0106 4046     		mov	r0, r8
- 2386 0108 4946     		mov	r1, r9
- 2387 010a FFF7FEFF 		bl	__aeabi_dadd
- 2388              	.LVL185:
- 2389 010e 8046     		mov	r8, r0
- 2390 0110 8946     		mov	r9, r1
+ 2383              		.loc 1 283 46 view .LVU838
+ 2384 0102 0246     		mov	r2, r0
+ 2385 0104 0B46     		mov	r3, r1
+ 2386 0106 4046     		mov	r0, r8
+ 2387 0108 4946     		mov	r1, r9
+ 2388 010a FFF7FEFF 		bl	__aeabi_dadd
+ 2389              	.LVL185:
+ 2390 010e 8046     		mov	r8, r0
+ 2391 0110 8946     		mov	r9, r1
  283:Src/LTC6811.c **** 			conversion[i] = 500 * (conversion[i] + 20); // map value to larger range
- 2391              		.loc 1 283 84 view .LVU839
- 2392 0112 0022     		movs	r2, #0
- 2393 0114 3E4B     		ldr	r3, .L95+64
- 2394 0116 DDE90001 		ldrd	r0, [sp]
- 2395 011a FFF7FEFF 		bl	pow
- 2396              	.LVL186:
+ 2392              		.loc 1 283 84 view .LVU839
+ 2393 0112 0022     		movs	r2, #0
+ 2394 0114 3E4B     		ldr	r3, .L95+64
+ 2395 0116 DDE90001 		ldrd	r0, [sp]
+ 2396 011a FFF7FEFF 		bl	pow
+ 2397              	.LVL186:
  283:Src/LTC6811.c **** 			conversion[i] = 500 * (conversion[i] + 20); // map value to larger range
- 2397              		.loc 1 283 82 view .LVU840
- 2398 011e 34A3     		adr	r3, .L95+32
- 2399 0120 D3E90023 		ldrd	r2, [r3]
- 2400 0124 FFF7FEFF 		bl	__aeabi_dmul
- 2401              	.LVL187:
+ 2398              		.loc 1 283 82 view .LVU840
+ 2399 011e 34A3     		adr	r3, .L95+32
+ 2400 0120 D3E90023 		ldrd	r2, [r3]
+ 2401 0124 FFF7FEFF 		bl	__aeabi_dmul
+ 2402              	.LVL187:
  283:Src/LTC6811.c **** 			conversion[i] = 500 * (conversion[i] + 20); // map value to larger range
- 2402              		.loc 1 283 74 view .LVU841
- 2403 0128 0246     		mov	r2, r0
- 2404 012a 0B46     		mov	r3, r1
- 2405 012c 4046     		mov	r0, r8
- 2406 012e 4946     		mov	r1, r9
- 2407 0130 FFF7FEFF 		bl	__aeabi_dsub
- 2408              	.LVL188:
- 2409 0134 8046     		mov	r8, r0
- 2410 0136 8946     		mov	r9, r1
+ 2403              		.loc 1 283 74 view .LVU841
+ 2404 0128 0246     		mov	r2, r0
+ 2405 012a 0B46     		mov	r3, r1
+ 2406 012c 4046     		mov	r0, r8
+ 2407 012e 4946     		mov	r1, r9
+ 2408 0130 FFF7FEFF 		bl	__aeabi_dsub
+ 2409              	.LVL188:
+ 2410 0134 8046     		mov	r8, r0
+ 2411 0136 8946     		mov	r9, r1
  283:Src/LTC6811.c **** 			conversion[i] = 500 * (conversion[i] + 20); // map value to larger range
- 2411              		.loc 1 283 111 view .LVU842
- 2412 0138 0022     		movs	r2, #0
- 2413 013a 364B     		ldr	r3, .L95+68
- 2414 013c DDE90001 		ldrd	r0, [sp]
- 2415 0140 FFF7FEFF 		bl	pow
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 68
+ 2412              		.loc 1 283 111 view .LVU842
+ 2413 0138 0022     		movs	r2, #0
+ 2414 013a 364B     		ldr	r3, .L95+68
+ 2415 013c DDE90001 		ldrd	r0, [sp]
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 68
 
 
- 2416              	.LVL189:
+ 2416 0140 FFF7FEFF 		bl	pow
+ 2417              	.LVL189:
  283:Src/LTC6811.c **** 			conversion[i] = 500 * (conversion[i] + 20); // map value to larger range
- 2417              		.loc 1 283 109 view .LVU843
- 2418 0144 2CA3     		adr	r3, .L95+40
- 2419 0146 D3E90023 		ldrd	r2, [r3]
- 2420 014a FFF7FEFF 		bl	__aeabi_dmul
- 2421              	.LVL190:
+ 2418              		.loc 1 283 109 view .LVU843
+ 2419 0144 2CA3     		adr	r3, .L95+40
+ 2420 0146 D3E90023 		ldrd	r2, [r3]
+ 2421 014a FFF7FEFF 		bl	__aeabi_dmul
+ 2422              	.LVL190:
  283:Src/LTC6811.c **** 			conversion[i] = 500 * (conversion[i] + 20); // map value to larger range
- 2422              		.loc 1 283 101 view .LVU844
- 2423 014e 0246     		mov	r2, r0
- 2424 0150 0B46     		mov	r3, r1
- 2425 0152 4046     		mov	r0, r8
- 2426 0154 4946     		mov	r1, r9
- 2427 0156 FFF7FEFF 		bl	__aeabi_dadd
- 2428              	.LVL191:
- 2429 015a 8046     		mov	r8, r0
- 2430 015c 8946     		mov	r9, r1
+ 2423              		.loc 1 283 101 view .LVU844
+ 2424 014e 0246     		mov	r2, r0
+ 2425 0150 0B46     		mov	r3, r1
+ 2426 0152 4046     		mov	r0, r8
+ 2427 0154 4946     		mov	r1, r9
+ 2428 0156 FFF7FEFF 		bl	__aeabi_dadd
+ 2429              	.LVL191:
+ 2430 015a 8046     		mov	r8, r0
+ 2431 015c 8946     		mov	r9, r1
  283:Src/LTC6811.c **** 			conversion[i] = 500 * (conversion[i] + 20); // map value to larger range
- 2431              		.loc 1 283 137 view .LVU845
- 2432 015e 0022     		movs	r2, #0
- 2433 0160 2D4B     		ldr	r3, .L95+72
- 2434 0162 DDE90001 		ldrd	r0, [sp]
- 2435 0166 FFF7FEFF 		bl	pow
- 2436              	.LVL192:
+ 2432              		.loc 1 283 137 view .LVU845
+ 2433 015e 0022     		movs	r2, #0
+ 2434 0160 2D4B     		ldr	r3, .L95+72
+ 2435 0162 DDE90001 		ldrd	r0, [sp]
+ 2436 0166 FFF7FEFF 		bl	pow
+ 2437              	.LVL192:
  283:Src/LTC6811.c **** 			conversion[i] = 500 * (conversion[i] + 20); // map value to larger range
- 2437              		.loc 1 283 135 view .LVU846
- 2438 016a 25A3     		adr	r3, .L95+48
- 2439 016c D3E90023 		ldrd	r2, [r3]
- 2440 0170 FFF7FEFF 		bl	__aeabi_dmul
- 2441              	.LVL193:
+ 2438              		.loc 1 283 135 view .LVU846
+ 2439 016a 25A3     		adr	r3, .L95+48
+ 2440 016c D3E90023 		ldrd	r2, [r3]
+ 2441 0170 FFF7FEFF 		bl	__aeabi_dmul
+ 2442              	.LVL193:
  283:Src/LTC6811.c **** 			conversion[i] = 500 * (conversion[i] + 20); // map value to larger range
- 2442              		.loc 1 283 128 view .LVU847
- 2443 0174 0246     		mov	r2, r0
- 2444 0176 0B46     		mov	r3, r1
- 2445 0178 4046     		mov	r0, r8
- 2446 017a 4946     		mov	r1, r9
- 2447 017c FFF7FEFF 		bl	__aeabi_dsub
- 2448              	.LVL194:
- 2449 0180 8046     		mov	r8, r0
- 2450 0182 8946     		mov	r9, r1
+ 2443              		.loc 1 283 128 view .LVU847
+ 2444 0174 0246     		mov	r2, r0
+ 2445 0176 0B46     		mov	r3, r1
+ 2446 0178 4046     		mov	r0, r8
+ 2447 017a 4946     		mov	r1, r9
+ 2448 017c FFF7FEFF 		bl	__aeabi_dsub
+ 2449              	.LVL194:
+ 2450 0180 8046     		mov	r8, r0
+ 2451 0182 8946     		mov	r9, r1
  283:Src/LTC6811.c **** 			conversion[i] = 500 * (conversion[i] + 20); // map value to larger range
- 2451              		.loc 1 283 165 view .LVU848
- 2452 0184 0022     		movs	r2, #0
- 2453 0186 254B     		ldr	r3, .L95+76
- 2454 0188 DDE90001 		ldrd	r0, [sp]
- 2455 018c FFF7FEFF 		bl	pow
- 2456              	.LVL195:
+ 2452              		.loc 1 283 165 view .LVU848
+ 2453 0184 0022     		movs	r2, #0
+ 2454 0186 254B     		ldr	r3, .L95+76
+ 2455 0188 DDE90001 		ldrd	r0, [sp]
+ 2456 018c FFF7FEFF 		bl	pow
+ 2457              	.LVL195:
  283:Src/LTC6811.c **** 			conversion[i] = 500 * (conversion[i] + 20); // map value to larger range
- 2457              		.loc 1 283 163 view .LVU849
- 2458 0190 1DA3     		adr	r3, .L95+56
- 2459 0192 D3E90023 		ldrd	r2, [r3]
- 2460 0196 FFF7FEFF 		bl	__aeabi_dmul
- 2461              	.LVL196:
+ 2458              		.loc 1 283 163 view .LVU849
+ 2459 0190 1DA3     		adr	r3, .L95+56
+ 2460 0192 D3E90023 		ldrd	r2, [r3]
+ 2461 0196 FFF7FEFF 		bl	__aeabi_dmul
+ 2462              	.LVL196:
  283:Src/LTC6811.c **** 			conversion[i] = 500 * (conversion[i] + 20); // map value to larger range
- 2462              		.loc 1 283 154 view .LVU850
- 2463 019a 0246     		mov	r2, r0
- 2464 019c 0B46     		mov	r3, r1
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 69
+ 2463              		.loc 1 283 154 view .LVU850
+ 2464 019a 0246     		mov	r2, r0
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 69
 
 
- 2465 019e 4046     		mov	r0, r8
- 2466 01a0 4946     		mov	r1, r9
- 2467 01a2 FFF7FEFF 		bl	__aeabi_dadd
- 2468              	.LVL197:
+ 2465 019c 0B46     		mov	r3, r1
+ 2466 019e 4046     		mov	r0, r8
+ 2467 01a0 4946     		mov	r1, r9
+ 2468 01a2 FFF7FEFF 		bl	__aeabi_dadd
+ 2469              	.LVL197:
  284:Src/LTC6811.c **** 			cellTemp[i] = (uint16_t) conversion[i];
- 2469              		.loc 1 284 4 is_stmt 1 view .LVU851
+ 2470              		.loc 1 284 4 is_stmt 1 view .LVU851
  284:Src/LTC6811.c **** 			cellTemp[i] = (uint16_t) conversion[i];
- 2470              		.loc 1 284 41 is_stmt 0 view .LVU852
- 2471 01a6 0022     		movs	r2, #0
- 2472 01a8 1D4B     		ldr	r3, .L95+80
- 2473 01aa FFF7FEFF 		bl	__aeabi_dadd
- 2474              	.LVL198:
+ 2471              		.loc 1 284 41 is_stmt 0 view .LVU852
+ 2472 01a6 0022     		movs	r2, #0
+ 2473 01a8 1D4B     		ldr	r3, .L95+80
+ 2474 01aa FFF7FEFF 		bl	__aeabi_dadd
+ 2475              	.LVL198:
  284:Src/LTC6811.c **** 			cellTemp[i] = (uint16_t) conversion[i];
- 2475              		.loc 1 284 24 view .LVU853
- 2476 01ae 0022     		movs	r2, #0
- 2477 01b0 1C4B     		ldr	r3, .L95+84
- 2478 01b2 FFF7FEFF 		bl	__aeabi_dmul
- 2479              	.LVL199:
+ 2476              		.loc 1 284 24 view .LVU853
+ 2477 01ae 0022     		movs	r2, #0
+ 2478 01b0 1C4B     		ldr	r3, .L95+84
+ 2479 01b2 FFF7FEFF 		bl	__aeabi_dmul
+ 2480              	.LVL199:
  285:Src/LTC6811.c **** 		}
- 2480              		.loc 1 285 4 is_stmt 1 view .LVU854
+ 2481              		.loc 1 285 4 is_stmt 1 view .LVU854
  285:Src/LTC6811.c **** 		}
- 2481              		.loc 1 285 18 is_stmt 0 view .LVU855
- 2482 01b6 FFF7FEFF 		bl	__aeabi_d2uiz
- 2483              	.LVL200:
+ 2482              		.loc 1 285 18 is_stmt 0 view .LVU855
+ 2483 01b6 FFF7FEFF 		bl	__aeabi_d2uiz
+ 2484              	.LVL200:
  285:Src/LTC6811.c **** 		}
- 2484              		.loc 1 285 16 view .LVU856
- 2485 01ba 2BF80400 		strh	r0, [fp, r4]	@ movhi
- 2486 01be 56E7     		b	.L90
- 2487              	.L94:
+ 2485              		.loc 1 285 16 view .LVU856
+ 2486 01ba 2BF80400 		strh	r0, [fp, r4]	@ movhi
+ 2487 01be 56E7     		b	.L90
+ 2488              	.L94:
  285:Src/LTC6811.c **** 		}
- 2488              		.loc 1 285 16 view .LVU857
- 2489              	.LBE17:
+ 2489              		.loc 1 285 16 view .LVU857
+ 2490              	.LBE17:
  289:Src/LTC6811.c **** 	
- 2490              		.loc 1 289 2 is_stmt 1 view .LVU858
- 2491 01c0 5046     		mov	r0, r10
- 2492 01c2 FFF7FEFF 		bl	free
- 2493              	.LVL201:
+ 2491              		.loc 1 289 2 is_stmt 1 view .LVU858
+ 2492 01c0 5046     		mov	r0, r10
+ 2493 01c2 FFF7FEFF 		bl	free
+ 2494              	.LVL201:
  291:Src/LTC6811.c **** 	
- 2494              		.loc 1 291 2 view .LVU859
+ 2495              		.loc 1 291 2 view .LVU859
  293:Src/LTC6811.c **** 
- 2495              		.loc 1 293 1 is_stmt 0 view .LVU860
- 2496 01c6 0398     		ldr	r0, [sp, #12]
- 2497 01c8 05B0     		add	sp, sp, #20
- 2498              	.LCFI46:
- 2499              		.cfi_def_cfa_offset 36
- 2500              		@ sp needed
- 2501 01ca BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
- 2502              	.LVL202:
- 2503              	.L96:
+ 2496              		.loc 1 293 1 is_stmt 0 view .LVU860
+ 2497 01c6 0398     		ldr	r0, [sp, #12]
+ 2498 01c8 05B0     		add	sp, sp, #20
+ 2499              	.LCFI46:
+ 2500              		.cfi_def_cfa_offset 36
+ 2501              		@ sp needed
+ 2502 01ca BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 2503              	.LVL202:
+ 2504              	.L96:
  293:Src/LTC6811.c **** 
- 2504              		.loc 1 293 1 view .LVU861
- 2505 01ce 00BF     		.align	3
- 2506              	.L95:
- 2507 01d0 00000000 		.word	0
- 2508 01d4 0088C340 		.word	1086556160
- 2509 01d8 00000000 		.word	0
- 2510 01dc 30D0FB40 		.word	1090244656
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 70
+ 2505              		.loc 1 293 1 view .LVU861
+ 2506 01ce 00BF     		.align	3
+ 2507              	.L95:
+ 2508 01d0 00000000 		.word	0
+ 2509 01d4 0088C340 		.word	1086556160
+ 2510 01d8 00000000 		.word	0
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 70
 
 
- 2511 01e0 00000000 		.word	0
- 2512 01e4 E06CE240 		.word	1088580832
- 2513 01e8 00000000 		.word	0
- 2514 01ec 386A0141 		.word	1090611768
- 2515 01f0 00000000 		.word	0
- 2516 01f4 1010F740 		.word	1089933328
- 2517 01f8 00000000 		.word	0
- 2518 01fc E0FDE040 		.word	1088486880
- 2519 0200 00000000 		.word	0
- 2520 0204 005DBA40 		.word	1085955328
- 2521 0208 7B14AE47 		.word	1202590843
- 2522 020c E1C88040 		.word	1082181857
- 2523 0210 00000840 		.word	1074266112
- 2524 0214 00001040 		.word	1074790400
- 2525 0218 00001440 		.word	1075052544
- 2526 021c 00001840 		.word	1075314688
- 2527 0220 00003440 		.word	1077149696
- 2528 0224 00407F40 		.word	1082081280
- 2529              		.cfi_endproc
- 2530              	.LFE71:
- 2532              		.section	.text.readAllCellTemps,"ax",%progbits
- 2533              		.align	1
- 2534              		.global	readAllCellTemps
- 2535              		.syntax unified
- 2536              		.thumb
- 2537              		.thumb_func
- 2538              		.fpu softvfp
- 2540              	readAllCellTemps:
- 2541              	.LVL203:
- 2542              	.LFB72:
+ 2511 01dc 30D0FB40 		.word	1090244656
+ 2512 01e0 00000000 		.word	0
+ 2513 01e4 E06CE240 		.word	1088580832
+ 2514 01e8 00000000 		.word	0
+ 2515 01ec 386A0141 		.word	1090611768
+ 2516 01f0 00000000 		.word	0
+ 2517 01f4 1010F740 		.word	1089933328
+ 2518 01f8 00000000 		.word	0
+ 2519 01fc E0FDE040 		.word	1088486880
+ 2520 0200 00000000 		.word	0
+ 2521 0204 005DBA40 		.word	1085955328
+ 2522 0208 7B14AE47 		.word	1202590843
+ 2523 020c E1C88040 		.word	1082181857
+ 2524 0210 00000840 		.word	1074266112
+ 2525 0214 00001040 		.word	1074790400
+ 2526 0218 00001440 		.word	1075052544
+ 2527 021c 00001840 		.word	1075314688
+ 2528 0220 00003440 		.word	1077149696
+ 2529 0224 00407F40 		.word	1082081280
+ 2530              		.cfi_endproc
+ 2531              	.LFE71:
+ 2533              		.section	.text.readAllCellTemps,"ax",%progbits
+ 2534              		.align	1
+ 2535              		.global	readAllCellTemps
+ 2536              		.syntax unified
+ 2537              		.thumb
+ 2538              		.thumb_func
+ 2539              		.fpu softvfp
+ 2541              	readAllCellTemps:
+ 2542              	.LVL203:
+ 2543              	.LFB72:
  295:Src/LTC6811.c **** 
- 2543              		.loc 1 295 75 is_stmt 1 view -0
- 2544              		.cfi_startproc
- 2545              		@ args = 100, pretend = 16, frame = 8
- 2546              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2544              		.loc 1 295 75 is_stmt 1 view -0
+ 2545              		.cfi_startproc
+ 2546              		@ args = 100, pretend = 16, frame = 8
+ 2547              		@ frame_needed = 1, uses_anonymous_args = 0
  295:Src/LTC6811.c **** 
- 2547              		.loc 1 295 75 is_stmt 0 view .LVU863
- 2548 0000 84B0     		sub	sp, sp, #16
- 2549              	.LCFI47:
- 2550              		.cfi_def_cfa_offset 16
- 2551 0002 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
- 2552              	.LCFI48:
- 2553              		.cfi_def_cfa_offset 52
- 2554              		.cfi_offset 4, -52
- 2555              		.cfi_offset 5, -48
- 2556              		.cfi_offset 6, -44
- 2557              		.cfi_offset 7, -40
- 2558              		.cfi_offset 8, -36
- 2559              		.cfi_offset 9, -32
- 2560              		.cfi_offset 10, -28
- 2561              		.cfi_offset 11, -24
- 2562              		.cfi_offset 14, -20
- 2563 0006 83B0     		sub	sp, sp, #12
- 2564              	.LCFI49:
- 2565              		.cfi_def_cfa_offset 64
- 2566 0008 00AF     		add	r7, sp, #0
- 2567              	.LCFI50:
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 71
+ 2548              		.loc 1 295 75 is_stmt 0 view .LVU863
+ 2549 0000 84B0     		sub	sp, sp, #16
+ 2550              	.LCFI47:
+ 2551              		.cfi_def_cfa_offset 16
+ 2552 0002 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 2553              	.LCFI48:
+ 2554              		.cfi_def_cfa_offset 52
+ 2555              		.cfi_offset 4, -52
+ 2556              		.cfi_offset 5, -48
+ 2557              		.cfi_offset 6, -44
+ 2558              		.cfi_offset 7, -40
+ 2559              		.cfi_offset 8, -36
+ 2560              		.cfi_offset 9, -32
+ 2561              		.cfi_offset 10, -28
+ 2562              		.cfi_offset 11, -24
+ 2563              		.cfi_offset 14, -20
+ 2564 0006 83B0     		sub	sp, sp, #12
+ 2565              	.LCFI49:
+ 2566              		.cfi_def_cfa_offset 64
+ 2567 0008 00AF     		add	r7, sp, #0
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 71
 
 
- 2568              		.cfi_def_cfa_register 7
- 2569 000a 07F13004 		add	r4, r7, #48
- 2570 000e 84E80F00 		stm	r4, {r0, r1, r2, r3}
- 2571 0012 D7F89060 		ldr	r6, [r7, #144]
+ 2568              	.LCFI50:
+ 2569              		.cfi_def_cfa_register 7
+ 2570 000a 07F13004 		add	r4, r7, #48
+ 2571 000e 84E80F00 		stm	r4, {r0, r1, r2, r3}
+ 2572 0012 D7F89060 		ldr	r6, [r7, #144]
  297:Src/LTC6811.c **** 	bool boardDCFault[cfg.numOfTempPerIC];
- 2572              		.loc 1 297 2 is_stmt 1 view .LVU864
+ 2573              		.loc 1 297 2 is_stmt 1 view .LVU864
  297:Src/LTC6811.c **** 	bool boardDCFault[cfg.numOfTempPerIC];
- 2573              		.loc 1 297 24 is_stmt 0 view .LVU865
- 2574 0016 97F85330 		ldrb	r3, [r7, #83]	@ zero_extendqisi2
- 2575              	.LVL204:
+ 2574              		.loc 1 297 24 is_stmt 0 view .LVU865
+ 2575 0016 97F85330 		ldrb	r3, [r7, #83]	@ zero_extendqisi2
+ 2576              	.LVL204:
  297:Src/LTC6811.c **** 	bool boardDCFault[cfg.numOfTempPerIC];
- 2576              		.loc 1 297 11 view .LVU866
- 2577 001a 5A00     		lsls	r2, r3, #1
- 2578 001c 0732     		adds	r2, r2, #7
- 2579 001e 02F47E72 		and	r2, r2, #1016
- 2580 0022 ADEB020D 		sub	sp, sp, r2
- 2581 0026 6D46     		mov	r5, sp
- 2582              	.LVL205:
+ 2577              		.loc 1 297 11 view .LVU866
+ 2578 001a 5A00     		lsls	r2, r3, #1
+ 2579 001c 0732     		adds	r2, r2, #7
+ 2580 001e 02F47E72 		and	r2, r2, #1016
+ 2581 0022 ADEB020D 		sub	sp, sp, r2
+ 2582 0026 6D46     		mov	r5, sp
+ 2583              	.LVL205:
  298:Src/LTC6811.c **** 	bool boardTempFault[cfg.numOfTempPerIC];
- 2583              		.loc 1 298 2 is_stmt 1 view .LVU867
+ 2584              		.loc 1 298 2 is_stmt 1 view .LVU867
  298:Src/LTC6811.c **** 	bool boardTempFault[cfg.numOfTempPerIC];
- 2584              		.loc 1 298 7 is_stmt 0 view .LVU868
- 2585 0028 0733     		adds	r3, r3, #7
- 2586              	.LVL206:
+ 2585              		.loc 1 298 7 is_stmt 0 view .LVU868
+ 2586 0028 0733     		adds	r3, r3, #7
+ 2587              	.LVL206:
  298:Src/LTC6811.c **** 	bool boardTempFault[cfg.numOfTempPerIC];
- 2587              		.loc 1 298 7 view .LVU869
- 2588 002a 03F4FC73 		and	r3, r3, #504
- 2589              	.LVL207:
+ 2588              		.loc 1 298 7 view .LVU869
+ 2589 002a 03F4FC73 		and	r3, r3, #504
+ 2590              	.LVL207:
  298:Src/LTC6811.c **** 	bool boardTempFault[cfg.numOfTempPerIC];
- 2590              		.loc 1 298 7 view .LVU870
- 2591 002e ADEB030D 		sub	sp, sp, r3
- 2592 0032 EA46     		mov	r10, sp
- 2593              	.LVL208:
+ 2591              		.loc 1 298 7 view .LVU870
+ 2592 002e ADEB030D 		sub	sp, sp, r3
+ 2593 0032 EA46     		mov	r10, sp
+ 2594              	.LVL208:
  299:Src/LTC6811.c **** 	bool PEC_check[cfg.numOfICs];
- 2594              		.loc 1 299 2 is_stmt 1 view .LVU871
+ 2595              		.loc 1 299 2 is_stmt 1 view .LVU871
  299:Src/LTC6811.c **** 	bool PEC_check[cfg.numOfICs];
- 2595              		.loc 1 299 7 is_stmt 0 view .LVU872
- 2596 0034 ADEB030D 		sub	sp, sp, r3
- 2597 0038 E946     		mov	r9, sp
- 2598              	.LVL209:
+ 2596              		.loc 1 299 7 is_stmt 0 view .LVU872
+ 2597 0034 ADEB030D 		sub	sp, sp, r3
+ 2598 0038 E946     		mov	r9, sp
+ 2599              	.LVL209:
  300:Src/LTC6811.c **** 	bool dataValid = true;
- 2599              		.loc 1 300 2 is_stmt 1 view .LVU873
+ 2600              		.loc 1 300 2 is_stmt 1 view .LVU873
  300:Src/LTC6811.c **** 	bool dataValid = true;
- 2600              		.loc 1 300 20 is_stmt 0 view .LVU874
- 2601 003a 97F83030 		ldrb	r3, [r7, #48]	@ zero_extendqisi2
- 2602 003e 7B60     		str	r3, [r7, #4]
- 2603              	.LVL210:
+ 2601              		.loc 1 300 20 is_stmt 0 view .LVU874
+ 2602 003a 97F83030 		ldrb	r3, [r7, #48]	@ zero_extendqisi2
+ 2603 003e 7B60     		str	r3, [r7, #4]
+ 2604              	.LVL210:
  300:Src/LTC6811.c **** 	bool dataValid = true;
- 2604              		.loc 1 300 7 view .LVU875
- 2605 0040 0733     		adds	r3, r3, #7
- 2606              	.LVL211:
+ 2605              		.loc 1 300 7 view .LVU875
+ 2606 0040 0733     		adds	r3, r3, #7
+ 2607              	.LVL211:
  300:Src/LTC6811.c **** 	bool dataValid = true;
- 2607              		.loc 1 300 7 view .LVU876
- 2608 0042 03F4FC73 		and	r3, r3, #504
- 2609 0046 ADEB030D 		sub	sp, sp, r3
- 2610 004a E846     		mov	r8, sp
- 2611              	.LVL212:
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 72
+ 2608              		.loc 1 300 7 view .LVU876
+ 2609 0042 03F4FC73 		and	r3, r3, #504
+ 2610 0046 ADEB030D 		sub	sp, sp, r3
+ 2611 004a E846     		mov	r8, sp
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 72
 
 
+ 2612              	.LVL212:
  301:Src/LTC6811.c **** 
- 2612              		.loc 1 301 2 is_stmt 1 view .LVU877
+ 2613              		.loc 1 301 2 is_stmt 1 view .LVU877
  303:Src/LTC6811.c **** 
- 2613              		.loc 1 303 2 view .LVU878
- 2614              	.LBB18:
+ 2614              		.loc 1 303 2 view .LVU878
+ 2615              	.LBB18:
  303:Src/LTC6811.c **** 
- 2615              		.loc 1 303 7 view .LVU879
+ 2616              		.loc 1 303 7 view .LVU879
  303:Src/LTC6811.c **** 
- 2616              		.loc 1 303 15 is_stmt 0 view .LVU880
- 2617 004c 4FF0000B 		mov	fp, #0
+ 2617              		.loc 1 303 15 is_stmt 0 view .LVU880
+ 2618 004c 4FF0000B 		mov	fp, #0
  303:Src/LTC6811.c **** 
- 2618              		.loc 1 303 2 view .LVU881
- 2619 0050 47E0     		b	.L98
- 2620              	.LVL213:
- 2621              	.L108:
+ 2619              		.loc 1 303 2 view .LVU881
+ 2620 0050 47E0     		b	.L98
+ 2621              	.LVL213:
+ 2622              	.L108:
  316:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 0][5] = (uint8_t) (boardTemp[0] & 0xFF); //temp1 L
- 2622              		.loc 1 316 3 is_stmt 1 discriminator 2 view .LVU882
+ 2623              		.loc 1 316 3 is_stmt 1 discriminator 2 view .LVU882
  316:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 0][5] = (uint8_t) (boardTemp[0] & 0xFF); //temp1 L
- 2623              		.loc 1 316 72 is_stmt 0 discriminator 2 view .LVU883
- 2624 0052 2A88     		ldrh	r2, [r5]
+ 2624              		.loc 1 316 72 is_stmt 0 discriminator 2 view .LVU883
+ 2625 0052 2A88     		ldrh	r2, [r5]
  316:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 0][5] = (uint8_t) (boardTemp[0] & 0xFF); //temp1 L
- 2625              		.loc 1 316 18 discriminator 2 view .LVU884
- 2626 0054 03FB04F4 		mul	r4, r3, r4
+ 2626              		.loc 1 316 18 discriminator 2 view .LVU884
+ 2627 0054 03FB04F4 		mul	r4, r3, r4
  316:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 0][5] = (uint8_t) (boardTemp[0] & 0xFF); //temp1 L
- 2627              		.loc 1 316 10 discriminator 2 view .LVU885
- 2628 0058 04EB4401 		add	r1, r4, r4, lsl #1
- 2629              	.LVL214:
+ 2628              		.loc 1 316 10 discriminator 2 view .LVU885
+ 2629 0058 04EB4401 		add	r1, r4, r4, lsl #1
+ 2630              	.LVL214:
  316:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 0][5] = (uint8_t) (boardTemp[0] & 0xFF); //temp1 L
- 2630              		.loc 1 316 10 discriminator 2 view .LVU886
- 2631 005c 4B00     		lsls	r3, r1, #1
- 2632 005e F118     		adds	r1, r6, r3
+ 2631              		.loc 1 316 10 discriminator 2 view .LVU886
+ 2632 005c 4B00     		lsls	r3, r1, #1
+ 2633 005e F118     		adds	r1, r6, r3
  316:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 0][5] = (uint8_t) (boardTemp[0] & 0xFF); //temp1 L
- 2633              		.loc 1 316 51 discriminator 2 view .LVU887
- 2634 0060 120A     		lsrs	r2, r2, #8
+ 2634              		.loc 1 316 51 discriminator 2 view .LVU887
+ 2635 0060 120A     		lsrs	r2, r2, #8
  316:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 0][5] = (uint8_t) (boardTemp[0] & 0xFF); //temp1 L
- 2635              		.loc 1 316 49 discriminator 2 view .LVU888
- 2636 0062 0A71     		strb	r2, [r1, #4]
+ 2636              		.loc 1 316 49 discriminator 2 view .LVU888
+ 2637 0062 0A71     		strb	r2, [r1, #4]
  317:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 1][4] = (uint8_t) ((boardTemp[0] >> 8) & 0xFF); //temp1 H
- 2637              		.loc 1 317 3 is_stmt 1 discriminator 2 view .LVU889
+ 2638              		.loc 1 317 3 is_stmt 1 discriminator 2 view .LVU889
  317:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 1][4] = (uint8_t) ((boardTemp[0] >> 8) & 0xFF); //temp1 H
- 2638              		.loc 1 317 51 is_stmt 0 discriminator 2 view .LVU890
- 2639 0064 2A78     		ldrb	r2, [r5]	@ zero_extendqisi2
+ 2639              		.loc 1 317 51 is_stmt 0 discriminator 2 view .LVU890
+ 2640 0064 2A78     		ldrb	r2, [r5]	@ zero_extendqisi2
  317:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 1][4] = (uint8_t) ((boardTemp[0] >> 8) & 0xFF); //temp1 H
- 2640              		.loc 1 317 49 discriminator 2 view .LVU891
- 2641 0066 4A71     		strb	r2, [r1, #5]
+ 2641              		.loc 1 317 49 discriminator 2 view .LVU891
+ 2642 0066 4A71     		strb	r2, [r1, #5]
  318:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 1][5] = (uint8_t) (boardTemp[0] & 0xFF); //temp1 L
- 2642              		.loc 1 318 3 is_stmt 1 discriminator 2 view .LVU892
+ 2643              		.loc 1 318 3 is_stmt 1 discriminator 2 view .LVU892
  318:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 1][5] = (uint8_t) (boardTemp[0] & 0xFF); //temp1 L
- 2643              		.loc 1 318 72 is_stmt 0 discriminator 2 view .LVU893
- 2644 0068 2988     		ldrh	r1, [r5]
+ 2644              		.loc 1 318 72 is_stmt 0 discriminator 2 view .LVU893
+ 2645 0068 2988     		ldrh	r1, [r5]
  318:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 1][5] = (uint8_t) (boardTemp[0] & 0xFF); //temp1 L
- 2645              		.loc 1 318 10 discriminator 2 view .LVU894
- 2646 006a 0134     		adds	r4, r4, #1
- 2647 006c 04EB4404 		add	r4, r4, r4, lsl #1
- 2648 0070 6200     		lsls	r2, r4, #1
- 2649 0072 3244     		add	r2, r2, r6
- 318:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 1][5] = (uint8_t) (boardTemp[0] & 0xFF); //temp1 L
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 73
+ 2646              		.loc 1 318 10 discriminator 2 view .LVU894
+ 2647 006a 0134     		adds	r4, r4, #1
+ 2648 006c 04EB4404 		add	r4, r4, r4, lsl #1
+ 2649 0070 6200     		lsls	r2, r4, #1
+ 2650 0072 3244     		add	r2, r2, r6
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 73
 
 
- 2650              		.loc 1 318 51 discriminator 2 view .LVU895
- 2651 0074 090A     		lsrs	r1, r1, #8
  318:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 1][5] = (uint8_t) (boardTemp[0] & 0xFF); //temp1 L
- 2652              		.loc 1 318 49 discriminator 2 view .LVU896
- 2653 0076 1171     		strb	r1, [r2, #4]
+ 2651              		.loc 1 318 51 discriminator 2 view .LVU895
+ 2652 0074 090A     		lsrs	r1, r1, #8
+ 318:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 1][5] = (uint8_t) (boardTemp[0] & 0xFF); //temp1 L
+ 2653              		.loc 1 318 49 discriminator 2 view .LVU896
+ 2654 0076 1171     		strb	r1, [r2, #4]
  319:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 2][4] = (uint8_t) ((boardTemp[1] >> 8) & 0xFF); //temp2 H
- 2654              		.loc 1 319 3 is_stmt 1 discriminator 2 view .LVU897
+ 2655              		.loc 1 319 3 is_stmt 1 discriminator 2 view .LVU897
  319:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 2][4] = (uint8_t) ((boardTemp[1] >> 8) & 0xFF); //temp2 H
- 2655              		.loc 1 319 51 is_stmt 0 discriminator 2 view .LVU898
- 2656 0078 2978     		ldrb	r1, [r5]	@ zero_extendqisi2
+ 2656              		.loc 1 319 51 is_stmt 0 discriminator 2 view .LVU898
+ 2657 0078 2978     		ldrb	r1, [r5]	@ zero_extendqisi2
  319:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 2][4] = (uint8_t) ((boardTemp[1] >> 8) & 0xFF); //temp2 H
- 2657              		.loc 1 319 49 discriminator 2 view .LVU899
- 2658 007a 5171     		strb	r1, [r2, #5]
+ 2658              		.loc 1 319 49 discriminator 2 view .LVU899
+ 2659 007a 5171     		strb	r1, [r2, #5]
  320:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 2][5] = (uint8_t) (boardTemp[1] & 0xFF); //temp2 L
- 2659              		.loc 1 320 3 is_stmt 1 discriminator 2 view .LVU900
+ 2660              		.loc 1 320 3 is_stmt 1 discriminator 2 view .LVU900
  320:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 2][5] = (uint8_t) (boardTemp[1] & 0xFF); //temp2 L
- 2660              		.loc 1 320 72 is_stmt 0 discriminator 2 view .LVU901
- 2661 007c 6988     		ldrh	r1, [r5, #2]
+ 2661              		.loc 1 320 72 is_stmt 0 discriminator 2 view .LVU901
+ 2662 007c 6988     		ldrh	r1, [r5, #2]
  320:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 2][5] = (uint8_t) (boardTemp[1] & 0xFF); //temp2 L
- 2662              		.loc 1 320 10 discriminator 2 view .LVU902
- 2663 007e 03F10C02 		add	r2, r3, #12
- 2664 0082 3244     		add	r2, r2, r6
+ 2663              		.loc 1 320 10 discriminator 2 view .LVU902
+ 2664 007e 03F10C02 		add	r2, r3, #12
+ 2665 0082 3244     		add	r2, r2, r6
  320:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 2][5] = (uint8_t) (boardTemp[1] & 0xFF); //temp2 L
- 2665              		.loc 1 320 51 discriminator 2 view .LVU903
- 2666 0084 090A     		lsrs	r1, r1, #8
+ 2666              		.loc 1 320 51 discriminator 2 view .LVU903
+ 2667 0084 090A     		lsrs	r1, r1, #8
  320:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 2][5] = (uint8_t) (boardTemp[1] & 0xFF); //temp2 L
- 2667              		.loc 1 320 49 discriminator 2 view .LVU904
- 2668 0086 1171     		strb	r1, [r2, #4]
+ 2668              		.loc 1 320 49 discriminator 2 view .LVU904
+ 2669 0086 1171     		strb	r1, [r2, #4]
  321:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 3][4] = (uint8_t) ((boardTemp[1] >> 8) & 0xFF); //temp2 H
- 2669              		.loc 1 321 3 is_stmt 1 discriminator 2 view .LVU905
+ 2670              		.loc 1 321 3 is_stmt 1 discriminator 2 view .LVU905
  321:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 3][4] = (uint8_t) ((boardTemp[1] >> 8) & 0xFF); //temp2 H
- 2670              		.loc 1 321 51 is_stmt 0 discriminator 2 view .LVU906
- 2671 0088 A978     		ldrb	r1, [r5, #2]	@ zero_extendqisi2
+ 2671              		.loc 1 321 51 is_stmt 0 discriminator 2 view .LVU906
+ 2672 0088 A978     		ldrb	r1, [r5, #2]	@ zero_extendqisi2
  321:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 3][4] = (uint8_t) ((boardTemp[1] >> 8) & 0xFF); //temp2 H
- 2672              		.loc 1 321 49 discriminator 2 view .LVU907
- 2673 008a 5171     		strb	r1, [r2, #5]
+ 2673              		.loc 1 321 49 discriminator 2 view .LVU907
+ 2674 008a 5171     		strb	r1, [r2, #5]
  322:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 3][5] = (uint8_t) (boardTemp[1] & 0xFF); //temp2 L
- 2674              		.loc 1 322 3 is_stmt 1 discriminator 2 view .LVU908
+ 2675              		.loc 1 322 3 is_stmt 1 discriminator 2 view .LVU908
  322:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 3][5] = (uint8_t) (boardTemp[1] & 0xFF); //temp2 L
- 2675              		.loc 1 322 72 is_stmt 0 discriminator 2 view .LVU909
- 2676 008c 6988     		ldrh	r1, [r5, #2]
+ 2676              		.loc 1 322 72 is_stmt 0 discriminator 2 view .LVU909
+ 2677 008c 6988     		ldrh	r1, [r5, #2]
  322:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 3][5] = (uint8_t) (boardTemp[1] & 0xFF); //temp2 L
- 2677              		.loc 1 322 10 discriminator 2 view .LVU910
- 2678 008e 03F11202 		add	r2, r3, #18
- 2679 0092 3244     		add	r2, r2, r6
+ 2678              		.loc 1 322 10 discriminator 2 view .LVU910
+ 2679 008e 03F11202 		add	r2, r3, #18
+ 2680 0092 3244     		add	r2, r2, r6
  322:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 3][5] = (uint8_t) (boardTemp[1] & 0xFF); //temp2 L
- 2680              		.loc 1 322 51 discriminator 2 view .LVU911
- 2681 0094 090A     		lsrs	r1, r1, #8
+ 2681              		.loc 1 322 51 discriminator 2 view .LVU911
+ 2682 0094 090A     		lsrs	r1, r1, #8
  322:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 3][5] = (uint8_t) (boardTemp[1] & 0xFF); //temp2 L
- 2682              		.loc 1 322 49 discriminator 2 view .LVU912
- 2683 0096 1171     		strb	r1, [r2, #4]
+ 2683              		.loc 1 322 49 discriminator 2 view .LVU912
+ 2684 0096 1171     		strb	r1, [r2, #4]
  323:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 4][4] = (uint8_t) ((boardTemp[2] >> 8) & 0xFF); //temp3 H
- 2684              		.loc 1 323 3 is_stmt 1 discriminator 2 view .LVU913
+ 2685              		.loc 1 323 3 is_stmt 1 discriminator 2 view .LVU913
  323:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 4][4] = (uint8_t) ((boardTemp[2] >> 8) & 0xFF); //temp3 H
- 2685              		.loc 1 323 51 is_stmt 0 discriminator 2 view .LVU914
- 2686 0098 A978     		ldrb	r1, [r5, #2]	@ zero_extendqisi2
+ 2686              		.loc 1 323 51 is_stmt 0 discriminator 2 view .LVU914
+ 2687 0098 A978     		ldrb	r1, [r5, #2]	@ zero_extendqisi2
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 74
+
+
  323:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 4][4] = (uint8_t) ((boardTemp[2] >> 8) & 0xFF); //temp3 H
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 74
-
-
- 2687              		.loc 1 323 49 discriminator 2 view .LVU915
- 2688 009a 5171     		strb	r1, [r2, #5]
+ 2688              		.loc 1 323 49 discriminator 2 view .LVU915
+ 2689 009a 5171     		strb	r1, [r2, #5]
  324:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 4][5] = (uint8_t) (boardTemp[2] & 0xFF); //temp3 L
- 2689              		.loc 1 324 3 is_stmt 1 discriminator 2 view .LVU916
+ 2690              		.loc 1 324 3 is_stmt 1 discriminator 2 view .LVU916
  324:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 4][5] = (uint8_t) (boardTemp[2] & 0xFF); //temp3 L
- 2690              		.loc 1 324 72 is_stmt 0 discriminator 2 view .LVU917
- 2691 009c A988     		ldrh	r1, [r5, #4]
+ 2691              		.loc 1 324 72 is_stmt 0 discriminator 2 view .LVU917
+ 2692 009c A988     		ldrh	r1, [r5, #4]
  324:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 4][5] = (uint8_t) (boardTemp[2] & 0xFF); //temp3 L
- 2692              		.loc 1 324 10 discriminator 2 view .LVU918
- 2693 009e 03F11802 		add	r2, r3, #24
- 2694 00a2 3244     		add	r2, r2, r6
+ 2693              		.loc 1 324 10 discriminator 2 view .LVU918
+ 2694 009e 03F11802 		add	r2, r3, #24
+ 2695 00a2 3244     		add	r2, r2, r6
  324:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 4][5] = (uint8_t) (boardTemp[2] & 0xFF); //temp3 L
- 2695              		.loc 1 324 51 discriminator 2 view .LVU919
- 2696 00a4 090A     		lsrs	r1, r1, #8
+ 2696              		.loc 1 324 51 discriminator 2 view .LVU919
+ 2697 00a4 090A     		lsrs	r1, r1, #8
  324:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 4][5] = (uint8_t) (boardTemp[2] & 0xFF); //temp3 L
- 2697              		.loc 1 324 49 discriminator 2 view .LVU920
- 2698 00a6 1171     		strb	r1, [r2, #4]
+ 2698              		.loc 1 324 49 discriminator 2 view .LVU920
+ 2699 00a6 1171     		strb	r1, [r2, #4]
  325:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 5][4] = (uint8_t) ((boardTemp[2] >> 8) & 0xFF); //temp3 H
- 2699              		.loc 1 325 3 is_stmt 1 discriminator 2 view .LVU921
+ 2700              		.loc 1 325 3 is_stmt 1 discriminator 2 view .LVU921
  325:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 5][4] = (uint8_t) ((boardTemp[2] >> 8) & 0xFF); //temp3 H
- 2700              		.loc 1 325 51 is_stmt 0 discriminator 2 view .LVU922
- 2701 00a8 2979     		ldrb	r1, [r5, #4]	@ zero_extendqisi2
+ 2701              		.loc 1 325 51 is_stmt 0 discriminator 2 view .LVU922
+ 2702 00a8 2979     		ldrb	r1, [r5, #4]	@ zero_extendqisi2
  325:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 5][4] = (uint8_t) ((boardTemp[2] >> 8) & 0xFF); //temp3 H
- 2702              		.loc 1 325 49 discriminator 2 view .LVU923
- 2703 00aa 5171     		strb	r1, [r2, #5]
+ 2703              		.loc 1 325 49 discriminator 2 view .LVU923
+ 2704 00aa 5171     		strb	r1, [r2, #5]
  326:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 5][5] = (uint8_t) (boardTemp[2] & 0xFF); //temp3 L
- 2704              		.loc 1 326 3 is_stmt 1 discriminator 2 view .LVU924
+ 2705              		.loc 1 326 3 is_stmt 1 discriminator 2 view .LVU924
  326:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 5][5] = (uint8_t) (boardTemp[2] & 0xFF); //temp3 L
- 2705              		.loc 1 326 72 is_stmt 0 discriminator 2 view .LVU925
- 2706 00ac A988     		ldrh	r1, [r5, #4]
+ 2706              		.loc 1 326 72 is_stmt 0 discriminator 2 view .LVU925
+ 2707 00ac A988     		ldrh	r1, [r5, #4]
  326:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 5][5] = (uint8_t) (boardTemp[2] & 0xFF); //temp3 L
- 2707              		.loc 1 326 10 discriminator 2 view .LVU926
- 2708 00ae 03F11E02 		add	r2, r3, #30
- 2709 00b2 3244     		add	r2, r2, r6
+ 2708              		.loc 1 326 10 discriminator 2 view .LVU926
+ 2709 00ae 03F11E02 		add	r2, r3, #30
+ 2710 00b2 3244     		add	r2, r2, r6
  326:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 5][5] = (uint8_t) (boardTemp[2] & 0xFF); //temp3 L
- 2710              		.loc 1 326 51 discriminator 2 view .LVU927
- 2711 00b4 090A     		lsrs	r1, r1, #8
+ 2711              		.loc 1 326 51 discriminator 2 view .LVU927
+ 2712 00b4 090A     		lsrs	r1, r1, #8
  326:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 5][5] = (uint8_t) (boardTemp[2] & 0xFF); //temp3 L
- 2712              		.loc 1 326 49 discriminator 2 view .LVU928
- 2713 00b6 1171     		strb	r1, [r2, #4]
+ 2713              		.loc 1 326 49 discriminator 2 view .LVU928
+ 2714 00b6 1171     		strb	r1, [r2, #4]
  327:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 6][4] = (uint8_t) ((boardTemp[3] >> 8) & 0xFF); //temp4 H
- 2714              		.loc 1 327 3 is_stmt 1 discriminator 2 view .LVU929
+ 2715              		.loc 1 327 3 is_stmt 1 discriminator 2 view .LVU929
  327:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 6][4] = (uint8_t) ((boardTemp[3] >> 8) & 0xFF); //temp4 H
- 2715              		.loc 1 327 51 is_stmt 0 discriminator 2 view .LVU930
- 2716 00b8 2979     		ldrb	r1, [r5, #4]	@ zero_extendqisi2
+ 2716              		.loc 1 327 51 is_stmt 0 discriminator 2 view .LVU930
+ 2717 00b8 2979     		ldrb	r1, [r5, #4]	@ zero_extendqisi2
  327:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 6][4] = (uint8_t) ((boardTemp[3] >> 8) & 0xFF); //temp4 H
- 2717              		.loc 1 327 49 discriminator 2 view .LVU931
- 2718 00ba 5171     		strb	r1, [r2, #5]
+ 2718              		.loc 1 327 49 discriminator 2 view .LVU931
+ 2719 00ba 5171     		strb	r1, [r2, #5]
  328:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 6][5] = (uint8_t) (boardTemp[3] & 0xFF); //temp4 L
- 2719              		.loc 1 328 3 is_stmt 1 discriminator 2 view .LVU932
+ 2720              		.loc 1 328 3 is_stmt 1 discriminator 2 view .LVU932
  328:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 6][5] = (uint8_t) (boardTemp[3] & 0xFF); //temp4 L
- 2720              		.loc 1 328 72 is_stmt 0 discriminator 2 view .LVU933
- 2721 00bc E988     		ldrh	r1, [r5, #6]
+ 2721              		.loc 1 328 72 is_stmt 0 discriminator 2 view .LVU933
+ 2722 00bc E988     		ldrh	r1, [r5, #6]
  328:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 6][5] = (uint8_t) (boardTemp[3] & 0xFF); //temp4 L
- 2722              		.loc 1 328 10 discriminator 2 view .LVU934
- 2723 00be 03F12402 		add	r2, r3, #36
- 2724 00c2 3244     		add	r2, r2, r6
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 75
+ 2723              		.loc 1 328 10 discriminator 2 view .LVU934
+ 2724 00be 03F12402 		add	r2, r3, #36
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 75
 
 
+ 2725 00c2 3244     		add	r2, r2, r6
  328:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 6][5] = (uint8_t) (boardTemp[3] & 0xFF); //temp4 L
- 2725              		.loc 1 328 51 discriminator 2 view .LVU935
- 2726 00c4 090A     		lsrs	r1, r1, #8
+ 2726              		.loc 1 328 51 discriminator 2 view .LVU935
+ 2727 00c4 090A     		lsrs	r1, r1, #8
  328:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 6][5] = (uint8_t) (boardTemp[3] & 0xFF); //temp4 L
- 2727              		.loc 1 328 49 discriminator 2 view .LVU936
- 2728 00c6 1171     		strb	r1, [r2, #4]
+ 2728              		.loc 1 328 49 discriminator 2 view .LVU936
+ 2729 00c6 1171     		strb	r1, [r2, #4]
  329:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 7][4] = (uint8_t) ((boardTemp[3] >> 8) & 0xFF); //temp4 H
- 2729              		.loc 1 329 3 is_stmt 1 discriminator 2 view .LVU937
+ 2730              		.loc 1 329 3 is_stmt 1 discriminator 2 view .LVU937
  329:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 7][4] = (uint8_t) ((boardTemp[3] >> 8) & 0xFF); //temp4 H
- 2730              		.loc 1 329 51 is_stmt 0 discriminator 2 view .LVU938
- 2731 00c8 A979     		ldrb	r1, [r5, #6]	@ zero_extendqisi2
+ 2731              		.loc 1 329 51 is_stmt 0 discriminator 2 view .LVU938
+ 2732 00c8 A979     		ldrb	r1, [r5, #6]	@ zero_extendqisi2
  329:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 7][4] = (uint8_t) ((boardTemp[3] >> 8) & 0xFF); //temp4 H
- 2732              		.loc 1 329 49 discriminator 2 view .LVU939
- 2733 00ca 5171     		strb	r1, [r2, #5]
+ 2733              		.loc 1 329 49 discriminator 2 view .LVU939
+ 2734 00ca 5171     		strb	r1, [r2, #5]
  330:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 7][5] = (uint8_t) (boardTemp[3] & 0xFF); //temp4 L
- 2734              		.loc 1 330 3 is_stmt 1 discriminator 2 view .LVU940
+ 2735              		.loc 1 330 3 is_stmt 1 discriminator 2 view .LVU940
  330:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 7][5] = (uint8_t) (boardTemp[3] & 0xFF); //temp4 L
- 2735              		.loc 1 330 72 is_stmt 0 discriminator 2 view .LVU941
- 2736 00cc EA88     		ldrh	r2, [r5, #6]
+ 2736              		.loc 1 330 72 is_stmt 0 discriminator 2 view .LVU941
+ 2737 00cc EA88     		ldrh	r2, [r5, #6]
  330:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 7][5] = (uint8_t) (boardTemp[3] & 0xFF); //temp4 L
- 2737              		.loc 1 330 10 discriminator 2 view .LVU942
- 2738 00ce 2A33     		adds	r3, r3, #42
- 2739 00d0 3344     		add	r3, r3, r6
+ 2738              		.loc 1 330 10 discriminator 2 view .LVU942
+ 2739 00ce 2A33     		adds	r3, r3, #42
+ 2740 00d0 3344     		add	r3, r3, r6
  330:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 7][5] = (uint8_t) (boardTemp[3] & 0xFF); //temp4 L
- 2740              		.loc 1 330 51 discriminator 2 view .LVU943
- 2741 00d2 120A     		lsrs	r2, r2, #8
+ 2741              		.loc 1 330 51 discriminator 2 view .LVU943
+ 2742 00d2 120A     		lsrs	r2, r2, #8
  330:Src/LTC6811.c **** 		bmsData[(board * cfg.numOfCellsPerIC) + 7][5] = (uint8_t) (boardTemp[3] & 0xFF); //temp4 L
- 2742              		.loc 1 330 49 discriminator 2 view .LVU944
- 2743 00d4 1A71     		strb	r2, [r3, #4]
+ 2743              		.loc 1 330 49 discriminator 2 view .LVU944
+ 2744 00d4 1A71     		strb	r2, [r3, #4]
  331:Src/LTC6811.c **** 	}
- 2744              		.loc 1 331 3 is_stmt 1 discriminator 2 view .LVU945
+ 2745              		.loc 1 331 3 is_stmt 1 discriminator 2 view .LVU945
  331:Src/LTC6811.c **** 	}
- 2745              		.loc 1 331 51 is_stmt 0 discriminator 2 view .LVU946
- 2746 00d6 AA79     		ldrb	r2, [r5, #6]	@ zero_extendqisi2
+ 2746              		.loc 1 331 51 is_stmt 0 discriminator 2 view .LVU946
+ 2747 00d6 AA79     		ldrb	r2, [r5, #6]	@ zero_extendqisi2
  331:Src/LTC6811.c **** 	}
- 2747              		.loc 1 331 49 discriminator 2 view .LVU947
- 2748 00d8 5A71     		strb	r2, [r3, #5]
+ 2748              		.loc 1 331 49 discriminator 2 view .LVU947
+ 2749 00d8 5A71     		strb	r2, [r3, #5]
  303:Src/LTC6811.c **** 
- 2749              		.loc 1 303 53 discriminator 2 view .LVU948
- 2750 00da 0BF1010B 		add	fp, fp, #1
- 2751              	.LVL215:
+ 2750              		.loc 1 303 53 discriminator 2 view .LVU948
+ 2751 00da 0BF1010B 		add	fp, fp, #1
+ 2752              	.LVL215:
  303:Src/LTC6811.c **** 
- 2752              		.loc 1 303 53 discriminator 2 view .LVU949
- 2753 00de 5FFA8BFB 		uxtb	fp, fp
- 2754              	.LVL216:
- 2755              	.L98:
+ 2753              		.loc 1 303 53 discriminator 2 view .LVU949
+ 2754 00de 5FFA8BFB 		uxtb	fp, fp
+ 2755              	.LVL216:
+ 2756              	.L98:
  303:Src/LTC6811.c **** 
- 2756              		.loc 1 303 2 discriminator 1 view .LVU950
- 2757 00e2 7B68     		ldr	r3, [r7, #4]
- 2758 00e4 9B45     		cmp	fp, r3
- 2759 00e6 2DD2     		bcs	.L107
+ 2757              		.loc 1 303 2 discriminator 1 view .LVU950
+ 2758 00e2 7B68     		ldr	r3, [r7, #4]
+ 2759 00e4 9B45     		cmp	fp, r3
+ 2760 00e6 2DD2     		bcs	.L107
  306:Src/LTC6811.c **** 
- 2760              		.loc 1 306 3 is_stmt 1 view .LVU951
+ 2761              		.loc 1 306 3 is_stmt 1 view .LVU951
  306:Src/LTC6811.c **** 
- 2761              		.loc 1 306 22 is_stmt 0 view .LVU952
- 2762 00e8 5C46     		mov	r4, fp
- 2763 00ea 07F13003 		add	r3, r7, #48
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 76
+ 2762              		.loc 1 306 22 is_stmt 0 view .LVU952
+ 2763 00e8 5C46     		mov	r4, fp
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 76
 
 
- 2764 00ee 03EB0B00 		add	r0, r3, fp
- 2765 00f2 4B46     		mov	r3, r9
- 2766 00f4 5246     		mov	r2, r10
- 2767 00f6 2946     		mov	r1, r5
- 2768 00f8 4078     		ldrb	r0, [r0, #1]	@ zero_extendqisi2
- 2769 00fa FFF7FEFF 		bl	readCellTemp
- 2770              	.LVL217:
+ 2764 00ea 07F13003 		add	r3, r7, #48
+ 2765 00ee 03EB0B00 		add	r0, r3, fp
+ 2766 00f2 4B46     		mov	r3, r9
+ 2767 00f4 5246     		mov	r2, r10
+ 2768 00f6 2946     		mov	r1, r5
+ 2769 00f8 4078     		ldrb	r0, [r0, #1]	@ zero_extendqisi2
+ 2770 00fa FFF7FEFF 		bl	readCellTemp
+ 2771              	.LVL217:
  306:Src/LTC6811.c **** 
- 2771              		.loc 1 306 20 view .LVU953
- 2772 00fe 08F80B00 		strb	r0, [r8, fp]
+ 2772              		.loc 1 306 20 view .LVU953
+ 2773 00fe 08F80B00 		strb	r0, [r8, fp]
  309:Src/LTC6811.c **** 			bmsData[(board * cfg.numOfCellsPerIC) + cell][1] &= (PEC_check[board] << 1);
- 2773              		.loc 1 309 3 is_stmt 1 view .LVU954
- 2774              	.LBB19:
+ 2774              		.loc 1 309 3 is_stmt 1 view .LVU954
+ 2775              	.LBB19:
  309:Src/LTC6811.c **** 			bmsData[(board * cfg.numOfCellsPerIC) + cell][1] &= (PEC_check[board] << 1);
- 2775              		.loc 1 309 8 view .LVU955
- 2776              	.LVL218:
+ 2776              		.loc 1 309 8 view .LVU955
+ 2777              	.LVL218:
  309:Src/LTC6811.c **** 			bmsData[(board * cfg.numOfCellsPerIC) + cell][1] &= (PEC_check[board] << 1);
- 2777              		.loc 1 309 16 is_stmt 0 view .LVU956
- 2778 0102 0021     		movs	r1, #0
- 2779              	.LVL219:
- 2780              	.L99:
+ 2778              		.loc 1 309 16 is_stmt 0 view .LVU956
+ 2779 0102 0021     		movs	r1, #0
+ 2780              	.LVL219:
+ 2781              	.L99:
  309:Src/LTC6811.c **** 			bmsData[(board * cfg.numOfCellsPerIC) + cell][1] &= (PEC_check[board] << 1);
- 2781              		.loc 1 309 36 discriminator 1 view .LVU957
- 2782 0104 97F85230 		ldrb	r3, [r7, #82]	@ zero_extendqisi2
+ 2782              		.loc 1 309 36 discriminator 1 view .LVU957
+ 2783 0104 97F85230 		ldrb	r3, [r7, #82]	@ zero_extendqisi2
  309:Src/LTC6811.c **** 			bmsData[(board * cfg.numOfCellsPerIC) + cell][1] &= (PEC_check[board] << 1);
- 2783              		.loc 1 309 3 discriminator 1 view .LVU958
- 2784 0108 9942     		cmp	r1, r3
- 2785 010a A2D2     		bcs	.L108
+ 2784              		.loc 1 309 3 discriminator 1 view .LVU958
+ 2785 0108 9942     		cmp	r1, r3
+ 2786 010a A2D2     		bcs	.L108
  310:Src/LTC6811.c **** 			bmsData[(board * cfg.numOfCellsPerIC) + cell][1] |= (boardTempFault[cell / 2] << 4);
- 2786              		.loc 1 310 4 is_stmt 1 discriminator 3 view .LVU959
+ 2787              		.loc 1 310 4 is_stmt 1 discriminator 3 view .LVU959
  310:Src/LTC6811.c **** 			bmsData[(board * cfg.numOfCellsPerIC) + cell][1] |= (boardTempFault[cell / 2] << 4);
- 2787              		.loc 1 310 53 is_stmt 0 discriminator 3 view .LVU960
- 2788 010c 04FB0313 		mla	r3, r4, r3, r1
- 2789 0110 03EB4303 		add	r3, r3, r3, lsl #1
- 2790 0114 5A00     		lsls	r2, r3, #1
- 2791 0116 3244     		add	r2, r2, r6
+ 2788              		.loc 1 310 53 is_stmt 0 discriminator 3 view .LVU960
+ 2789 010c 04FB0313 		mla	r3, r4, r3, r1
+ 2790 0110 03EB4303 		add	r3, r3, r3, lsl #1
+ 2791 0114 5A00     		lsls	r2, r3, #1
+ 2792 0116 3244     		add	r2, r2, r6
  310:Src/LTC6811.c **** 			bmsData[(board * cfg.numOfCellsPerIC) + cell][1] |= (boardTempFault[cell / 2] << 4);
- 2792              		.loc 1 310 66 discriminator 3 view .LVU961
- 2793 0118 18F80400 		ldrb	r0, [r8, r4]	@ zero_extendqisi2
+ 2793              		.loc 1 310 66 discriminator 3 view .LVU961
+ 2794 0118 18F80400 		ldrb	r0, [r8, r4]	@ zero_extendqisi2
  310:Src/LTC6811.c **** 			bmsData[(board * cfg.numOfCellsPerIC) + cell][1] |= (boardTempFault[cell / 2] << 4);
- 2794              		.loc 1 310 53 discriminator 3 view .LVU962
- 2795 011c 5378     		ldrb	r3, [r2, #1]	@ zero_extendqisi2
- 2796 011e 03EA4003 		and	r3, r3, r0, lsl #1
- 2797 0122 5BB2     		sxtb	r3, r3
- 2798 0124 5370     		strb	r3, [r2, #1]
+ 2795              		.loc 1 310 53 discriminator 3 view .LVU962
+ 2796 011c 5378     		ldrb	r3, [r2, #1]	@ zero_extendqisi2
+ 2797 011e 03EA4003 		and	r3, r3, r0, lsl #1
+ 2798 0122 5BB2     		sxtb	r3, r3
+ 2799 0124 5370     		strb	r3, [r2, #1]
  311:Src/LTC6811.c **** 			bmsData[(board * cfg.numOfCellsPerIC) + cell][1] |= (boardDCFault[cell / 2] >> 3);
- 2799              		.loc 1 311 4 is_stmt 1 discriminator 3 view .LVU963
+ 2800              		.loc 1 311 4 is_stmt 1 discriminator 3 view .LVU963
  311:Src/LTC6811.c **** 			bmsData[(board * cfg.numOfCellsPerIC) + cell][1] |= (boardDCFault[cell / 2] >> 3);
- 2800              		.loc 1 311 77 is_stmt 0 discriminator 3 view .LVU964
- 2801 0126 4808     		lsrs	r0, r1, #1
+ 2801              		.loc 1 311 77 is_stmt 0 discriminator 3 view .LVU964
+ 2802 0126 4808     		lsrs	r0, r1, #1
  311:Src/LTC6811.c **** 			bmsData[(board * cfg.numOfCellsPerIC) + cell][1] |= (boardDCFault[cell / 2] >> 3);
- 2802              		.loc 1 311 71 discriminator 3 view .LVU965
- 2803 0128 19F800C0 		ldrb	ip, [r9, r0]	@ zero_extendqisi2
+ 2803              		.loc 1 311 71 discriminator 3 view .LVU965
+ 2804 0128 19F800C0 		ldrb	ip, [r9, r0]	@ zero_extendqisi2
  311:Src/LTC6811.c **** 			bmsData[(board * cfg.numOfCellsPerIC) + cell][1] |= (boardDCFault[cell / 2] >> 3);
- 2804              		.loc 1 311 53 discriminator 3 view .LVU966
- 2805 012c 43EA0C13 		orr	r3, r3, ip, lsl #4
- 2806 0130 5BB2     		sxtb	r3, r3
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 77
+ 2805              		.loc 1 311 53 discriminator 3 view .LVU966
+ 2806 012c 43EA0C13 		orr	r3, r3, ip, lsl #4
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 77
 
 
- 2807 0132 5370     		strb	r3, [r2, #1]
+ 2807 0130 5BB2     		sxtb	r3, r3
+ 2808 0132 5370     		strb	r3, [r2, #1]
  312:Src/LTC6811.c **** 		}
- 2808              		.loc 1 312 4 is_stmt 1 discriminator 3 view .LVU967
+ 2809              		.loc 1 312 4 is_stmt 1 discriminator 3 view .LVU967
  312:Src/LTC6811.c **** 		}
- 2809              		.loc 1 312 69 is_stmt 0 discriminator 3 view .LVU968
- 2810 0134 1AF80000 		ldrb	r0, [r10, r0]	@ zero_extendqisi2
+ 2810              		.loc 1 312 69 is_stmt 0 discriminator 3 view .LVU968
+ 2811 0134 1AF80000 		ldrb	r0, [r10, r0]	@ zero_extendqisi2
  312:Src/LTC6811.c **** 		}
- 2811              		.loc 1 312 53 discriminator 3 view .LVU969
- 2812 0138 43EAE003 		orr	r3, r3, r0, asr #3
- 2813 013c 5370     		strb	r3, [r2, #1]
+ 2812              		.loc 1 312 53 discriminator 3 view .LVU969
+ 2813 0138 43EAE003 		orr	r3, r3, r0, asr #3
+ 2814 013c 5370     		strb	r3, [r2, #1]
  309:Src/LTC6811.c **** 			bmsData[(board * cfg.numOfCellsPerIC) + cell][1] &= (PEC_check[board] << 1);
- 2814              		.loc 1 309 58 discriminator 3 view .LVU970
- 2815 013e 0131     		adds	r1, r1, #1
- 2816              	.LVL220:
+ 2815              		.loc 1 309 58 discriminator 3 view .LVU970
+ 2816 013e 0131     		adds	r1, r1, #1
+ 2817              	.LVL220:
  309:Src/LTC6811.c **** 			bmsData[(board * cfg.numOfCellsPerIC) + cell][1] &= (PEC_check[board] << 1);
- 2817              		.loc 1 309 58 discriminator 3 view .LVU971
- 2818 0140 C9B2     		uxtb	r1, r1
- 2819              	.LVL221:
+ 2818              		.loc 1 309 58 discriminator 3 view .LVU971
+ 2819 0140 C9B2     		uxtb	r1, r1
+ 2820              	.LVL221:
  309:Src/LTC6811.c **** 			bmsData[(board * cfg.numOfCellsPerIC) + cell][1] &= (PEC_check[board] << 1);
- 2820              		.loc 1 309 58 discriminator 3 view .LVU972
- 2821 0142 DFE7     		b	.L99
- 2822              	.LVL222:
- 2823              	.L107:
+ 2821              		.loc 1 309 58 discriminator 3 view .LVU972
+ 2822 0142 DFE7     		b	.L99
+ 2823              	.LVL222:
+ 2824              	.L107:
  309:Src/LTC6811.c **** 			bmsData[(board * cfg.numOfCellsPerIC) + cell][1] &= (PEC_check[board] << 1);
- 2824              		.loc 1 309 58 discriminator 3 view .LVU973
- 2825              	.LBE19:
- 2826              	.LBE18:
- 2827              	.LBB20:
+ 2825              		.loc 1 309 58 discriminator 3 view .LVU973
+ 2826              	.LBE19:
+ 2827              	.LBE18:
+ 2828              	.LBB20:
  334:Src/LTC6811.c **** 		if (PEC_check[board] == 0)
- 2828              		.loc 1 334 15 view .LVU974
- 2829 0144 0023     		movs	r3, #0
- 2830              	.LBE20:
+ 2829              		.loc 1 334 15 view .LVU974
+ 2830 0144 0023     		movs	r3, #0
+ 2831              	.LBE20:
  301:Src/LTC6811.c **** 
- 2831              		.loc 1 301 7 view .LVU975
- 2832 0146 0120     		movs	r0, #1
- 2833 0148 01E0     		b	.L102
- 2834              	.LVL223:
- 2835              	.L103:
- 2836              	.LBB21:
+ 2832              		.loc 1 301 7 view .LVU975
+ 2833 0146 0120     		movs	r0, #1
+ 2834 0148 01E0     		b	.L102
+ 2835              	.LVL223:
+ 2836              	.L103:
+ 2837              	.LBB21:
  334:Src/LTC6811.c **** 		if (PEC_check[board] == 0)
- 2837              		.loc 1 334 53 discriminator 2 view .LVU976
- 2838 014a 0133     		adds	r3, r3, #1
- 2839              	.LVL224:
+ 2838              		.loc 1 334 53 discriminator 2 view .LVU976
+ 2839 014a 0133     		adds	r3, r3, #1
+ 2840              	.LVL224:
  334:Src/LTC6811.c **** 		if (PEC_check[board] == 0)
- 2840              		.loc 1 334 53 discriminator 2 view .LVU977
- 2841 014c DBB2     		uxtb	r3, r3
- 2842              	.LVL225:
- 2843              	.L102:
+ 2841              		.loc 1 334 53 discriminator 2 view .LVU977
+ 2842 014c DBB2     		uxtb	r3, r3
+ 2843              	.LVL225:
+ 2844              	.L102:
  334:Src/LTC6811.c **** 		if (PEC_check[board] == 0)
- 2844              		.loc 1 334 2 discriminator 1 view .LVU978
- 2845 014e 7A68     		ldr	r2, [r7, #4]
- 2846 0150 9342     		cmp	r3, r2
- 2847 0152 05D2     		bcs	.L109
+ 2845              		.loc 1 334 2 discriminator 1 view .LVU978
+ 2846 014e 7A68     		ldr	r2, [r7, #4]
+ 2847 0150 9342     		cmp	r3, r2
+ 2848 0152 05D2     		bcs	.L109
  335:Src/LTC6811.c **** 			dataValid = false;
- 2848              		.loc 1 335 3 is_stmt 1 view .LVU979
+ 2849              		.loc 1 335 3 is_stmt 1 view .LVU979
  335:Src/LTC6811.c **** 			dataValid = false;
- 2849              		.loc 1 335 16 is_stmt 0 view .LVU980
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 78
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 78
 
 
- 2850 0154 18F80320 		ldrb	r2, [r8, r3]	@ zero_extendqisi2
+ 2850              		.loc 1 335 16 is_stmt 0 view .LVU980
+ 2851 0154 18F80320 		ldrb	r2, [r8, r3]	@ zero_extendqisi2
  335:Src/LTC6811.c **** 			dataValid = false;
- 2851              		.loc 1 335 6 view .LVU981
- 2852 0158 002A     		cmp	r2, #0
- 2853 015a F6D1     		bne	.L103
+ 2852              		.loc 1 335 6 view .LVU981
+ 2853 0158 002A     		cmp	r2, #0
+ 2854 015a F6D1     		bne	.L103
  336:Src/LTC6811.c **** 	}
- 2854              		.loc 1 336 14 view .LVU982
- 2855 015c 1046     		mov	r0, r2
- 2856              	.LVL226:
+ 2855              		.loc 1 336 14 view .LVU982
+ 2856 015c 1046     		mov	r0, r2
+ 2857              	.LVL226:
  336:Src/LTC6811.c **** 	}
- 2857              		.loc 1 336 14 view .LVU983
- 2858 015e F4E7     		b	.L103
- 2859              	.LVL227:
- 2860              	.L109:
+ 2858              		.loc 1 336 14 view .LVU983
+ 2859 015e F4E7     		b	.L103
+ 2860              	.LVL227:
+ 2861              	.L109:
  336:Src/LTC6811.c **** 	}
- 2861              		.loc 1 336 14 view .LVU984
- 2862              	.LBE21:
+ 2862              		.loc 1 336 14 view .LVU984
+ 2863              	.LBE21:
  340:Src/LTC6811.c **** 
- 2863              		.loc 1 340 1 view .LVU985
- 2864 0160 0C37     		adds	r7, r7, #12
- 2865              	.LCFI51:
- 2866              		.cfi_def_cfa_offset 52
- 2867 0162 BD46     		mov	sp, r7
- 2868              	.LCFI52:
- 2869              		.cfi_def_cfa_register 13
- 2870              		@ sp needed
- 2871 0164 BDE8F04F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
- 2872              	.LCFI53:
- 2873              		.cfi_restore 14
- 2874              		.cfi_restore 11
- 2875              		.cfi_restore 10
- 2876              		.cfi_restore 9
- 2877              		.cfi_restore 8
- 2878              		.cfi_restore 7
- 2879              		.cfi_restore 6
- 2880              		.cfi_restore 5
- 2881              		.cfi_restore 4
- 2882              		.cfi_def_cfa_offset 16
- 2883              	.LVL228:
+ 2864              		.loc 1 340 1 view .LVU985
+ 2865 0160 0C37     		adds	r7, r7, #12
+ 2866              	.LCFI51:
+ 2867              		.cfi_def_cfa_offset 52
+ 2868 0162 BD46     		mov	sp, r7
+ 2869              	.LCFI52:
+ 2870              		.cfi_def_cfa_register 13
+ 2871              		@ sp needed
+ 2872 0164 BDE8F04F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 2873              	.LCFI53:
+ 2874              		.cfi_restore 14
+ 2875              		.cfi_restore 11
+ 2876              		.cfi_restore 10
+ 2877              		.cfi_restore 9
+ 2878              		.cfi_restore 8
+ 2879              		.cfi_restore 7
+ 2880              		.cfi_restore 6
+ 2881              		.cfi_restore 5
+ 2882              		.cfi_restore 4
+ 2883              		.cfi_def_cfa_offset 16
+ 2884              	.LVL228:
  340:Src/LTC6811.c **** 
- 2884              		.loc 1 340 1 view .LVU986
- 2885 0168 04B0     		add	sp, sp, #16
- 2886              	.LCFI54:
- 2887              		.cfi_def_cfa_offset 0
- 2888 016a 7047     		bx	lr
- 2889              		.cfi_endproc
- 2890              	.LFE72:
- 2892              		.global	CRC15_POLY
- 2893              		.comm	pec15Table,512,4
- 2894              		.section	.data.CRC15_POLY,"aw"
- 2895              		.align	1
- 2896              		.set	.LANCHOR0,. + 0
- 2899              	CRC15_POLY:
- 2900 0000 9945     		.short	17817
- 2901              		.text
- 2902              	.Letext0:
- 2903              		.file 2 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\machine\\_default_types.h"
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 79
+ 2885              		.loc 1 340 1 view .LVU986
+ 2886 0168 04B0     		add	sp, sp, #16
+ 2887              	.LCFI54:
+ 2888              		.cfi_def_cfa_offset 0
+ 2889 016a 7047     		bx	lr
+ 2890              		.cfi_endproc
+ 2891              	.LFE72:
+ 2893              		.global	CRC15_POLY
+ 2894              		.comm	pec15Table,512,4
+ 2895              		.section	.data.CRC15_POLY,"aw"
+ 2896              		.align	1
+ 2897              		.set	.LANCHOR0,. + 0
+ 2900              	CRC15_POLY:
+ 2901 0000 9945     		.short	17817
+ 2902              		.text
+ 2903              	.Letext0:
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 79
 
 
- 2904              		.file 3 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\sys\\_stdint.h"
- 2905              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
- 2906              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
- 2907              		.file 6 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\sys\\lock.h"
- 2908              		.file 7 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\sys\\_types.h"
- 2909              		.file 8 "c:\\arm-gcc\\8-2018-q4-major\\lib\\gcc\\arm-none-eabi\\8.2.1\\include\\stddef.h"
- 2910              		.file 9 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\sys\\reent.h"
- 2911              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
- 2912              		.file 11 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\stdlib.h"
- 2913              		.file 12 "Inc/BMSconfig.h"
- 2914              		.file 13 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\math.h"
- 2915              		.file 14 "Inc/LTC6811.h"
- 2916              		.file 15 "Inc/SPI.h"
- 2917              		.file 16 "<built-in>"
-ARM GAS  C:\cygwin64\tmp\cc7TszKD.s 			page 80
+ 2904              		.file 2 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 2905              		.file 3 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 2906              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
+ 2907              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 2908              		.file 6 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\sys\\lock.h"
+ 2909              		.file 7 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\sys\\_types.h"
+ 2910              		.file 8 "c:\\arm-gcc\\8-2018-q4-major\\lib\\gcc\\arm-none-eabi\\8.2.1\\include\\stddef.h"
+ 2911              		.file 9 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\sys\\reent.h"
+ 2912              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 2913              		.file 11 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\stdlib.h"
+ 2914              		.file 12 "Inc/BMSconfig.h"
+ 2915              		.file 13 "c:\\arm-gcc\\8-2018-q4-major\\arm-none-eabi\\include\\math.h"
+ 2916              		.file 14 "Inc/LTC6811.h"
+ 2917              		.file 15 "Inc/SPI.h"
+ 2918              		.file 16 "<built-in>"
+ARM GAS  C:\cygwin64\tmp\cc7JEtnh.s 			page 80
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 LTC6811.c
-C:\cygwin64\tmp\cc7TszKD.s:16     .text.initPECTable:00000000 $t
-C:\cygwin64\tmp\cc7TszKD.s:24     .text.initPECTable:00000000 initPECTable
-C:\cygwin64\tmp\cc7TszKD.s:118    .text.initPECTable:00000038 $d
+C:\cygwin64\tmp\cc7JEtnh.s:16     .text.initPECTable:00000000 $t
+C:\cygwin64\tmp\cc7JEtnh.s:24     .text.initPECTable:00000000 initPECTable
+C:\cygwin64\tmp\cc7JEtnh.s:118    .text.initPECTable:00000038 $d
                             *COM*:00000200 pec15Table
-C:\cygwin64\tmp\cc7TszKD.s:124    .text.calculatePEC:00000000 $t
-C:\cygwin64\tmp\cc7TszKD.s:131    .text.calculatePEC:00000000 calculatePEC
-C:\cygwin64\tmp\cc7TszKD.s:207    .text.calculatePEC:0000002c $d
-C:\cygwin64\tmp\cc7TszKD.s:212    .text.readRegister:00000000 $t
-C:\cygwin64\tmp\cc7TszKD.s:219    .text.readRegister:00000000 readRegister
-C:\cygwin64\tmp\cc7TszKD.s:712    .text.readConfig:00000000 $t
-C:\cygwin64\tmp\cc7TszKD.s:719    .text.readConfig:00000000 readConfig
-C:\cygwin64\tmp\cc7TszKD.s:806    .text.writeConfigAddress:00000000 $t
-C:\cygwin64\tmp\cc7TszKD.s:813    .text.writeConfigAddress:00000000 writeConfigAddress
-C:\cygwin64\tmp\cc7TszKD.s:1088   .text.writeConfigAll:00000000 $t
-C:\cygwin64\tmp\cc7TszKD.s:1095   .text.writeConfigAll:00000000 writeConfigAll
-C:\cygwin64\tmp\cc7TszKD.s:1172   .text.dischargeCellGroups:00000000 $t
-C:\cygwin64\tmp\cc7TszKD.s:1179   .text.dischargeCellGroups:00000000 dischargeCellGroups
-C:\cygwin64\tmp\cc7TszKD.s:1325   .text.sendBroadcastCommand:00000000 $t
-C:\cygwin64\tmp\cc7TszKD.s:1332   .text.sendBroadcastCommand:00000000 sendBroadcastCommand
-C:\cygwin64\tmp\cc7TszKD.s:1389   .text.sendAddressCommand:00000000 $t
-C:\cygwin64\tmp\cc7TszKD.s:1396   .text.sendAddressCommand:00000000 sendAddressCommand
-C:\cygwin64\tmp\cc7TszKD.s:1492   .text.readCellVoltage:00000000 $t
-C:\cygwin64\tmp\cc7TszKD.s:1499   .text.readCellVoltage:00000000 readCellVoltage
-C:\cygwin64\tmp\cc7TszKD.s:1638   .text.readAllCellVoltages:00000000 $t
-C:\cygwin64\tmp\cc7TszKD.s:1645   .text.readAllCellVoltages:00000000 readAllCellVoltages
-C:\cygwin64\tmp\cc7TszKD.s:1966   .text.checkAllCellConnections:00000000 $t
-C:\cygwin64\tmp\cc7TszKD.s:1973   .text.checkAllCellConnections:00000000 checkAllCellConnections
-C:\cygwin64\tmp\cc7TszKD.s:2169   .text.readCellTemp:00000000 $t
-C:\cygwin64\tmp\cc7TszKD.s:2176   .text.readCellTemp:00000000 readCellTemp
-C:\cygwin64\tmp\cc7TszKD.s:2507   .text.readCellTemp:000001d0 $d
-C:\cygwin64\tmp\cc7TszKD.s:2533   .text.readAllCellTemps:00000000 $t
-C:\cygwin64\tmp\cc7TszKD.s:2540   .text.readAllCellTemps:00000000 readAllCellTemps
-C:\cygwin64\tmp\cc7TszKD.s:2899   .data.CRC15_POLY:00000000 CRC15_POLY
-C:\cygwin64\tmp\cc7TszKD.s:2895   .data.CRC15_POLY:00000000 $d
+C:\cygwin64\tmp\cc7JEtnh.s:124    .text.calculatePEC:00000000 $t
+C:\cygwin64\tmp\cc7JEtnh.s:131    .text.calculatePEC:00000000 calculatePEC
+C:\cygwin64\tmp\cc7JEtnh.s:207    .text.calculatePEC:0000002c $d
+C:\cygwin64\tmp\cc7JEtnh.s:212    .text.readRegister:00000000 $t
+C:\cygwin64\tmp\cc7JEtnh.s:219    .text.readRegister:00000000 readRegister
+C:\cygwin64\tmp\cc7JEtnh.s:712    .text.readConfig:00000000 $t
+C:\cygwin64\tmp\cc7JEtnh.s:719    .text.readConfig:00000000 readConfig
+C:\cygwin64\tmp\cc7JEtnh.s:806    .text.writeConfigAddress:00000000 $t
+C:\cygwin64\tmp\cc7JEtnh.s:813    .text.writeConfigAddress:00000000 writeConfigAddress
+C:\cygwin64\tmp\cc7JEtnh.s:1088   .text.writeConfigAll:00000000 $t
+C:\cygwin64\tmp\cc7JEtnh.s:1095   .text.writeConfigAll:00000000 writeConfigAll
+C:\cygwin64\tmp\cc7JEtnh.s:1172   .text.dischargeCellGroups:00000000 $t
+C:\cygwin64\tmp\cc7JEtnh.s:1179   .text.dischargeCellGroups:00000000 dischargeCellGroups
+C:\cygwin64\tmp\cc7JEtnh.s:1325   .text.sendBroadcastCommand:00000000 $t
+C:\cygwin64\tmp\cc7JEtnh.s:1332   .text.sendBroadcastCommand:00000000 sendBroadcastCommand
+C:\cygwin64\tmp\cc7JEtnh.s:1389   .text.sendAddressCommand:00000000 $t
+C:\cygwin64\tmp\cc7JEtnh.s:1396   .text.sendAddressCommand:00000000 sendAddressCommand
+C:\cygwin64\tmp\cc7JEtnh.s:1492   .text.readCellVoltage:00000000 $t
+C:\cygwin64\tmp\cc7JEtnh.s:1499   .text.readCellVoltage:00000000 readCellVoltage
+C:\cygwin64\tmp\cc7JEtnh.s:1638   .text.readAllCellVoltages:00000000 $t
+C:\cygwin64\tmp\cc7JEtnh.s:1645   .text.readAllCellVoltages:00000000 readAllCellVoltages
+C:\cygwin64\tmp\cc7JEtnh.s:1966   .text.checkAllCellConnections:00000000 $t
+C:\cygwin64\tmp\cc7JEtnh.s:1973   .text.checkAllCellConnections:00000000 checkAllCellConnections
+C:\cygwin64\tmp\cc7JEtnh.s:2170   .text.readCellTemp:00000000 $t
+C:\cygwin64\tmp\cc7JEtnh.s:2177   .text.readCellTemp:00000000 readCellTemp
+C:\cygwin64\tmp\cc7JEtnh.s:2508   .text.readCellTemp:000001d0 $d
+C:\cygwin64\tmp\cc7JEtnh.s:2534   .text.readAllCellTemps:00000000 $t
+C:\cygwin64\tmp\cc7JEtnh.s:2541   .text.readAllCellTemps:00000000 readAllCellTemps
+C:\cygwin64\tmp\cc7JEtnh.s:2900   .data.CRC15_POLY:00000000 CRC15_POLY
+C:\cygwin64\tmp\cc7JEtnh.s:2896   .data.CRC15_POLY:00000000 $d
 
 UNDEFINED SYMBOLS
 malloc

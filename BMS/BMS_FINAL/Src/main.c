@@ -72,6 +72,7 @@ uint8_t                 CELLVAL_DATA[6];
 uint8_t                 BMSSTAT_DATA[6];
 
 uint16_t                minimum;
+uint32_t                sumOfCells;
 uint8_t                 chargeRate = 2;
 
 /* USER CODE END PV */
@@ -85,14 +86,15 @@ static void MX_SPI1_Init(void);
 static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
 bool FAULT_check(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6], uint8_t bmsStatus[6]);
-void setDischarge(BMSconfigStructTypedef cfg, uint16_t cellVoltage[12][12], bool cellDischarge[12][8], bool bmsFault, bool fullDischarge[12][8]);
-void checkDischarge(BMSconfigStructTypedef cfg, bool fullDischarge[12][8], uint16_t cellVoltage[12][12]);
+void setDischarge(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6], bool cellDischarge[12][8], bool bmsFault, bool fullDischarge[12][8]);
+void checkDischarge(BMSconfigStructTypedef cfg, bool fullDischarge[12][8], uint8_t bmsData[96][6]);
 uint16_t balancingThreshold(BMSconfigStructTypedef cfg);
 void setChargerTxData(BMSconfigStructTypedef cfg);
 void CELLVAL_message(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]);
-void BMSVINF_message(BMSconfigStructTypedef cfg, uint16_t cellVoltage[12][12]);
-void BMSTINF_message(BMSconfigStructTypedef cfg, uint16_t cellTemp[12][4]);
+void BMSVINF_message(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]);
+void BMSTINF_message(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]);
 void BMSSTAT_message(BMSconfigStructTypedef cfg, uint8_t bmsStatus[6]);
+void PACKSTAT_message(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -140,6 +142,8 @@ int main(void)
 
   uint8_t BMS_DATA[96][6];
   uint8_t BMS_STATUS[6];
+  bool discharge[12][8];
+  bool full_discharge[12][8];
 
   bool AIR = 0;
   bool CHARGE_EN = 0;
@@ -161,11 +165,13 @@ int main(void)
     //wait 100ms
     HAL_Delay(100);
 
-    //read all cell voltages
+    //read all cell voltages, send BMSVINF message
     readAllCellVoltages(BMSconfig, BMS_DATA);
+    BMSVINF_message(BMSconfig, BMS_DATA);
 
-    //read all cell temps
+    //read all cell temps, send BMSTINF message
     readAllCellTemps(BMSconfig, BMS_DATA);
+    BMSTINF_message(BMSconfig, BMS_DATA);
 
     //check for faults (cell DC, cell OV, cell UV, cell OT, cell TDC, invalid PEC, no charger comm)
     checkAllCellConnections(BMSconfig, BMS_DATA);
@@ -175,27 +181,28 @@ int main(void)
     AIR = HAL_GPIO_ReadPin(GPIOB, AIR_Pin);
     CHARGE_EN = HAL_GPIO_ReadPin(GPIOB, CHARGE_EN_Pin);
 
-    /*if ((AIR == 0) && (CHARGE_EN == 0)) {
+    if ((AIR == 0) && (CHARGE_EN == 0)) {
 
-      if (chargerate != 0)
-        setDischarge(BMSconfig, BMS_DATA, BMS_FAULT, discharge);
+      if (chargeRate != 0)
+        setDischarge(BMSconfig, BMS_DATA, discharge, BMS_FAULT, full_discharge);
       
       setChargerTxData(BMSconfig);
 
-      if (chargerate != 0)
+      if (chargeRate != 0) {
         dischargeCellGroups(BMSconfig, discharge);
-      else {
-        //checkDischarge
-        //dischargeCellGroups
+        HAL_Delay(BMSconfig.dischargeTime);
       }
-    }*/
-    
-    //wait 500ms if discharging
-    HAL_Delay(500); //needs to be changed
+      else {
+        checkDischarge(BMSconfig, full_discharge, BMS_DATA);
+        dischargeCellGroups(BMSconfig, full_discharge);
+        HAL_Delay(BMSconfig.dischargeTime);
+      }
+    }
 
-    //send CAN messages (CELLVAL, BMSSTAT, BMSVINF, BMSTINF, PACKSTAT)
+    //send remaining CAN messages
     CELLVAL_message(BMSconfig, BMS_DATA);
     BMSSTAT_message(BMSconfig, BMS_STATUS);
+    PACKSTAT_message(BMSconfig, BMS_DATA);
 
   }
   /* USER CODE END 3 */
@@ -521,6 +528,8 @@ bool FAULT_check(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6], uint8_t bms
   bool dataValid;
   bool OT_fault;
   bool DC_fault;
+  uint8_t board;
+  uint8_t error_count[cfg.numOfICs];
 
   bmsStatus[0] = 0;
 
@@ -529,7 +538,7 @@ bool FAULT_check(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6], uint8_t bms
     cellVoltage = 0;
     cellVoltage = (uint16_t) (bmsData[cell][2]);
     cellVoltage = cellVoltage << 8;
-		cellVoltage |= (uint16_t) (bmsData[cell][3]);
+		cellVoltage += (uint16_t) (bmsData[cell][3]);
 
     cellConnection = (bool) (bmsData[cell][1] & 0x01);
     dataValid = (bool) ((bmsData[cell][1] & 0x02) >> 1);
@@ -571,10 +580,20 @@ bool FAULT_check(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6], uint8_t bms
       bmsStatus[5] = cell + 1;
     }
 
+    board = cell % cfg.numOfCellsPerIC;
+
     //Board DC fault
     if (dataValid == 0) {
-      BMS_FAULT = true;
-      //bmsStatus[0] |= 0x20;
+      error_count[board]++;
+
+      //if data is invalid for a board, every cell will report invalid
+      if (error_count[board] > (cfg.numOfCellsPerIC * cfg.invalidPECcount)) {
+        BMS_FAULT = true;
+        bmsStatus[0] |= 0x20;
+      }
+    }
+    if (dataValid == 1) {
+      error_count[board] = 0;
     }
 
     //Charger comm fault
@@ -594,45 +613,63 @@ bool FAULT_check(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6], uint8_t bms
   return BMS_FAULT;
 }
 
-void setDischarge(BMSconfigStructTypedef cfg, uint16_t cellVoltage[12][12], bool cellDischarge[12][8], bool bmsFault, bool fullDischarge[12][8]) {
+void setDischarge(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6], bool cellDischarge[12][8], bool bmsFault, bool fullDischarge[12][8]) {
 
   uint16_t threshold;
+  uint16_t cellVoltage;
+  uint8_t board;
+  uint8_t cell;
 	chargeRate = 2; // initialize the charging current to normal operation
 
-  // if any BMS fault(change this), set charge current to 0
-  if (bmsFault == 1)
+  // if there is any type of fault, stop charging
+  if (bmsFault) {
     chargeRate = 0;
-	
-	for (int board = 0; board < cfg.numOfICs; board++) {
-		for (int cell = 0; cell < cfg.numOfCellsPerIC; cell++) {
+    //return 0;
+  }
 
-      // if any cell voltage is much greater than the minimum (>200mV), stop charging and discharge that cell to the minimum
-      if (cellVoltage[board][cell] > (minimum + cfg.max_difference)) {
-        chargeRate = 0;
-        fullDischarge[board][cell] = 1;
+  for (uint8_t i = 0; i < 96; i++) {
+
+    cellVoltage = 0;
+    cellVoltage = (uint16_t) (bmsData[i][2]);
+    cellVoltage = cellVoltage << 8;
+		cellVoltage += (uint16_t) (bmsData[i][3]);
+
+    board = i / cfg.numOfCellsPerIC;
+    cell = i % cfg.numOfCellsPerIC;
+
+    bmsData[i][1] &= 0x5F; //charging state = 2
+
+    // if any cell voltage is much greater than the minimum (>200mV), stop charging and discharge that cell to the minimum
+    if (cellVoltage > (minimum + cfg.max_difference)) {
+      chargeRate = 0;
+      fullDischarge[board][cell] = 1;
+      bmsData[i][1] &= 0x7F; //charging state = 3
+    }
+    // if any cell voltage is greater than some absolute threshold (4.18V), stop charging and discharge that cell to the minimum
+    // could discharge to a fixed value (4.15V) instead
+    if (cellVoltage > cfg.stopCharge_threshold) {
+      chargeRate = 0;
+      fullDischarge[board][cell] = 1;
+      bmsData[i][1] &= 0x9F; //charging state = 4
+    }
+
+    // if still charging AND cells above ~3V
+    if ((chargeRate != 0) && (minimum > 3000)) {
+
+      // if any cell is above some absolute threshold, charge slower 
+      if (cellVoltage > cfg.slowCharge_threshold)
+        chargeRate = 1;
+
+      // determine the relative balancing threshold based on minimum voltage
+      threshold = balancingThreshold(cfg);
+
+      if (cellVoltage > (minimum + threshold)) {
+        cellDischarge[board][cell] = 1;
+        bmsData[i][1] &= 0x2F; //charging state = 1
       }
-
-      // if any cell voltage is greater than some absolute threshold (4.18V), stop charging and discharge that cell to the minimum
-      // could discharge to a fixed value (4.15V) instead
-      if (cellVoltage[board][cell] > cfg.stopCharge_threshold) {
-        chargeRate = 0;
-        fullDischarge[board][cell] = 1;
-      }
-
-      // if still charging AND cells above ~3V (add this)
-      if (chargeRate != 0) {
-
-        // if any cell is above some absolute threshold, charge slower 
-        if (cellVoltage[board][cell] > cfg.slowCharge_threshold)
-          chargeRate = 1;
-
-        // determine the relative balancing threshold based on minimum voltage
-        threshold = balancingThreshold(cfg);
-
-        if (cellVoltage[board][cell] > (minimum + threshold))
-          cellDischarge[board][cell] = 1;
-        else
-          cellDischarge[board][cell] = 0;
+      else {
+        cellDischarge[board][cell] = 0;
+        bmsData[i][1] &= 0x1F; //charging state = 0
       }
     }
 	}
@@ -664,18 +701,30 @@ uint16_t balancingThreshold(BMSconfigStructTypedef cfg) {
 
 }
 
-void checkDischarge(BMSconfigStructTypedef cfg, bool fullDischarge[12][8], uint16_t cellVoltage[12][12]) {
+void checkDischarge(BMSconfigStructTypedef cfg, bool fullDischarge[12][8], uint8_t bmsData[96][6]) {
 
   uint8_t sum = 0;
+  uint16_t cellVoltage;
+  uint8_t board;
+  uint8_t cell;
 
-  for (uint8_t board = 0; board < cfg.numOfICs; board++) {
-    for (uint8_t cell = 0; cell < cfg.numOfCellsPerIC; cell++) {
-      if (fullDischarge[board][cell] == 1) {
-        if (cellVoltage[board][cell] <= minimum)
-          fullDischarge[board][cell] = 0;
-        else
-          sum = sum + 1;
+  for (uint8_t i = 0; i < 96; i++) {
+
+    cellVoltage = 0;
+    cellVoltage = (uint16_t) (bmsData[i][2]);
+    cellVoltage = cellVoltage << 8;
+		cellVoltage += (uint16_t) (bmsData[i][3]);
+
+    board = i / cfg.numOfCellsPerIC;
+    cell = i % cfg.numOfCellsPerIC;
+
+    if (fullDischarge[board][cell] == 1) {
+      if (cellVoltage <= minimum) {
+        fullDischarge[board][cell] = 0;
+        bmsData[i][1] &= 0x5F; //reset charging state to 2
       }
+      else
+        sum += 1;
     }
   }
 
@@ -746,38 +795,37 @@ void BMSSTAT_message(BMSconfigStructTypedef cfg, uint8_t bmsStatus[6]) {
   HAL_CAN_AddTxMessage(&hcan, &TxHeader, bmsStatus, &TxMailbox);
 }
 
-void BMSVINF_message(BMSconfigStructTypedef cfg, uint16_t cellVoltage[12][12]) {
+void BMSVINF_message(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
 
-  uint16_t minV;
+  uint16_t cellVoltage;
+  uint16_t minV = 0xFFFF;
   uint8_t minCell;
-  uint16_t maxV;
+  uint16_t maxV = 0x0000;
   uint8_t maxCell;
   uint16_t averageV;
   uint32_t sum = 0;
 
-  minV = cellVoltage[0][0];
-  minCell = 1;
-  maxV = cellVoltage[0][0];
-  maxCell = 1;
+  for (uint8_t cell = 0; cell < 96; cell++) {
 
-  for (int i = 0; i < cfg.numOfICs; i++) {
-		for (int j = 0; j < cfg.numOfCellsPerIC; j++) {
+    cellVoltage = 0;
+    cellVoltage = (uint16_t) (bmsData[cell][2]);
+    cellVoltage = cellVoltage << 8;
+		cellVoltage += (uint16_t) (bmsData[cell][3]);
 
-			if (cellVoltage[i][j] < minV) {
-        minV = cellVoltage[i][j];
-        minCell = i * cfg.numOfCellsPerIC + j + 1;
-      }
+    if (cellVoltage < minV) {
+      minV = cellVoltage;
+      minCell = cell + 1;
+    }
 
-      if (cellVoltage[i][j] > maxV) {
-        maxV = cellVoltage[i][j];
-        maxCell = i * cfg.numOfCellsPerIC + j + 1;
-      }
+    if (cellVoltage > maxV) {
+      maxV = cellVoltage;
+      maxCell = cell + 1;
+    }
 
-      sum = sum + cellVoltage[i][j];
-
-		}
+    sum += cellVoltage;
   }
 
+  sumOfCells = sum;
   minimum = minV;
   averageV = (uint16_t) (sum / (cfg.numOfICs * cfg.numOfCellsPerIC));
 
@@ -798,36 +846,34 @@ void BMSVINF_message(BMSconfigStructTypedef cfg, uint16_t cellVoltage[12][12]) {
 
 }
 
-void BMSTINF_message(BMSconfigStructTypedef cfg, uint16_t cellTemp[12][4]) {
+void BMSTINF_message(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
 
-  uint16_t minT;
+  uint16_t cellTemp;
+  uint16_t minT = 0xFFFF;
   uint8_t minCell;
-  uint16_t maxT;
+  uint16_t maxT = 0x0000;
   uint8_t maxCell;
   uint16_t averageT;
   uint32_t sum = 0;
 
-  minT = cellTemp[0][0];
-  minCell = 1;
-  maxT = cellTemp[0][0];
-  maxCell = 1;
+  for (uint8_t cell = 0; cell < 96; cell++) {
 
-  for (int i = 0; i < cfg.numOfICs; i++) {
-		for (int j = 0; j < cfg.numOfTempPerIC; j++) {
+    cellTemp = 0;
+    cellTemp = (uint16_t) (bmsData[cell][4]);
+    cellTemp = cellTemp << 8;
+		cellTemp += (uint16_t) (bmsData[cell][5]);
 
-			if (cellTemp[i][j] < minT) {
-        minT = cellTemp[i][j];
-        minCell = i * cfg.numOfTempPerIC + j*2 + 1;
-      }
+    if (cellTemp < minT) {
+      minT = cellTemp;
+      minCell = cell + 1;
+    }
 
-      if (cellTemp[i][j] > maxT) {
-        maxT = cellTemp[i][j];
-        maxCell = i * cfg.numOfTempPerIC + j*2 + 1;
-      }
+    if (cellTemp > maxT) {
+      maxT = cellTemp;
+      maxCell = cell + 1;
+    }
 
-      sum = sum + cellTemp[i][j];
-
-		}
+    sum += cellTemp;
   }
 
   averageT = (uint16_t) (sum / (cfg.numOfICs * cfg.numOfTempPerIC));
@@ -848,6 +894,14 @@ void BMSTINF_message(BMSconfigStructTypedef cfg, uint16_t cellTemp[12][4]) {
   HAL_CAN_AddTxMessage(&hcan, &TxHeader, BMSTINF_DATA, &TxMailbox);  
 
 };
+
+void PACKSTAT_message(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
+
+  //read current sensor
+
+  //use sumOfCells
+
+}
 
 /* USER CODE END 4 */
 

@@ -20,7 +20,8 @@
 // Status byte-
 // Bit  | Description
 // ---------------------------------------------------
-// 7-4	| Undefined
+// 7-5	| Charging state
+// 4    | 1 if overtemperature 
 // 3    | 1 if temp sensor is disconnected
 // 2	| 1 if being balanced
 // 1	| 1 if data is valid (Any data received will still be transmitted)
@@ -28,6 +29,12 @@
 // The voltage and temperature are short int (16bits) split as a High and Low byte. 
 // Actual voltage     in V is obtained by  (x/10000)   min - 0,    max - 6.5535
 // Actual temperature in C is obtained by  (x/500-20)  min - -20,  max - 111
+// Charging states:
+// 0 - pack is charging, cell is not being balanced
+// 1 - pack is charging, cell is being balanced
+// 2 - pack is not charging, cell is not being discharged
+// 3 - pack is not charging, cell is being discharged because its voltage greatly exceeds the minimum
+// 4 - pack is not charging, cell is being discharged because its voltage is greater than an absolute threshold (4.18V)
 //
 #define 	CELLVAL		0x007
 
@@ -37,7 +44,8 @@
 // Status byte-
 // Bit  | Description
 // ---------------------------------------------------
-// 7-5	| Undefined
+// 7-6	| Undefined
+// 5    | 1 if there is a disconnected board fault
 // 4    | 1 if there is a disconnected temp sensor fault
 // 3    | 1 if there is a disconnected cell fault
 // 2	| 1 if there is an OT fault
