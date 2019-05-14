@@ -1,17 +1,19 @@
 #include "BMSconfig.h"
 
 void loadConfig(BMSconfigStructTypedef* cfg) {
-		
-	cfg->numOfICs = 1;
-	cfg->address[0] = 0;
-	//cfg->address[1] = 1;
 
-	cfg->numOfCellInputs = 12; // this should never changes
+	//change this
+	cfg->numOfICs = 2;
+	cfg->address[0] = 0;
+	cfg->address[1] = 1;
+
+	cfg->numOfCellInputs = 12; 
 	cfg->numOfCellsPerIC = 8;
 	cfg->numOfTempPerIC = 4;
 
 	cfg->OV_threshold = 42000;
-	//charge to 4.16V, lower charge current, discharge cell above 4.16
+	cfg->UV_threshold = 25000;
+	//charge to 4.14V, lower charge current, discharge cells above 4.16V
 	//exceed 4.18V, stop charging entirely, discharge to 4.15V
 	//exceed 4.2V, fault prevents discharging
 
@@ -25,10 +27,22 @@ void loadConfig(BMSconfigStructTypedef* cfg) {
 	//UV FAULT 2.5, check ESF
 	//if cells are below 3, don't balance
 
-	cfg->slowCharge_threshold = 41000;
-	cfg->stopCharge_threshold = 41850;
-	cfg->balancing_difference = 500; 
-	
+	cfg->slowCharge_threshold = 41400;
+	cfg->stopCharge_threshold = 41800;
+	cfg->max_difference = 2000;
+	cfg->balancing_difference = 500;
+	cfg->start_scaling = 41000;
+	cfg->stop_scaling = 41600;
+	cfg->scale_to = 100;
+
+	cfg->invalidPECcount = 3;
+
+	cfg->dischargeTime = 500; // ms
+
+	cfg->normalCurrent = 0x003E; // 6.2A 
+	cfg->lowerCurrent = 0x000A; // 1A
+	cfg->chargerVoltage = 0xFA0; // 400V
+
 	// 0: 422Hz, 1: 27kHz, 2: 7kHz, 3: 26Hz, 4: 1kHz, 5: 14kHz, 6: 3kHz, 7: 2kHz
 	cfg->ADCConversionRate = 0;
 

@@ -14,9 +14,19 @@ typedef struct {
 	uint8_t numOfTempPerIC;
 	uint8_t ADCConversionRate;
 	uint16_t OV_threshold;
+	uint16_t UV_threshold;
 	uint16_t slowCharge_threshold;
 	uint16_t stopCharge_threshold;
+	uint16_t max_difference;
 	uint16_t balancing_difference;
+	uint8_t invalidPECcount;
+	uint16_t dischargeTime;
+	uint16_t start_scaling;
+	uint16_t stop_scaling;
+	uint16_t scale_to;
+	uint16_t normalCurrent;
+	uint16_t lowerCurrent;
+	uint16_t chargerVoltage;
 	
 	// LTC configuration
 	bool GPIO5PulldownOff;
