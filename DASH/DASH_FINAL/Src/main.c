@@ -47,7 +47,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef hadc1;
-
+ADC_ChannelConfTypeDef sConfig = {0};
 CAN_HandleTypeDef hcan;
 
 /* USER CODE BEGIN PV */
@@ -129,13 +129,14 @@ int main(void)
 	//send POT positions CAN message
 	
 	uint16_t pot_position[4];
-  POT_read(pot_position);
+	POT_read(pot_position);
 	POT_interpret(pot_position);
 
-  HAL_CAN_AddTxMessage(&hcan, &POT_TxHeader, POT_data, &TxMailbox);
+	
+	HAL_CAN_AddTxMessage(&hcan, &POT_TxHeader, POT_data, &TxMailbox);
 
 	
-	//HAL_Delay();
+	HAL_Delay(1000);
 
 	
   }
@@ -195,7 +196,7 @@ static void MX_ADC1_Init(void)
 
   /* USER CODE END ADC1_Init 0 */
 
-  ADC_ChannelConfTypeDef sConfig = {0};
+  //ADC_ChannelConfTypeDef sConfig = {0};
 
   /* USER CODE BEGIN ADC1_Init 1 */
 
@@ -203,8 +204,8 @@ static void MX_ADC1_Init(void)
   /** Common config 
   */
   hadc1.Instance = ADC1;
-  hadc1.Init.ScanConvMode = ADC_SCAN_ENABLE;
-  hadc1.Init.ContinuousConvMode = ENABLE;
+  hadc1.Init.ScanConvMode = DISABLE;
+  hadc1.Init.ContinuousConvMode = DISABLE;
   hadc1.Init.DiscontinuousConvMode = DISABLE;
   hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
   hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
@@ -270,8 +271,8 @@ static void MX_CAN_Init(void)
   hcan.Instance = CAN1;
   hcan.Init.Prescaler = 2;
   hcan.Init.Mode = CAN_MODE_NORMAL;
-  hcan.Init.SyncJumpWidth = CAN_SJW_1TQ;
-  hcan.Init.TimeSeg1 = CAN_BS1_3TQ;
+  hcan.Init.SyncJumpWidth = CAN_SJW_4TQ;
+  hcan.Init.TimeSeg1 = CAN_BS1_11TQ;
   hcan.Init.TimeSeg2 = CAN_BS2_4TQ;
   hcan.Init.TimeTriggeredMode = DISABLE;
   hcan.Init.AutoBusOff = DISABLE;
@@ -349,17 +350,46 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 void POT_read(uint16_t pot_values[4]) {
+	//0 1 7 9
+
+	sConfig.Channel = ADC_CHANNEL_0;
+	sConfig.Rank = ADC_REGULAR_RANK_1;
+	sConfig.SamplingTime = ADC_SAMPLETIME_71CYCLES_5;
+	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
 	
 	HAL_ADC_Start(&hadc1);
 	HAL_ADC_PollForConversion(&hadc1, 1000);		//change timeout to a HAL define
 	pot_values[0] = HAL_ADC_GetValue(&hadc1);
+	HAL_ADC_Stop(&hadc1);
 	
+	sConfig.Channel = ADC_CHANNEL_1;
+	sConfig.Rank = ADC_REGULAR_RANK_1;
+	sConfig.SamplingTime = ADC_SAMPLETIME_71CYCLES_5;
+	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+	
+	HAL_ADC_Start(&hadc1);
 	HAL_ADC_PollForConversion(&hadc1, 1000);
 	pot_values[1] = HAL_ADC_GetValue(&hadc1);
+	HAL_ADC_Stop(&hadc1);
 	
+	sConfig.Channel = ADC_CHANNEL_7;
+	sConfig.Rank = ADC_REGULAR_RANK_1;
+	sConfig.SamplingTime = ADC_SAMPLETIME_71CYCLES_5;
+	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+	
+	
+	HAL_ADC_Start(&hadc1);
 	HAL_ADC_PollForConversion(&hadc1, 1000);
 	pot_values[2] = HAL_ADC_GetValue(&hadc1);
+	HAL_ADC_Stop(&hadc1);
 	
+	sConfig.Channel = ADC_CHANNEL_9;
+	sConfig.Rank = ADC_REGULAR_RANK_1;
+	sConfig.SamplingTime = ADC_SAMPLETIME_71CYCLES_5;
+	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+	
+	
+	HAL_ADC_Start(&hadc1);
 	HAL_ADC_PollForConversion(&hadc1, 1000);
 	pot_values[3] = HAL_ADC_GetValue(&hadc1);
 	
@@ -370,10 +400,11 @@ void POT_read(uint16_t pot_values[4]) {
 void POT_interpret(uint16_t pot_values[4]) {
 	
 	uint8_t pot_pos[4];
+	uint8_t i, j;
 	
-	for (uint8_t i = 0; i < 4; i++) {
+	for (i = 0; i < 4; i++) {
 		
-		for (uint8_t j = 0; j < 10; j++) {
+		for (j = 0; j < 10; j++) {
 			
 			//uint16_t pot_threshold[12] = {0, 615, 1025, 1435, 1845, 2255, 2665, 3075, 3485, 3895, 4095};
 			if ((pot_values[i] > pot_threshold[j]) && (pot_values[i] <= pot_threshold[j + 1]))
@@ -381,18 +412,19 @@ void POT_interpret(uint16_t pot_values[4]) {
 			}
 
 		POT_data[i] = pot_pos[i];
+		//POT_data[0] = 0x00;
 			
 	}
 	
 	if (pot_pos[0] != 0) // if CURRENT_POT is in any position other than first, turn on CUR_LED
-		HAL_GPIO_WritePin(GPIOA, CUR_LED_Pin, GPIO_PIN_SET);
-	else
-		HAL_GPIO_WritePin(GPIOA, CUR_LED_Pin, GPIO_PIN_RESET);
-	
-	if (pot_pos[1] != 0) // if CUSTOM_POT is in any position other than first, turn on CUST_LED
 		HAL_GPIO_WritePin(GPIOB, CUST_LED_Pin, GPIO_PIN_SET);
 	else
 		HAL_GPIO_WritePin(GPIOB, CUST_LED_Pin, GPIO_PIN_RESET);
+	
+	if (pot_pos[1] != 0) // if CUSTOM_POT is in any position other than first, turn on CUST_LED
+		HAL_GPIO_WritePin(GPIOA, CUR_LED_Pin, GPIO_PIN_SET);
+	else
+		HAL_GPIO_WritePin(GPIOA, CUR_LED_Pin, GPIO_PIN_RESET);
 	
 	if (pot_pos[2] != 0) // if TC_POT is in any position other than first, turn on TC_LED
 		HAL_GPIO_WritePin(GPIOA, TC_LED_Pin, GPIO_PIN_SET);
