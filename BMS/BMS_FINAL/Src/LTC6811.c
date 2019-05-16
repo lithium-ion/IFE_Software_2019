@@ -172,6 +172,8 @@ bool readCellVoltage(uint8_t address, uint16_t cellVoltage[12]) {
 	voltage = (uint16_t *)malloc(12*sizeof(uint16_t));
 	
 	sendAddressCommand(StartCellVoltageADCConversionAll, address); // start conversion for every cell
+	sendAddressCommand(0x261, address); // 1 and 7
+	sendAddressCommand(0x264, address); // 4 and 10
 
 	HAL_Delay(50); // conversion time is 12.8ms at 422Hz, so wait 15ms
 	
