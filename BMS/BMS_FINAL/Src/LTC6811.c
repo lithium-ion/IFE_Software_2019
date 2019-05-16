@@ -198,6 +198,7 @@ bool readCellVoltage(uint8_t address, uint16_t cellVoltage[12]) {
 
 bool readAllCellVoltages(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
 
+	/*
 	uint16_t boardVoltage[cfg.numOfCellInputs];
 	bool PEC_check[cfg.numOfICs];
 	bool dataValid = true;
@@ -238,7 +239,50 @@ bool readAllCellVoltages(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
 			dataValid = false;
 	}
 
-	return dataValid; //return true if no PEC errors for any board 
+	return dataValid; //return true if no PEC errors for any board
+	*/
+
+	uint16_t boardVoltage[12];
+	bool PEC_check[12];
+	bool dataValid = true;
+
+	for (uint8_t board = 0; board < 12; board++) {
+
+		//read voltage of every cell input (1-12) for a specific address, store in boardVoltage
+		PEC_check[board] = readCellVoltage(board, boardVoltage);
+
+		//store cell number and valid data bit in bmsData
+		for (uint8_t cell = 0; cell < 8; cell++) {
+			bmsData[(board * 8) + cell][0] = (uint8_t) ((board * 8) + cell + 1); //cell number
+			bmsData[(board * 8) + cell][1] = (uint8_t) (0x02 & (PEC_check[board] << 1)); //valid data bit in status byte
+		}
+
+		//store cell voltage in bmsData
+		bmsData[(board * 8) + 0][2] = (uint8_t) ((boardVoltage[0] >> 8) & 0xFF); //cell 1, voltage H
+		bmsData[(board * 8) + 0][3] = (uint8_t) (boardVoltage[0] & 0xFF); //cell 1, voltage L
+		bmsData[(board * 8) + 1][2] = (uint8_t) ((boardVoltage[1] >> 8) & 0xFF); //cell 2, voltage H
+		bmsData[(board * 8) + 1][3] = (uint8_t) (boardVoltage[1] & 0xFF); //cell 2, voltage L
+		bmsData[(board * 8) + 2][2] = (uint8_t) ((boardVoltage[2] >> 8) & 0xFF); //cell 3, voltage H
+		bmsData[(board * 8) + 2][3] = (uint8_t) (boardVoltage[2] & 0xFF); //cell 3, voltage L
+		bmsData[(board * 8) + 3][2] = (uint8_t) ((boardVoltage[3] >> 8) & 0xFF); //cell 4, voltage H
+		bmsData[(board * 8) + 3][3] = (uint8_t) (boardVoltage[3] & 0xFF); //cell 4, voltage L 
+		bmsData[(board * 8) + 4][2] = (uint8_t) ((boardVoltage[6] >> 8) & 0xFF); //cell 7, voltage H
+		bmsData[(board * 8) + 4][3] = (uint8_t) (boardVoltage[6] & 0xFF); //cell 7, voltage L 
+		bmsData[(board * 8) + 5][2] = (uint8_t) ((boardVoltage[7] >> 8) & 0xFF); //cell 8, voltage H
+		bmsData[(board * 8) + 5][3] = (uint8_t) (boardVoltage[7] & 0xFF); //cell 8, voltage L
+		bmsData[(board * 8) + 6][2] = (uint8_t) ((boardVoltage[8] >> 8) & 0xFF); //cell 9, voltage H
+		bmsData[(board * 8) + 6][3] = (uint8_t) (boardVoltage[8] & 0xFF); //cell 9, voltage L
+		bmsData[(board * 8) + 7][2] = (uint8_t) ((boardVoltage[9] >> 8) & 0xFF); //cell 10, voltage H
+		bmsData[(board * 8) + 7][3] = (uint8_t) (boardVoltage[9] & 0xFF); //cell 10, voltage L
+	
+	}
+
+	for (uint8_t board = 0; board < 12; board++) {
+		if (PEC_check[board] == 0)
+			dataValid = false;
+	}
+
+	return dataValid; //return true if no PEC errors for any board
 }
 
 bool readCellTemp(uint8_t address, uint16_t cellTemp[4], bool dcFault[4], bool tempFault[4]) {
