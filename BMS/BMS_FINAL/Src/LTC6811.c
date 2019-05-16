@@ -173,7 +173,7 @@ bool readCellVoltage(uint8_t address, uint16_t cellVoltage[12]) {
 	
 	sendAddressCommand(StartCellVoltageADCConversionAll, address); // start conversion for every cell
 
-	HAL_Delay(15); // conversion time is 12.8ms at 422Hz, so wait 15ms
+	HAL_Delay(50); // conversion time is 12.8ms at 422Hz, so wait 15ms
 	
 	PEC_check = readRegister(ReadCellVoltageRegisterGroup1to3, address, voltage);
 	//dataValid = dataValid & PEC_check;
@@ -297,7 +297,7 @@ bool readCellTemp(uint8_t address, uint16_t cellTemp[4], bool dcFault[4], bool t
 	
 	sendAddressCommand(StartCellTempVoltageADCConversionAll, address);
 	
-	HAL_Delay(15); // conversion time is 12.8ms at 422Hz, so wait 15ms
+	HAL_Delay(50); // conversion time is 12.8ms at 422Hz, so wait 15ms
 	
 	PEC_check = readRegister(ReadAuxiliaryGroupA, address, temp);
 	//dataValid = dataValid & PEC_check;
@@ -338,44 +338,44 @@ bool readCellTemp(uint8_t address, uint16_t cellTemp[4], bool dcFault[4], bool t
 
 bool readAllCellTemps(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
 
-	uint16_t boardTemp[cfg.numOfTempPerIC];
-	bool boardDCFault[cfg.numOfTempPerIC];
-	bool boardTempFault[cfg.numOfTempPerIC];
-	bool PEC_check[cfg.numOfICs];
+	uint16_t boardTemp[4];
+	bool boardDCFault[4];
+	bool boardTempFault[4];
+	bool PEC_check[12];
 	bool dataValid = true;
 
-	for (uint8_t board = 0; board < cfg.numOfICs; board++) {
+	for (uint8_t board = 0; board < 12; board++) {
 
 		//read temperature, check for OT and temp DC
-		PEC_check[board] = readCellTemp(cfg.address[board], boardTemp, boardDCFault, boardTempFault);
+		PEC_check[board] = readCellTemp(board, boardTemp, boardDCFault, boardTempFault);
 
 		//store OT and temp DC bits in status byte
-		for (uint8_t cell = 0; cell < cfg.numOfCellsPerIC; cell++) {
-			bmsData[(board * cfg.numOfCellsPerIC) + cell][1] &= (PEC_check[board] << 1);
-			bmsData[(board * cfg.numOfCellsPerIC) + cell][1] |= (boardTempFault[cell / 2] << 4);
-			bmsData[(board * cfg.numOfCellsPerIC) + cell][1] |= (boardDCFault[cell / 2] >> 3);
+		for (uint8_t cell = 0; cell < 8; cell++) {
+			bmsData[(board * 8) + cell][1] &= (PEC_check[board] << 1);
+			bmsData[(board * 8) + cell][1] |= (boardTempFault[cell / 2] << 4);
+			bmsData[(board * 8) + cell][1] |= (boardDCFault[cell / 2] << 3);
 		}
 
 		//store cell temperature in bmsData
-		bmsData[(board * cfg.numOfCellsPerIC) + 0][4] = (uint8_t) ((boardTemp[0] >> 8) & 0xFF); //temp1 H
-		bmsData[(board * cfg.numOfCellsPerIC) + 0][5] = (uint8_t) (boardTemp[0] & 0xFF); //temp1 L
-		bmsData[(board * cfg.numOfCellsPerIC) + 1][4] = (uint8_t) ((boardTemp[0] >> 8) & 0xFF); //temp1 H
-		bmsData[(board * cfg.numOfCellsPerIC) + 1][5] = (uint8_t) (boardTemp[0] & 0xFF); //temp1 L
-		bmsData[(board * cfg.numOfCellsPerIC) + 2][4] = (uint8_t) ((boardTemp[1] >> 8) & 0xFF); //temp2 H
-		bmsData[(board * cfg.numOfCellsPerIC) + 2][5] = (uint8_t) (boardTemp[1] & 0xFF); //temp2 L
-		bmsData[(board * cfg.numOfCellsPerIC) + 3][4] = (uint8_t) ((boardTemp[1] >> 8) & 0xFF); //temp2 H
-		bmsData[(board * cfg.numOfCellsPerIC) + 3][5] = (uint8_t) (boardTemp[1] & 0xFF); //temp2 L
-		bmsData[(board * cfg.numOfCellsPerIC) + 4][4] = (uint8_t) ((boardTemp[2] >> 8) & 0xFF); //temp3 H
-		bmsData[(board * cfg.numOfCellsPerIC) + 4][5] = (uint8_t) (boardTemp[2] & 0xFF); //temp3 L
-		bmsData[(board * cfg.numOfCellsPerIC) + 5][4] = (uint8_t) ((boardTemp[2] >> 8) & 0xFF); //temp3 H
-		bmsData[(board * cfg.numOfCellsPerIC) + 5][5] = (uint8_t) (boardTemp[2] & 0xFF); //temp3 L
-		bmsData[(board * cfg.numOfCellsPerIC) + 6][4] = (uint8_t) ((boardTemp[3] >> 8) & 0xFF); //temp4 H
-		bmsData[(board * cfg.numOfCellsPerIC) + 6][5] = (uint8_t) (boardTemp[3] & 0xFF); //temp4 L
-		bmsData[(board * cfg.numOfCellsPerIC) + 7][4] = (uint8_t) ((boardTemp[3] >> 8) & 0xFF); //temp4 H
-		bmsData[(board * cfg.numOfCellsPerIC) + 7][5] = (uint8_t) (boardTemp[3] & 0xFF); //temp4 L
+		bmsData[(board * 8) + 0][4] = (uint8_t) ((boardTemp[0] >> 8) & 0xFF); //temp1 H
+		bmsData[(board * 8) + 0][5] = (uint8_t) (boardTemp[0] & 0xFF); //temp1 L
+		bmsData[(board * 8) + 1][4] = (uint8_t) ((boardTemp[0] >> 8) & 0xFF); //temp1 H
+		bmsData[(board * 8) + 1][5] = (uint8_t) (boardTemp[0] & 0xFF); //temp1 L
+		bmsData[(board * 8) + 2][4] = (uint8_t) ((boardTemp[1] >> 8) & 0xFF); //temp2 H
+		bmsData[(board * 8) + 2][5] = (uint8_t) (boardTemp[1] & 0xFF); //temp2 L
+		bmsData[(board * 8) + 3][4] = (uint8_t) ((boardTemp[1] >> 8) & 0xFF); //temp2 H
+		bmsData[(board * 8) + 3][5] = (uint8_t) (boardTemp[1] & 0xFF); //temp2 L
+		bmsData[(board * 8) + 4][4] = (uint8_t) ((boardTemp[2] >> 8) & 0xFF); //temp3 H
+		bmsData[(board * 8) + 4][5] = (uint8_t) (boardTemp[2] & 0xFF); //temp3 L
+		bmsData[(board * 8) + 5][4] = (uint8_t) ((boardTemp[2] >> 8) & 0xFF); //temp3 H
+		bmsData[(board * 8) + 5][5] = (uint8_t) (boardTemp[2] & 0xFF); //temp3 L
+		bmsData[(board * 8) + 6][4] = (uint8_t) ((boardTemp[3] >> 8) & 0xFF); //temp4 H
+		bmsData[(board * 8) + 6][5] = (uint8_t) (boardTemp[3] & 0xFF); //temp4 L
+		bmsData[(board * 8) + 7][4] = (uint8_t) ((boardTemp[3] >> 8) & 0xFF); //temp4 H
+		bmsData[(board * 8) + 7][5] = (uint8_t) (boardTemp[3] & 0xFF); //temp4 L
 	}
 	
-	for (uint8_t board = 0; board < cfg.numOfICs; board++) {
+	for (uint8_t board = 0; board < 12; board++) {
 		if (PEC_check[board] == 0)
 			dataValid = false;
 	}
