@@ -117,7 +117,7 @@ void writeConfigAddress(BMSconfigStructTypedef cfg, uint8_t address) {
 	uint16_t PEC_return;
 	uint8_t dummy[8];
 
-	readConfig(address, dummy);
+	// readConfig(address, dummy);
 	
 	cmd = (uint8_t *)malloc(cmd_len*sizeof(uint8_t));
 	
@@ -158,6 +158,11 @@ void writeConfigAddress(BMSconfigStructTypedef cfg, uint8_t address) {
 
 void writeConfigAll(BMSconfigStructTypedef cfg) {
 
+	uint32_t delay = 15;
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
+	while(delay--);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
+
 	for (uint8_t i = 0; i < cfg.numOfICs; i++) {
 		writeConfigAddress(cfg, cfg.address[i]);
 	}
@@ -171,11 +176,12 @@ bool readCellVoltage(uint8_t address, uint16_t cellVoltage[12]) {
 	
 	voltage = (uint16_t *)malloc(12*sizeof(uint16_t));
 	
-	sendAddressCommand(StartCellVoltageADCConversionAll, address); // start conversion for every cell
-	sendAddressCommand(0x261, address); // 1 and 7
-	sendAddressCommand(0x264, address); // 4 and 10
+	// sendAddressCommand(0x711, address); // clear cell voltage groups
+	// sendAddressCommand(StartCellVoltageADCConversionAll, address); // start conversion for every cell
+	// sendAddressCommand(0x261, address); // 1 and 7
+	// sendAddressCommand(0x264, address); // 4 and 10
 
-	HAL_Delay(50); // conversion time is 12.8ms at 422Hz, so wait 15ms
+	// HAL_Delay(50); // conversion time is 12.8ms at 422Hz, so wait 15ms
 	
 	PEC_check = readRegister(ReadCellVoltageRegisterGroup1to3, address, voltage);
 	//dataValid = dataValid & PEC_check;
@@ -247,6 +253,15 @@ bool readAllCellVoltages(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
 	uint16_t boardVoltage[12];
 	bool PEC_check[12];
 	bool dataValid = true;
+
+	sendBroadcastCommand(ClearRegisters);
+	sendBroadcastCommand(StartCellVoltageADCConversionAll);
+	HAL_Delay(20);
+
+	uint32_t delay = 15;
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
+	while(delay--);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
 
 	for (uint8_t board = 0; board < 12; board++) {
 

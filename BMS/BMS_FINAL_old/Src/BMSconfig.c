@@ -3,10 +3,12 @@
 void loadConfig(BMSconfigStructTypedef* cfg) {
 
 	//change this
-	cfg->numOfICs = 12;
-	for(int i = 0; i<12; i++){
-		cfg->address[i] = i;
-	}
+	cfg->numOfICs = 2;
+	// for(int i = 0; i<12; i++){
+		// cfg->address[i] = i;
+	// }
+	cfg->address[0] = 4;
+	cfg->address[1] = 5;
 
 	cfg->numOfCellInputs = 12; 
 	cfg->numOfCellsPerIC = 8;

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc8ca0WU.s 			page 1
+ARM GAS  /tmp/ccx2Tc4g.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cc8ca0WU.s 			page 1
   44 0010 8360     		str	r3, [r0, #8]
   13:Src/SPI.c     ****   SPIHandle.Init.DataSize = SPI_DATASIZE_8BIT;
   45              		.loc 1 13 0
-ARM GAS  /tmp/cc8ca0WU.s 			page 2
+ARM GAS  /tmp/ccx2Tc4g.s 			page 2
 
 
   46 0012 C360     		str	r3, [r0, #12]
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cc8ca0WU.s 			page 1
   90              	.LFB67:
   26:Src/SPI.c     **** 
   27:Src/SPI.c     **** bool SPIWrite(uint8_t *writeBuffer, uint8_t totalBytes) {
-ARM GAS  /tmp/cc8ca0WU.s 			page 3
+ARM GAS  /tmp/ccx2Tc4g.s 			page 3
 
 
   91              		.loc 1 27 0
@@ -126,236 +126,263 @@ ARM GAS  /tmp/cc8ca0WU.s 			page 1
   93              		@ args = 0, pretend = 0, frame = 0
   94              		@ frame_needed = 1, uses_anonymous_args = 0
   95              	.LVL1:
-  96 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  96 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
   97              	.LCFI1:
-  98              		.cfi_def_cfa_offset 20
-  99              		.cfi_offset 4, -20
- 100              		.cfi_offset 5, -16
- 101              		.cfi_offset 6, -12
- 102              		.cfi_offset 7, -8
- 103              		.cfi_offset 14, -4
- 104 0002 83B0     		sub	sp, sp, #12
- 105              	.LCFI2:
- 106              		.cfi_def_cfa_offset 32
- 107 0004 02AF     		add	r7, sp, #8
- 108              	.LCFI3:
- 109              		.cfi_def_cfa 7, 24
- 110 0006 0546     		mov	r5, r0
- 111 0008 0C46     		mov	r4, r1
- 112              	.LVL2:
-  28:Src/SPI.c     **** 	
-  29:Src/SPI.c     **** 	HAL_StatusTypeDef halReturnStatus;
-  30:Src/SPI.c     **** 	uint8_t readBuffer[totalBytes];
- 113              		.loc 1 30 0
- 114 000a CB1D     		adds	r3, r1, #7
- 115 000c 03F4FC73 		and	r3, r3, #504
- 116 0010 ADEB030D 		sub	sp, sp, r3
- 117 0014 02AE     		add	r6, sp, #8
- 118              	.LVL3:
-  31:Src/SPI.c     **** 	
-  32:Src/SPI.c     **** 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
- 119              		.loc 1 32 0
- 120 0016 0022     		movs	r2, #0
- 121 0018 1021     		movs	r1, #16
- 122              	.LVL4:
- 123 001a 0F48     		ldr	r0, .L8
- 124              	.LVL5:
- 125 001c FFF7FEFF 		bl	HAL_GPIO_WritePin
- 126              	.LVL6:
-  33:Src/SPI.c     **** 	//HAL_Delay(10);
-  34:Src/SPI.c     **** 	halReturnStatus = HAL_SPI_TransmitReceive(&SPIHandle, writeBuffer, readBuffer, totalBytes, 1000);
- 127              		.loc 1 34 0
- 128 0020 4FF47A73 		mov	r3, #1000
- 129 0024 0093     		str	r3, [sp]
- 130 0026 2346     		mov	r3, r4
- 131 0028 3246     		mov	r2, r6
- 132 002a 2946     		mov	r1, r5
- 133 002c 0B48     		ldr	r0, .L8+4
- 134 002e FFF7FEFF 		bl	HAL_SPI_TransmitReceive
- 135              	.LVL7:
- 136 0032 0446     		mov	r4, r0
- 137              	.LVL8:
- 138              	.L6:
-  35:Src/SPI.c     **** 	while( SPIHandle.State == HAL_SPI_STATE_BUSY );  // wait xmission complete
- 139              		.loc 1 35 0 discriminator 1
-ARM GAS  /tmp/cc8ca0WU.s 			page 4
+  98              		.cfi_def_cfa_offset 24
+  99              		.cfi_offset 4, -24
+ 100              		.cfi_offset 5, -20
+ 101              		.cfi_offset 6, -16
+ 102              		.cfi_offset 7, -12
+ 103              		.cfi_offset 8, -8
+ 104              		.cfi_offset 14, -4
+ 105 0004 82B0     		sub	sp, sp, #8
+ 106              	.LCFI2:
+ 107              		.cfi_def_cfa_offset 32
+ 108 0006 02AF     		add	r7, sp, #8
+ 109              	.LCFI3:
+ 110              		.cfi_def_cfa 7, 24
+ 111 0008 0646     		mov	r6, r0
+ 112 000a 0C46     		mov	r4, r1
+  28:Src/SPI.c     **** 
+  29:Src/SPI.c     **** 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_SET); //For debug only
+ 113              		.loc 1 29 0
+ 114 000c 1A4D     		ldr	r5, .L8
+ 115 000e 0122     		movs	r2, #1
+ 116 0010 4FF48071 		mov	r1, #256
+ 117              	.LVL2:
+ 118 0014 2846     		mov	r0, r5
+ 119              	.LVL3:
+ 120 0016 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 121              	.LVL4:
+  30:Src/SPI.c     **** 	HAL_StatusTypeDef halReturnStatus;
+  31:Src/SPI.c     **** 	uint8_t readBuffer[totalBytes];
+ 122              		.loc 1 31 0
+ 123 001a E31D     		adds	r3, r4, #7
+ 124 001c 03F4FC73 		and	r3, r3, #504
+ 125 0020 ADEB030D 		sub	sp, sp, r3
+ 126 0024 0DF10808 		add	r8, sp, #8
+ 127              	.LVL5:
+  32:Src/SPI.c     **** 	
+  33:Src/SPI.c     **** 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
+ 128              		.loc 1 33 0
+ 129 0028 0022     		movs	r2, #0
+ 130 002a 1021     		movs	r1, #16
+ 131 002c 2846     		mov	r0, r5
+ 132 002e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 133              	.LVL6:
+  34:Src/SPI.c     **** 	// HAL_Delay(1);
+  35:Src/SPI.c     **** 	halReturnStatus = HAL_SPI_TransmitReceive(&SPIHandle, writeBuffer, readBuffer, totalBytes, 1000);
+ 134              		.loc 1 35 0
+ 135 0032 4FF47A73 		mov	r3, #1000
+ 136 0036 0093     		str	r3, [sp]
+ 137 0038 2346     		mov	r3, r4
+ 138 003a 4246     		mov	r2, r8
+ 139 003c 3146     		mov	r1, r6
+ARM GAS  /tmp/ccx2Tc4g.s 			page 4
 
 
- 140 0034 094B     		ldr	r3, .L8+4
- 141 0036 93F85130 		ldrb	r3, [r3, #81]	@ zero_extendqisi2
- 142 003a DBB2     		uxtb	r3, r3
- 143 003c 022B     		cmp	r3, #2
- 144 003e F9D0     		beq	.L6
-  36:Src/SPI.c     **** 	//HAL_Delay(10);
-  37:Src/SPI.c     **** 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
- 145              		.loc 1 37 0
- 146 0040 0122     		movs	r2, #1
- 147 0042 1021     		movs	r1, #16
- 148 0044 0448     		ldr	r0, .L8
- 149 0046 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 150              	.LVL9:
-  38:Src/SPI.c     **** 	
-  39:Src/SPI.c     **** 	return(halReturnStatus == HAL_OK);
-  40:Src/SPI.c     **** };
- 151              		.loc 1 40 0
- 152 004a B4FA84F0 		clz	r0, r4
- 153 004e 4009     		lsrs	r0, r0, #5
- 154 0050 0437     		adds	r7, r7, #4
- 155              	.LCFI4:
- 156              		.cfi_def_cfa_offset 20
- 157 0052 BD46     		mov	sp, r7
- 158              	.LCFI5:
- 159              		.cfi_def_cfa_register 13
- 160              		@ sp needed
- 161 0054 F0BD     		pop	{r4, r5, r6, r7, pc}
- 162              	.LVL10:
- 163              	.L9:
- 164 0056 00BF     		.align	2
- 165              	.L8:
- 166 0058 00080140 		.word	1073809408
- 167 005c 00000000 		.word	SPIHandle
- 168              		.cfi_endproc
- 169              	.LFE67:
- 171              		.section	.text.SPIWriteRead,"ax",%progbits
- 172              		.align	1
- 173              		.global	SPIWriteRead
- 174              		.syntax unified
- 175              		.thumb
- 176              		.thumb_func
- 177              		.fpu softvfp
- 179              	SPIWriteRead:
- 180              	.LFB68:
+ 140 003e 0F48     		ldr	r0, .L8+4
+ 141 0040 FFF7FEFF 		bl	HAL_SPI_TransmitReceive
+ 142              	.LVL7:
+ 143 0044 0546     		mov	r5, r0
+ 144              	.LVL8:
+ 145              	.L6:
+  36:Src/SPI.c     **** 	while( SPIHandle.State == HAL_SPI_STATE_BUSY );  // wait xmission complete
+ 146              		.loc 1 36 0 discriminator 1
+ 147 0046 0D4B     		ldr	r3, .L8+4
+ 148 0048 93F85130 		ldrb	r3, [r3, #81]	@ zero_extendqisi2
+ 149 004c DBB2     		uxtb	r3, r3
+ 150 004e 022B     		cmp	r3, #2
+ 151 0050 F9D0     		beq	.L6
+  37:Src/SPI.c     **** 	// HAL_Delay(1);
+  38:Src/SPI.c     **** 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
+ 152              		.loc 1 38 0
+ 153 0052 094C     		ldr	r4, .L8
+ 154              	.LVL9:
+ 155 0054 0122     		movs	r2, #1
+ 156 0056 1021     		movs	r1, #16
+ 157 0058 2046     		mov	r0, r4
+ 158 005a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 159              	.LVL10:
+  39:Src/SPI.c     **** 
+  40:Src/SPI.c     **** 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_RESET); //For debug only
+ 160              		.loc 1 40 0
+ 161 005e 0022     		movs	r2, #0
+ 162 0060 4FF48071 		mov	r1, #256
+ 163 0064 2046     		mov	r0, r4
+ 164 0066 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 165              	.LVL11:
   41:Src/SPI.c     **** 
-  42:Src/SPI.c     **** bool SPIWriteRead(uint8_t *writeBuffer, uint8_t *readBuffer, uint8_t totalBytes) {
- 181              		.loc 1 42 0
- 182              		.cfi_startproc
- 183              		@ args = 0, pretend = 0, frame = 0
- 184              		@ frame_needed = 0, uses_anonymous_args = 0
- 185              	.LVL11:
- 186 0000 70B5     		push	{r4, r5, r6, lr}
- 187              	.LCFI6:
- 188              		.cfi_def_cfa_offset 16
- 189              		.cfi_offset 4, -16
- 190              		.cfi_offset 5, -12
- 191              		.cfi_offset 6, -8
-ARM GAS  /tmp/cc8ca0WU.s 			page 5
+  42:Src/SPI.c     **** 	return(halReturnStatus == HAL_OK);
+  43:Src/SPI.c     **** };
+ 166              		.loc 1 43 0
+ 167 006a B5FA85F0 		clz	r0, r5
+ 168 006e 4009     		lsrs	r0, r0, #5
+ 169 0070 BD46     		mov	sp, r7
+ 170              	.LCFI4:
+ 171              		.cfi_def_cfa_register 13
+ 172              		@ sp needed
+ 173 0072 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 174              	.LVL12:
+ 175              	.L9:
+ 176 0076 00BF     		.align	2
+ 177              	.L8:
+ 178 0078 00080140 		.word	1073809408
+ 179 007c 00000000 		.word	SPIHandle
+ 180              		.cfi_endproc
+ 181              	.LFE67:
+ 183              		.section	.text.SPIWriteRead,"ax",%progbits
+ 184              		.align	1
+ 185              		.global	SPIWriteRead
+ 186              		.syntax unified
+ 187              		.thumb
+ 188              		.thumb_func
+ 189              		.fpu softvfp
+ARM GAS  /tmp/ccx2Tc4g.s 			page 5
 
 
- 192              		.cfi_offset 14, -4
- 193 0002 82B0     		sub	sp, sp, #8
- 194              	.LCFI7:
- 195              		.cfi_def_cfa_offset 24
- 196 0004 0446     		mov	r4, r0
- 197 0006 0D46     		mov	r5, r1
- 198 0008 1646     		mov	r6, r2
-  43:Src/SPI.c     **** 	
-  44:Src/SPI.c     **** 	HAL_StatusTypeDef halReturnStatus;
-  45:Src/SPI.c     **** 	
-  46:Src/SPI.c     **** 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
- 199              		.loc 1 46 0
- 200 000a 0022     		movs	r2, #0
- 201              	.LVL12:
- 202 000c 1021     		movs	r1, #16
- 203              	.LVL13:
- 204 000e 1148     		ldr	r0, .L13
- 205              	.LVL14:
- 206 0010 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 207              	.LVL15:
-  47:Src/SPI.c     **** 	HAL_Delay(1);
- 208              		.loc 1 47 0
- 209 0014 0120     		movs	r0, #1
- 210 0016 FFF7FEFF 		bl	HAL_Delay
- 211              	.LVL16:
-  48:Src/SPI.c     **** 	halReturnStatus = HAL_SPI_TransmitReceive(&SPIHandle, writeBuffer, readBuffer, totalBytes, 1000);
- 212              		.loc 1 48 0
- 213 001a 4FF47A73 		mov	r3, #1000
- 214 001e 0093     		str	r3, [sp]
- 215 0020 3346     		mov	r3, r6
- 216 0022 2A46     		mov	r2, r5
- 217 0024 2146     		mov	r1, r4
- 218 0026 0C48     		ldr	r0, .L13+4
- 219 0028 FFF7FEFF 		bl	HAL_SPI_TransmitReceive
- 220              	.LVL17:
- 221 002c 0446     		mov	r4, r0
- 222              	.LVL18:
- 223              	.L11:
-  49:Src/SPI.c     **** 	while( SPIHandle.State == HAL_SPI_STATE_BUSY );  // wait xmission complete
- 224              		.loc 1 49 0 discriminator 1
- 225 002e 0A4B     		ldr	r3, .L13+4
- 226 0030 93F85130 		ldrb	r3, [r3, #81]	@ zero_extendqisi2
- 227 0034 DBB2     		uxtb	r3, r3
- 228 0036 022B     		cmp	r3, #2
- 229 0038 F9D0     		beq	.L11
-  50:Src/SPI.c     **** 	HAL_Delay(1);
- 230              		.loc 1 50 0
- 231 003a 0120     		movs	r0, #1
- 232 003c FFF7FEFF 		bl	HAL_Delay
- 233              	.LVL19:
-  51:Src/SPI.c     **** 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
- 234              		.loc 1 51 0
- 235 0040 0122     		movs	r2, #1
- 236 0042 1021     		movs	r1, #16
- 237 0044 0348     		ldr	r0, .L13
- 238 0046 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 239              	.LVL20:
-ARM GAS  /tmp/cc8ca0WU.s 			page 6
+ 191              	SPIWriteRead:
+ 192              	.LFB68:
+  44:Src/SPI.c     **** 
+  45:Src/SPI.c     **** bool SPIWriteRead(uint8_t *writeBuffer, uint8_t *readBuffer, uint8_t totalBytes) {
+ 193              		.loc 1 45 0
+ 194              		.cfi_startproc
+ 195              		@ args = 0, pretend = 0, frame = 0
+ 196              		@ frame_needed = 0, uses_anonymous_args = 0
+ 197              	.LVL13:
+ 198 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 199              	.LCFI5:
+ 200              		.cfi_def_cfa_offset 20
+ 201              		.cfi_offset 4, -20
+ 202              		.cfi_offset 5, -16
+ 203              		.cfi_offset 6, -12
+ 204              		.cfi_offset 7, -8
+ 205              		.cfi_offset 14, -4
+ 206 0002 83B0     		sub	sp, sp, #12
+ 207              	.LCFI6:
+ 208              		.cfi_def_cfa_offset 32
+ 209 0004 0546     		mov	r5, r0
+ 210 0006 0E46     		mov	r6, r1
+ 211 0008 1746     		mov	r7, r2
+  46:Src/SPI.c     **** 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_SET); //For debug only
+ 212              		.loc 1 46 0
+ 213 000a 164C     		ldr	r4, .L13
+ 214 000c 0122     		movs	r2, #1
+ 215              	.LVL14:
+ 216 000e 4FF48071 		mov	r1, #256
+ 217              	.LVL15:
+ 218 0012 2046     		mov	r0, r4
+ 219              	.LVL16:
+ 220 0014 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 221              	.LVL17:
+  47:Src/SPI.c     **** 
+  48:Src/SPI.c     **** 	HAL_StatusTypeDef halReturnStatus;
+  49:Src/SPI.c     **** 
+  50:Src/SPI.c     **** 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
+ 222              		.loc 1 50 0
+ 223 0018 0022     		movs	r2, #0
+ 224 001a 1021     		movs	r1, #16
+ 225 001c 2046     		mov	r0, r4
+ 226 001e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 227              	.LVL18:
+  51:Src/SPI.c     **** 	// HAL_Delay(1);
+  52:Src/SPI.c     **** 	halReturnStatus = HAL_SPI_TransmitReceive(&SPIHandle, writeBuffer, readBuffer, totalBytes, 1000);
+ 228              		.loc 1 52 0
+ 229 0022 4FF47A73 		mov	r3, #1000
+ 230 0026 0093     		str	r3, [sp]
+ 231 0028 3B46     		mov	r3, r7
+ 232 002a 3246     		mov	r2, r6
+ 233 002c 2946     		mov	r1, r5
+ 234 002e 0E48     		ldr	r0, .L13+4
+ 235 0030 FFF7FEFF 		bl	HAL_SPI_TransmitReceive
+ 236              	.LVL19:
+ 237 0034 0546     		mov	r5, r0
+ 238              	.LVL20:
+ARM GAS  /tmp/ccx2Tc4g.s 			page 6
 
 
-  52:Src/SPI.c     **** 	
-  53:Src/SPI.c     **** 	return(halReturnStatus == HAL_OK);
-  54:Src/SPI.c     **** };...
- 240              		.loc 1 54 0
- 241 004a B4FA84F0 		clz	r0, r4
- 242 004e 4009     		lsrs	r0, r0, #5
- 243 0050 02B0     		add	sp, sp, #8
- 244              	.LCFI8:
- 245              		.cfi_def_cfa_offset 16
- 246              		@ sp needed
- 247 0052 70BD     		pop	{r4, r5, r6, pc}
- 248              	.LVL21:
- 249              	.L14:
- 250              		.align	2
- 251              	.L13:
- 252 0054 00080140 		.word	1073809408
- 253 0058 00000000 		.word	SPIHandle
- 254              		.cfi_endproc
- 255              	.LFE68:
- 257              		.comm	SPIHandle,88,4
- 258              		.text
- 259              	.Letext0:
- 260              		.file 2 "/usr/include/newlib/machine/_default_types.h"
- 261              		.file 3 "/usr/include/newlib/sys/_stdint.h"
- 262              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
- 263              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
- 264              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
- 265              		.file 7 "/usr/include/newlib/sys/lock.h"
- 266              		.file 8 "/usr/include/newlib/sys/_types.h"
- 267              		.file 9 "/usr/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h"
- 268              		.file 10 "/usr/include/newlib/sys/reent.h"
- 269              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
- 270              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
- 271              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
- 272              		.file 14 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h"
- 273              		.file 15 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
- 274              		.file 16 "/usr/include/newlib/stdlib.h"
-ARM GAS  /tmp/cc8ca0WU.s 			page 7
+ 239              	.L11:
+  53:Src/SPI.c     **** 	while( SPIHandle.State == HAL_SPI_STATE_BUSY );  // wait xmission complete
+ 240              		.loc 1 53 0 discriminator 1
+ 241 0036 0C4B     		ldr	r3, .L13+4
+ 242 0038 93F85130 		ldrb	r3, [r3, #81]	@ zero_extendqisi2
+ 243 003c DBB2     		uxtb	r3, r3
+ 244 003e 022B     		cmp	r3, #2
+ 245 0040 F9D0     		beq	.L11
+  54:Src/SPI.c     **** 	// HAL_Delay(1);
+  55:Src/SPI.c     **** 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
+ 246              		.loc 1 55 0
+ 247 0042 084C     		ldr	r4, .L13
+ 248 0044 0122     		movs	r2, #1
+ 249 0046 1021     		movs	r1, #16
+ 250 0048 2046     		mov	r0, r4
+ 251 004a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 252              	.LVL21:
+  56:Src/SPI.c     **** 	
+  57:Src/SPI.c     **** 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_RESET); //For debug only
+ 253              		.loc 1 57 0
+ 254 004e 0022     		movs	r2, #0
+ 255 0050 4FF48071 		mov	r1, #256
+ 256 0054 2046     		mov	r0, r4
+ 257 0056 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 258              	.LVL22:
+  58:Src/SPI.c     **** 
+  59:Src/SPI.c     **** 	return(halReturnStatus == HAL_OK);
+  60:Src/SPI.c     **** };...
+ 259              		.loc 1 60 0
+ 260 005a B5FA85F0 		clz	r0, r5
+ 261 005e 4009     		lsrs	r0, r0, #5
+ 262 0060 03B0     		add	sp, sp, #12
+ 263              	.LCFI7:
+ 264              		.cfi_def_cfa_offset 20
+ 265              		@ sp needed
+ 266 0062 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 267              	.LVL23:
+ 268              	.L14:
+ 269              		.align	2
+ 270              	.L13:
+ 271 0064 00080140 		.word	1073809408
+ 272 0068 00000000 		.word	SPIHandle
+ 273              		.cfi_endproc
+ 274              	.LFE68:
+ 276              		.comm	SPIHandle,88,4
+ 277              		.text
+ 278              	.Letext0:
+ 279              		.file 2 "/usr/include/newlib/machine/_default_types.h"
+ 280              		.file 3 "/usr/include/newlib/sys/_stdint.h"
+ 281              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
+ 282              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 283              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 284              		.file 7 "/usr/include/newlib/sys/lock.h"
+ 285              		.file 8 "/usr/include/newlib/sys/_types.h"
+ 286              		.file 9 "/usr/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h"
+ 287              		.file 10 "/usr/include/newlib/sys/reent.h"
+ 288              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ARM GAS  /tmp/ccx2Tc4g.s 			page 7
+
+
+ 289              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ 290              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 291              		.file 14 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h"
+ 292              		.file 15 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 293              		.file 16 "/usr/include/newlib/stdlib.h"
+ARM GAS  /tmp/ccx2Tc4g.s 			page 8
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 SPI.c
-     /tmp/cc8ca0WU.s:16     .text.SPI_Init:0000000000000000 $t
-     /tmp/cc8ca0WU.s:23     .text.SPI_Init:0000000000000000 SPI_Init
-     /tmp/cc8ca0WU.s:76     .text.SPI_Init:0000000000000038 $d
+     /tmp/ccx2Tc4g.s:16     .text.SPI_Init:0000000000000000 $t
+     /tmp/ccx2Tc4g.s:23     .text.SPI_Init:0000000000000000 SPI_Init
+     /tmp/ccx2Tc4g.s:76     .text.SPI_Init:0000000000000038 $d
                             *COM*:0000000000000058 SPIHandle
-     /tmp/cc8ca0WU.s:82     .text.SPIWrite:0000000000000000 $t
-     /tmp/cc8ca0WU.s:89     .text.SPIWrite:0000000000000000 SPIWrite
-     /tmp/cc8ca0WU.s:166    .text.SPIWrite:0000000000000058 $d
-     /tmp/cc8ca0WU.s:172    .text.SPIWriteRead:0000000000000000 $t
-     /tmp/cc8ca0WU.s:179    .text.SPIWriteRead:0000000000000000 SPIWriteRead
-     /tmp/cc8ca0WU.s:252    .text.SPIWriteRead:0000000000000054 $d
+     /tmp/ccx2Tc4g.s:82     .text.SPIWrite:0000000000000000 $t
+     /tmp/ccx2Tc4g.s:89     .text.SPIWrite:0000000000000000 SPIWrite
+     /tmp/ccx2Tc4g.s:178    .text.SPIWrite:0000000000000078 $d
+     /tmp/ccx2Tc4g.s:184    .text.SPIWriteRead:0000000000000000 $t
+     /tmp/ccx2Tc4g.s:191    .text.SPIWriteRead:0000000000000000 SPIWriteRead
+     /tmp/ccx2Tc4g.s:271    .text.SPIWriteRead:0000000000000064 $d
 
 UNDEFINED SYMBOLS
 HAL_SPI_Init
 HAL_GPIO_WritePin
 HAL_SPI_TransmitReceive
-HAL_Delay

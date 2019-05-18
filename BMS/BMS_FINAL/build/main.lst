@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc2C1RGN.s 			page 1
+ARM GAS  /tmp/cc9JneMt.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
   32:Src/main.c    **** /* USER CODE END PTD */
   33:Src/main.c    **** 
   34:Src/main.c    **** /* Private define ------------------------------------------------------------*/
-ARM GAS  /tmp/cc2C1RGN.s 			page 2
+ARM GAS  /tmp/cc9JneMt.s 			page 2
 
 
   35:Src/main.c    **** /* USER CODE BEGIN PD */
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
   89:Src/main.c    **** void setDischarge(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6], bool cellDischarge[12][8], bo
   90:Src/main.c    **** void checkDischarge(BMSconfigStructTypedef cfg, bool fullDischarge[12][8], uint8_t bmsData[96][6]);
   91:Src/main.c    **** uint16_t balancingThreshold(BMSconfigStructTypedef cfg);
-ARM GAS  /tmp/cc2C1RGN.s 			page 3
+ARM GAS  /tmp/cc9JneMt.s 			page 3
 
 
   92:Src/main.c    **** void setChargerTxData(BMSconfigStructTypedef cfg);
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  146:Src/main.c    ****   bool full_discharge[12][8];
  147:Src/main.c    **** 
  148:Src/main.c    ****   bool AIR = 0;
-ARM GAS  /tmp/cc2C1RGN.s 			page 4
+ARM GAS  /tmp/cc9JneMt.s 			page 4
 
 
  149:Src/main.c    ****   bool CHARGE_EN = 0;
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  203:Src/main.c    ****     CELLVAL_message(BMSconfig, BMS_DATA);
  204:Src/main.c    ****     BMSSTAT_message(BMSconfig, BMS_STATUS);
  205:Src/main.c    ****     PACKSTAT_message(BMSconfig, BMS_DATA);
-ARM GAS  /tmp/cc2C1RGN.s 			page 5
+ARM GAS  /tmp/cc9JneMt.s 			page 5
 
 
  206:Src/main.c    **** 
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  260:Src/main.c    ****   /* USER CODE BEGIN ADC1_Init 0 */
  261:Src/main.c    **** 
  262:Src/main.c    ****   /* USER CODE END ADC1_Init 0 */
-ARM GAS  /tmp/cc2C1RGN.s 			page 6
+ARM GAS  /tmp/cc9JneMt.s 			page 6
 
 
  263:Src/main.c    **** 
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  317:Src/main.c    ****   hcan.Init.TimeSeg2 = CAN_BS2_2TQ;
  318:Src/main.c    ****   hcan.Init.TimeTriggeredMode = DISABLE;
  319:Src/main.c    ****   hcan.Init.AutoBusOff = DISABLE;
-ARM GAS  /tmp/cc2C1RGN.s 			page 7
+ARM GAS  /tmp/cc9JneMt.s 			page 7
 
 
  320:Src/main.c    ****   hcan.Init.AutoWakeUp = DISABLE;
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  374:Src/main.c    **** 
  375:Src/main.c    ****   /* USER CODE END SPI1_Init 1 */
  376:Src/main.c    ****   /* SPI1 parameter configuration*/
-ARM GAS  /tmp/cc2C1RGN.s 			page 8
+ARM GAS  /tmp/cc9JneMt.s 			page 8
 
 
  377:Src/main.c    ****   hspi1.Instance = SPI1;
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  431:Src/main.c    ****   }
  432:Src/main.c    ****   sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
  433:Src/main.c    ****   sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-ARM GAS  /tmp/cc2C1RGN.s 			page 9
+ARM GAS  /tmp/cc9JneMt.s 			page 9
 
 
  434:Src/main.c    ****   if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
   58              	.LBE2:
   59              	.LBB3:
  455:Src/main.c    ****   __HAL_RCC_GPIOD_CLK_ENABLE();
-ARM GAS  /tmp/cc2C1RGN.s 			page 10
+ARM GAS  /tmp/cc9JneMt.s 			page 10
 
 
   60              		.loc 1 455 0
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  103              		.loc 1 466 0
  104 007a 1A4D     		ldr	r5, .L3+4
  105 007c 2246     		mov	r2, r4
-ARM GAS  /tmp/cc2C1RGN.s 			page 11
+ARM GAS  /tmp/cc9JneMt.s 			page 11
 
 
  106 007e 4FF40071 		mov	r1, #512
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  484:Src/main.c    ****   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
  143              		.loc 1 484 0
  144 00b8 0594     		str	r4, [sp, #20]
-ARM GAS  /tmp/cc2C1RGN.s 			page 12
+ARM GAS  /tmp/cc9JneMt.s 			page 12
 
 
  485:Src/main.c    ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  190              	.LFB68:
  258:Src/main.c    **** 
  191              		.loc 1 258 0
-ARM GAS  /tmp/cc2C1RGN.s 			page 13
+ARM GAS  /tmp/cc9JneMt.s 			page 13
 
 
  192              		.cfi_startproc
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  235              		.loc 1 285 0
  236 002e 0296     		str	r6, [sp, #8]
  286:Src/main.c    ****   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-ARM GAS  /tmp/cc2C1RGN.s 			page 14
+ARM GAS  /tmp/cc9JneMt.s 			page 14
 
 
  237              		.loc 1 286 0
@@ -838,7 +838,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  314:Src/main.c    ****   hcan.Init.SyncJumpWidth = CAN_SJW_2TQ;
  288              		.loc 1 314 0
  289 000e 0024     		movs	r4, #0
-ARM GAS  /tmp/cc2C1RGN.s 			page 15
+ARM GAS  /tmp/cc9JneMt.s 			page 15
 
 
  290 0010 AC60     		str	r4, [r5, #8]
@@ -898,7 +898,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  334:Src/main.c    **** 
  329              		.loc 1 334 0
  330 0048 1C75     		strb	r4, [r3, #20]
-ARM GAS  /tmp/cc2C1RGN.s 			page 16
+ARM GAS  /tmp/cc9JneMt.s 			page 16
 
 
  336:Src/main.c    **** 	ChargerTxHeader.RTR = CAN_RTR_DATA; 			// CAN frame type
@@ -958,7 +958,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  369 0076 FFF7FEFF 		bl	HAL_CAN_Start
  370              	.LVL11:
  356:Src/main.c    ****   /* USER CODE END CAN_Init 2 */
-ARM GAS  /tmp/cc2C1RGN.s 			page 17
+ARM GAS  /tmp/cc9JneMt.s 			page 17
 
 
  371              		.loc 1 356 0
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  423 0010 0194     		str	r4, [sp, #4]
  417:Src/main.c    ****   htim2.Init.Prescaler = 8000;
  424              		.loc 1 417 0
-ARM GAS  /tmp/cc2C1RGN.s 			page 18
+ARM GAS  /tmp/cc9JneMt.s 			page 18
 
 
  425 0012 114D     		ldr	r5, .L15
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  466 0052 07B0     		add	sp, sp, #28
  467              	.LCFI11:
  468              		.cfi_def_cfa_offset 12
-ARM GAS  /tmp/cc2C1RGN.s 			page 19
+ARM GAS  /tmp/cc9JneMt.s 			page 19
 
 
  469              		@ sp needed
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  520 0022 0225     		movs	r5, #2
  521 0024 0A95     		str	r5, [sp, #40]
  224:Src/main.c    ****   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
-ARM GAS  /tmp/cc2C1RGN.s 			page 20
+ARM GAS  /tmp/cc9JneMt.s 			page 20
 
 
  522              		.loc 1 224 0
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  565              		.section	.text.FAULT_check,"ax",%progbits
  566              		.align	1
  567              		.global	FAULT_check
-ARM GAS  /tmp/cc2C1RGN.s 			page 21
+ARM GAS  /tmp/cc9JneMt.s 			page 21
 
 
  568              		.syntax unified
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  595              	.LCFI17:
  596              		.cfi_def_cfa_register 7
  597 0008 07F12004 		add	r4, r7, #32
-ARM GAS  /tmp/cc2C1RGN.s 			page 22
+ARM GAS  /tmp/cc9JneMt.s 			page 22
 
 
  598 000c 84E80F00 		stm	r4, {r0, r1, r2, r3}
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  553:Src/main.c    ****     }
  554:Src/main.c    **** 
  555:Src/main.c    ****     //UV fault
-ARM GAS  /tmp/cc2C1RGN.s 			page 23
+ARM GAS  /tmp/cc9JneMt.s 			page 23
 
 
  556:Src/main.c    ****     if (cellVoltage < cfg.UV_threshold) {
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  635              	.L20:
  536:Src/main.c    **** 
  636              		.loc 1 536 0 is_stmt 0 discriminator 1
-ARM GAS  /tmp/cc2C1RGN.s 			page 24
+ARM GAS  /tmp/cc9JneMt.s 			page 24
 
 
  637 003e 5F2B     		cmp	r3, #95
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  682              		.loc 1 558 0
  683 0086 1078     		ldrb	r0, [r2]	@ zero_extendqisi2
  684              	.LVL42:
-ARM GAS  /tmp/cc2C1RGN.s 			page 25
+ARM GAS  /tmp/cc9JneMt.s 			page 25
 
 
  685 0088 40F00200 		orr	r0, r0, #2
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  727              		.loc 1 579 0
  728 00be 1178     		ldrb	r1, [r2]	@ zero_extendqisi2
  729              	.LVL49:
-ARM GAS  /tmp/cc2C1RGN.s 			page 26
+ARM GAS  /tmp/cc9JneMt.s 			page 26
 
 
  730 00c0 41F01001 		orr	r1, r1, #16
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  602:Src/main.c    ****     if (count > 20000) {
  603:Src/main.c    ****       BMS_FAULT = true;
  604:Src/main.c    ****       HAL_TIM_Base_Stop(&htim2);
-ARM GAS  /tmp/cc2C1RGN.s 			page 27
+ARM GAS  /tmp/cc9JneMt.s 			page 27
 
 
  605:Src/main.c    ****     }*/
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  813              		.loc 1 611 0
  814 0126 0122     		movs	r2, #1
  815 0128 4FF40071 		mov	r1, #512
-ARM GAS  /tmp/cc2C1RGN.s 			page 28
+ARM GAS  /tmp/cc9JneMt.s 			page 28
 
 
  816 012c 0148     		ldr	r0, .L35
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  647:Src/main.c    ****     }
  648:Src/main.c    ****     // if any cell voltage is greater than some absolute threshold (4.18V), stop charging and disch
  649:Src/main.c    ****     // could discharge to a fixed value (4.15V) instead
-ARM GAS  /tmp/cc2C1RGN.s 			page 29
+ARM GAS  /tmp/cc9JneMt.s 			page 29
 
 
  650:Src/main.c    ****     if (cellVoltage > cfg.stopCharge_threshold) {
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  863 0014 05D3     		bcc	.L41
  681:Src/main.c    ****     // min1 = 4.1V   threshold1 = 50mV
  682:Src/main.c    ****     // min2 = 4.16V  threshold2 = 10mV
-ARM GAS  /tmp/cc2C1RGN.s 			page 30
+ARM GAS  /tmp/cc9JneMt.s 			page 30
 
 
  683:Src/main.c    **** 
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  897 003c 0146     		mov	r1, r0
  898 003e 3846     		mov	r0, r7
  899 0040 FFF7FEFF 		bl	__aeabi_fdiv
-ARM GAS  /tmp/cc2C1RGN.s 			page 31
+ARM GAS  /tmp/cc9JneMt.s 			page 31
 
 
  900              	.LVL63:
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  953              		.cfi_def_cfa_offset 136
  954 0008 1EAC     		add	r4, sp, #120
  955 000a 84E80F00 		stm	r4, {r0, r1, r2, r3}
-ARM GAS  /tmp/cc2C1RGN.s 			page 32
+ARM GAS  /tmp/cc9JneMt.s 			page 32
 
 
  956 000e DDF8D8A0 		ldr	r10, [sp, #216]
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  1001 0050 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
  1002              	.LVL72:
  635:Src/main.c    **** 
-ARM GAS  /tmp/cc2C1RGN.s 			page 33
+ARM GAS  /tmp/cc9JneMt.s 			page 33
 
 
  1003              		.loc 1 635 0
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  1048 00a4 1A70     		strb	r2, [r3]
  652:Src/main.c    ****       bmsData[i][1] &= 0x9F; //charging state = 4
  1049              		.loc 1 652 0
-ARM GAS  /tmp/cc2C1RGN.s 			page 34
+ARM GAS  /tmp/cc9JneMt.s 			page 34
 
 
  1050 00a6 0BEBC803 		add	r3, fp, r8, lsl #3
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  1096              	.LVL79:
  1097 00f8 0123     		movs	r3, #1
  1098 00fa 08F80630 		strb	r3, [r8, r6]
-ARM GAS  /tmp/cc2C1RGN.s 			page 35
+ARM GAS  /tmp/cc9JneMt.s 			page 35
 
 
  668:Src/main.c    ****       }
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  1151              		@ link register save eliminated.
  1152              	.LVL82:
  1153 0000 84B0     		sub	sp, sp, #16
-ARM GAS  /tmp/cc2C1RGN.s 			page 36
+ARM GAS  /tmp/cc9JneMt.s 			page 36
 
 
  1154              	.LCFI33:
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  1184              	.L59:
  711:Src/main.c    **** 
  1185              		.loc 1 711 0 discriminator 2
-ARM GAS  /tmp/cc2C1RGN.s 			page 37
+ARM GAS  /tmp/cc9JneMt.s 			page 37
 
 
  1186 001a 0133     		adds	r3, r3, #1
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  724:Src/main.c    ****       }
  1232              		.loc 1 724 0
  1233 005a 4A78     		ldrb	r2, [r1, #1]	@ zero_extendqisi2
-ARM GAS  /tmp/cc2C1RGN.s 			page 38
+ARM GAS  /tmp/cc9JneMt.s 			page 38
 
 
  1234              	.LVL98:
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  1281              		.cfi_startproc
  1282              		@ args = 96, pretend = 16, frame = 0
  1283              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  /tmp/cc2C1RGN.s 			page 39
+ARM GAS  /tmp/cc9JneMt.s 			page 39
 
 
  1284 0000 84B0     		sub	sp, sp, #16
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  1315              	.L69:
  746:Src/main.c    **** 			ChargerTxData[3] = (uint8_t)cfg.lowerCurrent;
  1316              		.loc 1 746 0
-ARM GAS  /tmp/cc2C1RGN.s 			page 40
+ARM GAS  /tmp/cc9JneMt.s 			page 40
 
 
  1317 002e BDF84620 		ldrh	r2, [sp, #70]
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  753:Src/main.c    **** 			break;
  1359              		.loc 1 753 0
  1360 0062 DA70     		strb	r2, [r3, #3]
-ARM GAS  /tmp/cc2C1RGN.s 			page 41
+ARM GAS  /tmp/cc9JneMt.s 			page 41
 
 
  754:Src/main.c    **** 
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  775:Src/main.c    **** 
  776:Src/main.c    ****   for (uint8_t cell = 0; cell < 96; cell++) {
  1411              		.loc 1 776 0
-ARM GAS  /tmp/cc2C1RGN.s 			page 42
+ARM GAS  /tmp/cc9JneMt.s 			page 42
 
 
  1412 0016 0024     		movs	r4, #0
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  1455 0050 5F2C     		cmp	r4, #95
  1456 0052 E2D9     		bls	.L78
  1457              	.LBE11:
-ARM GAS  /tmp/cc2C1RGN.s 			page 43
+ARM GAS  /tmp/cc9JneMt.s 			page 43
 
 
  786:Src/main.c    **** 
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  1507 000c 0649     		ldr	r1, .L84
  1508 000e 0823     		movs	r3, #8
  1509 0010 0B60     		str	r3, [r1]
-ARM GAS  /tmp/cc2C1RGN.s 			page 44
+ARM GAS  /tmp/cc9JneMt.s 			page 44
 
 
  793:Src/main.c    ****   TxHeader.DLC = 6;
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  1560              		.cfi_offset 5, -32
  1561              		.cfi_offset 6, -28
  1562              		.cfi_offset 7, -24
-ARM GAS  /tmp/cc2C1RGN.s 			page 45
+ARM GAS  /tmp/cc9JneMt.s 			page 45
 
 
  1563              		.cfi_offset 14, -20
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  1587 001c 1844     		add	r0, r0, r3
  1588              	.LVL116:
  808:Src/main.c    **** 
-ARM GAS  /tmp/cc2C1RGN.s 			page 46
+ARM GAS  /tmp/cc9JneMt.s 			page 46
 
 
  1589              		.loc 1 808 0 discriminator 2
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  1634 004e E5E7     		b	.L89
  1635              	.LVL129:
  1636              	.L92:
-ARM GAS  /tmp/cc2C1RGN.s 			page 47
+ARM GAS  /tmp/cc9JneMt.s 			page 47
 
 
  1637              	.LBE13:
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  1674 0094 8DF80620 		strb	r2, [sp, #6]
  843:Src/main.c    ****   BMSVINF_DATA[7] = (uint8_t) (averageV & 0xFF);
  1675              		.loc 1 843 0
-ARM GAS  /tmp/cc2C1RGN.s 			page 48
+ARM GAS  /tmp/cc9JneMt.s 			page 48
 
 
  1676 0098 8DF80730 		strb	r3, [sp, #7]
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  1726              		@ args = 100, pretend = 16, frame = 8
  1727              		@ frame_needed = 0, uses_anonymous_args = 0
  1728              	.LVL136:
-ARM GAS  /tmp/cc2C1RGN.s 			page 49
+ARM GAS  /tmp/cc9JneMt.s 			page 49
 
 
  1729 0000 84B0     		sub	sp, sp, #16
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  868:Src/main.c    ****       minCell = cell + 1;
  869:Src/main.c    ****     }
  870:Src/main.c    **** 
-ARM GAS  /tmp/cc2C1RGN.s 			page 50
+ARM GAS  /tmp/cc9JneMt.s 			page 50
 
 
  871:Src/main.c    ****     if (cellTemp > maxT) {
@@ -2998,7 +2998,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  1802              	.LVL149:
  873:Src/main.c    ****     }
  1803              		.loc 1 873 0
-ARM GAS  /tmp/cc2C1RGN.s 			page 51
+ARM GAS  /tmp/cc9JneMt.s 			page 51
 
 
  1804 0048 551C     		adds	r5, r2, #1
@@ -3058,7 +3058,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  1842              		.loc 1 891 0
  1843 0088 C3F30722 		ubfx	r2, r3, #8, #8
  1844 008c 8DF80620 		strb	r2, [sp, #6]
-ARM GAS  /tmp/cc2C1RGN.s 			page 52
+ARM GAS  /tmp/cc9JneMt.s 			page 52
 
 
  892:Src/main.c    ****   BMSTINF_DATA[7] = (uint8_t) (averageT & 0xFF);
@@ -3118,7 +3118,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  1895              		@ frame_needed = 0, uses_anonymous_args = 0
  1896 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
  1897              	.LCFI62:
-ARM GAS  /tmp/cc2C1RGN.s 			page 53
+ARM GAS  /tmp/cc9JneMt.s 			page 53
 
 
  1898              		.cfi_def_cfa_offset 36
@@ -3178,7 +3178,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  1942              		.loc 1 187 0
  1943 0030 A449     		ldr	r1, .L111
  1944 0032 18AB     		add	r3, sp, #96
-ARM GAS  /tmp/cc2C1RGN.s 			page 54
+ARM GAS  /tmp/cc9JneMt.s 			page 54
 
 
  1945 0034 1793     		str	r3, [sp, #92]
@@ -3238,7 +3238,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  1997 009c D4F80490 		ldr	r9, [r4, #4]	@ unaligned
  1998 00a0 D4F80880 		ldr	r8, [r4, #8]	@ unaligned
  1999 00a4 E768     		ldr	r7, [r4, #12]	@ unaligned
-ARM GAS  /tmp/cc2C1RGN.s 			page 55
+ARM GAS  /tmp/cc9JneMt.s 			page 55
 
 
  2000 00a6 3246     		mov	r2, r6
@@ -3298,7 +3298,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  2051 0110 3A46     		mov	r2, r7
  2052 0112 2346     		mov	r3, r4
  2053 0114 FFF7FEFF 		bl	BMSSTAT_message
-ARM GAS  /tmp/cc2C1RGN.s 			page 56
+ARM GAS  /tmp/cc9JneMt.s 			page 56
 
 
  2054              	.LVL182:
@@ -3358,7 +3358,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  2104 0188 2946     		mov	r1, r5
  2105 018a 6846     		mov	r0, sp
  2106 018c FFF7FEFF 		bl	memcpy
-ARM GAS  /tmp/cc2C1RGN.s 			page 57
+ARM GAS  /tmp/cc9JneMt.s 			page 57
 
 
  2107              	.LVL188:
@@ -3418,7 +3418,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  2158              	.LVL194:
  2159 0208 5846     		mov	r0, fp
  2160 020a 5146     		mov	r1, r10
-ARM GAS  /tmp/cc2C1RGN.s 			page 58
+ARM GAS  /tmp/cc9JneMt.s 			page 58
 
 
  2161 020c 4A46     		mov	r2, r9
@@ -3478,7 +3478,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  2209 0264 7FF4E4AE 		bne	.L110
  2210              	.LVL202:
  2211              	.L106:
-ARM GAS  /tmp/cc2C1RGN.s 			page 59
+ARM GAS  /tmp/cc9JneMt.s 			page 59
 
 
  189:Src/main.c    **** 
@@ -3538,7 +3538,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  2262 02c8 000C0140 		.word	1073810432
  2263 02cc 00000000 		.word	.LANCHOR0
  2264              		.cfi_endproc
-ARM GAS  /tmp/cc2C1RGN.s 			page 60
+ARM GAS  /tmp/cc9JneMt.s 			page 60
 
 
  2265              	.LFE66:
@@ -3598,7 +3598,7 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  2306              		.cfi_startproc
  2307              		@ args = 0, pretend = 0, frame = 0
  2308              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  /tmp/cc2C1RGN.s 			page 61
+ARM GAS  /tmp/cc9JneMt.s 			page 61
 
 
  2309              		@ link register save eliminated.
@@ -3658,81 +3658,81 @@ ARM GAS  /tmp/cc2C1RGN.s 			page 1
  2361              		.file 22 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
  2362              		.file 23 "/usr/include/newlib/stdlib.h"
  2363              		.file 24 "Inc/BMSconfig.h"
-ARM GAS  /tmp/cc2C1RGN.s 			page 62
+ARM GAS  /tmp/cc9JneMt.s 			page 62
 
 
  2364              		.file 25 "/usr/include/newlib/math.h"
  2365              		.file 26 "Inc/LTC6811.h"
  2366              		.file 27 "<built-in>"
  2367              		.file 28 "Inc/SPI.h"
-ARM GAS  /tmp/cc2C1RGN.s 			page 63
+ARM GAS  /tmp/cc9JneMt.s 			page 63
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.c
-     /tmp/cc2C1RGN.s:16     .text.MX_GPIO_Init:0000000000000000 $t
-     /tmp/cc2C1RGN.s:22     .text.MX_GPIO_Init:0000000000000000 MX_GPIO_Init
-     /tmp/cc2C1RGN.s:175    .text.MX_GPIO_Init:00000000000000e0 $d
-     /tmp/cc2C1RGN.s:183    .text.MX_ADC1_Init:0000000000000000 $t
-     /tmp/cc2C1RGN.s:189    .text.MX_ADC1_Init:0000000000000000 MX_ADC1_Init
-     /tmp/cc2C1RGN.s:253    .text.MX_ADC1_Init:0000000000000040 $d
+     /tmp/cc9JneMt.s:16     .text.MX_GPIO_Init:0000000000000000 $t
+     /tmp/cc9JneMt.s:22     .text.MX_GPIO_Init:0000000000000000 MX_GPIO_Init
+     /tmp/cc9JneMt.s:175    .text.MX_GPIO_Init:00000000000000e0 $d
+     /tmp/cc9JneMt.s:183    .text.MX_ADC1_Init:0000000000000000 $t
+     /tmp/cc9JneMt.s:189    .text.MX_ADC1_Init:0000000000000000 MX_ADC1_Init
+     /tmp/cc9JneMt.s:253    .text.MX_ADC1_Init:0000000000000040 $d
                             *COM*:0000000000000030 hadc1
-     /tmp/cc2C1RGN.s:259    .text.MX_CAN_Init:0000000000000000 $t
-     /tmp/cc2C1RGN.s:265    .text.MX_CAN_Init:0000000000000000 MX_CAN_Init
-     /tmp/cc2C1RGN.s:385    .text.MX_CAN_Init:0000000000000088 $d
+     /tmp/cc9JneMt.s:259    .text.MX_CAN_Init:0000000000000000 $t
+     /tmp/cc9JneMt.s:265    .text.MX_CAN_Init:0000000000000000 MX_CAN_Init
+     /tmp/cc9JneMt.s:385    .text.MX_CAN_Init:0000000000000088 $d
                             *COM*:0000000000000028 hcan
                             *COM*:0000000000000018 TxHeader
                             *COM*:0000000000000018 ChargerTxHeader
-     /tmp/cc2C1RGN.s:394    .text.MX_TIM2_Init:0000000000000000 $t
-     /tmp/cc2C1RGN.s:400    .text.MX_TIM2_Init:0000000000000000 MX_TIM2_Init
-     /tmp/cc2C1RGN.s:474    .text.MX_TIM2_Init:0000000000000058 $d
+     /tmp/cc9JneMt.s:394    .text.MX_TIM2_Init:0000000000000000 $t
+     /tmp/cc9JneMt.s:400    .text.MX_TIM2_Init:0000000000000000 MX_TIM2_Init
+     /tmp/cc9JneMt.s:474    .text.MX_TIM2_Init:0000000000000058 $d
                             *COM*:0000000000000040 htim2
-     /tmp/cc2C1RGN.s:479    .text.SystemClock_Config:0000000000000000 $t
-     /tmp/cc2C1RGN.s:486    .text.SystemClock_Config:0000000000000000 SystemClock_Config
-     /tmp/cc2C1RGN.s:566    .text.FAULT_check:0000000000000000 $t
-     /tmp/cc2C1RGN.s:573    .text.FAULT_check:0000000000000000 FAULT_check
-     /tmp/cc2C1RGN.s:823    .text.FAULT_check:0000000000000134 $d
-     /tmp/cc2C1RGN.s:831    .text.balancingThreshold:0000000000000000 $t
-     /tmp/cc2C1RGN.s:838    .text.balancingThreshold:0000000000000000 balancingThreshold
-     /tmp/cc2C1RGN.s:916    .text.balancingThreshold:0000000000000058 $d
+     /tmp/cc9JneMt.s:479    .text.SystemClock_Config:0000000000000000 $t
+     /tmp/cc9JneMt.s:486    .text.SystemClock_Config:0000000000000000 SystemClock_Config
+     /tmp/cc9JneMt.s:566    .text.FAULT_check:0000000000000000 $t
+     /tmp/cc9JneMt.s:573    .text.FAULT_check:0000000000000000 FAULT_check
+     /tmp/cc9JneMt.s:823    .text.FAULT_check:0000000000000134 $d
+     /tmp/cc9JneMt.s:831    .text.balancingThreshold:0000000000000000 $t
+     /tmp/cc9JneMt.s:838    .text.balancingThreshold:0000000000000000 balancingThreshold
+     /tmp/cc9JneMt.s:916    .text.balancingThreshold:0000000000000058 $d
                             *COM*:0000000000000002 minimum
-     /tmp/cc2C1RGN.s:922    .text.setDischarge:0000000000000000 $t
-     /tmp/cc2C1RGN.s:929    .text.setDischarge:0000000000000000 setDischarge
-     /tmp/cc2C1RGN.s:1132   .text.setDischarge:0000000000000114 $d
-     /tmp/cc2C1RGN.s:1138   .text.checkDischarge:0000000000000000 $t
-     /tmp/cc2C1RGN.s:1145   .text.checkDischarge:0000000000000000 checkDischarge
-     /tmp/cc2C1RGN.s:1265   .text.checkDischarge:0000000000000074 $d
-     /tmp/cc2C1RGN.s:1271   .text.setChargerTxData:0000000000000000 $t
-     /tmp/cc2C1RGN.s:1278   .text.setChargerTxData:0000000000000000 setChargerTxData
-     /tmp/cc2C1RGN.s:1366   .text.setChargerTxData:0000000000000068 $d
+     /tmp/cc9JneMt.s:922    .text.setDischarge:0000000000000000 $t
+     /tmp/cc9JneMt.s:929    .text.setDischarge:0000000000000000 setDischarge
+     /tmp/cc9JneMt.s:1132   .text.setDischarge:0000000000000114 $d
+     /tmp/cc9JneMt.s:1138   .text.checkDischarge:0000000000000000 $t
+     /tmp/cc9JneMt.s:1145   .text.checkDischarge:0000000000000000 checkDischarge
+     /tmp/cc9JneMt.s:1265   .text.checkDischarge:0000000000000074 $d
+     /tmp/cc9JneMt.s:1271   .text.setChargerTxData:0000000000000000 $t
+     /tmp/cc9JneMt.s:1278   .text.setChargerTxData:0000000000000000 setChargerTxData
+     /tmp/cc9JneMt.s:1366   .text.setChargerTxData:0000000000000068 $d
                             *COM*:0000000000000008 ChargerTxData
                             *COM*:0000000000000004 TxMailbox
-     /tmp/cc2C1RGN.s:1375   .text.CELLVAL_message:0000000000000000 $t
-     /tmp/cc2C1RGN.s:1382   .text.CELLVAL_message:0000000000000000 CELLVAL_message
-     /tmp/cc2C1RGN.s:1474   .text.CELLVAL_message:000000000000005c $d
+     /tmp/cc9JneMt.s:1375   .text.CELLVAL_message:0000000000000000 $t
+     /tmp/cc9JneMt.s:1382   .text.CELLVAL_message:0000000000000000 CELLVAL_message
+     /tmp/cc9JneMt.s:1474   .text.CELLVAL_message:000000000000005c $d
                             *COM*:0000000000000006 CELLVAL_DATA
-     /tmp/cc2C1RGN.s:1482   .text.BMSSTAT_message:0000000000000000 $t
-     /tmp/cc2C1RGN.s:1489   .text.BMSSTAT_message:0000000000000000 BMSSTAT_message
-     /tmp/cc2C1RGN.s:1532   .text.BMSSTAT_message:0000000000000028 $d
-     /tmp/cc2C1RGN.s:1539   .text.BMSVINF_message:0000000000000000 $t
-     /tmp/cc2C1RGN.s:1546   .text.BMSVINF_message:0000000000000000 BMSVINF_message
-     /tmp/cc2C1RGN.s:1706   .text.BMSVINF_message:00000000000000b0 $d
+     /tmp/cc9JneMt.s:1482   .text.BMSSTAT_message:0000000000000000 $t
+     /tmp/cc9JneMt.s:1489   .text.BMSSTAT_message:0000000000000000 BMSSTAT_message
+     /tmp/cc9JneMt.s:1532   .text.BMSSTAT_message:0000000000000028 $d
+     /tmp/cc9JneMt.s:1539   .text.BMSVINF_message:0000000000000000 $t
+     /tmp/cc9JneMt.s:1546   .text.BMSVINF_message:0000000000000000 BMSVINF_message
+     /tmp/cc9JneMt.s:1706   .text.BMSVINF_message:00000000000000b0 $d
                             *COM*:0000000000000004 sumOfCells
-     /tmp/cc2C1RGN.s:1715   .text.BMSTINF_message:0000000000000000 $t
-     /tmp/cc2C1RGN.s:1722   .text.BMSTINF_message:0000000000000000 BMSTINF_message
-     /tmp/cc2C1RGN.s:1876   .text.BMSTINF_message:00000000000000a8 $d
-     /tmp/cc2C1RGN.s:1883   .text.main:0000000000000000 $t
-     /tmp/cc2C1RGN.s:1890   .text.main:0000000000000000 main
-     /tmp/cc2C1RGN.s:2261   .text.main:00000000000002c4 $d
+     /tmp/cc9JneMt.s:1715   .text.BMSTINF_message:0000000000000000 $t
+     /tmp/cc9JneMt.s:1722   .text.BMSTINF_message:0000000000000000 BMSTINF_message
+     /tmp/cc9JneMt.s:1876   .text.BMSTINF_message:00000000000000a8 $d
+     /tmp/cc9JneMt.s:1883   .text.main:0000000000000000 $t
+     /tmp/cc9JneMt.s:1890   .text.main:0000000000000000 main
+     /tmp/cc9JneMt.s:2261   .text.main:00000000000002c4 $d
                             *COM*:000000000000005e BMSconfig
-ARM GAS  /tmp/cc2C1RGN.s 			page 64
+ARM GAS  /tmp/cc9JneMt.s 			page 64
 
 
-     /tmp/cc2C1RGN.s:2268   .text.PACKSTAT_message:0000000000000000 $t
-     /tmp/cc2C1RGN.s:2275   .text.PACKSTAT_message:0000000000000000 PACKSTAT_message
-     /tmp/cc2C1RGN.s:2296   .text.Error_Handler:0000000000000000 $t
-     /tmp/cc2C1RGN.s:2303   .text.Error_Handler:0000000000000000 Error_Handler
-     /tmp/cc2C1RGN.s:2337   .data.chargeRate:0000000000000000 chargeRate
+     /tmp/cc9JneMt.s:2268   .text.PACKSTAT_message:0000000000000000 $t
+     /tmp/cc9JneMt.s:2275   .text.PACKSTAT_message:0000000000000000 PACKSTAT_message
+     /tmp/cc9JneMt.s:2296   .text.Error_Handler:0000000000000000 $t
+     /tmp/cc9JneMt.s:2303   .text.Error_Handler:0000000000000000 Error_Handler
+     /tmp/cc9JneMt.s:2337   .data.chargeRate:0000000000000000 chargeRate
                             *COM*:0000000000000006 BMSSTAT_DATA
                             *COM*:0000000000000008 RxData
                             *COM*:0000000000000008 TxData

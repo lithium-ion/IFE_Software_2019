@@ -13,7 +13,8 @@ typedef enum {
 	ReadAuxiliaryGroupB = 0x00E,
 	StartOpenWireConversionPulldown = 0x229,
 	StartCellVoltageADCConversionAll = 0x260, // MD = 00, DCP = 0, CHG = 000
-	StartCellTempVoltageADCConversionAll = 0x460 // MD = 00, CHG = 000
+	StartCellTempVoltageADCConversionAll = 0x460, // MD = 00, CHG = 000
+	ClearRegisters = 0x711
 } CommandCodeTypedef;
 
 void initPECTable(void);
