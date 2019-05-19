@@ -531,7 +531,8 @@ bool FAULT_check(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6], uint8_t bms
   uint8_t board;
   uint8_t error_count[cfg.numOfICs];
 
-  bmsStatus[0] = 0;
+  for (uint8_t i = 0; i < 6; i++)
+    bmsStatus[i] = 0;
 
   for (uint8_t cell = 0; cell < 96; cell++) {
 

@@ -271,7 +271,8 @@ bool readAllCellVoltages(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
 		//store cell number and valid data bit in bmsData
 		for (uint8_t cell = 0; cell < 8; cell++) {
 			bmsData[(board * 8) + cell][0] = (uint8_t) ((board * 8) + cell + 1); //cell number
-			bmsData[(board * 8) + cell][1] = (uint8_t) (0x02 & (PEC_check[board] << 1)); //valid data bit in status byte
+			bmsData[(board * 8) + cell][1] = (uint8_t) (0x01 & PEC_check[board]);
+			//bmsData[(board * 8) + cell][1] = (uint8_t) (0x02 & (PEC_check[board] << 1)); //valid data bit in status byte
 		}
 
 		//store cell voltage in bmsData
@@ -312,9 +313,9 @@ bool readCellTemp(uint8_t address, uint16_t cellTemp[4], bool dcFault[4], bool t
 	
 	temp = (uint16_t *)malloc(4*sizeof(uint16_t));
 	
-	sendAddressCommand(StartCellTempVoltageADCConversionAll, address);
+	//sendAddressCommand(StartCellTempVoltageADCConversionAll, address);
 	
-	HAL_Delay(50); // conversion time is 12.8ms at 422Hz, so wait 15ms
+	//HAL_Delay(50); // conversion time is 12.8ms at 422Hz, so wait 15ms
 	
 	PEC_check = readRegister(ReadAuxiliaryGroupA, address, temp);
 	//dataValid = dataValid & PEC_check;
@@ -361,6 +362,10 @@ bool readAllCellTemps(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
 	bool PEC_check[12];
 	bool dataValid = true;
 
+	sendBroadcastCommand(clearRegisters);
+	sendBroadcastCommand(StartCellTempVoltageADCConversionAll);
+	HAL_Delay(20);
+
 	for (uint8_t board = 0; board < 12; board++) {
 
 		//read temperature, check for OT and temp DC
@@ -368,7 +373,8 @@ bool readAllCellTemps(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
 
 		//store OT and temp DC bits in status byte
 		for (uint8_t cell = 0; cell < 8; cell++) {
-			bmsData[(board * 8) + cell][1] &= (PEC_check[board] << 1);
+			bmsData[(board * 8) + cell][1] &= PEC_check[board];
+			bmsData[(board * 8) + cell][1] = bmsData[(board * 8) + cell][1] << 1;
 			bmsData[(board * 8) + cell][1] |= (boardTempFault[cell / 2] << 4);
 			bmsData[(board * 8) + cell][1] |= (boardDCFault[cell / 2] << 3);
 		}
@@ -417,6 +423,8 @@ bool readConfig(uint8_t address, uint8_t cfg[8]) {
 	cfg[5] = (uint8_t) (config[2] & 0xFF);
 	cfg[6] = (uint8_t) ((config[3] >> 8) & 0xFF);
 	cfg[7] = (uint8_t) (config[3] & 0xFF);
+
+	free(config);
 	
 	return dataValid;
 }
@@ -445,13 +453,14 @@ bool checkAllCellConnections(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6])
 	bool disconnect = false;
 
 	//at least 2
+	sendBroadcastCommand(ClearRegisters);
 	sendBroadcastCommand(StartOpenWireConversionPulldown);
 	sendBroadcastCommand(StartOpenWireConversionPulldown);
 	sendBroadcastCommand(StartOpenWireConversionPulldown);
 	sendBroadcastCommand(StartOpenWireConversionPulldown);
 	sendBroadcastCommand(StartOpenWireConversionPulldown);
 
-	HAL_Delay(15);
+	HAL_Delay(20);
 
 	for (uint8_t board = 0; board < cfg.numOfICs; board++) {
 
@@ -622,6 +631,8 @@ bool readRegister(CommandCodeTypedef command, uint8_t address, uint16_t *data) {
 		data[2] = (uint16_t) ((rx_data[8] << 8) & 0xFF00) | (rx_data[9] & 0x00FF);
 		data[3] = (uint16_t) ((rx_data[10] << 8) & 0xFF00) | (rx_data[11] & 0x00FF);
 	}
+
+	free(PEC_send);
 	
 	return(dataValid);
 	
