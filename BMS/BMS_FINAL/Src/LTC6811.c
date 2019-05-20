@@ -158,10 +158,7 @@ void writeConfigAddress(BMSconfigStructTypedef cfg, uint8_t address) {
 
 void writeConfigAll(BMSconfigStructTypedef cfg) {
 
-	uint32_t delay = 15;
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
-	while(delay--);
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
+	wakeup_idle();
 
 	for (uint8_t i = 0; i < cfg.numOfICs; i++) {
 		writeConfigAddress(cfg, cfg.address[i]);
@@ -184,15 +181,15 @@ bool readCellVoltage(uint8_t address, uint16_t cellVoltage[12]) {
 	// HAL_Delay(50); // conversion time is 12.8ms at 422Hz, so wait 15ms
 	
 	PEC_check = readRegister(ReadCellVoltageRegisterGroup1to3, address, voltage);
-	//dataValid = dataValid & PEC_check;
+	dataValid = dataValid & PEC_check;
 	PEC_check = readRegister(ReadCellVoltageRegisterGroup4to6, address, voltage);
 	dataValid = dataValid & PEC_check;
 	PEC_check = readRegister(ReadCellVoltageRegisterGroup7to9, address, voltage);
 	dataValid = dataValid & PEC_check;
 	PEC_check = readRegister(ReadCellVoltageRegisterGroup10to12, address, voltage);
 	dataValid = dataValid & PEC_check;
-	PEC_check = readRegister(ReadCellVoltageRegisterGroup1to3, address, voltage);
-	dataValid = dataValid & PEC_check;
+	//PEC_check = readRegister(ReadCellVoltageRegisterGroup1to3, address, voltage);
+	//dataValid = dataValid & PEC_check;
 	
 	for (uint8_t i = 0; i < 12; i++) {
 		cellVoltage[i] = voltage[i];
@@ -254,14 +251,13 @@ bool readAllCellVoltages(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
 	bool PEC_check[12];
 	bool dataValid = true;
 
+	wakeup_idle();
+
 	sendBroadcastCommand(ClearRegisters);
 	sendBroadcastCommand(StartCellVoltageADCConversionAll);
 	HAL_Delay(20);
 
-	uint32_t delay = 15;
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
-	while(delay--);
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
+	wakeup_idle();
 
 	for (uint8_t board = 0; board < 12; board++) {
 
@@ -271,8 +267,7 @@ bool readAllCellVoltages(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
 		//store cell number and valid data bit in bmsData
 		for (uint8_t cell = 0; cell < 8; cell++) {
 			bmsData[(board * 8) + cell][0] = (uint8_t) ((board * 8) + cell + 1); //cell number
-			bmsData[(board * 8) + cell][1] = (uint8_t) (0x01 & PEC_check[board]);
-			//bmsData[(board * 8) + cell][1] = (uint8_t) (0x02 & (PEC_check[board] << 1)); //valid data bit in status byte
+			bmsData[(board * 8) + cell][1] = (uint8_t) (0x02 & (PEC_check[board] << 1)); //valid data bit in status byte
 		}
 
 		//store cell voltage in bmsData
@@ -318,11 +313,11 @@ bool readCellTemp(uint8_t address, uint16_t cellTemp[4], bool dcFault[4], bool t
 	//HAL_Delay(50); // conversion time is 12.8ms at 422Hz, so wait 15ms
 	
 	PEC_check = readRegister(ReadAuxiliaryGroupA, address, temp);
-	//dataValid = dataValid & PEC_check;
+	dataValid = dataValid & PEC_check;
 	PEC_check = readRegister(ReadAuxiliaryGroupB, address, temp);
 	dataValid = dataValid & PEC_check;
-	PEC_check = readRegister(ReadAuxiliaryGroupA, address, temp);
-	dataValid = dataValid & PEC_check;
+	//PEC_check = readRegister(ReadAuxiliaryGroupA, address, temp);
+	//dataValid = dataValid & PEC_check;
 	
 	for (uint8_t i = 0; i < 4; i++) {
 		if ((temp[i] > 24400) || (temp[i] < 13000)) {
@@ -362,9 +357,13 @@ bool readAllCellTemps(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
 	bool PEC_check[12];
 	bool dataValid = true;
 
-	sendBroadcastCommand(clearRegisters);
+	wakeup_idle();
+
+	sendBroadcastCommand(ClearRegisters);
 	sendBroadcastCommand(StartCellTempVoltageADCConversionAll);
 	HAL_Delay(20);
+
+	wakeup_idle();
 
 	for (uint8_t board = 0; board < 12; board++) {
 
@@ -373,8 +372,7 @@ bool readAllCellTemps(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
 
 		//store OT and temp DC bits in status byte
 		for (uint8_t cell = 0; cell < 8; cell++) {
-			bmsData[(board * 8) + cell][1] &= PEC_check[board];
-			bmsData[(board * 8) + cell][1] = bmsData[(board * 8) + cell][1] << 1;
+			bmsData[(board * 8) + cell][1] = (uint8_t) (0x02 & (PEC_check[board] << 1)); //valid data bit in status byte
 			bmsData[(board * 8) + cell][1] |= (boardTempFault[cell / 2] << 4);
 			bmsData[(board * 8) + cell][1] |= (boardDCFault[cell / 2] << 3);
 		}
@@ -452,6 +450,8 @@ bool checkAllCellConnections(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6])
 	uint16_t cellVoltage;
 	bool disconnect = false;
 
+	wakeup_idle();
+
 	//at least 2
 	sendBroadcastCommand(ClearRegisters);
 	sendBroadcastCommand(StartOpenWireConversionPulldown);
@@ -459,8 +459,9 @@ bool checkAllCellConnections(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6])
 	sendBroadcastCommand(StartOpenWireConversionPulldown);
 	sendBroadcastCommand(StartOpenWireConversionPulldown);
 	sendBroadcastCommand(StartOpenWireConversionPulldown);
-
 	HAL_Delay(20);
+
+	wakeup_idle();
 
 	for (uint8_t board = 0; board < cfg.numOfICs; board++) {
 
@@ -488,6 +489,8 @@ bool dischargeCellGroups(BMSconfigStructTypedef config, bool cellDischarge[12][8
 	BMSconfigStructTypedef *cfg;
 
 	cfg = &config;
+
+	wakeup_idle();
 
 	for (uint8_t i = 0; i < config.numOfICs; i++) {
 
@@ -536,6 +539,13 @@ bool dischargeCellGroups(BMSconfigStructTypedef config, bool cellDischarge[12][8
 	return 0;
 	
 }*/
+
+void wakeup_idle() {
+	uint32_t delay = 15;
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
+	while(delay--);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
+}
 
 bool readRegister(CommandCodeTypedef command, uint8_t address, uint16_t *data) {
 	

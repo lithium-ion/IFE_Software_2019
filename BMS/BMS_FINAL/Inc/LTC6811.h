@@ -27,6 +27,7 @@ bool readAllCellTemps(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]);
 //bool checkCellConnection(uint16_t cellVoltage[12], bool cellConnection[12]);
 bool checkAllCellConnections(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]);
 bool dischargeCellGroups(BMSconfigStructTypedef cfg, bool cellDischarge[12][8]);
+void wakeup_idle();
 //bool dischargeCell(BMSconfigStructTypedef config, bool cellDischarge[8]);
 bool readConfig(uint8_t address, uint8_t cfg[8]);
 bool readRegister(CommandCodeTypedef command, uint8_t address, uint16_t *data);

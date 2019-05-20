@@ -688,7 +688,6 @@ uint16_t balancingThreshold(BMSconfigStructTypedef cfg) {
     float m;
     uint16_t linear;
 
-    //  ()
     m = ((float) (cfg.scale_to - cfg.balancing_difference)) / (cfg.stop_scaling - cfg.start_scaling);
     linear = (uint16_t) m * (minimum - cfg.start_scaling) + cfg.balancing_difference;
 
