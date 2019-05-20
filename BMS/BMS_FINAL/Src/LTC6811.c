@@ -267,7 +267,9 @@ bool readAllCellVoltages(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
 		//store cell number and valid data bit in bmsData
 		for (uint8_t cell = 0; cell < 8; cell++) {
 			bmsData[(board * 8) + cell][0] = (uint8_t) ((board * 8) + cell + 1); //cell number
-			bmsData[(board * 8) + cell][1] = (uint8_t) (0x02 & (PEC_check[board] << 1)); //valid data bit in status byte
+			bmsData[(board * 8) + cell][1] = 0; //clear status byte 
+			if (PEC_check[board])
+				bmsData[(board * 8) + cell][1] |= 0b00000010; //set valid data bit
 		}
 
 		//store cell voltage in bmsData
@@ -372,9 +374,15 @@ bool readAllCellTemps(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
 
 		//store OT and temp DC bits in status byte
 		for (uint8_t cell = 0; cell < 8; cell++) {
-			bmsData[(board * 8) + cell][1] = (uint8_t) (0x02 & (PEC_check[board] << 1)); //valid data bit in status byte
-			bmsData[(board * 8) + cell][1] |= (boardTempFault[cell / 2] << 4);
-			bmsData[(board * 8) + cell][1] |= (boardDCFault[cell / 2] << 3);
+
+			if (PEC_check[board] == 0)
+				bmsData[(board * 8) + cell][1] &= 0b11111101; //reset valid data bit
+
+			if (boardTempFault[cell / 2])
+				bmsData[(board * 8) + cell][1] |= 0b00010000; //set OT bit
+
+			if (boardDCFault[cell / 2])
+				bmsData[(board * 8) + cell][1] |= 0b00001000; //set temp DC bit
 		}
 
 		//store cell temperature in bmsData
@@ -475,9 +483,9 @@ bool checkAllCellConnections(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6])
 			cellVoltage += (uint16_t) (bmsData[(board * cfg.numOfCellsPerIC) + cell][3]);
 
 			if ((cellVoltage - ADOWvoltage[cell]) > 1000)
-				bmsData[(board * cfg.numOfCellsPerIC) + cell][1] &= 0xFE;
+				bmsData[(board * cfg.numOfCellsPerIC) + cell][1] &= 0b11111110; //significant drop in voltage, so cell is disconnected
 			else
-				bmsData[(board * cfg.numOfCellsPerIC) + cell][1] |= 0x01;
+				bmsData[(board * cfg.numOfCellsPerIC) + cell][1] |= 0b00000001; //negligible drop in voltage, so cell is connected
 		}
 	}
 
