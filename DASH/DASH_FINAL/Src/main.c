@@ -122,23 +122,23 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	
+
 	if (CAN_flag == 0xFF)
 		CAN_interpret();
 
 	//send POT positions CAN message
-	
+
 	uint16_t pot_position[4];
 	POT_read(pot_position);
 	POT_interpret(pot_position);
 
-	
+
 	HAL_CAN_AddTxMessage(&hcan, &POT_TxHeader, POT_data, &TxMailbox);
 
-	
+
 	HAL_Delay(1000);
 
-	
+
   }
   /* USER CODE END 3 */
 }
@@ -153,7 +153,7 @@ void SystemClock_Config(void)
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
-  /** Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the CPU, AHB and APB busses clocks
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
@@ -163,7 +163,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /** Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the CPU, AHB and APB busses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
@@ -201,7 +201,7 @@ static void MX_ADC1_Init(void)
   /* USER CODE BEGIN ADC1_Init 1 */
 
   /* USER CODE END ADC1_Init 1 */
-  /** Common config 
+  /** Common config
   */
   hadc1.Instance = ADC1;
   hadc1.Init.ScanConvMode = DISABLE;
@@ -214,7 +214,7 @@ static void MX_ADC1_Init(void)
   {
     Error_Handler();
   }
-  /** Configure Regular Channel 
+  /** Configure Regular Channel
   */
   sConfig.Channel = ADC_CHANNEL_0;
   sConfig.Rank = ADC_REGULAR_RANK_1;
@@ -223,7 +223,7 @@ static void MX_ADC1_Init(void)
   {
     Error_Handler();
   }
-  /** Configure Regular Channel 
+  /** Configure Regular Channel
   */
   sConfig.Channel = ADC_CHANNEL_1;
   sConfig.Rank = ADC_REGULAR_RANK_2;
@@ -231,7 +231,7 @@ static void MX_ADC1_Init(void)
   {
     Error_Handler();
   }
-  /** Configure Regular Channel 
+  /** Configure Regular Channel
   */
   sConfig.Channel = ADC_CHANNEL_7;
   sConfig.Rank = ADC_REGULAR_RANK_3;
@@ -239,7 +239,7 @@ static void MX_ADC1_Init(void)
   {
     Error_Handler();
   }
-  /** Configure Regular Channel 
+  /** Configure Regular Channel
   */
   sConfig.Channel = ADC_CHANNEL_9;
   sConfig.Rank = ADC_REGULAR_RANK_4;
@@ -271,8 +271,8 @@ static void MX_CAN_Init(void)
   hcan.Instance = CAN1;
   hcan.Init.Prescaler = 2;
   hcan.Init.Mode = CAN_MODE_NORMAL;
-  hcan.Init.SyncJumpWidth = CAN_SJW_4TQ;
-  hcan.Init.TimeSeg1 = CAN_BS1_11TQ;
+  hcan.Init.SyncJumpWidth = CAN_SJW_1TQ;
+  hcan.Init.TimeSeg1 = CAN_BS1_3TQ;
   hcan.Init.TimeSeg2 = CAN_BS2_4TQ;
   hcan.Init.TimeTriggeredMode = DISABLE;
   hcan.Init.AutoBusOff = DISABLE;
@@ -290,22 +290,22 @@ static void MX_CAN_Init(void)
 	POT_TxHeader.IDE = CAN_ID_STD; 							// CAN ID type
 	POT_TxHeader.DLC = 4; 									// CAN frame length in bytes
 	POT_TxHeader.TransmitGlobalTime = DISABLE;				// CAN timestamp in TxData[6] and TxData[7]
-  
+
 	sFilterConfig.FilterBank = 0;							// filter number (0-13)
-	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;		// mask mode or identifier mode		
-	sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;		
+	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;		// mask mode or identifier mode
+	sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
 	sFilterConfig.FilterIdHigh = 0x0000;					// received ID must match filter ID for each bit specified by filter mask
 	sFilterConfig.FilterIdLow = 0x0000;
 	sFilterConfig.FilterMaskIdHigh = 0x0000;				// specifies which bits of the received ID to compare to the filter ID
 	sFilterConfig.FilterMaskIdLow = 0x0000;
 	sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO0;		// receive FIFO (0 or 1, must match chosen interrupt!)
 	sFilterConfig.FilterActivation = ENABLE;
-	
+
 	HAL_CAN_ConfigFilter(&hcan, &sFilterConfig);
-	
+
 	HAL_CAN_Start(&hcan);
-	
-	HAL_CAN_ActivateNotification(&hcan, CAN_IT_RX_FIFO0_MSG_PENDING); 
+
+	HAL_CAN_ActivateNotification(&hcan, CAN_IT_RX_FIFO0_MSG_PENDING);
   /* USER CODE END CAN_Init 2 */
 
 }
@@ -324,15 +324,15 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, CUR_LED_Pin|BMS_LED_ON_Pin|IMD_LED_ON_Pin|BSPD_LED_ON_Pin 
+  HAL_GPIO_WritePin(GPIOA, CUR_LED_Pin|BMS_LED_ON_Pin|IMD_LED_ON_Pin|BSPD_LED_ON_Pin
                           |DRS_LED_Pin|TC_LED_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, RGB_GREEN_Pin|RGB_RED_Pin|RGB_BLUE_Pin|CUST_LED_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : CUR_LED_Pin BMS_LED_ON_Pin IMD_LED_ON_Pin BSPD_LED_ON_Pin 
+  /*Configure GPIO pins : CUR_LED_Pin BMS_LED_ON_Pin IMD_LED_ON_Pin BSPD_LED_ON_Pin
                            DRS_LED_Pin TC_LED_Pin */
-  GPIO_InitStruct.Pin = CUR_LED_Pin|BMS_LED_ON_Pin|IMD_LED_ON_Pin|BSPD_LED_ON_Pin 
+  GPIO_InitStruct.Pin = CUR_LED_Pin|BMS_LED_ON_Pin|IMD_LED_ON_Pin|BSPD_LED_ON_Pin
                           |DRS_LED_Pin|TC_LED_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -348,6 +348,8 @@ static void MX_GPIO_Init(void)
 
 }
 
+
+
 /* USER CODE BEGIN 4 */
 void POT_read(uint16_t pot_values[4]) {
 	//0 1 7 9
@@ -356,56 +358,56 @@ void POT_read(uint16_t pot_values[4]) {
 	sConfig.Rank = ADC_REGULAR_RANK_1;
 	sConfig.SamplingTime = ADC_SAMPLETIME_71CYCLES_5;
 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
-	
+
 	HAL_ADC_Start(&hadc1);
 	HAL_ADC_PollForConversion(&hadc1, 1000);		//change timeout to a HAL define
 	pot_values[0] = HAL_ADC_GetValue(&hadc1);
 	HAL_ADC_Stop(&hadc1);
-	
+
 	sConfig.Channel = ADC_CHANNEL_1;
 	sConfig.Rank = ADC_REGULAR_RANK_1;
 	sConfig.SamplingTime = ADC_SAMPLETIME_71CYCLES_5;
 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
-	
+
 	HAL_ADC_Start(&hadc1);
 	HAL_ADC_PollForConversion(&hadc1, 1000);
 	pot_values[1] = HAL_ADC_GetValue(&hadc1);
 	HAL_ADC_Stop(&hadc1);
-	
+
 	sConfig.Channel = ADC_CHANNEL_7;
 	sConfig.Rank = ADC_REGULAR_RANK_1;
 	sConfig.SamplingTime = ADC_SAMPLETIME_71CYCLES_5;
 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
-	
-	
+
+
 	HAL_ADC_Start(&hadc1);
 	HAL_ADC_PollForConversion(&hadc1, 1000);
 	pot_values[2] = HAL_ADC_GetValue(&hadc1);
 	HAL_ADC_Stop(&hadc1);
-	
+
 	sConfig.Channel = ADC_CHANNEL_9;
 	sConfig.Rank = ADC_REGULAR_RANK_1;
 	sConfig.SamplingTime = ADC_SAMPLETIME_71CYCLES_5;
 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
-	
-	
+
+
 	HAL_ADC_Start(&hadc1);
 	HAL_ADC_PollForConversion(&hadc1, 1000);
 	pot_values[3] = HAL_ADC_GetValue(&hadc1);
-	
+
 	HAL_ADC_Stop(&hadc1);
-	
+
 }
 
 void POT_interpret(uint16_t pot_values[4]) {
-	
+
 	uint8_t pot_pos[4];
 	uint8_t i, j;
-	
+
 	for (i = 0; i < 4; i++) {
-		
+
 		for (j = 0; j < 10; j++) {
-			
+
 			//uint16_t pot_threshold[12] = {0, 615, 1025, 1435, 1845, 2255, 2665, 3075, 3485, 3895, 4095};
 			if ((pot_values[i] > pot_threshold[j]) && (pot_values[i] <= pot_threshold[j + 1]))
 				pot_pos[i] = 10 - (j + 1); // pot_pos[i] = 0 is ~3.3V, pot_pos[i] = 1 is ~3V, etc.
@@ -413,29 +415,30 @@ void POT_interpret(uint16_t pot_values[4]) {
 
 		POT_data[i] = pot_pos[i];
 		//POT_data[0] = 0x00;
-			
+
 	}
-	
+
+
 	if (pot_pos[0] != 0) // if CURRENT_POT is in any position other than first, turn on CUR_LED
 		HAL_GPIO_WritePin(GPIOB, CUST_LED_Pin, GPIO_PIN_SET);
-	else
-		HAL_GPIO_WritePin(GPIOB, CUST_LED_Pin, GPIO_PIN_RESET);
-	
+  else
+  	HAL_GPIO_WritePin(GPIOB, CUST_LED_Pin, GPIO_PIN_RESET);
+
 	if (pot_pos[1] != 0) // if CUSTOM_POT is in any position other than first, turn on CUST_LED
 		HAL_GPIO_WritePin(GPIOA, CUR_LED_Pin, GPIO_PIN_SET);
 	else
 		HAL_GPIO_WritePin(GPIOA, CUR_LED_Pin, GPIO_PIN_RESET);
-	
+
 	if (pot_pos[2] != 0) // if TC_POT is in any position other than first, turn on TC_LED
 		HAL_GPIO_WritePin(GPIOA, TC_LED_Pin, GPIO_PIN_SET);
 	else
 		HAL_GPIO_WritePin(GPIOA, TC_LED_Pin, GPIO_PIN_RESET);
-	
+
 	if (pot_pos[3] != 0) // if DRS_POT is in any position other than first, turn on DRS_LED
 		HAL_GPIO_WritePin(GPIOA, DRS_LED_Pin, GPIO_PIN_SET);
 	else
 		HAL_GPIO_WritePin(GPIOA, DRS_LED_Pin, GPIO_PIN_RESET);
-	
+
 }
 
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *CanHandle)
@@ -445,12 +448,12 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *CanHandle)
 }
 
 void CAN_interpret(void) {
-	
+
 	uint16_t received_ID;
 	received_ID = RxHeader.StdId;
-	
+
 	if (received_ID == FAULTS) {
-		
+
 		uint8_t BMS_fault;
 		uint8_t IMD_fault;
 		uint8_t BSPD_fault;
@@ -465,22 +468,22 @@ void CAN_interpret(void) {
 			any_fault = true;
 		}
 		else if (BMS_fault == 0x00)
-			HAL_GPIO_WritePin(GPIOA, BMS_LED_ON_Pin, GPIO_PIN_RESET);	
-			
+			HAL_GPIO_WritePin(GPIOA, BMS_LED_ON_Pin, GPIO_PIN_RESET);
+
 		if (IMD_fault == 0xFF) {
 			HAL_GPIO_WritePin(GPIOA, IMD_LED_ON_Pin, GPIO_PIN_SET);
 			any_fault = true;
 		}
 		else if (IMD_fault == 0x00)
 			HAL_GPIO_WritePin(GPIOA, IMD_LED_ON_Pin, GPIO_PIN_RESET);
-			
+
 		if (BSPD_fault == 0xFF) {
 			HAL_GPIO_WritePin(GPIOA, BSPD_LED_ON_Pin, GPIO_PIN_SET);
 			any_fault = true;
 		}
 		else if (BSPD_fault == 0x00)
 			HAL_GPIO_WritePin(GPIOA, BSPD_LED_ON_Pin, GPIO_PIN_RESET);
-			
+
 		if (any_fault == true) {
 			// if there is any fault
 			HAL_GPIO_WritePin(GPIOB, RGB_GREEN_Pin, GPIO_PIN_RESET); // set RGB LED red
@@ -492,29 +495,29 @@ void CAN_interpret(void) {
 	}
 
 	if (received_ID == PRECHARGE) {
-		
+
 		uint8_t Precharge_state;
 		Precharge_state = RxData[0];
-		
+
 		if (Precharge_state == 0xFF) {
-			// if precharge is complete 
+			// if precharge is complete
 			HAL_GPIO_WritePin(GPIOB, RGB_GREEN_Pin, GPIO_PIN_SET); // set RGB LED green
 			HAL_GPIO_WritePin(GPIOB, RGB_RED_Pin, GPIO_PIN_RESET);
 			HAL_GPIO_WritePin(GPIOB, RGB_BLUE_Pin, GPIO_PIN_RESET);
 		}
-		
+
 		if (Precharge_state == 0x00) {
-			// if precharge is not complete 
+			// if precharge is not complete
 			HAL_GPIO_WritePin(GPIOB, RGB_GREEN_Pin, GPIO_PIN_RESET); // set RGB LED blue
 			HAL_GPIO_WritePin(GPIOB, RGB_RED_Pin, GPIO_PIN_RESET);
 			HAL_GPIO_WritePin(GPIOB, RGB_BLUE_Pin, GPIO_PIN_SET);
-			
+
 		}
-		
+
 	}
-	
+
 	CAN_flag = 0x00;
-	
+
 }
 /* USER CODE END 4 */
 
@@ -539,7 +542,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
