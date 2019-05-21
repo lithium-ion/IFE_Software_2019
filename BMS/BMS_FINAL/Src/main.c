@@ -524,14 +524,15 @@ bool FAULT_check(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6], uint8_t bms
 
   bool BMS_FAULT = false;
   uint16_t cellVoltage;
-  bool cellConnection;
-  bool dataValid;
-  bool OT_fault;
-  bool DC_fault;
+  uint8_t cellConnection;
+  uint8_t dataValid;
+  uint8_t OT_fault;
+  uint8_t DC_fault;
   uint8_t board;
   uint8_t error_count[cfg.numOfICs];
 
-  bmsStatus[0] = 0;
+  for (uint8_t i = 0; i < 6; i++)
+    bmsStatus[i] = 0;
 
   for (uint8_t cell = 0; cell < 96; cell++) {
 
@@ -540,56 +541,59 @@ bool FAULT_check(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6], uint8_t bms
     cellVoltage = cellVoltage << 8;
 		cellVoltage += (uint16_t) (bmsData[cell][3]);
 
-    cellConnection = (bool) (bmsData[cell][1] & 0x01);
-    dataValid = (bool) ((bmsData[cell][1] & 0x02) >> 1);
-    OT_fault = (bool) ((bmsData[cell][1] & 0x10) >> 4);
-    DC_fault = (bool) ((bmsData[cell][1] & 0x08) >> 3);
+    cellConnection = bmsData[cell][1] & 0b00000001;
+    dataValid = bmsData[cell][1] & 0b00000010;
+    OT_fault = bmsData[cell][1] & 0b00010000;
+    DC_fault = bmsData[cell][1] & 0b00001000;
 
     //OV fault
-    if (cellVoltage > cfg.OV_threshold) {
+    //if (cellVoltage > cfg.OV_threshold) {
+    if (cellVoltage > 42000) {
       BMS_FAULT = true;
-      bmsStatus[0] |= 0x01; //fault byte
+      bmsStatus[0] |= 0b00000001; //fault byte
       bmsStatus[1] = cell + 1; //OV cell number
     }
 
     //UV fault
-    if (cellVoltage < cfg.UV_threshold) {
+    //if (cellVoltage < cfg.UV_threshold) {
+    if (cellVoltage < 25000) {
       BMS_FAULT = true;
-      bmsStatus[0] |= 0x02; //fault byte
+      bmsStatus[0] |= 0b00000010; //fault byte
       bmsStatus[2] = cell + 1; //UV cell number
     }
 
     //Cell DC fault
     if (cellConnection == 0) {
       BMS_FAULT = true;
-      bmsStatus[0] |= 0x80; //fault byte
+      bmsStatus[0] |= 0b00001000; //fault byte
       bmsStatus[4] = cell + 1; //DC cell number
     }
 
     //OT fault
-    if (OT_fault == 1) {
+    if (OT_fault) {
       BMS_FAULT = true;
-      bmsStatus[0] |= 0x04; //fault byte
+      bmsStatus[0] |= 0b00000100; //fault byte
       bmsStatus[3] = cell + 1; //OT cell number
     }
 
     //Temp DC fault
-    if (DC_fault == 1) {
+    if (DC_fault) {
       BMS_FAULT = true;
-      bmsStatus[0] |= 0x10;
-      bmsStatus[5] = cell + 1;
+      bmsStatus[0] |= 0b00010000; //fault byte
+      bmsStatus[5] = cell + 1; //temp DC cell number
     }
 
-    board = cell % cfg.numOfCellsPerIC;
+    board = cell % 8;
 
     //Board DC fault
     if (dataValid == 0) {
       error_count[board]++;
 
-      //if data is invalid for a board, every cell will report invalid
-      if (error_count[board] > (cfg.numOfCellsPerIC * cfg.invalidPECcount)) {
+    //if data is invalid for a board, every cell will report invalid
+    //if (error_count[board] > (cfg.numOfCellsPerIC * cfg.invalidPECcount)) {
+    if (error_count[board] > 40) {
         BMS_FAULT = true;
-        bmsStatus[0] |= 0x20;
+        bmsStatus[0] |= 0b00100000;
       }
     }
     if (dataValid == 1) {
@@ -687,7 +691,6 @@ uint16_t balancingThreshold(BMSconfigStructTypedef cfg) {
     float m;
     uint16_t linear;
 
-    //  ()
     m = ((float) (cfg.scale_to - cfg.balancing_difference)) / (cfg.stop_scaling - cfg.start_scaling);
     linear = (uint16_t) m * (minimum - cfg.start_scaling) + cfg.balancing_difference;
 
