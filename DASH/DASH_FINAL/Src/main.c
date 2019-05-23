@@ -34,7 +34,7 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 #define DASH_CAN_ID			0x00F
-
+#define RINEHARTCUR_CAN_ID			0x064
 #define FAULTS				0x0D0
 #define PRECHARGE			0x0D1
 #define ENABLE_SIG		0x0D2
@@ -56,7 +56,9 @@ CAN_RxHeaderTypeDef   	RxHeader;
 uint8_t               	RxData[8];
 
 CAN_TxHeaderTypeDef   	POT_TxHeader;
+CAN_TxHeaderTypeDef     POT_Txheader;
 uint8_t               	POT_data[8];
+uint8_t               	POT_Data[8];
 uint32_t              	TxMailbox;
 
 volatile char					CAN_flag;
@@ -134,7 +136,7 @@ int main(void)
 
 
 	HAL_CAN_AddTxMessage(&hcan, &POT_TxHeader, POT_data, &TxMailbox);
-
+  HAL_CAN_AddTxMessage(&hcan, &POT_Txheader, POT_Data, &TxMailbox);
 
 	HAL_Delay(1000);
 
@@ -291,6 +293,13 @@ static void MX_CAN_Init(void)
 	POT_TxHeader.DLC = 4; 									// CAN frame length in bytes
 	POT_TxHeader.TransmitGlobalTime = DISABLE;				// CAN timestamp in TxData[6] and TxData[7]
 
+  POT_Txheader.StdId = RINEHARTCUR_CAN_ID; 						// CAN standard ID
+	POT_Txheader.RTR = CAN_RTR_DATA; 						// CAN frame type
+	POT_Txheader.IDE = CAN_ID_STD; 							// CAN ID type
+	POT_Txheader.DLC = 2; 									// CAN frame length in bytes
+	POT_Txheader.TransmitGlobalTime = DISABLE;				// CAN timestamp in TxData[6] and TxData[7]
+
+
 	sFilterConfig.FilterBank = 0;							// filter number (0-13)
 	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;		// mask mode or identifier mode
 	sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
@@ -418,6 +427,55 @@ void POT_interpret(uint16_t pot_values[4]) {
 
 	}
 
+if (pot_pos[1] == 0){
+	POT_Data[1] = 1;
+  POT_Data[0] = 244;
+  }
+
+else if (pot_pos[1] == 1){
+  	POT_Data[1] = 3;
+    POT_Data[0] = 232;
+  }
+
+else if (pot_pos[1] == 2){
+    	POT_Data[1] = 4;
+      POT_Data[0] = 176;
+  }
+
+else if (pot_pos[1] == 3){
+    	POT_Data[1] = 5;
+      POT_Data[0] = 70;
+  }
+
+else if (pot_pos[1] == 4){
+      	POT_Data[1] = 5;
+        POT_Data[0] = 220;
+  }
+
+else if (pot_pos[1] == 5){
+        	POT_Data[1] = 6;
+          POT_Data[0] = 114;
+  }
+
+else if (pot_pos[1] == 6){
+    	POT_Data[1] = 7;
+      POT_Data[0] = 8;
+  }
+
+else if (pot_pos[1] == 7){
+    	POT_Data[1] = 7;
+      POT_Data[0] = 158;
+  }
+
+else if (pot_pos[1] == 8){
+    	POT_Data[1] = 8;
+      POT_Data[0] = 52;
+  }
+
+else if (pot_pos[1] == 9){
+    	POT_Data[1] = 8;
+      POT_Data[0] = 202;
+  }
 
 	if (pot_pos[0] != 0) // if CURRENT_POT is in any position other than first, turn on CUR_LED
 		HAL_GPIO_WritePin(GPIOB, CUST_LED_Pin, GPIO_PIN_SET);
