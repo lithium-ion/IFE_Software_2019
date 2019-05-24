@@ -35,9 +35,11 @@
 /* USER CODE BEGIN PD */
 #define DASH_CAN_ID			0x00F
 #define RINEHARTCUR_CAN_ID			0x064
+#define RINEHARTTOR_CAN_ID			0x082
 #define FAULTS				0x0D0
 #define PRECHARGE			0x0D1
 #define ENABLE_SIG		0x0D2
+#define MOTOR_POS		0x0A5
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -57,8 +59,10 @@ uint8_t               	RxData[8];
 
 CAN_TxHeaderTypeDef   	POT_TxHeader;
 CAN_TxHeaderTypeDef     POT_Txheader;
+CAN_TxHeaderTypeDef     POT_Txheader1;
 uint8_t               	POT_data[8];
 uint8_t               	POT_Data[8];
+uint8_t               	POT_Data1[8];
 uint32_t              	TxMailbox;
 
 volatile char					CAN_flag;
@@ -299,6 +303,11 @@ static void MX_CAN_Init(void)
 	POT_Txheader.DLC = 2; 									// CAN frame length in bytes
 	POT_Txheader.TransmitGlobalTime = DISABLE;				// CAN timestamp in TxData[6] and TxData[7]
 
+  POT_Txheader1.StdId = RINEHARTTOR_CAN_ID; 						// CAN standard ID
+  POT_Txheader1.RTR = CAN_RTR_DATA; 						// CAN frame type
+  POT_Txheader1.IDE = CAN_ID_STD; 							// CAN ID type
+  POT_Txheader1.DLC = 2; 									// CAN frame length in bytes
+  POT_Txheader1.TransmitGlobalTime = DISABLE;				// CAN timestamp in TxData[6] and TxData[7]
 
 	sFilterConfig.FilterBank = 0;							// filter number (0-13)
 	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;		// mask mode or identifier mode
@@ -573,6 +582,26 @@ void CAN_interpret(void) {
 		}
 
 	}
+
+
+if (received_ID == MOTOR_POS) {
+  uint16_t Rpm;
+  Rpm = RxData[2] + 256*RxData[3];
+
+  if (Rpm < 50){
+    POT_Data1[1] = 0;
+    POT_Data1[0] = 0;
+    HAL_CAN_AddTxMessage(&hcan, &POT_Txheader1, POT_Data1, &TxMailbox);
+  }
+
+  if (Rpm >= 50){
+    POT_Data1[1] = 3;
+    POT_Data1[0] = 232;
+    HAL_CAN_AddTxMessage(&hcan, &POT_Txheader1, POT_Data1, &TxMailbox);
+  }
+
+}
+
 
 	CAN_flag = 0x00;
 
