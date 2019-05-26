@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 1
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 1
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
    1              		.cpu cortex-m3
@@ -58,7 +62,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
   32:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
   33:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
   34:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 2
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 2
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
   35:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
@@ -118,7 +126,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
   89:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   * @{
   90:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   */  
   91:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c **** /* --- CR Register ---*/
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 3
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 3
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
   92:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c **** /* Alias word address of LPSDSR bit */
@@ -178,7 +190,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
  136:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   __asm volatile( "nop" );
   35              		.loc 1 136 0
   36              	@ 136 "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c" 1
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 4
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 4
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
   37 0002 00BF     		nop
@@ -238,7 +254,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
   56              		.loc 1 173 0
   57              		.cfi_startproc
   58              		@ args = 0, pretend = 0, frame = 0
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 5
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 5
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
   59              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -298,7 +318,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
   99 0006 7047     		bx	lr
  100              	.L7:
  101              		.align	2
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 6
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 6
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  102              	.L6:
@@ -358,7 +382,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
  205:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   * @}
  206:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   */
  207:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c **** 
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 7
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 7
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  208:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c **** /** @defgroup PWR_Exported_Functions_Group2 Peripheral Control functions 
@@ -418,7 +446,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
  262:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****            (+++) Any EXTI Line (Internal or External) configured in Event mode
  263:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c **** 
  264:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****    *** Stop mode ***
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 8
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 8
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  265:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****    =================
@@ -478,7 +510,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
  319:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c **** @endverbatim
  320:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   * @{
  321:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   */
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 9
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 9
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  322:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c **** 
@@ -538,7 +574,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
  346:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c **** 
  347:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   /* Configure interrupt mode */
  348:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   if((sConfigPVD->Mode & PVD_MODE_IT) == PVD_MODE_IT)
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 10
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 10
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  175              		.loc 1 348 0
@@ -598,7 +638,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
  210 006e 044A     		ldr	r2, .L16+4
  211 0070 D368     		ldr	r3, [r2, #12]
  212 0072 43F48033 		orr	r3, r3, #65536
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 11
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 11
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  213 0076 D360     		str	r3, [r2, #12]
@@ -658,7 +702,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
  258              		.thumb_func
  259              		.fpu softvfp
  261              	HAL_PWR_DisablePVD:
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 12
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 12
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  262              	.LFB72:
@@ -718,7 +766,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
  298              	.LBB21:
  299              		.file 2 "Drivers/CMSIS/Include/cmsis_gcc.h"
    1:Drivers/CMSIS/Include/cmsis_gcc.h **** /**************************************************************************//**
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 13
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 13
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
    2:Drivers/CMSIS/Include/cmsis_gcc.h ****  * @file     cmsis_gcc.h
@@ -778,7 +830,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
   56:Drivers/CMSIS/Include/cmsis_gcc.h ****            Can only be executed in Privileged modes.
   57:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
   58:Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __enable_irq(void)
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 14
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 14
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
   59:Drivers/CMSIS/Include/cmsis_gcc.h **** {
@@ -838,7 +894,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
  113:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  114:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
  115:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get APSR Register
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 15
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 15
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  116:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the content of the APSR Register.
@@ -898,7 +958,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
  170:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current value of the Main Stack Pointer (MSP).
  171:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               MSP Register value
  172:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 16
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 16
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  173:Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_MSP(void)
@@ -958,7 +1022,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
  227:Drivers/CMSIS/Include/cmsis_gcc.h **** {
  228:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("cpsie f" : : : "memory");
  229:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 17
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 17
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  230:Drivers/CMSIS/Include/cmsis_gcc.h **** 
@@ -1018,7 +1086,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
  284:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
  285:Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_FAULTMASK(void)
  286:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 18
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 18
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  287:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
@@ -1078,7 +1150,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
  341:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("");
  342:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
  343:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 19
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 19
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  344:Drivers/CMSIS/Include/cmsis_gcc.h **** 
@@ -1138,7 +1214,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
  398:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  399:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  400:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 20
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 20
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  401:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Send Event
@@ -1198,7 +1278,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
  455:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
  456:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  457:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("rev %0, %1" : __CMSIS_GCC_OUT_REG (result) : __CMSIS_GCC_USE_REG (value) );
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 21
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 21
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  458:Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
@@ -1258,7 +1342,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
  512:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Causes the processor to enter Debug state.
  513:Drivers/CMSIS/Include/cmsis_gcc.h ****            Debug tools can use this to investigate system state when the instruction at a particula
  514:Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    value  is ignored by the processor.
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 22
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 22
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  515:Drivers/CMSIS/Include/cmsis_gcc.h ****                  If required, a debugger can use it to store additional information about the break
@@ -1318,7 +1406,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
  334              	HAL_PWR_DisableWakeUpPin:
  335              	.LFB74:
  405:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c **** 
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 23
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 23
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  406:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c **** /**
@@ -1378,7 +1470,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
  378              	HAL_PWR_EnterSLEEPMode:
  379              	.LFB75:
  420:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c **** 
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 24
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 24
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  421:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c **** /**
@@ -1438,7 +1534,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
  396:Drivers/CMSIS/Include/cmsis_gcc.h **** }
  407              		.loc 2 396 0
  408              		.syntax unified
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 25
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 25
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  409              	@ 396 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
@@ -1498,7 +1598,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
  451              		.syntax unified
  452              		.thumb
  453              		.thumb_func
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 26
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 26
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  454              		.fpu softvfp
@@ -1558,7 +1662,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
  478 0014 1060     		str	r0, [r2]
  490:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c **** 
  491:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   /* Set SLEEPDEEP bit of Cortex System Control Register */
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 27
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 27
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  492:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   SET_BIT(SCB->SCR, ((uint32_t)SCB_SCR_SLEEPDEEP_Msk));
@@ -1618,7 +1726,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
  514              	.LBB34:
  515              	.LBB35:
  385:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 28
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 28
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  516              		.loc 2 385 0
@@ -1678,7 +1790,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
  556 000c 1369     		ldr	r3, [r2, #16]
  557 000e 43F00403 		orr	r3, r3, #4
  558 0012 1361     		str	r3, [r2, #16]
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 29
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 29
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  559              	.LBB36:
@@ -1738,7 +1854,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
  594              		@ link register save eliminated.
  546:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   /* Set SLEEPONEXIT bit of Cortex System Control Register */
  547:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c ****   SET_BIT(SCB->SCR, ((uint32_t)SCB_SCR_SLEEPONEXIT_Msk));
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 30
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 30
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  595              		.loc 1 547 0
@@ -1798,7 +1918,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
  638              		.section	.text.HAL_PWR_EnableSEVOnPend,"ax",%progbits
  639              		.align	1
  640              		.global	HAL_PWR_EnableSEVOnPend
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 31
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 31
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  641              		.syntax unified
@@ -1858,7 +1982,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
  583:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c **** void HAL_PWR_DisableSEVOnPend(void)
  584:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c **** {
  677              		.loc 1 584 0
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 32
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 32
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  678              		.cfi_startproc
@@ -1918,7 +2046,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
  613:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c **** __weak void HAL_PWR_PVDCallback(void)
  614:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c **** {
  706              		.loc 1 614 0
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 33
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 33
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  707              		.cfi_startproc
@@ -1978,7 +2110,11 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
  753              	.L64:
  754              		.align	2
  755              	.L63:
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 34
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 34
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  756 001c 00040140 		.word	1073808384
@@ -1998,11 +2134,69 @@ ARM GAS  /tmp/ccJYs8yl.s 			page 1
  771              		.file 12 "/usr/include/newlib/sys/reent.h"
  772              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h"
  773              		.file 14 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+<<<<<<< HEAD
+ARM GAS  /tmp/cciZRf5T.s 			page 35
+=======
 ARM GAS  /tmp/ccJYs8yl.s 			page 35
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32f1xx_hal_pwr.c
+<<<<<<< HEAD
+     /tmp/cciZRf5T.s:16     .text.PWR_OverloadWfe:0000000000000000 $t
+     /tmp/cciZRf5T.s:22     .text.PWR_OverloadWfe:0000000000000000 PWR_OverloadWfe
+     /tmp/cciZRf5T.s:47     .text.HAL_PWR_DeInit:0000000000000000 $t
+     /tmp/cciZRf5T.s:54     .text.HAL_PWR_DeInit:0000000000000000 HAL_PWR_DeInit
+     /tmp/cciZRf5T.s:75     .text.HAL_PWR_DeInit:0000000000000014 $d
+     /tmp/cciZRf5T.s:80     .text.HAL_PWR_EnableBkUpAccess:0000000000000000 $t
+     /tmp/cciZRf5T.s:87     .text.HAL_PWR_EnableBkUpAccess:0000000000000000 HAL_PWR_EnableBkUpAccess
+     /tmp/cciZRf5T.s:103    .text.HAL_PWR_EnableBkUpAccess:0000000000000008 $d
+     /tmp/cciZRf5T.s:108    .text.HAL_PWR_DisableBkUpAccess:0000000000000000 $t
+     /tmp/cciZRf5T.s:115    .text.HAL_PWR_DisableBkUpAccess:0000000000000000 HAL_PWR_DisableBkUpAccess
+     /tmp/cciZRf5T.s:131    .text.HAL_PWR_DisableBkUpAccess:0000000000000008 $d
+     /tmp/cciZRf5T.s:136    .text.HAL_PWR_ConfigPVD:0000000000000000 $t
+     /tmp/cciZRf5T.s:143    .text.HAL_PWR_ConfigPVD:0000000000000000 HAL_PWR_ConfigPVD
+     /tmp/cciZRf5T.s:220    .text.HAL_PWR_ConfigPVD:000000000000007c $d
+     /tmp/cciZRf5T.s:226    .text.HAL_PWR_EnablePVD:0000000000000000 $t
+     /tmp/cciZRf5T.s:233    .text.HAL_PWR_EnablePVD:0000000000000000 HAL_PWR_EnablePVD
+     /tmp/cciZRf5T.s:249    .text.HAL_PWR_EnablePVD:0000000000000008 $d
+     /tmp/cciZRf5T.s:254    .text.HAL_PWR_DisablePVD:0000000000000000 $t
+     /tmp/cciZRf5T.s:261    .text.HAL_PWR_DisablePVD:0000000000000000 HAL_PWR_DisablePVD
+     /tmp/cciZRf5T.s:277    .text.HAL_PWR_DisablePVD:0000000000000008 $d
+     /tmp/cciZRf5T.s:282    .text.HAL_PWR_EnableWakeUpPin:0000000000000000 $t
+     /tmp/cciZRf5T.s:289    .text.HAL_PWR_EnableWakeUpPin:0000000000000000 HAL_PWR_EnableWakeUpPin
+     /tmp/cciZRf5T.s:322    .text.HAL_PWR_EnableWakeUpPin:0000000000000014 $d
+     /tmp/cciZRf5T.s:327    .text.HAL_PWR_DisableWakeUpPin:0000000000000000 $t
+     /tmp/cciZRf5T.s:334    .text.HAL_PWR_DisableWakeUpPin:0000000000000000 HAL_PWR_DisableWakeUpPin
+     /tmp/cciZRf5T.s:366    .text.HAL_PWR_DisableWakeUpPin:0000000000000014 $d
+     /tmp/cciZRf5T.s:371    .text.HAL_PWR_EnterSLEEPMode:0000000000000000 $t
+     /tmp/cciZRf5T.s:378    .text.HAL_PWR_EnterSLEEPMode:0000000000000000 HAL_PWR_EnterSLEEPMode
+     /tmp/cciZRf5T.s:442    .text.HAL_PWR_EnterSLEEPMode:000000000000001c $d
+     /tmp/cciZRf5T.s:449    .text.HAL_PWR_EnterSTOPMode:0000000000000000 $t
+     /tmp/cciZRf5T.s:456    .text.HAL_PWR_EnterSTOPMode:0000000000000000 HAL_PWR_EnterSTOPMode
+     /tmp/cciZRf5T.s:527    .text.HAL_PWR_EnterSTOPMode:0000000000000040 $d
+     /tmp/cciZRf5T.s:535    .text.HAL_PWR_EnterSTANDBYMode:0000000000000000 $t
+     /tmp/cciZRf5T.s:542    .text.HAL_PWR_EnterSTANDBYMode:0000000000000000 HAL_PWR_EnterSTANDBYMode
+     /tmp/cciZRf5T.s:575    .text.HAL_PWR_EnterSTANDBYMode:0000000000000018 $d
+     /tmp/cciZRf5T.s:581    .text.HAL_PWR_EnableSleepOnExit:0000000000000000 $t
+     /tmp/cciZRf5T.s:588    .text.HAL_PWR_EnableSleepOnExit:0000000000000000 HAL_PWR_EnableSleepOnExit
+     /tmp/cciZRf5T.s:605    .text.HAL_PWR_EnableSleepOnExit:000000000000000c $d
+     /tmp/cciZRf5T.s:610    .text.HAL_PWR_DisableSleepOnExit:0000000000000000 $t
+     /tmp/cciZRf5T.s:617    .text.HAL_PWR_DisableSleepOnExit:0000000000000000 HAL_PWR_DisableSleepOnExit
+     /tmp/cciZRf5T.s:634    .text.HAL_PWR_DisableSleepOnExit:000000000000000c $d
+     /tmp/cciZRf5T.s:639    .text.HAL_PWR_EnableSEVOnPend:0000000000000000 $t
+     /tmp/cciZRf5T.s:646    .text.HAL_PWR_EnableSEVOnPend:0000000000000000 HAL_PWR_EnableSEVOnPend
+     /tmp/cciZRf5T.s:663    .text.HAL_PWR_EnableSEVOnPend:000000000000000c $d
+     /tmp/cciZRf5T.s:668    .text.HAL_PWR_DisableSEVOnPend:0000000000000000 $t
+     /tmp/cciZRf5T.s:675    .text.HAL_PWR_DisableSEVOnPend:0000000000000000 HAL_PWR_DisableSEVOnPend
+     /tmp/cciZRf5T.s:692    .text.HAL_PWR_DisableSEVOnPend:000000000000000c $d
+     /tmp/cciZRf5T.s:697    .text.HAL_PWR_PVDCallback:0000000000000000 $t
+     /tmp/cciZRf5T.s:704    .text.HAL_PWR_PVDCallback:0000000000000000 HAL_PWR_PVDCallback
+     /tmp/cciZRf5T.s:717    .text.HAL_PWR_PVD_IRQHandler:0000000000000000 $t
+     /tmp/cciZRf5T.s:724    .text.HAL_PWR_PVD_IRQHandler:0000000000000000 HAL_PWR_PVD_IRQHandler
+     /tmp/cciZRf5T.s:756    .text.HAL_PWR_PVD_IRQHandler:000000000000001c $d
+=======
      /tmp/ccJYs8yl.s:16     .text.PWR_OverloadWfe:0000000000000000 $t
      /tmp/ccJYs8yl.s:22     .text.PWR_OverloadWfe:0000000000000000 PWR_OverloadWfe
      /tmp/ccJYs8yl.s:47     .text.HAL_PWR_DeInit:0000000000000000 $t
@@ -2055,5 +2249,6 @@ DEFINED SYMBOLS
      /tmp/ccJYs8yl.s:717    .text.HAL_PWR_PVD_IRQHandler:0000000000000000 $t
      /tmp/ccJYs8yl.s:724    .text.HAL_PWR_PVD_IRQHandler:0000000000000000 HAL_PWR_PVD_IRQHandler
      /tmp/ccJYs8yl.s:756    .text.HAL_PWR_PVD_IRQHandler:000000000000001c $d
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 NO UNDEFINED SYMBOLS

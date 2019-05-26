@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+ARM GAS  /tmp/ccqz9tTG.s 			page 1
+=======
 ARM GAS  /tmp/ccyqJNKd.s 			page 1
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
    1              		.cpu cortex-m3
@@ -58,7 +62,11 @@ ARM GAS  /tmp/ccyqJNKd.s 			page 1
   31:Src/system_stm32f1xx.c ****   *    When HSE is used as system clock source, directly or through PLL, and you
   32:Src/system_stm32f1xx.c ****   *    are using different crystal you have to adapt the HSE value to your own
   33:Src/system_stm32f1xx.c ****   *    configuration.
+<<<<<<< HEAD
+ARM GAS  /tmp/ccqz9tTG.s 			page 2
+=======
 ARM GAS  /tmp/ccyqJNKd.s 			page 2
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
   34:Src/system_stm32f1xx.c ****   *        
@@ -118,7 +126,11 @@ ARM GAS  /tmp/ccyqJNKd.s 			page 1
   88:Src/system_stm32f1xx.c ****   * @}
   89:Src/system_stm32f1xx.c ****   */
   90:Src/system_stm32f1xx.c **** 
+<<<<<<< HEAD
+ARM GAS  /tmp/ccqz9tTG.s 			page 3
+=======
 ARM GAS  /tmp/ccyqJNKd.s 			page 3
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
   91:Src/system_stm32f1xx.c **** /** @addtogroup STM32F1xx_System_Private_Defines
@@ -178,7 +190,11 @@ ARM GAS  /tmp/ccyqJNKd.s 			page 1
  145:Src/system_stm32f1xx.c **** /**
  146:Src/system_stm32f1xx.c ****   * @}
  147:Src/system_stm32f1xx.c ****   */
+<<<<<<< HEAD
+ARM GAS  /tmp/ccqz9tTG.s 			page 4
+=======
 ARM GAS  /tmp/ccyqJNKd.s 			page 4
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  148:Src/system_stm32f1xx.c **** 
@@ -238,7 +254,11 @@ ARM GAS  /tmp/ccyqJNKd.s 			page 1
  187:Src/system_stm32f1xx.c ****   
  188:Src/system_stm32f1xx.c ****   /* Reset HSEON, CSSON and PLLON bits */
  189:Src/system_stm32f1xx.c ****   RCC->CR &= 0xFEF6FFFFU;
+<<<<<<< HEAD
+ARM GAS  /tmp/ccqz9tTG.s 			page 5
+=======
 ARM GAS  /tmp/ccyqJNKd.s 			page 5
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
   41              		.loc 1 189 0
@@ -298,7 +318,11 @@ ARM GAS  /tmp/ccyqJNKd.s 			page 1
   58 0034 044B     		ldr	r3, .L2+8
   59 0036 4FF00062 		mov	r2, #134217728
   60 003a 9A60     		str	r2, [r3, #8]
+<<<<<<< HEAD
+ARM GAS  /tmp/ccqz9tTG.s 			page 6
+=======
 ARM GAS  /tmp/ccyqJNKd.s 			page 6
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  227:Src/system_stm32f1xx.c **** #endif 
@@ -358,7 +382,11 @@ ARM GAS  /tmp/ccyqJNKd.s 			page 1
  262:Src/system_stm32f1xx.c ****   * @param  None
  263:Src/system_stm32f1xx.c ****   * @retval None
  264:Src/system_stm32f1xx.c ****   */
+<<<<<<< HEAD
+ARM GAS  /tmp/ccqz9tTG.s 			page 7
+=======
 ARM GAS  /tmp/ccyqJNKd.s 			page 7
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  265:Src/system_stm32f1xx.c **** void SystemCoreClockUpdate (void)
@@ -418,7 +446,11 @@ ARM GAS  /tmp/ccyqJNKd.s 			page 1
  302:Src/system_stm32f1xx.c ****       else
  303:Src/system_stm32f1xx.c ****       {
  304:Src/system_stm32f1xx.c ****  #if defined(STM32F100xB) || defined(STM32F100xE)
+<<<<<<< HEAD
+ARM GAS  /tmp/ccqz9tTG.s 			page 8
+=======
 ARM GAS  /tmp/ccyqJNKd.s 			page 8
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  305:Src/system_stm32f1xx.c ****        prediv1factor = (RCC->CFGR2 & RCC_CFGR2_PREDIV1) + 1U;
@@ -478,7 +510,11 @@ ARM GAS  /tmp/ccyqJNKd.s 			page 1
  359:Src/system_stm32f1xx.c ****       break;
  360:Src/system_stm32f1xx.c **** 
  361:Src/system_stm32f1xx.c ****     default:
+<<<<<<< HEAD
+ARM GAS  /tmp/ccqz9tTG.s 			page 9
+=======
 ARM GAS  /tmp/ccyqJNKd.s 			page 9
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  362:Src/system_stm32f1xx.c ****       SystemCoreClock = HSI_VALUE;
@@ -538,7 +574,11 @@ ARM GAS  /tmp/ccyqJNKd.s 			page 1
  291:Src/system_stm32f1xx.c ****       pllsource = RCC->CFGR & RCC_CFGR_PLLSRC;
  140              		.loc 1 291 0
  141 003e 104A     		ldr	r2, .L15
+<<<<<<< HEAD
+ARM GAS  /tmp/ccqz9tTG.s 			page 10
+=======
 ARM GAS  /tmp/ccyqJNKd.s 			page 10
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  142 0040 5368     		ldr	r3, [r2, #4]
@@ -598,7 +638,11 @@ ARM GAS  /tmp/ccyqJNKd.s 			page 1
  189              	.L15:
  190 0080 00100240 		.word	1073876992
  191 0084 00000000 		.word	.LANCHOR0
+<<<<<<< HEAD
+ARM GAS  /tmp/ccqz9tTG.s 			page 11
+=======
 ARM GAS  /tmp/ccyqJNKd.s 			page 11
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
  192 0088 00127A00 		.word	8000000
@@ -658,14 +702,35 @@ ARM GAS  /tmp/ccyqJNKd.s 			page 1
  253              		.file 10 "/usr/include/newlib/sys/reent.h"
  254              		.file 11 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h"
  255              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+<<<<<<< HEAD
+ARM GAS  /tmp/ccqz9tTG.s 			page 12
+
+
+ARM GAS  /tmp/ccqz9tTG.s 			page 13
+=======
 ARM GAS  /tmp/ccyqJNKd.s 			page 12
 
 
 ARM GAS  /tmp/ccyqJNKd.s 			page 13
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 system_stm32f1xx.c
+<<<<<<< HEAD
+     /tmp/ccqz9tTG.s:16     .text.SystemInit:0000000000000000 $t
+     /tmp/ccqz9tTG.s:23     .text.SystemInit:0000000000000000 SystemInit
+     /tmp/ccqz9tTG.s:66     .text.SystemInit:0000000000000040 $d
+     /tmp/ccqz9tTG.s:73     .text.SystemCoreClockUpdate:0000000000000000 $t
+     /tmp/ccqz9tTG.s:80     .text.SystemCoreClockUpdate:0000000000000000 SystemCoreClockUpdate
+     /tmp/ccqz9tTG.s:190    .text.SystemCoreClockUpdate:0000000000000080 $d
+     /tmp/ccqz9tTG.s:234    .rodata.APBPrescTable:0000000000000000 APBPrescTable
+     /tmp/ccqz9tTG.s:213    .rodata.AHBPrescTable:0000000000000000 AHBPrescTable
+     /tmp/ccqz9tTG.s:206    .data.SystemCoreClock:0000000000000000 SystemCoreClock
+     /tmp/ccqz9tTG.s:202    .data.SystemCoreClock:0000000000000000 $d
+     /tmp/ccqz9tTG.s:209    .rodata.AHBPrescTable:0000000000000000 $d
+     /tmp/ccqz9tTG.s:231    .rodata.APBPrescTable:0000000000000000 $d
+=======
      /tmp/ccyqJNKd.s:16     .text.SystemInit:0000000000000000 $t
      /tmp/ccyqJNKd.s:23     .text.SystemInit:0000000000000000 SystemInit
      /tmp/ccyqJNKd.s:66     .text.SystemInit:0000000000000040 $d
@@ -678,5 +743,6 @@ DEFINED SYMBOLS
      /tmp/ccyqJNKd.s:202    .data.SystemCoreClock:0000000000000000 $d
      /tmp/ccyqJNKd.s:209    .rodata.AHBPrescTable:0000000000000000 $d
      /tmp/ccyqJNKd.s:231    .rodata.APBPrescTable:0000000000000000 $d
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 NO UNDEFINED SYMBOLS

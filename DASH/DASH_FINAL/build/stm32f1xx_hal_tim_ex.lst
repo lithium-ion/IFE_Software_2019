@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+ARM GAS  /tmp/cc6Zk9XU.s 			page 1
+=======
 ARM GAS  /tmp/ccUKAJDW.s 			page 1
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
    1              		.cpu cortex-m3
@@ -25,7 +29,11 @@ ARM GAS  /tmp/ccUKAJDW.s 			page 1
   22              		.file 7 "/usr/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h"
   23              		.file 8 "/usr/include/newlib/sys/reent.h"
   24              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+<<<<<<< HEAD
+ARM GAS  /tmp/cc6Zk9XU.s 			page 2
+=======
 ARM GAS  /tmp/ccUKAJDW.s 			page 2
+>>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
 
 
 DEFINED SYMBOLS
