@@ -81,7 +81,7 @@
 // The HR current is a short int (16bits) split as a High and Low byte.
 // The full-range current is a short int (16bits) split as High and Low byte.
 // Actual voltage in V is obtained by (64*x/10000)  min - 0,  max - 419
-// Actual HR current in A is obtained by  ((x/10000 - 2.5) * 10)  min - -20 (x=0.5), max - 8 (x=3.3)
-// Actual full-range current in A is obtained by ((x/10000 - 2.5) * 250) min - -500 (x=0.5), max - 200 (x=3.3)
+// Actual HR current in A is obtained by  ((3.3*x/4096 - 2.5) * 10)  min - -20 (x=0.5), max - 8 (x=3.3)
+// Actual full-range current in A is obtained by ((3.3*x/4096 - 2.5) * 250) min - -500 (x=0.5), max - 200 (x=3.3)
 //
 #define		BMSPACKSTAT	 0x00B
