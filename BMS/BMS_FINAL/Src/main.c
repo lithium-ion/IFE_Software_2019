@@ -59,6 +59,8 @@ TIM_HandleTypeDef htim2;
 CommandCodeTypedef      CommandCode;
 BMSconfigStructTypedef  BMSconfig;
 
+ADC_ChannelConfTypeDef sConfig = {0};
+
 CAN_TxHeaderTypeDef     TxHeader;
 CAN_RxHeaderTypeDef     RxHeader;
 uint8_t                 TxData[8];
@@ -261,7 +263,7 @@ static void MX_ADC1_Init(void)
 
   /* USER CODE END ADC1_Init 0 */
 
-  ADC_ChannelConfTypeDef sConfig = {0};
+  //ADC_ChannelConfTypeDef sConfig = {0};
 
   /* USER CODE BEGIN ADC1_Init 1 */
 
@@ -902,9 +904,46 @@ void BMSTINF_message(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
 
 void PACKSTAT_message(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
 
-  //read current sensor
+  uint16_t channel1;
+  uint16_t channel2;
+  uint16_t pack_voltage;
 
-  //use sumOfCells
+  // +/- 20A (high res, channel 1)
+  sConfig.Channel = ADC_CHANNEL_9;
+	sConfig.Rank = ADC_REGULAR_RANK_1;
+	sConfig.SamplingTime = ADC_SAMPLETIME_71CYCLES_5;
+	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+
+	HAL_ADC_Start(&hadc1);
+	HAL_ADC_PollForConversion(&hadc1, 1000);
+	channel1 = HAL_ADC_GetValue(&hadc1);
+	HAL_ADC_Stop(&hadc1);
+
+  // +/- 500A (full range, channel 2)
+  sConfig.Channel = ADC_CHANNEL_8;
+	sConfig.Rank = ADC_REGULAR_RANK_1;
+	sConfig.SamplingTime = ADC_SAMPLETIME_71CYCLES_5;
+	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+
+	HAL_ADC_Start(&hadc1);
+	HAL_ADC_PollForConversion(&hadc1, 1000);
+	channel2 = HAL_ADC_GetValue(&hadc1);
+	HAL_ADC_Stop(&hadc1);
+
+  pack_voltage = (uint16_t) sumOfCells / 64;
+
+  TxHeader.StdId = PACKSTAT_ID;
+  TxHeader.DLC = 6;
+  uint8_t PACKSTAT_DATA[6];
+
+  PACKSTAT_DATA[0] = (uint8_t) ((pack_voltage >> 8) & 0xFF);
+  PACKSTAT_DATA[1] = (uint8_t) (pack_voltage & 0xFF);
+  PACKSTAT_DATA[2] = (uint8_t) ((channel1 >> 8) & 0xFF);
+  PACKSTAT_DATA[3] = (uint8_t) (channel1 & 0xFF);
+  PACKSTAT_DATA[4] = (uint8_t) ((channel2 >> 8) & 0xFF);
+  PACKSTAT_DATA[5] = (uint8_t) (channel2 & 0xFF);
+
+  HAL_CAN_AddTxMessage(&hcan, &TxHeader, PACKSTAT_DATA, &TxMailbox);
 
 }
 
