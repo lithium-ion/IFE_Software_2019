@@ -181,7 +181,7 @@ int main(void)
     AIR = HAL_GPIO_ReadPin(GPIOB, AIR_Pin);
     CHARGE_EN = HAL_GPIO_ReadPin(GPIOB, CHARGE_EN_Pin);
 
-    if ((AIR == 0) && (CHARGE_EN == 0)) {
+    if (/*(AIR == 0) && */(CHARGE_EN == 0)) {
 
       if (chargeRate != 0)
         setDischarge(BMSconfig, BMS_DATA, discharge, BMS_FAULT, full_discharge);
@@ -622,56 +622,58 @@ void setDischarge(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6], bool cellD
 	chargeRate = 2; // initialize the charging current to normal operation
 
   // if there is any type of fault, stop charging
-  if (bmsFault) {
-    chargeRate = 0;
-    //return 0;
-  }
+  // if (bmsFault) {
+  //   chargeRate = 0;
+  //   //return 0;
+  // }
 
   for (uint8_t i = 0; i < 96; i++) {
-
+    
     cellVoltage = 0;
     cellVoltage = (uint16_t) (bmsData[i][2]);
     cellVoltage = cellVoltage << 8;
 		cellVoltage += (uint16_t) (bmsData[i][3]);
+    if (cellVoltage == 65535) continue;
 
     board = i / cfg.numOfCellsPerIC;
     cell = i % cfg.numOfCellsPerIC;
+    cellDischarge[board][cell] = 1;
 
     bmsData[i][1] &= 0x5F; //charging state = 2
 
-    // if any cell voltage is much greater than the minimum (>200mV), stop charging and discharge that cell to the minimum
-    if (cellVoltage > (minimum + cfg.max_difference)) {
-      chargeRate = 0;
-      fullDischarge[board][cell] = 1;
-      bmsData[i][1] &= 0x7F; //charging state = 3
-    }
-    // if any cell voltage is greater than some absolute threshold (4.18V), stop charging and discharge that cell to the minimum
-    // could discharge to a fixed value (4.15V) instead
-    if (cellVoltage > cfg.stopCharge_threshold) {
-      chargeRate = 0;
-      fullDischarge[board][cell] = 1;
-      bmsData[i][1] &= 0x9F; //charging state = 4
-    }
+    // // if any cell voltage is much greater than the minimum (>200mV), stop charging and discharge that cell to the minimum
+    // if (cellVoltage > (minimum + cfg.max_difference)) {
+    //   chargeRate = 0;
+    //   fullDischarge[board][cell] = 1;
+    //   bmsData[i][1] &= 0x7F; //charging state = 3
+    // }
+    // // if any cell voltage is greater than some absolute threshold (4.18V), stop charging and discharge that cell to the minimum
+    // // could discharge to a fixed value (4.15V) instead
+    // if (cellVoltage > cfg.stopCharge_threshold) {
+    //   chargeRate = 0;
+    //   fullDischarge[board][cell] = 1;
+    //   bmsData[i][1] &= 0x9F; //charging state = 4
+    // }
 
-    // if still charging AND cells above ~3V
-    if ((chargeRate != 0) && (minimum > 3000)) {
+    // // if still charging AND cells above ~3V
+    // if ((chargeRate != 0) && (minimum > 30000)) {
 
-      // if any cell is above some absolute threshold, charge slower 
-      if (cellVoltage > cfg.slowCharge_threshold)
-        chargeRate = 1;
+    //   // if any cell is above some absolute threshold, charge slower 
+    //   if (cellVoltage > cfg.slowCharge_threshold)
+    //     chargeRate = 1;
 
-      // determine the relative balancing threshold based on minimum voltage
-      threshold = balancingThreshold(cfg);
+    //   // determine the relative balancing threshold based on minimum voltage
+    //   threshold = balancingThreshold(cfg);
 
-      if (cellVoltage > (minimum + threshold)) {
-        cellDischarge[board][cell] = 1;
-        bmsData[i][1] &= 0x2F; //charging state = 1
-      }
-      else {
-        cellDischarge[board][cell] = 0;
-        bmsData[i][1] &= 0x1F; //charging state = 0
-      }
-    }
+    //   if (cellVoltage > (minimum + threshold)) {
+    //     cellDischarge[board][cell] = 1;
+    //     bmsData[i][1] &= 0x2F; //charging state = 1
+    //   }
+    //   else {
+    //     cellDischarge[board][cell] = 0;
+    //     bmsData[i][1] &= 0x1F; //charging state = 0
+    //   }
+    // }
 	}
 }
 
@@ -735,22 +737,25 @@ void checkDischarge(BMSconfigStructTypedef cfg, bool fullDischarge[12][8], uint8
 
 void setChargerTxData(BMSconfigStructTypedef cfg) {
 
+  TxHeader.ExtId = 0x1806E5F4;
+  TxHeader.DLC = 8;
+
 	/* voltage data (hex value of desired voltage (V) times 10)*/
-	ChargerTxData[0] = (uint8_t)(cfg.chargerVoltage >> 8);
-	ChargerTxData[1] = (uint8_t)cfg.chargerVoltage;
+	ChargerTxData[0] = (uint8_t)((cfg.chargerVoltage & 0xFF) >> 8);
+	ChargerTxData[1] = (uint8_t)(cfg.chargerVoltage & 0xFF);
 
 	/* set the current data (hex value of desired current (A) times 10) */
 	switch (chargeRate) {
 		case 1:
 			/* lower current */
-			ChargerTxData[2] = (uint8_t)(cfg.lowerCurrent >> 8);
-			ChargerTxData[3] = (uint8_t)cfg.lowerCurrent;
+			ChargerTxData[2] = (uint8_t)((cfg.lowerCurrent & 0xFF) >> 8);
+			ChargerTxData[3] = (uint8_t)(cfg.lowerCurrent & 0xFF);
 			break;
 
 		case 2:
 			/* normal current */
-			ChargerTxData[2] = (uint8_t)(cfg.normalCurrent >> 8);
-			ChargerTxData[3] = (uint8_t)cfg.normalCurrent;
+			ChargerTxData[2] = (uint8_t)((cfg.normalCurrent & 0xFF) >> 8);
+			ChargerTxData[3] = (uint8_t)(cfg.normalCurrent & 0xFF);
 			break;
 
 		default:

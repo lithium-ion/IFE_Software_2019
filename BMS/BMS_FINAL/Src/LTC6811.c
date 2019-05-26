@@ -314,6 +314,13 @@ bool readCellTemp(uint8_t address, uint16_t cellTemp[4], bool dcFault[4], bool t
 	//sendAddressCommand(StartCellTempVoltageADCConversionAll, address);
 	
 	//HAL_Delay(50); // conversion time is 12.8ms at 422Hz, so wait 15ms
+
+	// wakeup_idle();
+	// HAL_Delay(1);
+	
+	for (uint8_t i = 0; i < 4; i++) {
+		temp[i] = 0;
+	}
 	
 	PEC_check = readRegister(ReadAuxiliaryGroupA, address, temp);
 	dataValid = dataValid & PEC_check;
@@ -325,24 +332,25 @@ bool readCellTemp(uint8_t address, uint16_t cellTemp[4], bool dcFault[4], bool t
 	for (uint8_t i = 0; i < 4; i++) {
 		if ((temp[i] > 24400) || (temp[i] < 13000)) {
 			dcFault[i] = true;
-			cellTemp[i] = 0x0000;
+			// cellTemp[i] = 0x0000;
 		}
 		else
 			dcFault[i] = false;
 		
 		if ((temp[i] >= 13000) && (temp[i] < 15100)) {
 			tempFault[i] = true;
-			cellTemp[i] = 0xFFFF;
+			// cellTemp[i] = 0xFFFF;
 		}
 		else
 			tempFault[i] = false;
 		
 		if ((temp[i] >= 15100) && (temp[i] <= 24400)) {
-			dummy[i] = (double) temp[i] / 10000; // convert from ADC value to voltage
-			// convert from voltage to temperature
-			conversion[i] = 37735 - 113923 * dummy[i] + 142663 * pow(dummy[i], 2) - 94465 * pow(dummy[i], 3) + 34799 * pow(dummy[i], 4) - 6749 * pow(dummy[i], 5) + 537.11 * pow(dummy[i], 6);
-			conversion[i] = 500 * (conversion[i] + 20); // map value to larger range
-			cellTemp[i] = (uint16_t) conversion[i];
+			// dummy[i] = (double) temp[i] / 10000; // convert from ADC value to voltage
+			// // convert from voltage to temperature
+			// conversion[i] = 37735 - 113923 * dummy[i] + 142663 * pow(dummy[i], 2) - 94465 * pow(dummy[i], 3) + 34799 * pow(dummy[i], 4) - 6749 * pow(dummy[i], 5) + 537.11 * pow(dummy[i], 6);
+			// conversion[i] = 500 * (conversion[i] + 20); // map value to larger range
+			// cellTemp[i] = (uint16_t) conversion[i];
+			cellTemp[i] = (uint16_t) temp[i];
 		}
 	}
 	
@@ -361,12 +369,14 @@ bool readAllCellTemps(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
 	bool dataValid = true;
 
 	wakeup_idle();
+	HAL_Delay(2);
 
 	sendBroadcastCommand(ClearRegisters);
 	sendBroadcastCommand(StartCellTempVoltageADCConversionAll);
 	HAL_Delay(20);
 
 	wakeup_idle();
+	HAL_Delay(2);
 
 	for (uint8_t board = 0; board < 12; board++) {
 
