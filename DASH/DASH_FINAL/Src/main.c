@@ -606,7 +606,7 @@ void CAN_interpret(void) {
       // if precharge is not complete
       HAL_GPIO_WritePin(GPIOB, RGB_GREEN_Pin, GPIO_PIN_RESET); // set RGB LED blue
       HAL_GPIO_TogglePin(GPIOB, RGB_RED_Pin);
-      HAL_GPIO_Togglein(GPIOB, RGB_BLUE_Pin);
+      HAL_GPIO_TogglPin(GPIOB, RGB_BLUE_Pin);
 
     }
 
