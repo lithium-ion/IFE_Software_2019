@@ -54,16 +54,16 @@ CAN_HandleTypeDef hcan;
 
 /* USER CODE BEGIN PV */
 
-CAN_RxHeaderTypeDef   	RxHeader;
-uint8_t               	RxData[8];
+CAN_RxHeaderTypeDef     RxHeader;
+uint8_t                 RxData[8];
 
-CAN_TxHeaderTypeDef   	POT_TxHeader;
+CAN_TxHeaderTypeDef     POT_TxHeader;
 CAN_TxHeaderTypeDef     POT_Txheader;
 CAN_TxHeaderTypeDef     POT_Txheader1;
-uint8_t               	POT_data[8];
-uint8_t               	POT_Data[8];
-uint8_t               	POT_Data1[8];
-uint32_t              	TxMailbox;
+uint8_t                 POT_data[8];
+uint8_t                 POT_Data[8];
+uint8_t                 POT_Data1[8];
+uint32_t                TxMailbox;
 
 volatile char					CAN_flag;
 
@@ -566,20 +566,49 @@ void CAN_interpret(void) {
 		uint8_t Precharge_state;
 		Precharge_state = RxData[0];
 
-		if (Precharge_state == 0xFF) {
+		if (Precharge_state == 0x01) {
 			// if precharge is complete
-			HAL_GPIO_WritePin(GPIOB, RGB_GREEN_Pin, GPIO_PIN_SET); // set RGB LED green
+			HAL_GPIO_WritePin(GPIOB, RGB_GREEN_Pin, GPIO_PIN_RESET); // set RGB LED green
 			HAL_GPIO_WritePin(GPIOB, RGB_RED_Pin, GPIO_PIN_RESET);
 			HAL_GPIO_WritePin(GPIOB, RGB_BLUE_Pin, GPIO_PIN_RESET);
 		}
 
-		if (Precharge_state == 0x00) {
+		if (Precharge_state == 0x02) {
 			// if precharge is not complete
 			HAL_GPIO_WritePin(GPIOB, RGB_GREEN_Pin, GPIO_PIN_RESET); // set RGB LED blue
 			HAL_GPIO_WritePin(GPIOB, RGB_RED_Pin, GPIO_PIN_RESET);
 			HAL_GPIO_WritePin(GPIOB, RGB_BLUE_Pin, GPIO_PIN_SET);
 
 		}
+
+  if (Precharge_state == 0x04) {
+      // if precharge is not complete
+      HAL_GPIO_WritePin(GPIOB, RGB_GREEN_Pin, GPIO_PIN_RESET); // set RGB LED blue
+      HAL_GPIO_WritePin(GPIOB, RGB_RED_Pin, GPIO_PIN_RESET);
+      HAL_GPIO_WritePin(GPIOB, RGB_BLUE_Pin, GPIO_PIN_SET);
+
+    }
+    if (Precharge_state == 0x08) {
+      // if precharge is not complete
+      HAL_GPIO_WritePin(GPIOB, RGB_GREEN_Pin, GPIO_PIN_SET); // set RGB LED blue
+      HAL_GPIO_WritePin(GPIOB, RGB_RED_Pin, GPIO_PIN_RESET);
+      HAL_GPIO_WritePin(GPIOB, RGB_BLUE_Pin, GPIO_PIN_RESET);
+
+    }
+    if (Precharge_state == 0x10) {
+      // if precharge is not complete
+      HAL_GPIO_WritePin(GPIOB, RGB_GREEN_Pin, GPIO_PIN_SET); // set RGB LED blue
+      HAL_GPIO_WritePin(GPIOB, RGB_RED_Pin, GPIO_PIN_RESET);
+      HAL_GPIO_WritePin(GPIOB, RGB_BLUE_Pin, GPIO_PIN_RESET);
+
+    }
+    if (Precharge_state == 0x20) {
+      // if precharge is not complete
+      HAL_GPIO_WritePin(GPIOB, RGB_GREEN_Pin, GPIO_PIN_RESET); // set RGB LED blue
+      HAL_GPIO_WritePin(GPIOB, RGB_RED_Pin, GPIO_PIN_SET);
+      HAL_GPIO_WritePin(GPIOB, RGB_BLUE_Pin, GPIO_PIN_SET);
+
+    }
 
 	}
 

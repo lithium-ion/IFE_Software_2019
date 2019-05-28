@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 1
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 1
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -27,7 +23,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
   20              		.thumb_func
   21              		.fpu softvfp
   23              	HAL_NVIC_SetPriorityGrouping:
-  24              	.LFB66:
+  24              	.LFB64:
   25              		.file 1 "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c"
    1:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** /**
    2:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   ******************************************************************************
@@ -62,11 +58,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
   31:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****    
   32:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****      -@- IRQ priority order (sorted by highest to lowest priority):
   33:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****         (+@) Lowest preemption priority
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 2
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 2
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 2
 
 
   34:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****         (+@) Lowest sub priority
@@ -126,11 +118,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
   88:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
   89:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
   90:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 3
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 3
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 3
 
 
   91:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
@@ -190,11 +178,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  145:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   *         @arg NVIC_PRIORITYGROUP_0: 0 bits for preemption priority
  146:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   *                                    4 bits for subpriority
  147:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   *         @arg NVIC_PRIORITYGROUP_1: 1 bits for preemption priority
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 4
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 4
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 4
 
 
  148:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   *                                    3 bits for subpriority
@@ -254,11 +238,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
   33:Drivers/CMSIS/Include/core_cm3.h **** 
   34:Drivers/CMSIS/Include/core_cm3.h **** 
   35:Drivers/CMSIS/Include/core_cm3.h **** #if   defined ( __ICCARM__ )
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 5
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 5
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 5
 
 
   36:Drivers/CMSIS/Include/core_cm3.h ****  #pragma system_include         /* treat file as system include file for MISRA check */
@@ -318,11 +298,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
   90:Drivers/CMSIS/Include/core_cm3.h ****   #define __STATIC_INLINE  static __inline
   91:Drivers/CMSIS/Include/core_cm3.h **** 
   92:Drivers/CMSIS/Include/core_cm3.h **** #elif defined ( __GNUC__ )
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 6
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 6
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 6
 
 
   93:Drivers/CMSIS/Include/core_cm3.h ****   #define __ASM            __asm                                      /*!< asm keyword for GNU Comp
@@ -382,11 +358,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  147:Drivers/CMSIS/Include/core_cm3.h ****   #if defined __TI_VFP_SUPPORT__
  148:Drivers/CMSIS/Include/core_cm3.h ****     #error "Compiler generates FPU instructions for a device without an FPU (check __FPU_PRESENT)"
  149:Drivers/CMSIS/Include/core_cm3.h ****   #endif
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 7
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 7
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 7
 
 
  150:Drivers/CMSIS/Include/core_cm3.h **** 
@@ -446,11 +418,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  204:Drivers/CMSIS/Include/core_cm3.h **** /* IO definitions (access restrictions to peripheral registers) */
  205:Drivers/CMSIS/Include/core_cm3.h **** /**
  206:Drivers/CMSIS/Include/core_cm3.h ****     \defgroup CMSIS_glob_defs CMSIS Global Defines
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 8
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 8
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 8
 
 
  207:Drivers/CMSIS/Include/core_cm3.h **** 
@@ -510,11 +478,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  261:Drivers/CMSIS/Include/core_cm3.h ****     uint32_t C:1;                        /*!< bit:     29  Carry condition code flag */
  262:Drivers/CMSIS/Include/core_cm3.h ****     uint32_t Z:1;                        /*!< bit:     30  Zero condition code flag */
  263:Drivers/CMSIS/Include/core_cm3.h ****     uint32_t N:1;                        /*!< bit:     31  Negative condition code flag */
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 9
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 9
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 9
 
 
  264:Drivers/CMSIS/Include/core_cm3.h ****   } b;                                   /*!< Structure used for bit  access */
@@ -574,11 +538,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  318:Drivers/CMSIS/Include/core_cm3.h ****     uint32_t N:1;                        /*!< bit:     31  Negative condition code flag */
  319:Drivers/CMSIS/Include/core_cm3.h ****   } b;                                   /*!< Structure used for bit  access */
  320:Drivers/CMSIS/Include/core_cm3.h ****   uint32_t w;                            /*!< Type      used for word access */
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 10
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 10
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 10
 
 
  321:Drivers/CMSIS/Include/core_cm3.h **** } xPSR_Type;
@@ -638,11 +598,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  375:Drivers/CMSIS/Include/core_cm3.h ****   \defgroup   CMSIS_NVIC  Nested Vectored Interrupt Controller (NVIC)
  376:Drivers/CMSIS/Include/core_cm3.h ****   \brief      Type definitions for the NVIC Registers
  377:Drivers/CMSIS/Include/core_cm3.h ****   @{
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 11
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 11
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 11
 
 
  378:Drivers/CMSIS/Include/core_cm3.h ****  */
@@ -702,11 +658,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  432:Drivers/CMSIS/Include/core_cm3.h ****   __IOM uint32_t AFSR;                   /*!< Offset: 0x03C (R/W)  Auxiliary Fault Status Register 
  433:Drivers/CMSIS/Include/core_cm3.h ****   __IM  uint32_t PFR[2U];                /*!< Offset: 0x040 (R/ )  Processor Feature Register */
  434:Drivers/CMSIS/Include/core_cm3.h ****   __IM  uint32_t DFR;                    /*!< Offset: 0x048 (R/ )  Debug Feature Register */
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 12
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 12
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 12
 
 
  435:Drivers/CMSIS/Include/core_cm3.h ****   __IM  uint32_t ADR;                    /*!< Offset: 0x04C (R/ )  Auxiliary Feature Register */
@@ -766,11 +718,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  489:Drivers/CMSIS/Include/core_cm3.h **** /* SCB Vector Table Offset Register Definitions */
  490:Drivers/CMSIS/Include/core_cm3.h **** #if (__CM3_REV < 0x0201U)                   /* core r2p1 */
  491:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_VTOR_TBLBASE_Pos               29U                                            /*!< SCB 
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 13
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 13
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 13
 
 
  492:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_VTOR_TBLBASE_Msk               (1UL << SCB_VTOR_TBLBASE_Pos)                  /*!< SCB 
@@ -830,11 +778,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  546:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_CCR_USERSETMPEND_Pos            1U                                            /*!< SCB 
  547:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_CCR_USERSETMPEND_Msk           (1UL << SCB_CCR_USERSETMPEND_Pos)              /*!< SCB 
  548:Drivers/CMSIS/Include/core_cm3.h **** 
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 14
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 14
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 14
 
 
  549:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_CCR_NONBASETHRDENA_Pos          0U                                            /*!< SCB 
@@ -894,11 +838,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  603:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_CFSR_MEMFAULTSR_Msk            (0xFFUL /*<< SCB_CFSR_MEMFAULTSR_Pos*/)        /*!< SCB 
  604:Drivers/CMSIS/Include/core_cm3.h **** 
  605:Drivers/CMSIS/Include/core_cm3.h **** /* SCB Hard Fault Status Register Definitions */
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 15
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 15
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 15
 
 
  606:Drivers/CMSIS/Include/core_cm3.h **** #define SCB_HFSR_DEBUGEVT_Pos              31U                                            /*!< SCB 
@@ -958,11 +898,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  660:Drivers/CMSIS/Include/core_cm3.h **** 
  661:Drivers/CMSIS/Include/core_cm3.h **** #define SCnSCB_ACTLR_DISFOLD_Pos            2U                                         /*!< ACTLR: 
  662:Drivers/CMSIS/Include/core_cm3.h **** #define SCnSCB_ACTLR_DISFOLD_Msk           (1UL << SCnSCB_ACTLR_DISFOLD_Pos)           /*!< ACTLR: 
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 16
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 16
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 16
 
 
  663:Drivers/CMSIS/Include/core_cm3.h **** 
@@ -1022,11 +958,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  717:Drivers/CMSIS/Include/core_cm3.h **** #define SysTick_CALIB_SKEW_Msk             (1UL << SysTick_CALIB_SKEW_Pos)                /*!< SysT
  718:Drivers/CMSIS/Include/core_cm3.h **** 
  719:Drivers/CMSIS/Include/core_cm3.h **** #define SysTick_CALIB_TENMS_Pos             0U                                            /*!< SysT
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 17
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 17
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 17
 
 
  720:Drivers/CMSIS/Include/core_cm3.h **** #define SysTick_CALIB_TENMS_Msk            (0xFFFFFFUL /*<< SysTick_CALIB_TENMS_Pos*/)    /*!< SysT
@@ -1086,11 +1018,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  774:Drivers/CMSIS/Include/core_cm3.h **** 
  775:Drivers/CMSIS/Include/core_cm3.h **** /* ITM Trace Control Register Definitions */
  776:Drivers/CMSIS/Include/core_cm3.h **** #define ITM_TCR_BUSY_Pos                   23U                                            /*!< ITM 
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 18
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 18
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 18
 
 
  777:Drivers/CMSIS/Include/core_cm3.h **** #define ITM_TCR_BUSY_Msk                   (1UL << ITM_TCR_BUSY_Pos)                      /*!< ITM 
@@ -1150,11 +1078,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  831:Drivers/CMSIS/Include/core_cm3.h ****   \brief    Type definitions for the Data Watchpoint and Trace (DWT)
  832:Drivers/CMSIS/Include/core_cm3.h ****   @{
  833:Drivers/CMSIS/Include/core_cm3.h ****  */
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 19
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 19
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 19
 
 
  834:Drivers/CMSIS/Include/core_cm3.h **** 
@@ -1214,11 +1138,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  888:Drivers/CMSIS/Include/core_cm3.h **** #define DWT_CTRL_LSUEVTENA_Msk             (0x1UL << DWT_CTRL_LSUEVTENA_Pos)           /*!< DWT CTR
  889:Drivers/CMSIS/Include/core_cm3.h **** 
  890:Drivers/CMSIS/Include/core_cm3.h **** #define DWT_CTRL_SLEEPEVTENA_Pos           19U                                         /*!< DWT CTR
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 20
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 20
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 20
 
 
  891:Drivers/CMSIS/Include/core_cm3.h **** #define DWT_CTRL_SLEEPEVTENA_Msk           (0x1UL << DWT_CTRL_SLEEPEVTENA_Pos)         /*!< DWT CTR
@@ -1278,11 +1198,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  945:Drivers/CMSIS/Include/core_cm3.h **** #define DWT_FUNCTION_MATCHED_Pos           24U                                         /*!< DWT FUN
  946:Drivers/CMSIS/Include/core_cm3.h **** #define DWT_FUNCTION_MATCHED_Msk           (0x1UL << DWT_FUNCTION_MATCHED_Pos)         /*!< DWT FUN
  947:Drivers/CMSIS/Include/core_cm3.h **** 
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 21
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 21
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 21
 
 
  948:Drivers/CMSIS/Include/core_cm3.h **** #define DWT_FUNCTION_DATAVADDR1_Pos        16U                                         /*!< DWT FUN
@@ -1342,11 +1258,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
 1002:Drivers/CMSIS/Include/core_cm3.h ****   __IM  uint32_t ITATBCTR0;              /*!< Offset: 0xEF8 (R/ )  ITATBCTR0 */
 1003:Drivers/CMSIS/Include/core_cm3.h ****   __IM  uint32_t FIFO1;                  /*!< Offset: 0xEFC (R/ )  Integration ITM Data */
 1004:Drivers/CMSIS/Include/core_cm3.h ****   __IOM uint32_t ITCTRL;                 /*!< Offset: 0xF00 (R/W)  Integration Mode Control */
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 22
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 22
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 22
 
 
 1005:Drivers/CMSIS/Include/core_cm3.h ****         uint32_t RESERVED5[39U];
@@ -1406,11 +1318,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
 1059:Drivers/CMSIS/Include/core_cm3.h **** #define TPI_FIFO0_ETM2_Msk                 (0xFFUL << TPI_FIFO0_ETM2_Pos)              /*!< TPI FIF
 1060:Drivers/CMSIS/Include/core_cm3.h **** 
 1061:Drivers/CMSIS/Include/core_cm3.h **** #define TPI_FIFO0_ETM1_Pos                  8U                                         /*!< TPI FIF
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 23
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 23
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 23
 
 
 1062:Drivers/CMSIS/Include/core_cm3.h **** #define TPI_FIFO0_ETM1_Msk                 (0xFFUL << TPI_FIFO0_ETM1_Pos)              /*!< TPI FIF
@@ -1470,11 +1378,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
 1116:Drivers/CMSIS/Include/core_cm3.h **** 
 1117:Drivers/CMSIS/Include/core_cm3.h **** #define TPI_DEVID_NrTraceInput_Pos          0U                                         /*!< TPI DEV
 1118:Drivers/CMSIS/Include/core_cm3.h **** #define TPI_DEVID_NrTraceInput_Msk         (0x1FUL /*<< TPI_DEVID_NrTraceInput_Pos*/)  /*!< TPI DEV
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 24
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 24
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 24
 
 
 1119:Drivers/CMSIS/Include/core_cm3.h **** 
@@ -1534,11 +1438,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
 1173:Drivers/CMSIS/Include/core_cm3.h **** #define MPU_CTRL_ENABLE_Pos                 0U                                            /*!< MPU 
 1174:Drivers/CMSIS/Include/core_cm3.h **** #define MPU_CTRL_ENABLE_Msk                (1UL /*<< MPU_CTRL_ENABLE_Pos*/)               /*!< MPU 
 1175:Drivers/CMSIS/Include/core_cm3.h **** 
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 25
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 25
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 25
 
 
 1176:Drivers/CMSIS/Include/core_cm3.h **** /* MPU Region Number Register Definitions */
@@ -1598,11 +1498,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
 1230:Drivers/CMSIS/Include/core_cm3.h ****  */
 1231:Drivers/CMSIS/Include/core_cm3.h **** 
 1232:Drivers/CMSIS/Include/core_cm3.h **** /**
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 26
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 26
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 26
 
 
 1233:Drivers/CMSIS/Include/core_cm3.h ****   \brief  Structure type to access the Core Debug Register (CoreDebug).
@@ -1662,11 +1558,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
 1287:Drivers/CMSIS/Include/core_cm3.h **** /* Debug Exception and Monitor Control Register Definitions */
 1288:Drivers/CMSIS/Include/core_cm3.h **** #define CoreDebug_DEMCR_TRCENA_Pos         24U                                            /*!< Core
 1289:Drivers/CMSIS/Include/core_cm3.h **** #define CoreDebug_DEMCR_TRCENA_Msk         (1UL << CoreDebug_DEMCR_TRCENA_Pos)            /*!< Core
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 27
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 27
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 27
 
 
 1290:Drivers/CMSIS/Include/core_cm3.h **** 
@@ -1726,11 +1618,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
 1344:Drivers/CMSIS/Include/core_cm3.h **** 
 1345:Drivers/CMSIS/Include/core_cm3.h **** /**
 1346:Drivers/CMSIS/Include/core_cm3.h ****   \brief     Mask and shift a register value to extract a bit filed value.
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 28
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 28
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 28
 
 
 1347:Drivers/CMSIS/Include/core_cm3.h ****   \param[in] field  Name of the register bit field.
@@ -1790,11 +1678,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
 1401:Drivers/CMSIS/Include/core_cm3.h **** */
 1402:Drivers/CMSIS/Include/core_cm3.h **** 
 1403:Drivers/CMSIS/Include/core_cm3.h **** 
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 29
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 29
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 29
 
 
 1404:Drivers/CMSIS/Include/core_cm3.h **** 
@@ -1851,38 +1735,33 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
   55              		.loc 2 1432 0
   56 001c D060     		str	r0, [r2, #12]
   57              	.LVL6:
-  58              	.LBE41:
-  59              	.LBE40:
+  58 001e 7047     		bx	lr
+  59              	.L3:
+  60              		.align	2
+ARM GAS  /tmp/ccopQHo5.s 			page 30
+
+
+  61              	.L2:
+  62 0020 00ED00E0 		.word	-536810240
+  63              	.LBE41:
+  64              	.LBE40:
+  65              		.cfi_endproc
+  66              	.LFE64:
+  68              		.section	.text.HAL_NVIC_SetPriority,"ax",%progbits
+  69              		.align	1
+  70              		.global	HAL_NVIC_SetPriority
+  71              		.syntax unified
+  72              		.thumb
+  73              		.thumb_func
+  74              		.fpu softvfp
+  76              	HAL_NVIC_SetPriority:
+  77              	.LFB65:
  161:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   /* Check the parameters */
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 30
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 30
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
-
-
  162:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   assert_param(IS_NVIC_PRIORITY_GROUP(PriorityGroup));
  163:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   
  164:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   /* Set the PRIGROUP[10:8] bits according to the PriorityGroup parameter value */
  165:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   NVIC_SetPriorityGrouping(PriorityGroup);
  166:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** }
-  60              		.loc 1 166 0
-  61 001e 7047     		bx	lr
-  62              	.L3:
-  63              		.align	2
-  64              	.L2:
-  65 0020 00ED00E0 		.word	-536810240
-  66              		.cfi_endproc
-  67              	.LFE66:
-  69              		.section	.text.HAL_NVIC_SetPriority,"ax",%progbits
-  70              		.align	1
-  71              		.global	HAL_NVIC_SetPriority
-  72              		.syntax unified
-  73              		.thumb
-  74              		.thumb_func
-  75              		.fpu softvfp
-  77              	HAL_NVIC_SetPriority:
-  78              	.LFB67:
  167:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** 
  168:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** /**
  169:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   * @brief  Sets the priority of an interrupt.
@@ -1899,47 +1778,43 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  180:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   */
  181:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** void HAL_NVIC_SetPriority(IRQn_Type IRQn, uint32_t PreemptPriority, uint32_t SubPriority)
  182:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** { 
-  79              		.loc 1 182 0
-  80              		.cfi_startproc
-  81              		@ args = 0, pretend = 0, frame = 0
-  82              		@ frame_needed = 0, uses_anonymous_args = 0
-  83              		@ link register save eliminated.
-  84              	.LVL7:
-  85 0000 30B4     		push	{r4, r5}
-  86              	.LCFI0:
-  87              		.cfi_def_cfa_offset 8
-  88              		.cfi_offset 4, -8
-  89              		.cfi_offset 5, -4
-  90              	.LVL8:
-  91              	.LBB42:
-  92              	.LBB43:
+  78              		.loc 1 182 0
+  79              		.cfi_startproc
+  80              		@ args = 0, pretend = 0, frame = 0
+  81              		@ frame_needed = 0, uses_anonymous_args = 0
+  82              		@ link register save eliminated.
+  83              	.LVL7:
+  84 0000 30B4     		push	{r4, r5}
+  85              	.LCFI0:
+  86              		.cfi_def_cfa_offset 8
+  87              		.cfi_offset 4, -8
+  88              		.cfi_offset 5, -4
+  89              	.LVL8:
+  90              	.LBB42:
+  91              	.LBB43:
 1433:Drivers/CMSIS/Include/core_cm3.h **** }
 1434:Drivers/CMSIS/Include/core_cm3.h **** 
 1435:Drivers/CMSIS/Include/core_cm3.h **** 
 1436:Drivers/CMSIS/Include/core_cm3.h **** /**
 1437:Drivers/CMSIS/Include/core_cm3.h ****   \brief   Get Priority Grouping
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 31
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 31
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
-
-
 1438:Drivers/CMSIS/Include/core_cm3.h ****   \details Reads the priority grouping field from the NVIC Interrupt Controller.
+ARM GAS  /tmp/ccopQHo5.s 			page 31
+
+
 1439:Drivers/CMSIS/Include/core_cm3.h ****   \return                Priority grouping field (SCB->AIRCR [10:8] PRIGROUP field).
 1440:Drivers/CMSIS/Include/core_cm3.h ****  */
 1441:Drivers/CMSIS/Include/core_cm3.h **** __STATIC_INLINE uint32_t NVIC_GetPriorityGrouping(void)
 1442:Drivers/CMSIS/Include/core_cm3.h **** {
 1443:Drivers/CMSIS/Include/core_cm3.h ****   return ((uint32_t)((SCB->AIRCR & SCB_AIRCR_PRIGROUP_Msk) >> SCB_AIRCR_PRIGROUP_Pos));
-  93              		.loc 2 1443 0
-  94 0002 174B     		ldr	r3, .L11
-  95 0004 DB68     		ldr	r3, [r3, #12]
-  96 0006 C3F30223 		ubfx	r3, r3, #8, #3
-  97              	.LVL9:
-  98              	.LBE43:
-  99              	.LBE42:
- 100              	.LBB44:
- 101              	.LBB45:
+  92              		.loc 2 1443 0
+  93 0002 164B     		ldr	r3, .L11
+  94 0004 DB68     		ldr	r3, [r3, #12]
+  95 0006 C3F30223 		ubfx	r3, r3, #8, #3
+  96              	.LVL9:
+  97              	.LBE43:
+  98              	.LBE42:
+  99              	.LBB44:
+ 100              	.LBB45:
 1444:Drivers/CMSIS/Include/core_cm3.h **** }
 1445:Drivers/CMSIS/Include/core_cm3.h **** 
 1446:Drivers/CMSIS/Include/core_cm3.h **** 
@@ -1982,14 +1857,10 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
 1483:Drivers/CMSIS/Include/core_cm3.h ****   \brief   Set Pending Interrupt
 1484:Drivers/CMSIS/Include/core_cm3.h ****   \details Sets the pending bit of an external interrupt.
 1485:Drivers/CMSIS/Include/core_cm3.h ****   \param [in]      IRQn  Interrupt number. Value cannot be negative.
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 32
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 32
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
-
-
 1486:Drivers/CMSIS/Include/core_cm3.h ****  */
+ARM GAS  /tmp/ccopQHo5.s 			page 32
+
+
 1487:Drivers/CMSIS/Include/core_cm3.h **** __STATIC_INLINE void NVIC_SetPendingIRQ(IRQn_Type IRQn)
 1488:Drivers/CMSIS/Include/core_cm3.h **** {
 1489:Drivers/CMSIS/Include/core_cm3.h ****   NVIC->ISPR[(((uint32_t)(int32_t)IRQn) >> 5UL)] = (uint32_t)(1UL << (((uint32_t)(int32_t)IRQn) & 0
@@ -2046,14 +1917,10 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
 1540:Drivers/CMSIS/Include/core_cm3.h ****            The interrupt number can be positive to specify an external (device specific) interrupt,
 1541:Drivers/CMSIS/Include/core_cm3.h ****            or negative to specify an internal (core) interrupt.
 1542:Drivers/CMSIS/Include/core_cm3.h ****   \param [in]   IRQn  Interrupt number.
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 33
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 33
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
-
-
 1543:Drivers/CMSIS/Include/core_cm3.h ****   \return             Interrupt Priority.
+ARM GAS  /tmp/ccopQHo5.s 			page 33
+
+
 1544:Drivers/CMSIS/Include/core_cm3.h ****                       Value is aligned automatically to the implemented priority bits of the microc
 1545:Drivers/CMSIS/Include/core_cm3.h ****  */
 1546:Drivers/CMSIS/Include/core_cm3.h **** __STATIC_INLINE uint32_t NVIC_GetPriority(IRQn_Type IRQn)
@@ -2088,67 +1955,65 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
 1575:Drivers/CMSIS/Include/core_cm3.h ****   uint32_t SubPriorityBits;
 1576:Drivers/CMSIS/Include/core_cm3.h **** 
 1577:Drivers/CMSIS/Include/core_cm3.h ****   PreemptPriorityBits = ((7UL - PriorityGroupTmp) > (uint32_t)(__NVIC_PRIO_BITS)) ? (uint32_t)(__NV
- 102              		.loc 2 1577 0
- 103 000a C3F10704 		rsb	r4, r3, #7
- 104 000e 042C     		cmp	r4, #4
- 105 0010 28BF     		it	cs
- 106 0012 0424     		movcs	r4, #4
- 107              	.LVL10:
+ 101              		.loc 2 1577 0
+ 102 000a C3F10704 		rsb	r4, r3, #7
+ 103 000e 042C     		cmp	r4, #4
+ 104 0010 28BF     		it	cs
+ 105 0012 0424     		movcs	r4, #4
+ 106              	.LVL10:
 1578:Drivers/CMSIS/Include/core_cm3.h ****   SubPriorityBits     = ((PriorityGroupTmp + (uint32_t)(__NVIC_PRIO_BITS)) < (uint32_t)7UL) ? (uint
- 108              		.loc 2 1578 0
- 109 0014 1D1D     		adds	r5, r3, #4
- 110 0016 062D     		cmp	r5, #6
- 111 0018 18D9     		bls	.L8
- 112 001a 033B     		subs	r3, r3, #3
- 113              	.LVL11:
- 114              	.L5:
+ 107              		.loc 2 1578 0
+ 108 0014 1D1D     		adds	r5, r3, #4
+ 109 0016 062D     		cmp	r5, #6
+ 110 0018 17D9     		bls	.L8
+ 111 001a 033B     		subs	r3, r3, #3
+ 112              	.LVL11:
+ 113              	.L5:
 1579:Drivers/CMSIS/Include/core_cm3.h **** 
 1580:Drivers/CMSIS/Include/core_cm3.h ****   return (
 1581:Drivers/CMSIS/Include/core_cm3.h ****            ((PreemptPriority & (uint32_t)((1UL << (PreemptPriorityBits)) - 1UL)) << SubPriorityBits
- 115              		.loc 2 1581 0
- 116 001c 4FF0FF35 		mov	r5, #-1
- 117              	.LVL12:
- 118 0020 05FA04F4 		lsl	r4, r5, r4
- 119              	.LVL13:
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 34
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 34
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ 114              		.loc 2 1581 0
+ 115 001c 0125     		movs	r5, #1
+ 116              	.LVL12:
+ 117 001e 05FA04F4 		lsl	r4, r5, r4
+ 118              	.LVL13:
+ 119 0022 013C     		subs	r4, r4, #1
+ARM GAS  /tmp/ccopQHo5.s 			page 34
 
 
- 120 0024 21EA0401 		bic	r1, r1, r4
+ 120 0024 2140     		ands	r1, r1, r4
  121              	.LVL14:
- 122 0028 9940     		lsls	r1, r1, r3
+ 122 0026 9940     		lsls	r1, r1, r3
 1582:Drivers/CMSIS/Include/core_cm3.h ****            ((SubPriority     & (uint32_t)((1UL << (SubPriorityBits    )) - 1UL)))
  123              		.loc 2 1582 0
- 124 002a 05FA03F3 		lsl	r3, r5, r3
+ 124 0028 05FA03F3 		lsl	r3, r5, r3
  125              	.LVL15:
- 126 002e 22EA0303 		bic	r3, r2, r3
+ 126 002c 013B     		subs	r3, r3, #1
+ 127 002e 1340     		ands	r3, r3, r2
 1581:Drivers/CMSIS/Include/core_cm3.h ****            ((SubPriority     & (uint32_t)((1UL << (SubPriorityBits    )) - 1UL)))
- 127              		.loc 2 1581 0
- 128 0032 1943     		orrs	r1, r1, r3
- 129              	.LVL16:
- 130              	.LBE45:
- 131              	.LBE44:
- 132              	.LBB47:
- 133              	.LBB48:
+ 128              		.loc 2 1581 0
+ 129 0030 1943     		orrs	r1, r1, r3
+ 130              	.LVL16:
+ 131              	.LBE45:
+ 132              	.LBE44:
+ 133              	.LBB47:
+ 134              	.LBB48:
 1526:Drivers/CMSIS/Include/core_cm3.h ****   {
- 134              		.loc 2 1526 0
- 135 0034 0028     		cmp	r0, #0
- 136 0036 0BDB     		blt	.L10
+ 135              		.loc 2 1526 0
+ 136 0032 0028     		cmp	r0, #0
+ 137 0034 0BDB     		blt	.L10
 1532:Drivers/CMSIS/Include/core_cm3.h ****   }
- 137              		.loc 2 1532 0
- 138 0038 0901     		lsls	r1, r1, #4
- 139 003a C9B2     		uxtb	r1, r1
- 140 003c 00F16040 		add	r0, r0, #-536870912
- 141              	.LVL17:
- 142 0040 00F56140 		add	r0, r0, #57600
- 143 0044 80F80013 		strb	r1, [r0, #768]
- 144              	.LVL18:
- 145              	.L4:
- 146              	.LBE48:
- 147              	.LBE47:
+ 138              		.loc 2 1532 0
+ 139 0036 0901     		lsls	r1, r1, #4
+ 140 0038 C9B2     		uxtb	r1, r1
+ 141 003a 00F16040 		add	r0, r0, #-536870912
+ 142              	.LVL17:
+ 143 003e 00F56140 		add	r0, r0, #57600
+ 144 0042 80F80013 		strb	r1, [r0, #768]
+ 145              	.LVL18:
+ 146              	.L4:
+ 147              	.LBE48:
+ 148              	.LBE47:
  183:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   uint32_t prioritygroup = 0x00U;
  184:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   
  185:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   /* Check the parameters */
@@ -2159,65 +2024,61 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  190:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   
  191:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   NVIC_SetPriority(IRQn, NVIC_EncodePriority(prioritygroup, PreemptPriority, SubPriority));
  192:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** }
- 148              		.loc 1 192 0
- 149 0048 30BC     		pop	{r4, r5}
- 150              	.LCFI1:
- 151              		.cfi_remember_state
- 152              		.cfi_restore 5
- 153              		.cfi_restore 4
- 154              		.cfi_def_cfa_offset 0
- 155 004a 7047     		bx	lr
- 156              	.LVL19:
- 157              	.L8:
- 158              	.LCFI2:
- 159              		.cfi_restore_state
- 160              	.LBB50:
- 161              	.LBB46:
+ 149              		.loc 1 192 0
+ 150 0046 30BC     		pop	{r4, r5}
+ 151              	.LCFI1:
+ 152              		.cfi_remember_state
+ 153              		.cfi_restore 5
+ 154              		.cfi_restore 4
+ 155              		.cfi_def_cfa_offset 0
+ 156 0048 7047     		bx	lr
+ 157              	.LVL19:
+ 158              	.L8:
+ 159              	.LCFI2:
+ 160              		.cfi_restore_state
+ 161              	.LBB50:
+ 162              	.LBB46:
+ARM GAS  /tmp/ccopQHo5.s 			page 35
+
+
 1578:Drivers/CMSIS/Include/core_cm3.h **** 
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 35
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 35
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
-
-
- 162              		.loc 2 1578 0
- 163 004c 0023     		movs	r3, #0
- 164              	.LVL20:
- 165 004e E5E7     		b	.L5
- 166              	.LVL21:
- 167              	.L10:
- 168              	.LBE46:
- 169              	.LBE50:
- 170              	.LBB51:
- 171              	.LBB49:
+ 163              		.loc 2 1578 0
+ 164 004a 0023     		movs	r3, #0
+ 165              	.LVL20:
+ 166 004c E6E7     		b	.L5
+ 167              	.LVL21:
+ 168              	.L10:
+ 169              	.LBE46:
+ 170              	.LBE50:
+ 171              	.LBB51:
+ 172              	.LBB49:
 1528:Drivers/CMSIS/Include/core_cm3.h ****   }
- 172              		.loc 2 1528 0
- 173 0050 00F00F00 		and	r0, r0, #15
- 174              	.LVL22:
- 175 0054 0901     		lsls	r1, r1, #4
- 176 0056 C9B2     		uxtb	r1, r1
- 177 0058 024B     		ldr	r3, .L11+4
- 178 005a 1954     		strb	r1, [r3, r0]
- 179 005c F4E7     		b	.L4
- 180              	.L12:
- 181 005e 00BF     		.align	2
- 182              	.L11:
- 183 0060 00ED00E0 		.word	-536810240
- 184 0064 14ED00E0 		.word	-536810220
- 185              	.LBE49:
- 186              	.LBE51:
- 187              		.cfi_endproc
- 188              	.LFE67:
- 190              		.section	.text.HAL_NVIC_EnableIRQ,"ax",%progbits
- 191              		.align	1
- 192              		.global	HAL_NVIC_EnableIRQ
- 193              		.syntax unified
- 194              		.thumb
- 195              		.thumb_func
- 196              		.fpu softvfp
- 198              	HAL_NVIC_EnableIRQ:
- 199              	.LFB68:
+ 173              		.loc 2 1528 0
+ 174 004e 00F00F00 		and	r0, r0, #15
+ 175              	.LVL22:
+ 176 0052 0901     		lsls	r1, r1, #4
+ 177 0054 C9B2     		uxtb	r1, r1
+ 178 0056 024B     		ldr	r3, .L11+4
+ 179 0058 1954     		strb	r1, [r3, r0]
+ 180 005a F4E7     		b	.L4
+ 181              	.L12:
+ 182              		.align	2
+ 183              	.L11:
+ 184 005c 00ED00E0 		.word	-536810240
+ 185 0060 14ED00E0 		.word	-536810220
+ 186              	.LBE49:
+ 187              	.LBE51:
+ 188              		.cfi_endproc
+ 189              	.LFE65:
+ 191              		.section	.text.HAL_NVIC_EnableIRQ,"ax",%progbits
+ 192              		.align	1
+ 193              		.global	HAL_NVIC_EnableIRQ
+ 194              		.syntax unified
+ 195              		.thumb
+ 196              		.thumb_func
+ 197              		.fpu softvfp
+ 199              	HAL_NVIC_EnableIRQ:
+ 200              	.LFB66:
  193:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** 
  194:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** /**
  195:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   * @brief  Enables a device specific interrupt in the NVIC interrupt controller.
@@ -2230,47 +2091,36 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  202:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   */
  203:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** void HAL_NVIC_EnableIRQ(IRQn_Type IRQn)
  204:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** {
- 200              		.loc 1 204 0
- 201              		.cfi_startproc
- 202              		@ args = 0, pretend = 0, frame = 0
- 203              		@ frame_needed = 0, uses_anonymous_args = 0
- 204              		@ link register save eliminated.
- 205              	.LVL23:
- 206              	.LBB52:
- 207              	.LBB53:
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 36
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 36
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ 201              		.loc 1 204 0
+ 202              		.cfi_startproc
+ 203              		@ args = 0, pretend = 0, frame = 0
+ 204              		@ frame_needed = 0, uses_anonymous_args = 0
+ 205              		@ link register save eliminated.
+ 206              	.LVL23:
+ 207              	.LBB52:
+ARM GAS  /tmp/ccopQHo5.s 			page 36
 
 
+ 208              	.LBB53:
 1454:Drivers/CMSIS/Include/core_cm3.h **** }
- 208              		.loc 2 1454 0
- 209 0000 00F01F02 		and	r2, r0, #31
- 210 0004 4009     		lsrs	r0, r0, #5
- 211              	.LVL24:
- 212 0006 0123     		movs	r3, #1
- 213 0008 9340     		lsls	r3, r3, r2
- 214 000a 024A     		ldr	r2, .L14
- 215 000c 42F82030 		str	r3, [r2, r0, lsl #2]
- 216              	.LVL25:
- 217              	.LBE53:
- 218              	.LBE52:
- 205:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   /* Check the parameters */
- 206:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   assert_param(IS_NVIC_DEVICE_IRQ(IRQn));
- 207:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** 
- 208:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   /* Enable interrupt */
- 209:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   NVIC_EnableIRQ(IRQn);
- 210:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** }
- 219              		.loc 1 210 0
- 220 0010 7047     		bx	lr
- 221              	.L15:
- 222 0012 00BF     		.align	2
- 223              	.L14:
- 224 0014 00E100E0 		.word	-536813312
+ 209              		.loc 2 1454 0
+ 210 0000 4209     		lsrs	r2, r0, #5
+ 211 0002 00F01F00 		and	r0, r0, #31
+ 212              	.LVL24:
+ 213 0006 0123     		movs	r3, #1
+ 214 0008 03FA00F0 		lsl	r0, r3, r0
+ 215 000c 014B     		ldr	r3, .L14
+ 216 000e 43F82200 		str	r0, [r3, r2, lsl #2]
+ 217              	.LVL25:
+ 218 0012 7047     		bx	lr
+ 219              	.L15:
+ 220              		.align	2
+ 221              	.L14:
+ 222 0014 00E100E0 		.word	-536813312
+ 223              	.LBE53:
+ 224              	.LBE52:
  225              		.cfi_endproc
- 226              	.LFE68:
+ 226              	.LFE66:
  228              		.section	.text.HAL_NVIC_DisableIRQ,"ax",%progbits
  229              		.align	1
  230              		.global	HAL_NVIC_DisableIRQ
@@ -2279,7 +2129,13 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  233              		.thumb_func
  234              		.fpu softvfp
  236              	HAL_NVIC_DisableIRQ:
- 237              	.LFB69:
+ 237              	.LFB67:
+ 205:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   /* Check the parameters */
+ 206:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   assert_param(IS_NVIC_DEVICE_IRQ(IRQn));
+ 207:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** 
+ 208:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   /* Enable interrupt */
+ 209:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   NVIC_EnableIRQ(IRQn);
+ 210:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** }
  211:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** 
  212:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** /**
  213:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   * @brief  Disables a device specific interrupt in the NVIC interrupt controller.
@@ -2300,47 +2156,42 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  245              	.LBB55:
 1465:Drivers/CMSIS/Include/core_cm3.h **** }
  246              		.loc 2 1465 0
- 247 0000 00F01F02 		and	r2, r0, #31
- 248 0004 4009     		lsrs	r0, r0, #5
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 37
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 37
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ 247 0000 4309     		lsrs	r3, r0, #5
+ 248 0002 00F01F00 		and	r0, r0, #31
+ARM GAS  /tmp/ccopQHo5.s 			page 37
 
 
  249              	.LVL27:
- 250 0006 0123     		movs	r3, #1
- 251 0008 9340     		lsls	r3, r3, r2
- 252 000a 2030     		adds	r0, r0, #32
- 253 000c 014A     		ldr	r2, .L17
- 254 000e 42F82030 		str	r3, [r2, r0, lsl #2]
+ 250 0006 0122     		movs	r2, #1
+ 251 0008 02FA00F0 		lsl	r0, r2, r0
+ 252 000c 2033     		adds	r3, r3, #32
+ 253 000e 024A     		ldr	r2, .L17
+ 254 0010 42F82300 		str	r0, [r2, r3, lsl #2]
  255              	.LVL28:
- 256              	.LBE55:
- 257              	.LBE54:
+ 256 0014 7047     		bx	lr
+ 257              	.L18:
+ 258 0016 00BF     		.align	2
+ 259              	.L17:
+ 260 0018 00E100E0 		.word	-536813312
+ 261              	.LBE55:
+ 262              	.LBE54:
+ 263              		.cfi_endproc
+ 264              	.LFE67:
+ 266              		.section	.text.HAL_NVIC_SystemReset,"ax",%progbits
+ 267              		.align	1
+ 268              		.global	HAL_NVIC_SystemReset
+ 269              		.syntax unified
+ 270              		.thumb
+ 271              		.thumb_func
+ 272              		.fpu softvfp
+ 274              	HAL_NVIC_SystemReset:
+ 275              	.LFB68:
  221:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   /* Check the parameters */
  222:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   assert_param(IS_NVIC_DEVICE_IRQ(IRQn));
  223:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** 
  224:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   /* Disable interrupt */
  225:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   NVIC_DisableIRQ(IRQn);
  226:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** }
- 258              		.loc 1 226 0
- 259 0012 7047     		bx	lr
- 260              	.L18:
- 261              		.align	2
- 262              	.L17:
- 263 0014 00E100E0 		.word	-536813312
- 264              		.cfi_endproc
- 265              	.LFE69:
- 267              		.section	.text.HAL_NVIC_SystemReset,"ax",%progbits
- 268              		.align	1
- 269              		.global	HAL_NVIC_SystemReset
- 270              		.syntax unified
- 271              		.thumb
- 272              		.thumb_func
- 273              		.fpu softvfp
- 275              	HAL_NVIC_SystemReset:
- 276              	.LFB70:
  227:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** 
  228:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** /**
  229:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   * @brief  Initiates a system reset request to reset the MCU.
@@ -2348,17 +2199,17 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  231:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   */
  232:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** void HAL_NVIC_SystemReset(void)
  233:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** {
- 277              		.loc 1 233 0
- 278              		.cfi_startproc
- 279              		@ Volatile: function does not return.
- 280              		@ args = 0, pretend = 0, frame = 0
- 281              		@ frame_needed = 0, uses_anonymous_args = 0
- 282              		@ link register save eliminated.
- 283              	.LBB64:
- 284              	.LBB65:
- 285              	.LBB66:
- 286              	.LBB67:
- 287              		.file 3 "Drivers/CMSIS/Include/cmsis_gcc.h"
+ 276              		.loc 1 233 0
+ 277              		.cfi_startproc
+ 278              		@ Volatile: function does not return.
+ 279              		@ args = 0, pretend = 0, frame = 0
+ 280              		@ frame_needed = 0, uses_anonymous_args = 0
+ 281              		@ link register save eliminated.
+ 282              	.LBB64:
+ 283              	.LBB65:
+ 284              	.LBB66:
+ 285              	.LBB67:
+ 286              		.file 3 "Drivers/CMSIS/Include/cmsis_gcc.h"
    1:Drivers/CMSIS/Include/cmsis_gcc.h **** /**************************************************************************//**
    2:Drivers/CMSIS/Include/cmsis_gcc.h ****  * @file     cmsis_gcc.h
    3:Drivers/CMSIS/Include/cmsis_gcc.h ****  * @brief    CMSIS Cortex-M Core Function/Instruction Header File
@@ -2366,14 +2217,10 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
    5:Drivers/CMSIS/Include/cmsis_gcc.h ****  * @date     20. October 2015
    6:Drivers/CMSIS/Include/cmsis_gcc.h ****  ******************************************************************************/
    7:Drivers/CMSIS/Include/cmsis_gcc.h **** /* Copyright (c) 2009 - 2015 ARM LIMITED
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 38
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 38
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
-
-
    8:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccopQHo5.s 			page 38
+
+
    9:Drivers/CMSIS/Include/cmsis_gcc.h ****    All rights reserved.
   10:Drivers/CMSIS/Include/cmsis_gcc.h ****    Redistribution and use in source and binary forms, with or without
   11:Drivers/CMSIS/Include/cmsis_gcc.h ****    modification, are permitted provided that the following conditions are met:
@@ -2430,14 +2277,10 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
   62:Drivers/CMSIS/Include/cmsis_gcc.h **** 
   63:Drivers/CMSIS/Include/cmsis_gcc.h **** 
   64:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 39
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 39
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
-
-
   65:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Disable IRQ Interrupts
+ARM GAS  /tmp/ccopQHo5.s 			page 39
+
+
   66:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Disables IRQ interrupts by setting the I-bit in the CPSR.
   67:Drivers/CMSIS/Include/cmsis_gcc.h ****   Can only be executed in Privileged modes.
   68:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
@@ -2494,14 +2337,10 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  119:Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_APSR(void)
  120:Drivers/CMSIS/Include/cmsis_gcc.h **** {
  121:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 40
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 40
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
-
-
  122:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccopQHo5.s 			page 40
+
+
  123:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, apsr" : "=r" (result) );
  124:Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
  125:Drivers/CMSIS/Include/cmsis_gcc.h **** }
@@ -2558,14 +2397,10 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  176:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  177:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, msp\n" : "=r" (result) );
  178:Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 41
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 41
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
-
-
  179:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ARM GAS  /tmp/ccopQHo5.s 			page 41
+
+
  180:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  181:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  182:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
@@ -2622,14 +2457,10 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  233:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Disable FIQ
  234:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Disables FIQ interrupts by setting the F-bit in the CPSR.
  235:Drivers/CMSIS/Include/cmsis_gcc.h ****            Can only be executed in Privileged modes.
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 42
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 42
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
-
-
  236:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ARM GAS  /tmp/ccopQHo5.s 			page 42
+
+
  237:Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __disable_fault_irq(void)
  238:Drivers/CMSIS/Include/cmsis_gcc.h **** {
  239:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("cpsid f" : : : "memory");
@@ -2686,14 +2517,10 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  290:Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
  291:Drivers/CMSIS/Include/cmsis_gcc.h **** }
  292:Drivers/CMSIS/Include/cmsis_gcc.h **** 
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 43
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 43
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
-
-
  293:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccopQHo5.s 			page 43
+
+
  294:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
  295:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Fault Mask
  296:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the Fault Mask register.
@@ -2750,14 +2577,10 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  347:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  348:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  349:Drivers/CMSIS/Include/cmsis_gcc.h **** /*@} end of CMSIS_Core_RegAccFunctions */
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 44
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 44
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
-
-
  350:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccopQHo5.s 			page 44
+
+
  351:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  352:Drivers/CMSIS/Include/cmsis_gcc.h **** /* ##########################  Core Instruction Access  ######################### */
  353:Drivers/CMSIS/Include/cmsis_gcc.h **** /** \defgroup CMSIS_Core_InstructionInterface CMSIS Core Instruction Interface
@@ -2814,14 +2637,10 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  404:Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__((always_inline)) __STATIC_INLINE void __SEV(void)
  405:Drivers/CMSIS/Include/cmsis_gcc.h **** {
  406:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("sev");
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 45
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 45
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
-
-
  407:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ARM GAS  /tmp/ccopQHo5.s 			page 45
+
+
  408:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  409:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  410:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
@@ -2844,15 +2663,15 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  427:Drivers/CMSIS/Include/cmsis_gcc.h **** __attribute__((always_inline)) __STATIC_INLINE void __DSB(void)
  428:Drivers/CMSIS/Include/cmsis_gcc.h **** {
  429:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("dsb 0xF":::"memory");
- 288              		.loc 3 429 0
- 289              		.syntax unified
- 290              	@ 429 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
- 291 0000 BFF34F8F 		dsb 0xF
- 292              	@ 0 "" 2
- 293              		.thumb
- 294              		.syntax unified
- 295              	.LBE67:
- 296              	.LBE66:
+ 287              		.loc 3 429 0
+ 288              		.syntax unified
+ 289              	@ 429 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 290 0000 BFF34F8F 		dsb 0xF
+ 291              	@ 0 "" 2
+ 292              		.thumb
+ 293              		.syntax unified
+ 294              	.LBE67:
+ 295              	.LBE66:
 1583:Drivers/CMSIS/Include/core_cm3.h ****          );
 1584:Drivers/CMSIS/Include/core_cm3.h **** }
 1585:Drivers/CMSIS/Include/core_cm3.h **** 
@@ -2878,14 +2697,10 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
 1605:Drivers/CMSIS/Include/core_cm3.h ****   SubPriorityBits     = ((PriorityGroupTmp + (uint32_t)(__NVIC_PRIO_BITS)) < (uint32_t)7UL) ? (uint
 1606:Drivers/CMSIS/Include/core_cm3.h **** 
 1607:Drivers/CMSIS/Include/core_cm3.h ****   *pPreemptPriority = (Priority >> SubPriorityBits) & (uint32_t)((1UL << (PreemptPriorityBits)) - 1
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 46
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 46
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
-
-
 1608:Drivers/CMSIS/Include/core_cm3.h ****   *pSubPriority     = (Priority                   ) & (uint32_t)((1UL << (SubPriorityBits    )) - 1
+ARM GAS  /tmp/ccopQHo5.s 			page 46
+
+
 1609:Drivers/CMSIS/Include/core_cm3.h **** }
 1610:Drivers/CMSIS/Include/core_cm3.h **** 
 1611:Drivers/CMSIS/Include/core_cm3.h **** 
@@ -2899,65 +2714,61 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
 1619:Drivers/CMSIS/Include/core_cm3.h ****                                                                        buffered write are completed
 1620:Drivers/CMSIS/Include/core_cm3.h ****   SCB->AIRCR  = (uint32_t)((0x5FAUL << SCB_AIRCR_VECTKEY_Pos)    |
 1621:Drivers/CMSIS/Include/core_cm3.h ****                            (SCB->AIRCR & SCB_AIRCR_PRIGROUP_Msk) |
- 297              		.loc 2 1621 0
- 298 0004 0549     		ldr	r1, .L21
- 299 0006 CA68     		ldr	r2, [r1, #12]
- 300 0008 02F4E062 		and	r2, r2, #1792
+ 296              		.loc 2 1621 0
+ 297 0004 0549     		ldr	r1, .L21
+ 298 0006 CA68     		ldr	r2, [r1, #12]
+ 299 0008 02F4E062 		and	r2, r2, #1792
 1620:Drivers/CMSIS/Include/core_cm3.h ****                            (SCB->AIRCR & SCB_AIRCR_PRIGROUP_Msk) |
- 301              		.loc 2 1620 0
- 302 000c 044B     		ldr	r3, .L21+4
- 303 000e 1343     		orrs	r3, r3, r2
- 304 0010 CB60     		str	r3, [r1, #12]
- 305              	.LBB68:
- 306              	.LBB69:
- 307              		.loc 3 429 0
- 308              		.syntax unified
- 309              	@ 429 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
- 310 0012 BFF34F8F 		dsb 0xF
- 311              	@ 0 "" 2
- 312              		.thumb
- 313              		.syntax unified
- 314              	.L20:
- 315              	.LBE69:
- 316              	.LBE68:
- 317              	.LBB70:
- 318              	.LBB71:
+ 300              		.loc 2 1620 0
+ 301 000c 044B     		ldr	r3, .L21+4
+ 302 000e 1343     		orrs	r3, r3, r2
+ 303 0010 CB60     		str	r3, [r1, #12]
+ 304              	.LBB68:
+ 305              	.LBB69:
+ 306              		.loc 3 429 0
+ 307              		.syntax unified
+ 308              	@ 429 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 309 0012 BFF34F8F 		dsb 0xF
+ 310              	@ 0 "" 2
+ 311              		.thumb
+ 312              		.syntax unified
+ 313              	.L20:
+ 314              	.LBE69:
+ 315              	.LBE68:
+ 316              	.LBB70:
+ 317              	.LBB71:
  375:Drivers/CMSIS/Include/cmsis_gcc.h **** }
- 319              		.loc 3 375 0
- 320              		.syntax unified
- 321              	@ 375 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
- 322 0016 00BF     		nop
- 323              	@ 0 "" 2
- 324              		.thumb
- 325              		.syntax unified
- 326 0018 FDE7     		b	.L20
- 327              	.L22:
- 328 001a 00BF     		.align	2
- 329              	.L21:
- 330 001c 00ED00E0 		.word	-536810240
- 331 0020 0400FA05 		.word	100270084
- 332              	.LBE71:
- 333              	.LBE70:
- 334              	.LBE65:
- 335              	.LBE64:
- 336              		.cfi_endproc
- 337              	.LFE70:
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 47
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 47
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ 318              		.loc 3 375 0
+ 319              		.syntax unified
+ 320              	@ 375 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 321 0016 00BF     		nop
+ 322              	@ 0 "" 2
+ 323              		.thumb
+ 324              		.syntax unified
+ 325 0018 FDE7     		b	.L20
+ 326              	.L22:
+ 327 001a 00BF     		.align	2
+ 328              	.L21:
+ 329 001c 00ED00E0 		.word	-536810240
+ 330 0020 0400FA05 		.word	100270084
+ 331              	.LBE71:
+ 332              	.LBE70:
+ 333              	.LBE65:
+ 334              	.LBE64:
+ 335              		.cfi_endproc
+ 336              	.LFE68:
+ 338              		.section	.text.HAL_SYSTICK_Config,"ax",%progbits
+ARM GAS  /tmp/ccopQHo5.s 			page 47
 
 
- 339              		.section	.text.HAL_SYSTICK_Config,"ax",%progbits
- 340              		.align	1
- 341              		.global	HAL_SYSTICK_Config
- 342              		.syntax unified
- 343              		.thumb
- 344              		.thumb_func
- 345              		.fpu softvfp
- 347              	HAL_SYSTICK_Config:
- 348              	.LFB71:
+ 339              		.align	1
+ 340              		.global	HAL_SYSTICK_Config
+ 341              		.syntax unified
+ 342              		.thumb
+ 343              		.thumb_func
+ 344              		.fpu softvfp
+ 346              	HAL_SYSTICK_Config:
+ 347              	.LFB69:
  234:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   /* System Reset */
  235:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   NVIC_SystemReset();
  236:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** }
@@ -2971,14 +2782,14 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  244:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   */
  245:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** uint32_t HAL_SYSTICK_Config(uint32_t TicksNumb)
  246:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** {
- 349              		.loc 1 246 0
- 350              		.cfi_startproc
- 351              		@ args = 0, pretend = 0, frame = 0
- 352              		@ frame_needed = 0, uses_anonymous_args = 0
- 353              		@ link register save eliminated.
- 354              	.LVL29:
- 355              	.LBB72:
- 356              	.LBB73:
+ 348              		.loc 1 246 0
+ 349              		.cfi_startproc
+ 350              		@ args = 0, pretend = 0, frame = 0
+ 351              		@ frame_needed = 0, uses_anonymous_args = 0
+ 352              		@ link register save eliminated.
+ 353              	.LVL29:
+ 354              	.LBB72:
+ 355              	.LBB73:
 1622:Drivers/CMSIS/Include/core_cm3.h ****                             SCB_AIRCR_SYSRESETREQ_Msk    );         /* Keep priority group unchange
 1623:Drivers/CMSIS/Include/core_cm3.h ****   __DSB();                                                          /* Ensure completion of memory 
 1624:Drivers/CMSIS/Include/core_cm3.h **** 
@@ -3006,14 +2817,10 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
 1646:Drivers/CMSIS/Include/core_cm3.h ****   \brief   System Tick Configuration
 1647:Drivers/CMSIS/Include/core_cm3.h ****   \details Initializes the System Timer and its interrupt, and starts the System Tick Timer.
 1648:Drivers/CMSIS/Include/core_cm3.h ****            Counter is in free running mode to generate periodic interrupts.
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 48
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 48
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
-
-
 1649:Drivers/CMSIS/Include/core_cm3.h ****   \param [in]  ticks  Number of ticks between two interrupts.
+ARM GAS  /tmp/ccopQHo5.s 			page 48
+
+
 1650:Drivers/CMSIS/Include/core_cm3.h ****   \return          0  Function succeeded.
 1651:Drivers/CMSIS/Include/core_cm3.h ****   \return          1  Function failed.
 1652:Drivers/CMSIS/Include/core_cm3.h ****   \note    When the variable <b>__Vendor_SysTickConfig</b> is set to 1, then the
@@ -3023,75 +2830,71 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
 1656:Drivers/CMSIS/Include/core_cm3.h **** __STATIC_INLINE uint32_t SysTick_Config(uint32_t ticks)
 1657:Drivers/CMSIS/Include/core_cm3.h **** {
 1658:Drivers/CMSIS/Include/core_cm3.h ****   if ((ticks - 1UL) > SysTick_LOAD_RELOAD_Msk)
- 357              		.loc 2 1658 0
- 358 0000 0138     		subs	r0, r0, #1
- 359              	.LVL30:
- 360 0002 B0F1807F 		cmp	r0, #16777216
- 361 0006 0AD2     		bcs	.L25
+ 356              		.loc 2 1658 0
+ 357 0000 0138     		subs	r0, r0, #1
+ 358              	.LVL30:
+ 359 0002 B0F1807F 		cmp	r0, #16777216
+ 360 0006 0AD2     		bcs	.L25
 1659:Drivers/CMSIS/Include/core_cm3.h ****   {
 1660:Drivers/CMSIS/Include/core_cm3.h ****     return (1UL);                                                   /* Reload value impossible */
 1661:Drivers/CMSIS/Include/core_cm3.h ****   }
 1662:Drivers/CMSIS/Include/core_cm3.h **** 
 1663:Drivers/CMSIS/Include/core_cm3.h ****   SysTick->LOAD  = (uint32_t)(ticks - 1UL);                         /* set reload register */
- 362              		.loc 2 1663 0
- 363 0008 064B     		ldr	r3, .L26
- 364 000a 5860     		str	r0, [r3, #4]
- 365              	.LVL31:
- 366              	.LBB74:
- 367              	.LBB75:
+ 361              		.loc 2 1663 0
+ 362 0008 064B     		ldr	r3, .L26
+ 363 000a 5860     		str	r0, [r3, #4]
+ 364              	.LVL31:
+ 365              	.LBB74:
+ 366              	.LBB75:
 1528:Drivers/CMSIS/Include/core_cm3.h ****   }
- 368              		.loc 2 1528 0
- 369 000c 064A     		ldr	r2, .L26+4
- 370 000e F021     		movs	r1, #240
- 371 0010 82F82310 		strb	r1, [r2, #35]
- 372              	.LVL32:
- 373              	.LBE75:
- 374              	.LBE74:
+ 367              		.loc 2 1528 0
+ 368 000c F021     		movs	r1, #240
+ 369 000e 064A     		ldr	r2, .L26+4
+ 370 0010 82F82310 		strb	r1, [r2, #35]
+ 371              	.LVL32:
+ 372              	.LBE75:
+ 373              	.LBE74:
 1664:Drivers/CMSIS/Include/core_cm3.h ****   NVIC_SetPriority (SysTick_IRQn, (1UL << __NVIC_PRIO_BITS) - 1UL); /* set Priority for Systick Int
 1665:Drivers/CMSIS/Include/core_cm3.h ****   SysTick->VAL   = 0UL;                                             /* Load the SysTick Counter Val
- 375              		.loc 2 1665 0
- 376 0014 0020     		movs	r0, #0
- 377              	.LVL33:
- 378 0016 9860     		str	r0, [r3, #8]
+ 374              		.loc 2 1665 0
+ 375 0014 0020     		movs	r0, #0
+ 376              	.LVL33:
+ 377 0016 9860     		str	r0, [r3, #8]
 1666:Drivers/CMSIS/Include/core_cm3.h ****   SysTick->CTRL  = SysTick_CTRL_CLKSOURCE_Msk |
- 379              		.loc 2 1666 0
- 380 0018 0722     		movs	r2, #7
- 381 001a 1A60     		str	r2, [r3]
- 382 001c 7047     		bx	lr
- 383              	.L25:
+ 378              		.loc 2 1666 0
+ 379 0018 0722     		movs	r2, #7
+ 380 001a 1A60     		str	r2, [r3]
+ 381 001c 7047     		bx	lr
+ 382              	.L25:
 1660:Drivers/CMSIS/Include/core_cm3.h ****   }
- 384              		.loc 2 1660 0
- 385 001e 0120     		movs	r0, #1
- 386              	.LVL34:
- 387              	.LBE73:
- 388              	.LBE72:
+ 383              		.loc 2 1660 0
+ 384 001e 0120     		movs	r0, #1
+ 385              	.LVL34:
+ 386              	.LBE73:
+ 387              	.LBE72:
  247:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****    return SysTick_Config(TicksNumb);
  248:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** }
- 389              		.loc 1 248 0
- 390 0020 7047     		bx	lr
- 391              	.L27:
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 49
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 49
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ 388              		.loc 1 248 0
+ 389 0020 7047     		bx	lr
+ 390              	.L27:
+ 391 0022 00BF     		.align	2
+ARM GAS  /tmp/ccopQHo5.s 			page 49
 
 
- 392 0022 00BF     		.align	2
- 393              	.L26:
- 394 0024 10E000E0 		.word	-536813552
- 395 0028 00ED00E0 		.word	-536810240
- 396              		.cfi_endproc
- 397              	.LFE71:
- 399              		.section	.text.HAL_NVIC_GetPriorityGrouping,"ax",%progbits
- 400              		.align	1
- 401              		.global	HAL_NVIC_GetPriorityGrouping
- 402              		.syntax unified
- 403              		.thumb
- 404              		.thumb_func
- 405              		.fpu softvfp
- 407              	HAL_NVIC_GetPriorityGrouping:
- 408              	.LFB72:
+ 392              	.L26:
+ 393 0024 10E000E0 		.word	-536813552
+ 394 0028 00ED00E0 		.word	-536810240
+ 395              		.cfi_endproc
+ 396              	.LFE69:
+ 398              		.section	.text.HAL_NVIC_GetPriorityGrouping,"ax",%progbits
+ 399              		.align	1
+ 400              		.global	HAL_NVIC_GetPriorityGrouping
+ 401              		.syntax unified
+ 402              		.thumb
+ 403              		.thumb_func
+ 404              		.fpu softvfp
+ 406              	HAL_NVIC_GetPriorityGrouping:
+ 407              	.LFB70:
  249:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** /**
  250:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   * @}
  251:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   */
@@ -3134,14 +2937,10 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  288:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   * @param  MPU_Control: Specifies the control mode of the MPU during hard fault, 
  289:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   *          NMI, FAULTMASK and privileged access to the default memory 
  290:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   *          This parameter can be one of the following values:
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 50
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 50
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
-
-
  291:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   *            @arg MPU_HFNMI_PRIVDEF_NONE
+ARM GAS  /tmp/ccopQHo5.s 			page 50
+
+
  292:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   *            @arg MPU_HARDFAULT_NMI
  293:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   *            @arg MPU_PRIVILEGED_DEFAULT
  294:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   *            @arg MPU_HFNMI_PRIVDEF
@@ -3198,14 +2997,10 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  345:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****                 ((uint32_t)MPU_Init->Size                    << MPU_RASR_SIZE_Pos) |
  346:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****                 ((uint32_t)MPU_Init->Enable                  << MPU_RASR_ENABLE_Pos);
  347:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   }
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 51
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 51
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
-
-
  348:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   else
+ARM GAS  /tmp/ccopQHo5.s 			page 51
+
+
  349:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   {
  350:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****     MPU->RBAR = 0x00U;
  351:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****     MPU->RASR = 0x00U;
@@ -3219,40 +3014,40 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  359:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   */
  360:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** uint32_t HAL_NVIC_GetPriorityGrouping(void)
  361:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** {
- 409              		.loc 1 361 0
- 410              		.cfi_startproc
- 411              		@ args = 0, pretend = 0, frame = 0
- 412              		@ frame_needed = 0, uses_anonymous_args = 0
- 413              		@ link register save eliminated.
- 414              	.LBB76:
- 415              	.LBB77:
+ 408              		.loc 1 361 0
+ 409              		.cfi_startproc
+ 410              		@ args = 0, pretend = 0, frame = 0
+ 411              		@ frame_needed = 0, uses_anonymous_args = 0
+ 412              		@ link register save eliminated.
+ 413              	.LBB76:
+ 414              	.LBB77:
 1443:Drivers/CMSIS/Include/core_cm3.h **** }
- 416              		.loc 2 1443 0
- 417 0000 024B     		ldr	r3, .L29
- 418 0002 D868     		ldr	r0, [r3, #12]
- 419              	.LBE77:
- 420              	.LBE76:
+ 415              		.loc 2 1443 0
+ 416 0000 024B     		ldr	r3, .L29
+ 417 0002 D868     		ldr	r0, [r3, #12]
+ 418              	.LBE77:
+ 419              	.LBE76:
  362:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   /* Get the PRIGROUP[10:8] field value */
  363:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   return NVIC_GetPriorityGrouping();
  364:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** }
- 421              		.loc 1 364 0
- 422 0004 C0F30220 		ubfx	r0, r0, #8, #3
- 423 0008 7047     		bx	lr
- 424              	.L30:
- 425 000a 00BF     		.align	2
- 426              	.L29:
- 427 000c 00ED00E0 		.word	-536810240
- 428              		.cfi_endproc
- 429              	.LFE72:
- 431              		.section	.text.HAL_NVIC_GetPriority,"ax",%progbits
- 432              		.align	1
- 433              		.global	HAL_NVIC_GetPriority
- 434              		.syntax unified
- 435              		.thumb
- 436              		.thumb_func
- 437              		.fpu softvfp
- 439              	HAL_NVIC_GetPriority:
- 440              	.LFB73:
+ 420              		.loc 1 364 0
+ 421 0004 C0F30220 		ubfx	r0, r0, #8, #3
+ 422 0008 7047     		bx	lr
+ 423              	.L30:
+ 424 000a 00BF     		.align	2
+ 425              	.L29:
+ 426 000c 00ED00E0 		.word	-536810240
+ 427              		.cfi_endproc
+ 428              	.LFE70:
+ 430              		.section	.text.HAL_NVIC_GetPriority,"ax",%progbits
+ 431              		.align	1
+ 432              		.global	HAL_NVIC_GetPriority
+ 433              		.syntax unified
+ 434              		.thumb
+ 435              		.thumb_func
+ 436              		.fpu softvfp
+ 438              	HAL_NVIC_GetPriority:
+ 439              	.LFB71:
  365:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** 
  366:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** /**
  367:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   * @brief  Gets the priority of an interrupt.
@@ -3262,14 +3057,10 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  371:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   * @param   PriorityGroup: the priority grouping bits length.
  372:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   *         This parameter can be one of the following values:
  373:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   *           @arg NVIC_PRIORITYGROUP_0: 0 bits for preemption priority
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 52
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 52
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
-
-
  374:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   *                                      4 bits for subpriority
+ARM GAS  /tmp/ccopQHo5.s 			page 52
+
+
  375:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   *           @arg NVIC_PRIORITYGROUP_1: 1 bits for preemption priority
  376:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   *                                      3 bits for subpriority
  377:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   *           @arg NVIC_PRIORITYGROUP_2: 2 bits for preemption priority
@@ -3284,80 +3075,77 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  386:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   */
  387:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** void HAL_NVIC_GetPriority(IRQn_Type IRQn, uint32_t PriorityGroup, uint32_t *pPreemptPriority, uint3
  388:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** {
- 441              		.loc 1 388 0
- 442              		.cfi_startproc
- 443              		@ args = 0, pretend = 0, frame = 0
- 444              		@ frame_needed = 0, uses_anonymous_args = 0
- 445              		@ link register save eliminated.
- 446              	.LVL35:
- 447 0000 70B4     		push	{r4, r5, r6}
- 448              	.LCFI3:
- 449              		.cfi_def_cfa_offset 12
- 450              		.cfi_offset 4, -12
- 451              		.cfi_offset 5, -8
- 452              		.cfi_offset 6, -4
- 453              	.LVL36:
- 454              	.LBB78:
- 455              	.LBB79:
+ 440              		.loc 1 388 0
+ 441              		.cfi_startproc
+ 442              		@ args = 0, pretend = 0, frame = 0
+ 443              		@ frame_needed = 0, uses_anonymous_args = 0
+ 444              		@ link register save eliminated.
+ 445              	.LVL35:
+ 446 0000 70B4     		push	{r4, r5, r6}
+ 447              	.LCFI3:
+ 448              		.cfi_def_cfa_offset 12
+ 449              		.cfi_offset 4, -12
+ 450              		.cfi_offset 5, -8
+ 451              		.cfi_offset 6, -4
+ 452              	.LVL36:
+ 453              	.LBB78:
+ 454              	.LBB79:
 1549:Drivers/CMSIS/Include/core_cm3.h ****   {
- 456              		.loc 2 1549 0
- 457 0002 0028     		cmp	r0, #0
- 458              	.LVL37:
- 459 0004 21DB     		blt	.L37
+ 455              		.loc 2 1549 0
+ 456 0002 0028     		cmp	r0, #0
+ 457              	.LVL37:
+ 458 0004 1FDB     		blt	.L37
 1555:Drivers/CMSIS/Include/core_cm3.h ****   }
- 460              		.loc 2 1555 0
- 461 0006 00F16040 		add	r0, r0, #-536870912
- 462 000a 00F56140 		add	r0, r0, #57600
- 463 000e 90F80003 		ldrb	r0, [r0, #768]	@ zero_extendqisi2
- 464 0012 0009     		lsrs	r0, r0, #4
- 465              	.L33:
- 466              	.LVL38:
- 467              	.LBE79:
- 468              	.LBE78:
- 469              	.LBB81:
- 470              	.LBB82:
+ 459              		.loc 2 1555 0
+ 460 0006 00F16040 		add	r0, r0, #-536870912
+ 461 000a 00F56140 		add	r0, r0, #57600
+ 462 000e 90F80003 		ldrb	r0, [r0, #768]	@ zero_extendqisi2
+ 463 0012 0509     		lsrs	r5, r0, #4
+ 464              	.L33:
+ 465              	.LVL38:
+ 466              	.LBE79:
+ 467              	.LBE78:
+ 468              	.LBB81:
+ 469              	.LBB82:
 1600:Drivers/CMSIS/Include/core_cm3.h ****   uint32_t PreemptPriorityBits;
- 471              		.loc 2 1600 0
- 472 0014 01F00701 		and	r1, r1, #7
- 473              	.LVL39:
+ 470              		.loc 2 1600 0
+ 471 0014 01F00701 		and	r1, r1, #7
+ 472              	.LVL39:
 1604:Drivers/CMSIS/Include/core_cm3.h ****   SubPriorityBits     = ((PriorityGroupTmp + (uint32_t)(__NVIC_PRIO_BITS)) < (uint32_t)7UL) ? (uint
- 474              		.loc 2 1604 0
- 475 0018 C1F10704 		rsb	r4, r1, #7
- 476 001c 042C     		cmp	r4, #4
- 477 001e 28BF     		it	cs
- 478 0020 0424     		movcs	r4, #4
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 53
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 53
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ 473              		.loc 2 1604 0
+ 474 0018 C1F10704 		rsb	r4, r1, #7
+ 475 001c 042C     		cmp	r4, #4
+ 476 001e 28BF     		it	cs
+ 477 0020 0424     		movcs	r4, #4
+ 478              	.LVL40:
+ARM GAS  /tmp/ccopQHo5.s 			page 53
 
 
- 479              	.LVL40:
 1605:Drivers/CMSIS/Include/core_cm3.h **** 
- 480              		.loc 2 1605 0
- 481 0022 0D1D     		adds	r5, r1, #4
- 482 0024 062D     		cmp	r5, #6
- 483 0026 16D9     		bls	.L35
- 484 0028 0339     		subs	r1, r1, #3
- 485              	.LVL41:
- 486              	.L34:
+ 479              		.loc 2 1605 0
+ 480 0022 081D     		adds	r0, r1, #4
+ 481 0024 0628     		cmp	r0, #6
+ 482 0026 14D9     		bls	.L35
+ 483 0028 0339     		subs	r1, r1, #3
+ 484              	.LVL41:
+ 485              	.L34:
 1607:Drivers/CMSIS/Include/core_cm3.h ****   *pSubPriority     = (Priority                   ) & (uint32_t)((1UL << (SubPriorityBits    )) - 1
- 487              		.loc 2 1607 0
- 488 002a 20FA01F6 		lsr	r6, r0, r1
- 489 002e 4FF0FF35 		mov	r5, #-1
- 490              	.LVL42:
- 491 0032 05FA04F4 		lsl	r4, r5, r4
- 492              	.LVL43:
- 493 0036 26EA0404 		bic	r4, r6, r4
- 494 003a 1460     		str	r4, [r2]
+ 486              		.loc 2 1607 0
+ 487 002a 25FA01F6 		lsr	r6, r5, r1
+ 488 002e 0120     		movs	r0, #1
+ 489              	.LVL42:
+ 490 0030 00FA04F4 		lsl	r4, r0, r4
+ 491              	.LVL43:
+ 492 0034 013C     		subs	r4, r4, #1
+ 493 0036 3440     		ands	r4, r4, r6
+ 494 0038 1460     		str	r4, [r2]
 1608:Drivers/CMSIS/Include/core_cm3.h **** }
  495              		.loc 2 1608 0
- 496 003c 05FA01F1 		lsl	r1, r5, r1
- 497              	.LVL44:
- 498 0040 20EA0100 		bic	r0, r0, r1
- 499 0044 1860     		str	r0, [r3]
- 500              	.LVL45:
+ 496 003a 8840     		lsls	r0, r0, r1
+ 497 003c 0138     		subs	r0, r0, #1
+ 498 003e 2840     		ands	r0, r0, r5
+ 499 0040 1860     		str	r0, [r3]
+ 500              	.LVL44:
  501              	.LBE82:
  502              	.LBE81:
  389:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   /* Check the parameters */
@@ -3366,15 +3154,15 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  392:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   NVIC_DecodePriority(NVIC_GetPriority(IRQn), PriorityGroup, pPreemptPriority, pSubPriority);
  393:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** }
  503              		.loc 1 393 0
- 504 0046 70BC     		pop	{r4, r5, r6}
+ 504 0042 70BC     		pop	{r4, r5, r6}
  505              	.LCFI4:
  506              		.cfi_remember_state
  507              		.cfi_restore 6
  508              		.cfi_restore 5
  509              		.cfi_restore 4
  510              		.cfi_def_cfa_offset 0
- 511 0048 7047     		bx	lr
- 512              	.LVL46:
+ 511 0044 7047     		bx	lr
+ 512              	.LVL45:
  513              	.L37:
  514              	.LCFI5:
  515              		.cfi_restore_state
@@ -3382,19 +3170,15 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  517              	.LBB80:
 1551:Drivers/CMSIS/Include/core_cm3.h ****   }
  518              		.loc 2 1551 0
- 519 004a 00F00F00 		and	r0, r0, #15
- 520 004e 034C     		ldr	r4, .L38
- 521 0050 205C     		ldrb	r0, [r4, r0]	@ zero_extendqisi2
- 522 0052 0009     		lsrs	r0, r0, #4
- 523 0054 DEE7     		b	.L33
- 524              	.LVL47:
+ 519 0046 00F00F00 		and	r0, r0, #15
+ 520 004a 034C     		ldr	r4, .L38
+ 521 004c 205C     		ldrb	r0, [r4, r0]	@ zero_extendqisi2
+ 522 004e 0509     		lsrs	r5, r0, #4
+ 523 0050 E0E7     		b	.L33
+ 524              	.LVL46:
  525              	.L35:
  526              	.LBE80:
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 54
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 54
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ARM GAS  /tmp/ccopQHo5.s 			page 54
 
 
  527              	.LBE84:
@@ -3402,17 +3186,17 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  529              	.LBB83:
 1605:Drivers/CMSIS/Include/core_cm3.h **** 
  530              		.loc 2 1605 0
- 531 0056 0021     		movs	r1, #0
- 532              	.LVL48:
- 533 0058 E7E7     		b	.L34
+ 531 0052 0021     		movs	r1, #0
+ 532              	.LVL47:
+ 533 0054 E9E7     		b	.L34
  534              	.L39:
- 535 005a 00BF     		.align	2
+ 535 0056 00BF     		.align	2
  536              	.L38:
- 537 005c 14ED00E0 		.word	-536810220
+ 537 0058 14ED00E0 		.word	-536810220
  538              	.LBE83:
  539              	.LBE85:
  540              		.cfi_endproc
- 541              	.LFE73:
+ 541              	.LFE71:
  543              		.section	.text.HAL_NVIC_SetPendingIRQ,"ax",%progbits
  544              		.align	1
  545              		.global	HAL_NVIC_SetPendingIRQ
@@ -3421,7 +3205,7 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  548              		.thumb_func
  549              		.fpu softvfp
  551              	HAL_NVIC_SetPendingIRQ:
- 552              	.LFB74:
+ 552              	.LFB72:
  394:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** 
  395:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** /**
  396:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   * @brief  Sets Pending bit of an external interrupt.
@@ -3437,52 +3221,47 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  555              		@ args = 0, pretend = 0, frame = 0
  556              		@ frame_needed = 0, uses_anonymous_args = 0
  557              		@ link register save eliminated.
- 558              	.LVL49:
+ 558              	.LVL48:
  559              	.LBB86:
  560              	.LBB87:
 1489:Drivers/CMSIS/Include/core_cm3.h **** }
  561              		.loc 2 1489 0
- 562 0000 00F01F02 		and	r2, r0, #31
- 563 0004 4009     		lsrs	r0, r0, #5
- 564              	.LVL50:
- 565 0006 0123     		movs	r3, #1
- 566 0008 9340     		lsls	r3, r3, r2
- 567 000a 4030     		adds	r0, r0, #64
- 568 000c 014A     		ldr	r2, .L41
- 569 000e 42F82030 		str	r3, [r2, r0, lsl #2]
- 570              	.LVL51:
- 571              	.LBE87:
- 572              	.LBE86:
+ 562 0000 4309     		lsrs	r3, r0, #5
+ 563 0002 00F01F00 		and	r0, r0, #31
+ 564              	.LVL49:
+ 565 0006 0122     		movs	r2, #1
+ 566 0008 02FA00F0 		lsl	r0, r2, r0
+ 567 000c 4033     		adds	r3, r3, #64
+ 568 000e 024A     		ldr	r2, .L41
+ 569 0010 42F82300 		str	r0, [r2, r3, lsl #2]
+ 570              	.LVL50:
+ 571 0014 7047     		bx	lr
+ 572              	.L42:
+ 573 0016 00BF     		.align	2
+ARM GAS  /tmp/ccopQHo5.s 			page 55
+
+
+ 574              	.L41:
+ 575 0018 00E100E0 		.word	-536813312
+ 576              	.LBE87:
+ 577              	.LBE86:
+ 578              		.cfi_endproc
+ 579              	.LFE72:
+ 581              		.section	.text.HAL_NVIC_GetPendingIRQ,"ax",%progbits
+ 582              		.align	1
+ 583              		.global	HAL_NVIC_GetPendingIRQ
+ 584              		.syntax unified
+ 585              		.thumb
+ 586              		.thumb_func
+ 587              		.fpu softvfp
+ 589              	HAL_NVIC_GetPendingIRQ:
+ 590              	.LFB73:
  404:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   /* Check the parameters */
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 55
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 55
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
-
-
  405:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   assert_param(IS_NVIC_DEVICE_IRQ(IRQn));
  406:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   
  407:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   /* Set interrupt pending */
  408:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   NVIC_SetPendingIRQ(IRQn);
  409:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** }
- 573              		.loc 1 409 0
- 574 0012 7047     		bx	lr
- 575              	.L42:
- 576              		.align	2
- 577              	.L41:
- 578 0014 00E100E0 		.word	-536813312
- 579              		.cfi_endproc
- 580              	.LFE74:
- 582              		.section	.text.HAL_NVIC_GetPendingIRQ,"ax",%progbits
- 583              		.align	1
- 584              		.global	HAL_NVIC_GetPendingIRQ
- 585              		.syntax unified
- 586              		.thumb
- 587              		.thumb_func
- 588              		.fpu softvfp
- 590              	HAL_NVIC_GetPendingIRQ:
- 591              	.LFB75:
  410:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** 
  411:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** /**
  412:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   * @brief  Gets Pending Interrupt (reads the pending register in the NVIC 
@@ -3495,57 +3274,53 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  419:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   */
  420:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** uint32_t HAL_NVIC_GetPendingIRQ(IRQn_Type IRQn)
  421:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** {
- 592              		.loc 1 421 0
- 593              		.cfi_startproc
- 594              		@ args = 0, pretend = 0, frame = 0
- 595              		@ frame_needed = 0, uses_anonymous_args = 0
- 596              		@ link register save eliminated.
- 597              	.LVL52:
- 598              	.LBB88:
- 599              	.LBB89:
+ 591              		.loc 1 421 0
+ 592              		.cfi_startproc
+ 593              		@ args = 0, pretend = 0, frame = 0
+ 594              		@ frame_needed = 0, uses_anonymous_args = 0
+ 595              		@ link register save eliminated.
+ 596              	.LVL51:
+ 597              	.LBB88:
+ 598              	.LBB89:
 1478:Drivers/CMSIS/Include/core_cm3.h **** }
- 600              		.loc 2 1478 0
- 601 0000 4309     		lsrs	r3, r0, #5
- 602 0002 4033     		adds	r3, r3, #64
- 603 0004 044A     		ldr	r2, .L44
- 604 0006 52F82330 		ldr	r3, [r2, r3, lsl #2]
- 605 000a 00F01F00 		and	r0, r0, #31
- 606              	.LVL53:
- 607 000e 23FA00F0 		lsr	r0, r3, r0
- 608              	.LVL54:
- 609              	.LBE89:
- 610              	.LBE88:
+ 599              		.loc 2 1478 0
+ 600 0000 4309     		lsrs	r3, r0, #5
+ 601 0002 4033     		adds	r3, r3, #64
+ 602 0004 044A     		ldr	r2, .L44
+ 603 0006 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 604 000a 00F01F00 		and	r0, r0, #31
+ 605              	.LVL52:
+ 606 000e 23FA00F0 		lsr	r0, r3, r0
+ 607              	.LVL53:
+ 608              	.LBE89:
+ 609              	.LBE88:
  422:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   /* Check the parameters */
  423:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   assert_param(IS_NVIC_DEVICE_IRQ(IRQn));
  424:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** 
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 56
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 56
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
-
-
  425:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   /* Return 1 if pending else 0 */
+ARM GAS  /tmp/ccopQHo5.s 			page 56
+
+
  426:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   return NVIC_GetPendingIRQ(IRQn);
  427:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** }
- 611              		.loc 1 427 0
- 612 0012 00F00100 		and	r0, r0, #1
- 613 0016 7047     		bx	lr
- 614              	.L45:
- 615              		.align	2
- 616              	.L44:
- 617 0018 00E100E0 		.word	-536813312
- 618              		.cfi_endproc
- 619              	.LFE75:
- 621              		.section	.text.HAL_NVIC_ClearPendingIRQ,"ax",%progbits
- 622              		.align	1
- 623              		.global	HAL_NVIC_ClearPendingIRQ
- 624              		.syntax unified
- 625              		.thumb
- 626              		.thumb_func
- 627              		.fpu softvfp
- 629              	HAL_NVIC_ClearPendingIRQ:
- 630              	.LFB76:
+ 610              		.loc 1 427 0
+ 611 0012 00F00100 		and	r0, r0, #1
+ 612 0016 7047     		bx	lr
+ 613              	.L45:
+ 614              		.align	2
+ 615              	.L44:
+ 616 0018 00E100E0 		.word	-536813312
+ 617              		.cfi_endproc
+ 618              	.LFE73:
+ 620              		.section	.text.HAL_NVIC_ClearPendingIRQ,"ax",%progbits
+ 621              		.align	1
+ 622              		.global	HAL_NVIC_ClearPendingIRQ
+ 623              		.syntax unified
+ 624              		.thumb
+ 625              		.thumb_func
+ 626              		.fpu softvfp
+ 628              	HAL_NVIC_ClearPendingIRQ:
+ 629              	.LFB74:
  428:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** 
  429:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** /**
  430:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   * @brief  Clears the pending bit of an external interrupt.
@@ -3556,57 +3331,52 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  435:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   */
  436:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** void HAL_NVIC_ClearPendingIRQ(IRQn_Type IRQn)
  437:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** {
- 631              		.loc 1 437 0
- 632              		.cfi_startproc
- 633              		@ args = 0, pretend = 0, frame = 0
- 634              		@ frame_needed = 0, uses_anonymous_args = 0
- 635              		@ link register save eliminated.
- 636              	.LVL55:
- 637              	.LBB90:
- 638              	.LBB91:
+ 630              		.loc 1 437 0
+ 631              		.cfi_startproc
+ 632              		@ args = 0, pretend = 0, frame = 0
+ 633              		@ frame_needed = 0, uses_anonymous_args = 0
+ 634              		@ link register save eliminated.
+ 635              	.LVL54:
+ 636              	.LBB90:
+ 637              	.LBB91:
 1500:Drivers/CMSIS/Include/core_cm3.h **** }
- 639              		.loc 2 1500 0
- 640 0000 00F01F02 		and	r2, r0, #31
- 641 0004 4009     		lsrs	r0, r0, #5
- 642              	.LVL56:
- 643 0006 0123     		movs	r3, #1
- 644 0008 9340     		lsls	r3, r3, r2
- 645 000a 6030     		adds	r0, r0, #96
- 646 000c 014A     		ldr	r2, .L47
- 647 000e 42F82030 		str	r3, [r2, r0, lsl #2]
- 648              	.LVL57:
- 649              	.LBE91:
- 650              	.LBE90:
+ 638              		.loc 2 1500 0
+ 639 0000 4309     		lsrs	r3, r0, #5
+ 640 0002 00F01F00 		and	r0, r0, #31
+ 641              	.LVL55:
+ 642 0006 0122     		movs	r2, #1
+ 643 0008 02FA00F0 		lsl	r0, r2, r0
+ 644 000c 6033     		adds	r3, r3, #96
+ 645 000e 024A     		ldr	r2, .L47
+ 646 0010 42F82300 		str	r0, [r2, r3, lsl #2]
+ 647              	.LVL56:
+ 648 0014 7047     		bx	lr
+ 649              	.L48:
+ 650 0016 00BF     		.align	2
+ 651              	.L47:
+ 652 0018 00E100E0 		.word	-536813312
+ 653              	.LBE91:
+ 654              	.LBE90:
+ 655              		.cfi_endproc
+ARM GAS  /tmp/ccopQHo5.s 			page 57
+
+
+ 656              	.LFE74:
+ 658              		.section	.text.HAL_NVIC_GetActive,"ax",%progbits
+ 659              		.align	1
+ 660              		.global	HAL_NVIC_GetActive
+ 661              		.syntax unified
+ 662              		.thumb
+ 663              		.thumb_func
+ 664              		.fpu softvfp
+ 666              	HAL_NVIC_GetActive:
+ 667              	.LFB75:
  438:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   /* Check the parameters */
  439:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   assert_param(IS_NVIC_DEVICE_IRQ(IRQn));
  440:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** 
  441:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   /* Clear pending interrupt */
  442:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   NVIC_ClearPendingIRQ(IRQn);
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 57
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 57
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
-
-
  443:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** }
- 651              		.loc 1 443 0
- 652 0012 7047     		bx	lr
- 653              	.L48:
- 654              		.align	2
- 655              	.L47:
- 656 0014 00E100E0 		.word	-536813312
- 657              		.cfi_endproc
- 658              	.LFE76:
- 660              		.section	.text.HAL_NVIC_GetActive,"ax",%progbits
- 661              		.align	1
- 662              		.global	HAL_NVIC_GetActive
- 663              		.syntax unified
- 664              		.thumb
- 665              		.thumb_func
- 666              		.fpu softvfp
- 668              	HAL_NVIC_GetActive:
- 669              	.LFB77:
  444:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** 
  445:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** /**
  446:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   * @brief Gets active interrupt ( reads the active register in NVIC and returns the active bit).
@@ -3618,57 +3388,53 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  452:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   */
  453:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** uint32_t HAL_NVIC_GetActive(IRQn_Type IRQn)
  454:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** {
- 670              		.loc 1 454 0
- 671              		.cfi_startproc
- 672              		@ args = 0, pretend = 0, frame = 0
- 673              		@ frame_needed = 0, uses_anonymous_args = 0
- 674              		@ link register save eliminated.
- 675              	.LVL58:
- 676              	.LBB92:
- 677              	.LBB93:
+ 668              		.loc 1 454 0
+ 669              		.cfi_startproc
+ 670              		@ args = 0, pretend = 0, frame = 0
+ 671              		@ frame_needed = 0, uses_anonymous_args = 0
+ 672              		@ link register save eliminated.
+ 673              	.LVL57:
+ 674              	.LBB92:
+ 675              	.LBB93:
 1513:Drivers/CMSIS/Include/core_cm3.h **** }
- 678              		.loc 2 1513 0
- 679 0000 4309     		lsrs	r3, r0, #5
- 680 0002 8033     		adds	r3, r3, #128
- 681 0004 044A     		ldr	r2, .L50
- 682 0006 52F82330 		ldr	r3, [r2, r3, lsl #2]
- 683 000a 00F01F00 		and	r0, r0, #31
+ 676              		.loc 2 1513 0
+ 677 0000 4309     		lsrs	r3, r0, #5
+ 678 0002 8033     		adds	r3, r3, #128
+ 679 0004 044A     		ldr	r2, .L50
+ 680 0006 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 681 000a 00F01F00 		and	r0, r0, #31
+ 682              	.LVL58:
+ 683 000e 23FA00F0 		lsr	r0, r3, r0
  684              	.LVL59:
- 685 000e 23FA00F0 		lsr	r0, r3, r0
- 686              	.LVL60:
- 687              	.LBE93:
- 688              	.LBE92:
+ 685              	.LBE93:
+ 686              	.LBE92:
  455:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   /* Check the parameters */
  456:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   assert_param(IS_NVIC_DEVICE_IRQ(IRQn));
  457:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** 
  458:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   /* Return 1 if active else 0 */
  459:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   return NVIC_GetActive(IRQn);
  460:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** }
- 689              		.loc 1 460 0
- 690 0012 00F00100 		and	r0, r0, #1
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 58
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 58
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ 687              		.loc 1 460 0
+ 688 0012 00F00100 		and	r0, r0, #1
+ 689 0016 7047     		bx	lr
+ 690              	.L51:
+ARM GAS  /tmp/ccopQHo5.s 			page 58
 
 
- 691 0016 7047     		bx	lr
- 692              	.L51:
- 693              		.align	2
- 694              	.L50:
- 695 0018 00E100E0 		.word	-536813312
- 696              		.cfi_endproc
- 697              	.LFE77:
- 699              		.section	.text.HAL_SYSTICK_CLKSourceConfig,"ax",%progbits
- 700              		.align	1
- 701              		.global	HAL_SYSTICK_CLKSourceConfig
- 702              		.syntax unified
- 703              		.thumb
- 704              		.thumb_func
- 705              		.fpu softvfp
- 707              	HAL_SYSTICK_CLKSourceConfig:
- 708              	.LFB78:
+ 691              		.align	2
+ 692              	.L50:
+ 693 0018 00E100E0 		.word	-536813312
+ 694              		.cfi_endproc
+ 695              	.LFE75:
+ 697              		.section	.text.HAL_SYSTICK_CLKSourceConfig,"ax",%progbits
+ 698              		.align	1
+ 699              		.global	HAL_SYSTICK_CLKSourceConfig
+ 700              		.syntax unified
+ 701              		.thumb
+ 702              		.thumb_func
+ 703              		.fpu softvfp
+ 705              	HAL_SYSTICK_CLKSourceConfig:
+ 706              	.LFB76:
  461:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** 
  462:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** /**
  463:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   * @brief  Configures the SysTick clock source.
@@ -3680,63 +3446,58 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  469:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   */
  470:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** void HAL_SYSTICK_CLKSourceConfig(uint32_t CLKSource)
  471:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** {
- 709              		.loc 1 471 0
- 710              		.cfi_startproc
- 711              		@ args = 0, pretend = 0, frame = 0
- 712              		@ frame_needed = 0, uses_anonymous_args = 0
- 713              		@ link register save eliminated.
- 714              	.LVL61:
+ 707              		.loc 1 471 0
+ 708              		.cfi_startproc
+ 709              		@ args = 0, pretend = 0, frame = 0
+ 710              		@ frame_needed = 0, uses_anonymous_args = 0
+ 711              		@ link register save eliminated.
+ 712              	.LVL60:
  472:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   /* Check the parameters */
  473:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   assert_param(IS_SYSTICK_CLK_SOURCE(CLKSource));
  474:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   if (CLKSource == SYSTICK_CLKSOURCE_HCLK)
- 715              		.loc 1 474 0
- 716 0000 0428     		cmp	r0, #4
- 717 0002 05D0     		beq	.L55
+ 713              		.loc 1 474 0
+ 714 0000 0428     		cmp	r0, #4
+ 715 0002 05D0     		beq	.L55
  475:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   {
  476:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****     SysTick->CTRL |= SYSTICK_CLKSOURCE_HCLK;
  477:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   }
  478:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   else
  479:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   {
  480:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****     SysTick->CTRL &= ~SYSTICK_CLKSOURCE_HCLK;
- 718              		.loc 1 480 0
- 719 0004 054A     		ldr	r2, .L56
- 720 0006 1368     		ldr	r3, [r2]
- 721 0008 23F00403 		bic	r3, r3, #4
- 722 000c 1360     		str	r3, [r2]
+ 716              		.loc 1 480 0
+ 717 0004 054A     		ldr	r2, .L56
+ 718 0006 1368     		ldr	r3, [r2]
+ 719 0008 23F00403 		bic	r3, r3, #4
+ 720 000c 1360     		str	r3, [r2]
+ 721 000e 7047     		bx	lr
+ 722              	.L55:
+ 476:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   }
+ 723              		.loc 1 476 0
+ 724 0010 024A     		ldr	r2, .L56
+ 725 0012 1368     		ldr	r3, [r2]
+ 726 0014 43F00403 		orr	r3, r3, #4
+ 727 0018 1360     		str	r3, [r2]
+ 728 001a 7047     		bx	lr
+ARM GAS  /tmp/ccopQHo5.s 			page 59
+
+
+ 729              	.L57:
+ 730              		.align	2
+ 731              	.L56:
+ 732 001c 10E000E0 		.word	-536813552
+ 733              		.cfi_endproc
+ 734              	.LFE76:
+ 736              		.section	.text.HAL_SYSTICK_Callback,"ax",%progbits
+ 737              		.align	1
+ 738              		.weak	HAL_SYSTICK_Callback
+ 739              		.syntax unified
+ 740              		.thumb
+ 741              		.thumb_func
+ 742              		.fpu softvfp
+ 744              	HAL_SYSTICK_Callback:
+ 745              	.LFB78:
  481:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   }
  482:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** }
- 723              		.loc 1 482 0
- 724 000e 7047     		bx	lr
- 725              	.L55:
- 476:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   }
- 726              		.loc 1 476 0
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 59
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 59
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
-
-
- 727 0010 024A     		ldr	r2, .L56
- 728 0012 1368     		ldr	r3, [r2]
- 729 0014 43F00403 		orr	r3, r3, #4
- 730 0018 1360     		str	r3, [r2]
- 731 001a 7047     		bx	lr
- 732              	.L57:
- 733              		.align	2
- 734              	.L56:
- 735 001c 10E000E0 		.word	-536813552
- 736              		.cfi_endproc
- 737              	.LFE78:
- 739              		.section	.text.HAL_SYSTICK_Callback,"ax",%progbits
- 740              		.align	1
- 741              		.weak	HAL_SYSTICK_Callback
- 742              		.syntax unified
- 743              		.thumb
- 744              		.thumb_func
- 745              		.fpu softvfp
- 747              	HAL_SYSTICK_Callback:
- 748              	.LFB80:
  483:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** 
  484:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** /**
  485:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   * @brief  This function handles SYSTICK interrupt request.
@@ -3753,162 +3514,104 @@ ARM GAS  /tmp/ccIMBJwR.s 			page 1
  496:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   */
  497:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** __weak void HAL_SYSTICK_Callback(void)
  498:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** {
- 749              		.loc 1 498 0
- 750              		.cfi_startproc
- 751              		@ args = 0, pretend = 0, frame = 0
- 752              		@ frame_needed = 0, uses_anonymous_args = 0
- 753              		@ link register save eliminated.
- 499:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   /* NOTE : This function Should not be modified, when the callback is needed,
- 500:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****             the HAL_SYSTICK_Callback could be implemented in the user file
- 501:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****    */
- 502:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** }
- 754              		.loc 1 502 0
- 755 0000 7047     		bx	lr
- 756              		.cfi_endproc
- 757              	.LFE80:
- 759              		.section	.text.HAL_SYSTICK_IRQHandler,"ax",%progbits
- 760              		.align	1
- 761              		.global	HAL_SYSTICK_IRQHandler
- 762              		.syntax unified
- 763              		.thumb
- 764              		.thumb_func
- 765              		.fpu softvfp
- 767              	HAL_SYSTICK_IRQHandler:
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 60
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 60
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
-
-
- 768              	.LFB79:
+ 746              		.loc 1 498 0
+ 747              		.cfi_startproc
+ 748              		@ args = 0, pretend = 0, frame = 0
+ 749              		@ frame_needed = 0, uses_anonymous_args = 0
+ 750              		@ link register save eliminated.
+ 751 0000 7047     		bx	lr
+ 752              		.cfi_endproc
+ 753              	.LFE78:
+ 755              		.section	.text.HAL_SYSTICK_IRQHandler,"ax",%progbits
+ 756              		.align	1
+ 757              		.global	HAL_SYSTICK_IRQHandler
+ 758              		.syntax unified
+ 759              		.thumb
+ 760              		.thumb_func
+ 761              		.fpu softvfp
+ 763              	HAL_SYSTICK_IRQHandler:
+ 764              	.LFB77:
+ 489:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   HAL_SYSTICK_Callback();
+ 765              		.loc 1 489 0
+ 766              		.cfi_startproc
+ 767              		@ args = 0, pretend = 0, frame = 0
+ 768              		@ frame_needed = 0, uses_anonymous_args = 0
  489:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c ****   HAL_SYSTICK_Callback();
  769              		.loc 1 489 0
- 770              		.cfi_startproc
- 771              		@ args = 0, pretend = 0, frame = 0
- 772              		@ frame_needed = 0, uses_anonymous_args = 0
- 773 0000 08B5     		push	{r3, lr}
- 774              	.LCFI6:
- 775              		.cfi_def_cfa_offset 8
- 776              		.cfi_offset 3, -8
- 777              		.cfi_offset 14, -4
+ARM GAS  /tmp/ccopQHo5.s 			page 60
+
+
+ 770 0000 08B5     		push	{r3, lr}
+ 771              	.LCFI6:
+ 772              		.cfi_def_cfa_offset 8
+ 773              		.cfi_offset 3, -8
+ 774              		.cfi_offset 14, -4
  490:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** }
- 778              		.loc 1 490 0
- 779 0002 FFF7FEFF 		bl	HAL_SYSTICK_Callback
- 780              	.LVL62:
- 491:Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c **** 
- 781              		.loc 1 491 0
- 782 0006 08BD     		pop	{r3, pc}
- 783              		.cfi_endproc
- 784              	.LFE79:
- 786              		.text
- 787              	.Letext0:
- 788              		.file 4 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
- 789              		.file 5 "/usr/include/newlib/machine/_default_types.h"
- 790              		.file 6 "/usr/include/newlib/sys/_stdint.h"
- 791              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
- 792              		.file 8 "/usr/include/newlib/sys/lock.h"
- 793              		.file 9 "/usr/include/newlib/sys/_types.h"
- 794              		.file 10 "/usr/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h"
- 795              		.file 11 "/usr/include/newlib/sys/reent.h"
- 796              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
-<<<<<<< HEAD
-ARM GAS  /tmp/ccShMQBE.s 			page 61
-=======
-ARM GAS  /tmp/ccIMBJwR.s 			page 61
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+ 775              		.loc 1 490 0
+ 776 0002 FFF7FEFF 		bl	HAL_SYSTICK_Callback
+ 777              	.LVL61:
+ 778 0006 08BD     		pop	{r3, pc}
+ 779              		.cfi_endproc
+ 780              	.LFE77:
+ 782              		.text
+ 783              	.Letext0:
+ 784              		.file 4 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 785              		.file 5 "/usr/include/newlib/machine/_default_types.h"
+ 786              		.file 6 "/usr/include/newlib/sys/_stdint.h"
+ 787              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 788              		.file 8 "/usr/include/newlib/sys/lock.h"
+ 789              		.file 9 "/usr/include/newlib/sys/_types.h"
+ 790              		.file 10 "/usr/lib/gcc/arm-none-eabi/6.3.1/include/stddef.h"
+ 791              		.file 11 "/usr/include/newlib/sys/reent.h"
+ 792              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ARM GAS  /tmp/ccopQHo5.s 			page 61
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32f1xx_hal_cortex.c
-<<<<<<< HEAD
-     /tmp/ccShMQBE.s:16     .text.HAL_NVIC_SetPriorityGrouping:0000000000000000 $t
-     /tmp/ccShMQBE.s:23     .text.HAL_NVIC_SetPriorityGrouping:0000000000000000 HAL_NVIC_SetPriorityGrouping
-     /tmp/ccShMQBE.s:65     .text.HAL_NVIC_SetPriorityGrouping:0000000000000020 $d
-     /tmp/ccShMQBE.s:70     .text.HAL_NVIC_SetPriority:0000000000000000 $t
-     /tmp/ccShMQBE.s:77     .text.HAL_NVIC_SetPriority:0000000000000000 HAL_NVIC_SetPriority
-     /tmp/ccShMQBE.s:183    .text.HAL_NVIC_SetPriority:0000000000000060 $d
-     /tmp/ccShMQBE.s:191    .text.HAL_NVIC_EnableIRQ:0000000000000000 $t
-     /tmp/ccShMQBE.s:198    .text.HAL_NVIC_EnableIRQ:0000000000000000 HAL_NVIC_EnableIRQ
-     /tmp/ccShMQBE.s:224    .text.HAL_NVIC_EnableIRQ:0000000000000014 $d
-     /tmp/ccShMQBE.s:229    .text.HAL_NVIC_DisableIRQ:0000000000000000 $t
-     /tmp/ccShMQBE.s:236    .text.HAL_NVIC_DisableIRQ:0000000000000000 HAL_NVIC_DisableIRQ
-     /tmp/ccShMQBE.s:263    .text.HAL_NVIC_DisableIRQ:0000000000000014 $d
-     /tmp/ccShMQBE.s:268    .text.HAL_NVIC_SystemReset:0000000000000000 $t
-     /tmp/ccShMQBE.s:275    .text.HAL_NVIC_SystemReset:0000000000000000 HAL_NVIC_SystemReset
-     /tmp/ccShMQBE.s:330    .text.HAL_NVIC_SystemReset:000000000000001c $d
-     /tmp/ccShMQBE.s:340    .text.HAL_SYSTICK_Config:0000000000000000 $t
-     /tmp/ccShMQBE.s:347    .text.HAL_SYSTICK_Config:0000000000000000 HAL_SYSTICK_Config
-     /tmp/ccShMQBE.s:394    .text.HAL_SYSTICK_Config:0000000000000024 $d
-     /tmp/ccShMQBE.s:400    .text.HAL_NVIC_GetPriorityGrouping:0000000000000000 $t
-     /tmp/ccShMQBE.s:407    .text.HAL_NVIC_GetPriorityGrouping:0000000000000000 HAL_NVIC_GetPriorityGrouping
-     /tmp/ccShMQBE.s:427    .text.HAL_NVIC_GetPriorityGrouping:000000000000000c $d
-     /tmp/ccShMQBE.s:432    .text.HAL_NVIC_GetPriority:0000000000000000 $t
-     /tmp/ccShMQBE.s:439    .text.HAL_NVIC_GetPriority:0000000000000000 HAL_NVIC_GetPriority
-     /tmp/ccShMQBE.s:537    .text.HAL_NVIC_GetPriority:000000000000005c $d
-     /tmp/ccShMQBE.s:544    .text.HAL_NVIC_SetPendingIRQ:0000000000000000 $t
-     /tmp/ccShMQBE.s:551    .text.HAL_NVIC_SetPendingIRQ:0000000000000000 HAL_NVIC_SetPendingIRQ
-     /tmp/ccShMQBE.s:578    .text.HAL_NVIC_SetPendingIRQ:0000000000000014 $d
-     /tmp/ccShMQBE.s:583    .text.HAL_NVIC_GetPendingIRQ:0000000000000000 $t
-     /tmp/ccShMQBE.s:590    .text.HAL_NVIC_GetPendingIRQ:0000000000000000 HAL_NVIC_GetPendingIRQ
-     /tmp/ccShMQBE.s:617    .text.HAL_NVIC_GetPendingIRQ:0000000000000018 $d
-     /tmp/ccShMQBE.s:622    .text.HAL_NVIC_ClearPendingIRQ:0000000000000000 $t
-     /tmp/ccShMQBE.s:629    .text.HAL_NVIC_ClearPendingIRQ:0000000000000000 HAL_NVIC_ClearPendingIRQ
-     /tmp/ccShMQBE.s:656    .text.HAL_NVIC_ClearPendingIRQ:0000000000000014 $d
-     /tmp/ccShMQBE.s:661    .text.HAL_NVIC_GetActive:0000000000000000 $t
-     /tmp/ccShMQBE.s:668    .text.HAL_NVIC_GetActive:0000000000000000 HAL_NVIC_GetActive
-     /tmp/ccShMQBE.s:695    .text.HAL_NVIC_GetActive:0000000000000018 $d
-     /tmp/ccShMQBE.s:700    .text.HAL_SYSTICK_CLKSourceConfig:0000000000000000 $t
-     /tmp/ccShMQBE.s:707    .text.HAL_SYSTICK_CLKSourceConfig:0000000000000000 HAL_SYSTICK_CLKSourceConfig
-     /tmp/ccShMQBE.s:735    .text.HAL_SYSTICK_CLKSourceConfig:000000000000001c $d
-     /tmp/ccShMQBE.s:740    .text.HAL_SYSTICK_Callback:0000000000000000 $t
-     /tmp/ccShMQBE.s:747    .text.HAL_SYSTICK_Callback:0000000000000000 HAL_SYSTICK_Callback
-     /tmp/ccShMQBE.s:760    .text.HAL_SYSTICK_IRQHandler:0000000000000000 $t
-     /tmp/ccShMQBE.s:767    .text.HAL_SYSTICK_IRQHandler:0000000000000000 HAL_SYSTICK_IRQHandler
-=======
-     /tmp/ccIMBJwR.s:16     .text.HAL_NVIC_SetPriorityGrouping:0000000000000000 $t
-     /tmp/ccIMBJwR.s:23     .text.HAL_NVIC_SetPriorityGrouping:0000000000000000 HAL_NVIC_SetPriorityGrouping
-     /tmp/ccIMBJwR.s:65     .text.HAL_NVIC_SetPriorityGrouping:0000000000000020 $d
-     /tmp/ccIMBJwR.s:70     .text.HAL_NVIC_SetPriority:0000000000000000 $t
-     /tmp/ccIMBJwR.s:77     .text.HAL_NVIC_SetPriority:0000000000000000 HAL_NVIC_SetPriority
-     /tmp/ccIMBJwR.s:183    .text.HAL_NVIC_SetPriority:0000000000000060 $d
-     /tmp/ccIMBJwR.s:191    .text.HAL_NVIC_EnableIRQ:0000000000000000 $t
-     /tmp/ccIMBJwR.s:198    .text.HAL_NVIC_EnableIRQ:0000000000000000 HAL_NVIC_EnableIRQ
-     /tmp/ccIMBJwR.s:224    .text.HAL_NVIC_EnableIRQ:0000000000000014 $d
-     /tmp/ccIMBJwR.s:229    .text.HAL_NVIC_DisableIRQ:0000000000000000 $t
-     /tmp/ccIMBJwR.s:236    .text.HAL_NVIC_DisableIRQ:0000000000000000 HAL_NVIC_DisableIRQ
-     /tmp/ccIMBJwR.s:263    .text.HAL_NVIC_DisableIRQ:0000000000000014 $d
-     /tmp/ccIMBJwR.s:268    .text.HAL_NVIC_SystemReset:0000000000000000 $t
-     /tmp/ccIMBJwR.s:275    .text.HAL_NVIC_SystemReset:0000000000000000 HAL_NVIC_SystemReset
-     /tmp/ccIMBJwR.s:330    .text.HAL_NVIC_SystemReset:000000000000001c $d
-     /tmp/ccIMBJwR.s:340    .text.HAL_SYSTICK_Config:0000000000000000 $t
-     /tmp/ccIMBJwR.s:347    .text.HAL_SYSTICK_Config:0000000000000000 HAL_SYSTICK_Config
-     /tmp/ccIMBJwR.s:394    .text.HAL_SYSTICK_Config:0000000000000024 $d
-     /tmp/ccIMBJwR.s:400    .text.HAL_NVIC_GetPriorityGrouping:0000000000000000 $t
-     /tmp/ccIMBJwR.s:407    .text.HAL_NVIC_GetPriorityGrouping:0000000000000000 HAL_NVIC_GetPriorityGrouping
-     /tmp/ccIMBJwR.s:427    .text.HAL_NVIC_GetPriorityGrouping:000000000000000c $d
-     /tmp/ccIMBJwR.s:432    .text.HAL_NVIC_GetPriority:0000000000000000 $t
-     /tmp/ccIMBJwR.s:439    .text.HAL_NVIC_GetPriority:0000000000000000 HAL_NVIC_GetPriority
-     /tmp/ccIMBJwR.s:537    .text.HAL_NVIC_GetPriority:000000000000005c $d
-     /tmp/ccIMBJwR.s:544    .text.HAL_NVIC_SetPendingIRQ:0000000000000000 $t
-     /tmp/ccIMBJwR.s:551    .text.HAL_NVIC_SetPendingIRQ:0000000000000000 HAL_NVIC_SetPendingIRQ
-     /tmp/ccIMBJwR.s:578    .text.HAL_NVIC_SetPendingIRQ:0000000000000014 $d
-     /tmp/ccIMBJwR.s:583    .text.HAL_NVIC_GetPendingIRQ:0000000000000000 $t
-     /tmp/ccIMBJwR.s:590    .text.HAL_NVIC_GetPendingIRQ:0000000000000000 HAL_NVIC_GetPendingIRQ
-     /tmp/ccIMBJwR.s:617    .text.HAL_NVIC_GetPendingIRQ:0000000000000018 $d
-     /tmp/ccIMBJwR.s:622    .text.HAL_NVIC_ClearPendingIRQ:0000000000000000 $t
-     /tmp/ccIMBJwR.s:629    .text.HAL_NVIC_ClearPendingIRQ:0000000000000000 HAL_NVIC_ClearPendingIRQ
-     /tmp/ccIMBJwR.s:656    .text.HAL_NVIC_ClearPendingIRQ:0000000000000014 $d
-     /tmp/ccIMBJwR.s:661    .text.HAL_NVIC_GetActive:0000000000000000 $t
-     /tmp/ccIMBJwR.s:668    .text.HAL_NVIC_GetActive:0000000000000000 HAL_NVIC_GetActive
-     /tmp/ccIMBJwR.s:695    .text.HAL_NVIC_GetActive:0000000000000018 $d
-     /tmp/ccIMBJwR.s:700    .text.HAL_SYSTICK_CLKSourceConfig:0000000000000000 $t
-     /tmp/ccIMBJwR.s:707    .text.HAL_SYSTICK_CLKSourceConfig:0000000000000000 HAL_SYSTICK_CLKSourceConfig
-     /tmp/ccIMBJwR.s:735    .text.HAL_SYSTICK_CLKSourceConfig:000000000000001c $d
-     /tmp/ccIMBJwR.s:740    .text.HAL_SYSTICK_Callback:0000000000000000 $t
-     /tmp/ccIMBJwR.s:747    .text.HAL_SYSTICK_Callback:0000000000000000 HAL_SYSTICK_Callback
-     /tmp/ccIMBJwR.s:760    .text.HAL_SYSTICK_IRQHandler:0000000000000000 $t
-     /tmp/ccIMBJwR.s:767    .text.HAL_SYSTICK_IRQHandler:0000000000000000 HAL_SYSTICK_IRQHandler
->>>>>>> 6f740bf2d042f697981f68ddcda7550922b66c1a
+     /tmp/ccopQHo5.s:16     .text.HAL_NVIC_SetPriorityGrouping:0000000000000000 $t
+     /tmp/ccopQHo5.s:23     .text.HAL_NVIC_SetPriorityGrouping:0000000000000000 HAL_NVIC_SetPriorityGrouping
+     /tmp/ccopQHo5.s:62     .text.HAL_NVIC_SetPriorityGrouping:0000000000000020 $d
+     /tmp/ccopQHo5.s:69     .text.HAL_NVIC_SetPriority:0000000000000000 $t
+     /tmp/ccopQHo5.s:76     .text.HAL_NVIC_SetPriority:0000000000000000 HAL_NVIC_SetPriority
+     /tmp/ccopQHo5.s:184    .text.HAL_NVIC_SetPriority:000000000000005c $d
+     /tmp/ccopQHo5.s:192    .text.HAL_NVIC_EnableIRQ:0000000000000000 $t
+     /tmp/ccopQHo5.s:199    .text.HAL_NVIC_EnableIRQ:0000000000000000 HAL_NVIC_EnableIRQ
+     /tmp/ccopQHo5.s:222    .text.HAL_NVIC_EnableIRQ:0000000000000014 $d
+     /tmp/ccopQHo5.s:229    .text.HAL_NVIC_DisableIRQ:0000000000000000 $t
+     /tmp/ccopQHo5.s:236    .text.HAL_NVIC_DisableIRQ:0000000000000000 HAL_NVIC_DisableIRQ
+     /tmp/ccopQHo5.s:260    .text.HAL_NVIC_DisableIRQ:0000000000000018 $d
+     /tmp/ccopQHo5.s:267    .text.HAL_NVIC_SystemReset:0000000000000000 $t
+     /tmp/ccopQHo5.s:274    .text.HAL_NVIC_SystemReset:0000000000000000 HAL_NVIC_SystemReset
+     /tmp/ccopQHo5.s:329    .text.HAL_NVIC_SystemReset:000000000000001c $d
+     /tmp/ccopQHo5.s:339    .text.HAL_SYSTICK_Config:0000000000000000 $t
+     /tmp/ccopQHo5.s:346    .text.HAL_SYSTICK_Config:0000000000000000 HAL_SYSTICK_Config
+     /tmp/ccopQHo5.s:393    .text.HAL_SYSTICK_Config:0000000000000024 $d
+     /tmp/ccopQHo5.s:399    .text.HAL_NVIC_GetPriorityGrouping:0000000000000000 $t
+     /tmp/ccopQHo5.s:406    .text.HAL_NVIC_GetPriorityGrouping:0000000000000000 HAL_NVIC_GetPriorityGrouping
+     /tmp/ccopQHo5.s:426    .text.HAL_NVIC_GetPriorityGrouping:000000000000000c $d
+     /tmp/ccopQHo5.s:431    .text.HAL_NVIC_GetPriority:0000000000000000 $t
+     /tmp/ccopQHo5.s:438    .text.HAL_NVIC_GetPriority:0000000000000000 HAL_NVIC_GetPriority
+     /tmp/ccopQHo5.s:537    .text.HAL_NVIC_GetPriority:0000000000000058 $d
+     /tmp/ccopQHo5.s:544    .text.HAL_NVIC_SetPendingIRQ:0000000000000000 $t
+     /tmp/ccopQHo5.s:551    .text.HAL_NVIC_SetPendingIRQ:0000000000000000 HAL_NVIC_SetPendingIRQ
+     /tmp/ccopQHo5.s:575    .text.HAL_NVIC_SetPendingIRQ:0000000000000018 $d
+     /tmp/ccopQHo5.s:582    .text.HAL_NVIC_GetPendingIRQ:0000000000000000 $t
+     /tmp/ccopQHo5.s:589    .text.HAL_NVIC_GetPendingIRQ:0000000000000000 HAL_NVIC_GetPendingIRQ
+     /tmp/ccopQHo5.s:616    .text.HAL_NVIC_GetPendingIRQ:0000000000000018 $d
+     /tmp/ccopQHo5.s:621    .text.HAL_NVIC_ClearPendingIRQ:0000000000000000 $t
+     /tmp/ccopQHo5.s:628    .text.HAL_NVIC_ClearPendingIRQ:0000000000000000 HAL_NVIC_ClearPendingIRQ
+     /tmp/ccopQHo5.s:652    .text.HAL_NVIC_ClearPendingIRQ:0000000000000018 $d
+     /tmp/ccopQHo5.s:659    .text.HAL_NVIC_GetActive:0000000000000000 $t
+     /tmp/ccopQHo5.s:666    .text.HAL_NVIC_GetActive:0000000000000000 HAL_NVIC_GetActive
+     /tmp/ccopQHo5.s:693    .text.HAL_NVIC_GetActive:0000000000000018 $d
+     /tmp/ccopQHo5.s:698    .text.HAL_SYSTICK_CLKSourceConfig:0000000000000000 $t
+     /tmp/ccopQHo5.s:705    .text.HAL_SYSTICK_CLKSourceConfig:0000000000000000 HAL_SYSTICK_CLKSourceConfig
+     /tmp/ccopQHo5.s:732    .text.HAL_SYSTICK_CLKSourceConfig:000000000000001c $d
+     /tmp/ccopQHo5.s:737    .text.HAL_SYSTICK_Callback:0000000000000000 $t
+     /tmp/ccopQHo5.s:744    .text.HAL_SYSTICK_Callback:0000000000000000 HAL_SYSTICK_Callback
+     /tmp/ccopQHo5.s:756    .text.HAL_SYSTICK_IRQHandler:0000000000000000 $t
+     /tmp/ccopQHo5.s:763    .text.HAL_SYSTICK_IRQHandler:0000000000000000 HAL_SYSTICK_IRQHandler
+                     .debug_frame:0000000000000010 $d
 
 NO UNDEFINED SYMBOLS
