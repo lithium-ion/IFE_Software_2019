@@ -37,7 +37,7 @@
 #define RINEHARTCUR_CAN_ID			0x064
 #define RINEHARTTOR_CAN_ID			0x082
 #define FAULTS				0x0D0
-#define PRECHARGE			0x0D1
+#define STATES			0x0D1
 #define ENABLE_SIG		0x0D2
 #define MOTOR_POS		0x0A5
 /* USER CODE END PD */
@@ -561,7 +561,7 @@ void CAN_interpret(void) {
 
 	}
 
-	if (received_ID == PRECHARGE) {
+	if (received_ID == STATES) {
 
 		uint8_t Precharge_state;
 		Precharge_state = RxData[0];
@@ -608,6 +608,43 @@ void CAN_interpret(void) {
       HAL_GPIO_TogglePin(GPIOB, RGB_RED_Pin);
       HAL_GPIO_TogglePin(GPIOB, RGB_BLUE_Pin);
 
+    }
+    uint8_t BMS_fault;
+    uint8_t IMD_fault;
+    uint8_t BSPD_fault;
+    bool any_fault;
+
+    BMS_fault = RxData[1];
+    IMD_fault = RxData[2];
+    BSPD_fault = RxData[3];
+
+    if (BMS_fault == 0xFF) {
+      HAL_GPIO_WritePin(GPIOA, BMS_LED_ON_Pin, GPIO_PIN_SET);
+      any_fault = true;
+    }
+    else if (BMS_fault == 0x00)
+      HAL_GPIO_WritePin(GPIOA, BMS_LED_ON_Pin, GPIO_PIN_RESET);
+
+    if (IMD_fault == 0xFF) {
+      HAL_GPIO_WritePin(GPIOA, IMD_LED_ON_Pin, GPIO_PIN_SET);
+      any_fault = true;
+    }
+    else if (IMD_fault == 0x00)
+      HAL_GPIO_WritePin(GPIOA, IMD_LED_ON_Pin, GPIO_PIN_RESET);
+
+    if (BSPD_fault == 0xFF) {
+      HAL_GPIO_WritePin(GPIOA, BSPD_LED_ON_Pin, GPIO_PIN_SET);
+      any_fault = true;
+    }
+    else if (BSPD_fault == 0x00)
+      HAL_GPIO_WritePin(GPIOA, BSPD_LED_ON_Pin, GPIO_PIN_RESET);
+
+    if (any_fault == true) {
+      // if there is any fault
+      HAL_GPIO_WritePin(GPIOB, RGB_GREEN_Pin, GPIO_PIN_RESET); // set RGB LED red
+      HAL_GPIO_WritePin(GPIOB, RGB_RED_Pin, GPIO_PIN_SET);
+      HAL_GPIO_WritePin(GPIOB, RGB_BLUE_Pin, GPIO_PIN_RESET);
+      any_fault = false;
     }
 
 	}

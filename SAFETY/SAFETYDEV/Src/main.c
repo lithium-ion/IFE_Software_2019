@@ -291,7 +291,7 @@ int main(void)
 
    readFaults(); 
    if (CAN_Timer == 0){ //sending routine message every 1 second
-     sendFaultMsg();
+
      sendCar_state();
      CAN_Timer = 1000;
      //HAL_GPIO_WritePin(BRAKE_LIGHT_EN_GPIO_Port, BRAKE_LIGHT_EN_Pin, GPIO_PIN_SET);
@@ -491,6 +491,9 @@ void sendFaultMsg(){
 }
 
 void sendCar_state(){
+  TxCar_state_data[1] = bms;  //Set all the data (faults) to their current values
+  TxCar_state_data[2] = imd;
+  TxCar_state_data[3] = bspd;
   HAL_CAN_AddTxMessage(&hcan, &TxCar_state,TxCar_state_data, &TxCar_stateMailbox);
 }
 
