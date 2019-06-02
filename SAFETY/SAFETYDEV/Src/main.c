@@ -69,7 +69,7 @@
   #define FAULT_INACTIVE  0x00
 
 //FAULT DEGS
-#define CAR_STATE         0x0D1
+#define CAR_STATE         0x00E
 // CAR STATES
   #define LV_ON           0x01
   #define PRECHARGED      0x02
@@ -82,26 +82,27 @@
 //throttle A .66-3.2 scaled to .396-1.866
 //throttle B .33-2.7 scaled to .198-1.62
 // That means 5% from 0 is .4705 volts
-const uint16_t ThrottleA_5 = 584;
+const uint16_t ThrottleA_5 = 725;
 // That means 25% from 0 is .7635 volts
-const uint16_t ThrottleA_25 = 947;
+const uint16_t ThrottleA_25 = 940;
 const uint16_t brakeThreshold = 2000; //80; >> 3.5 volts on 5 v scale, 2.1 on 3.3v scale
-const uint16_t RTD_Threshold = 2500; // NO idea for this
+const uint16_t RTD_Threshold = 500; // NO idea for this
 
 // APPS is .35 volts, so .21 volts scaled
 //This values is 0-100 based
-const int APPS_difference = 240; //~0.5 voltz
+const int APPS_difference = 600; //~0.5 voltz
 
 //These are based off above values measured
-const int throttle_A_min = 668;
-const int throttle_A_max = 1583;
-const int throttle_B_min = 867;
-const int throttle_B_max = 1780;
-const int throttle_min_APPS = 100;
-const int throttle_max_APPS = 2700;
+const int throttle_A_min = 657;
+const int throttle_A_max = 1737;
+const int throttle_B_min = 1365;
+const int throttle_B_max = 2978;
+const int throttle_min_APPS = 300;
+const int throttle_max_APPS_B = 3500;
+const int throttle_max_APPS_A = 2250;
 // APPS is .35 volts, so .21 volts scaled
 //This values is 0-100 based
-const int throttleA_to_B_offset = 240;
+const int throttleA_to_B_offset = 900;
 
 
 
@@ -237,6 +238,12 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+   // while(1)
+   //  {
+   //     HAL_GPIO_WritePin(GPIOB, RTD_EN_Pin | BTSF_EN_Pin | APPS_EN_Pin, GPIO_PIN_SET);
+
+   //    HAL_Delay(1000);
+   //  }
 
    while (1)
    {
@@ -244,30 +251,36 @@ int main(void)
    if(HAL_GPIO_ReadPin(GPIOB, PRECHARGE_COMPLETE_Pin) == GPIO_PIN_RESET){
      car_state_machine(PRECHARGED);
      //READ FOR ENABLE
-    if(HAL_GPIO_ReadPin(GPIOB,ENABLE_IN_Pin) == GPIO_PIN_RESET){
+     //TxCar_state_data[4] = HAL_GPIO_ReadPin(GPIOB,ENABLE_IN_Pin);
+    if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_8) == GPIO_PIN_RESET){
        car_state_machine(ENABLE_FLIPPED);
-       //ADC for Brake pressure
-       brakePressure_2 = updateADC(BRAKE_PRESSURE_2_ADC_CHANNEL);
+       //HAL_GPIO_WritePin(GPIOB,GPIO_PIN_13,GPIO_PIN_SET);
+
+            //ADC for Brake pressure
+       brakePressure_1 = updateADC(BRAKE_PRESSURE_1_ADC_CHANNEL);
+       TxFault_data[6] = brakePressure_1 >>8;
+       TxFault_data[7] = brakePressure_1; 
        //SEE IF BRAKE IS PRESSED 
-       if(brakePressure_2 >= RTD_Threshold){
+       if(brakePressure_1 >= RTD_Threshold){
        //set 3 second timer
         if(TxCar_state_data[0] == ENABLE_FLIPPED) {
          RTDS_Timer = 2500; //change to 3000 for 3 seconds
          car_state_machine(RTDS_SOUND);
           
-         HAL_GPIO_WritePin(GPIOB, RTD_EN_Pin | RTDS_EN_Pin | BTSF_EN_Pin | APPS_EN_Pin, GPIO_PIN_SET);
+         HAL_GPIO_WritePin(GPIOB, RTD_EN_Pin | BTSF_EN_Pin | APPS_EN_Pin, GPIO_PIN_SET);
+         HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15,GPIO_PIN_SET);
          } 
        //RTD Sound Enable Play sound for 2.5 seconds 
        }
       
        // IF OUR TIMER IS OVER FINALLY //we also stop timer if we started it from RTDS state or Soft fault state
          if((RTDS_Timer == 0) && (TxCar_state_data[0] & 0x38)){
-           HAL_GPIO_WritePin(GPIOB, RTDS_EN_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15,GPIO_PIN_RESET);
            //SeT pwr
            car_state_machine(PWR_AVAILABLE);
             }// rtds buzzer stop
      }//END OF RTD SEQUENCE*/
-     else if(HAL_GPIO_ReadPin(GPIOB,ENABLE_IN_Pin) == GPIO_PIN_SET)
+     else if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_8) == GPIO_PIN_SET)
      { //IF WE HAVE DE ENABLED LA COCHE
        TxCar_state_data[0] = PRECHARGED;
        HAL_GPIO_WritePin(GPIOB, RTD_EN_Pin,GPIO_PIN_RESET);
@@ -275,7 +288,7 @@ int main(void)
      }
    } // end of if precharge complete statement
       if(RTDS_Timer == 0)
-       HAL_GPIO_WritePin(GPIOB, RTDS_EN_Pin, GPIO_PIN_RESET);
+       HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15,GPIO_PIN_RESET);
   
      // SEQUENCE FOR CHECKING SOFT FAULTS
      if(TxCar_state_data[0] >= RTDS_SOUND){
@@ -287,24 +300,27 @@ int main(void)
          TxCar_state_data[0] = PWR_AVAILABLE;
          HAL_GPIO_WritePin(GPIOB, BTSF_EN_Pin|APPS_EN_Pin ,GPIO_PIN_SET);
      }
+    
+      //TxFault_data[4] = checkAPPS();
    }
 
    readFaults(); 
    if (CAN_Timer == 0){ //sending routine message every 1 second
 
      sendCar_state();
-     CAN_Timer = 1000;
+     sendFaultMsg();
+     CAN_Timer = 200;
      //HAL_GPIO_WritePin(BRAKE_LIGHT_EN_GPIO_Port, BRAKE_LIGHT_EN_Pin, GPIO_PIN_SET);
 
    }
 
    //Brake Light
-   brakePressure_2 = updateADC(BRAKE_PRESSURE_2_ADC_CHANNEL);
-   if(brakePressure_2 > brakeThreshold){
-     HAL_GPIO_WritePin(GPIOB, BRAKE_LIGHT_EN_Pin, GPIO_PIN_SET);
+   brakePos = updateADC(BRAKE_POS_ADC_CHANNEL);
+   if(brakePos > brakeThreshold){
+     HAL_GPIO_WritePin(GPIOB, BRAKE_LIGHT_EN_Pin, GPIO_PIN_RESET);
    }
    else
-     HAL_GPIO_WritePin(GPIOB, BRAKE_LIGHT_EN_Pin, GPIO_PIN_RESET);
+     HAL_GPIO_WritePin(GPIOB, BRAKE_LIGHT_EN_Pin, GPIO_PIN_SET);
 
 
      /* USER CODE END WHILE */
@@ -333,12 +349,10 @@ int main(void)
 /********************************************************************************/
 char checkAPPS(){
 
-  throttle_A = updateADC(THROTTLE_A_ADC_CHANNEL); 
-  throttle_B = updateADC(THROTTLE_B_ADC_CHANNEL); 
 
 /*
   if(throttle_A > throttle_B){
-    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(GPGIOB, GPIO_PIN_5, GPIO_PIN_SET);
     HAL_Delay(100);
   }
   else
@@ -348,12 +362,12 @@ char checkAPPS(){
   //Throttles Agree
   if(APPS_Diff() == 0){
    millisTimer = 100;
-   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_RESET);
+   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET);
   }
   
   //APPS_EN Fault
-  if(millisTimer == 0){ //this occurs when APPS_diff is true for > 100 ms
-    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET);
+  else if(millisTimer == 0){ //this occurs when APPS_diff is true for > 100 ms
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_RESET);
     return 1; //will set driving = 0;
   }
   return 0; //APPS is good
@@ -367,7 +381,12 @@ char checkAPPS(){
 /********************************************************************************/
 char checkBTSF(){
   brakePressure_2 = updateADC(BRAKE_PRESSURE_2_ADC_CHANNEL);
+  brakePressure_1 = updateADC(BRAKE_PRESSURE_1_ADC_CHANNEL);
   throttle_A = updateADC(THROTTLE_A_ADC_CHANNEL); 
+  TxFault_data[0]= brakePressure_1 >>8;
+  TxFault_data[1]= brakePressure_1;
+  TxFault_data[2]= brakePressure_2 >>8;
+  TxFault_data[3]= brakePressure_2;
   
   if(BTSF_ACTIVE)
   {
@@ -380,7 +399,7 @@ char checkBTSF(){
     return 1;
   }
 
-  if((brakePressure_2 > brakeThreshold) && (throttle_A > ThrottleA_25)){
+  if((brakePressure_1 > brakeThreshold) && (throttle_A > ThrottleA_25)){
        //HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET);
        BTSF_ACTIVE = 0xFF;
        return 1;
@@ -451,24 +470,41 @@ uint16_t updateADC(int channel){
 /********************************************************************************/
 char APPS_Diff(){
 
+throttle_A = updateADC(THROTTLE_A_ADC_CHANNEL); 
+throttle_B = updateADC(THROTTLE_B_ADC_CHANNEL);
+    //TxFault_data[4] = throttle_A;
+    //TxFault_data[5] = throttle_A >> 8;
+    //TxFault_data[6] = throttle_B;
+    //TxFault_data[7] = throttle_B >>8;
+
 int t_A = throttle_A;
 int t_B = throttle_B;
 
  //Fault if throttles are too low or too high
- if(t_A < throttle_min_APPS || t_A > throttle_max_APPS){
+ if(t_A < throttle_min_APPS || t_A > throttle_max_APPS_A){
+  //TxFault_data[0] = 0xFF;
   return 1;
  }
- if(t_B < throttle_min_APPS || t_B > throttle_max_APPS){
+ //else
+  //TxFault_data[0] = 0x00;
+ if(t_B < throttle_min_APPS || t_B > throttle_max_APPS_B){
+  //TxFault_data[1] = 0xFF;
   return 1;
  }
+ //else
+  //TxFault_data[1] = 0x00;
 
- t_A -= throttleA_to_B_offset;
+ t_B -= throttleA_to_B_offset;
 
 
   if(abs(t_A - t_B) > APPS_difference){ //600 ~ 0.5v
+    //TxFault_data[2] = 0xFF;
     return 1;
   }
-  else return 0;
+  else {
+    //TxFault_data[2] = 0x00;
+    return 0;
+  }
 
   
 /*
@@ -483,10 +519,7 @@ int t_B = throttle_B;
 
 }
 void sendFaultMsg(){
-  TxFault_data[0] = bms;  //Set all the data (faults) to their current values
-  TxFault_data[1] = imd;
-  TxFault_data[2] = bspd;
-  TxFault_data[3] = apps;
+ 
   HAL_CAN_AddTxMessage(&hcan, &TxFaults, TxFault_data, &TxFaultsMailbox);
 }
 
@@ -519,8 +552,8 @@ void readFaults(){
   else bms = FAULT_INACTIVE;
 
   if(bms || imd){
-    TxCar_state_data[0] = LV_ON;
-    HAL_GPIO_WritePin(GPIOB, RTD_EN_Pin | RTDS_EN_Pin, GPIO_PIN_RESET);
+    //TxCar_state_data[0] = LV_ON;
+    //HAL_GPIO_WritePin(GPIOB, RTD_EN_Pin | RTDS_EN_Pin, GPIO_PIN_RESET);
   }
 
 }
@@ -787,7 +820,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pins : BRAKE_LIGHT_EN_Pin RTDS_EN_Pin APPS_EN_Pin RTD_EN_Pin 
                            BTSF_EN_Pin */
-  GPIO_InitStruct.Pin = BRAKE_LIGHT_EN_Pin|RTDS_EN_Pin|APPS_EN_Pin|RTD_EN_Pin 
+  GPIO_InitStruct.Pin = BRAKE_LIGHT_EN_Pin|APPS_EN_Pin|RTD_EN_Pin 
                           |BTSF_EN_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -799,6 +832,21 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin : PA15 */
+  GPIO_InitStruct.Pin = GPIO_PIN_15;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+
+    GPIO_InitStruct.Pin = GPIO_PIN_8;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure peripheral I/O remapping */
