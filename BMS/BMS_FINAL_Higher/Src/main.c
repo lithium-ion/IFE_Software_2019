@@ -39,6 +39,9 @@
 #define BMSTINF_ID      0x00A
 #define PACKSTAT_ID     0x00B
 #define CHARGER_ID      0x1806E5F4
+
+#define START           32
+#define END             96
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -535,7 +538,7 @@ bool FAULT_check(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6], uint8_t bms
 
   bmsStatus[0] = 0;
 
-  for (uint8_t cell = 48; cell < 96; cell++) {
+  for (uint8_t cell = START; cell < END; cell++) {
 
     cellVoltage = 0;
     cellVoltage = (uint16_t) (bmsData[cell][2]);
@@ -634,7 +637,7 @@ void setDischarge(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6], bool cellD
   //   //return 0;
   // }
 
-  for (uint8_t i = 48; i < 96; i++) {
+  for (uint8_t i = START; i < END; i++) {
     
     cellVoltage = 0;
     cellVoltage = (uint16_t) (bmsData[i][2]);
@@ -717,7 +720,7 @@ void checkDischarge(BMSconfigStructTypedef cfg, bool fullDischarge[12][8], uint8
   uint8_t board;
   uint8_t cell;
 
-  for (uint8_t i = 48; i < 96; i++) {
+  for (uint8_t i = START; i < END; i++) {
 
     cellVoltage = 0;
     cellVoltage = (uint16_t) (bmsData[i][2]);
@@ -785,7 +788,7 @@ void CELLVAL_message(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
   TxHeader.StdId = CELLVAL_ID;
   TxHeader.DLC = 6;
 
-  for (uint8_t cell = 48; cell < 96; cell++) {
+  for (uint8_t cell = START; cell < END; cell++) {
     CELLVAL_DATA[0] = bmsData[cell][0];
     CELLVAL_DATA[1] = bmsData[cell][1];
     CELLVAL_DATA[2] = bmsData[cell][2];
