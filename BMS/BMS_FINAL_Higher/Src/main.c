@@ -38,7 +38,7 @@
 #define BMSVINF_ID      0x009
 #define BMSTINF_ID      0x00A
 #define PACKSTAT_ID     0x00B
-#define CHARGER_ID      0x1806E5F4
+#define CHARGER_ID      0x069
 
 #define START           32
 #define END             96
@@ -315,7 +315,7 @@ static void MX_CAN_Init(void)
   CAN_FilterTypeDef     sFilterConfig;
   /* USER CODE END CAN_Init 1 */
   hcan.Instance = CAN1;
-  hcan.Init.Prescaler = 1; //500kbit/s
+  hcan.Init.Prescaler = 2; //500kbit/s
   hcan.Init.Mode = CAN_MODE_NORMAL;
   hcan.Init.SyncJumpWidth = CAN_SJW_2TQ;
   hcan.Init.TimeSeg1 = CAN_BS1_13TQ;
@@ -747,7 +747,7 @@ void checkDischarge(BMSconfigStructTypedef cfg, bool fullDischarge[12][8], uint8
 
 void setChargerTxData(BMSconfigStructTypedef cfg) {
 
-  TxHeader.ExtId = 0x1806E5F4;
+  TxHeader.StdId = CHARGER_ID;
   TxHeader.DLC = 8;
 
 	/* voltage data (hex value of desired voltage (V) times 10)*/
@@ -953,6 +953,18 @@ void PACKSTAT_message(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
 
   HAL_CAN_AddTxMessage(&hcan, &TxHeader, PACKSTAT_DATA, &TxMailbox);
 
+}
+
+void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *CanHandle)
+{
+  /* Get RX message */
+  HAL_CAN_GetRxMessage(&hcan, CAN_RX_FIFO0, &RxHeader, RxData);
+  if(RxHeader.StdId == 0x001)
+  {
+    minimum = RxData[1];
+    minimum = minimum << 8;
+    minimum |= (uint16_t) RxData[0];
+  }
 }
 
 /* USER CODE END 4 */

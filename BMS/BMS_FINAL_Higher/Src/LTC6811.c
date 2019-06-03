@@ -84,6 +84,8 @@
 		- temperature conversion works, but error is +/- 1 degree
 */
 
+#define BOARD_START           4
+#define BOARD_END             12
 
 #include "LTC6811.h"
 
@@ -259,7 +261,7 @@ bool readAllCellVoltages(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
 
 	wakeup_idle();
 
-	for (uint8_t board = 6; board < 12; board++) {
+	for (uint8_t board = BOARD_START; board < BOARD_END; board++) {
 
 		//read voltage of every cell input (1-12) for a specific address, store in boardVoltage
 		PEC_check[board] = readCellVoltage(board, boardVoltage);
@@ -293,7 +295,7 @@ bool readAllCellVoltages(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
 	
 	}
 
-	// for (uint8_t board = 0; board < 12; board++) {
+	// for (uint8_t board = 0; board < BOARD_END; board++) {
 	// 	if (PEC_check[board] == 0)
 	// 		dataValid = false;
 	// }
@@ -378,7 +380,7 @@ bool readAllCellTemps(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
 	wakeup_idle();
 	HAL_Delay(2);
 
-	for (uint8_t board = 6; board < 12; board++) {
+	for (uint8_t board = BOARD_START; board < BOARD_END; board++) {
 
 		//read temperature, check for OT and temp DC
 		PEC_check[board] = readCellTemp(board, boardTemp, boardDCFault, boardTempFault);
@@ -418,7 +420,7 @@ bool readAllCellTemps(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
 		bmsData[(board * 8) + 7][5] = (uint8_t) (boardTemp[3] & 0xFF); //temp4 L
 	}
 	
-	// for (uint8_t board = 0; board < 12; board++) {
+	// for (uint8_t board = 0; board < BOARD_END; board++) {
 	// 	if (PEC_check[board] == 0)
 	// 		dataValid = false;
 	// }
@@ -489,7 +491,7 @@ bool checkAllCellConnections(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6])
 
 	wakeup_idle();
 
-	for (uint8_t board = 6; board < cfg.numOfICs; board++) {
+	for (uint8_t board = BOARD_START; board < cfg.numOfICs; board++) {
 
 		PEC_check[board] = readCellVoltage(cfg.address[board], ADOWvoltage);
 		dataValid &= PEC_check[board];

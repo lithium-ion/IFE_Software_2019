@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cccjDM90.s 			page 1
+ARM GAS  /tmp/ccoE54Gu.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cccjDM90.s 			page 1
   32:Src/main.c    **** /* USER CODE END PTD */
   33:Src/main.c    **** 
   34:Src/main.c    **** /* Private define ------------------------------------------------------------*/
-ARM GAS  /tmp/cccjDM90.s 			page 2
+ARM GAS  /tmp/ccoE54Gu.s 			page 2
 
 
   35:Src/main.c    **** /* USER CODE BEGIN PD */
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cccjDM90.s 			page 1
   89:Src/main.c    **** 
   90:Src/main.c    **** /**
   91:Src/main.c    ****   * @brief  The application entry point.
-ARM GAS  /tmp/cccjDM90.s 			page 3
+ARM GAS  /tmp/ccoE54Gu.s 			page 3
 
 
   92:Src/main.c    ****   * @retval int
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cccjDM90.s 			page 1
  146:Src/main.c    **** 
  147:Src/main.c    **** 
  148:Src/main.c    ****   }
-ARM GAS  /tmp/cccjDM90.s 			page 4
+ARM GAS  /tmp/ccoE54Gu.s 			page 4
 
 
  149:Src/main.c    ****   /* USER CODE END 3 */
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cccjDM90.s 			page 1
  203:Src/main.c    ****   /* USER CODE END ADC1_Init 0 */
  204:Src/main.c    **** 
  205:Src/main.c    ****   //ADC_ChannelConfTypeDef sConfig = {0};
-ARM GAS  /tmp/cccjDM90.s 			page 5
+ARM GAS  /tmp/ccoE54Gu.s 			page 5
 
 
  206:Src/main.c    **** 
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cccjDM90.s 			page 1
  260:Src/main.c    **** }
  261:Src/main.c    **** 
  262:Src/main.c    **** /**
-ARM GAS  /tmp/cccjDM90.s 			page 6
+ARM GAS  /tmp/ccoE54Gu.s 			page 6
 
 
  263:Src/main.c    ****   * @brief CAN Initialization Function
@@ -315,12 +315,12 @@ ARM GAS  /tmp/cccjDM90.s 			page 1
  274:Src/main.c    ****   /* USER CODE BEGIN CAN_Init 1 */
  275:Src/main.c    **** 
  276:Src/main.c    ****   /* USER CODE END CAN_Init 1 */
- 277:Src/main.c    ****   hcan.Instance = CAN1;
- 278:Src/main.c    ****   hcan.Init.Prescaler = 2;
+ 277:Src/main.c    **** hcan.Instance = CAN1;
+ 278:Src/main.c    ****   hcan.Init.Prescaler = 2; //500kbit/s
  279:Src/main.c    ****   hcan.Init.Mode = CAN_MODE_NORMAL;
- 280:Src/main.c    ****   hcan.Init.SyncJumpWidth = CAN_SJW_1TQ;
- 281:Src/main.c    ****   hcan.Init.TimeSeg1 = CAN_BS1_3TQ;
- 282:Src/main.c    ****   hcan.Init.TimeSeg2 = CAN_BS2_4TQ;
+ 280:Src/main.c    ****   hcan.Init.SyncJumpWidth = CAN_SJW_2TQ;
+ 281:Src/main.c    ****   hcan.Init.TimeSeg1 = CAN_BS1_13TQ;
+ 282:Src/main.c    ****   hcan.Init.TimeSeg2 = CAN_BS2_2TQ;
  283:Src/main.c    ****   hcan.Init.TimeTriggeredMode = DISABLE;
  284:Src/main.c    ****   hcan.Init.AutoBusOff = DISABLE;
  285:Src/main.c    ****   hcan.Init.AutoWakeUp = DISABLE;
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cccjDM90.s 			page 1
  317:Src/main.c    **** 	sFilterConfig.FilterMaskIdHigh = 0x0000;				// specifies which bits of the received ID to compare 
  318:Src/main.c    **** 	sFilterConfig.FilterMaskIdLow = 0x0000;
  319:Src/main.c    **** 	sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO0;		// receive FIFO (0 or 1, must match chosen int
-ARM GAS  /tmp/cccjDM90.s 			page 7
+ARM GAS  /tmp/ccoE54Gu.s 			page 7
 
 
  320:Src/main.c    **** 	sFilterConfig.FilterActivation = ENABLE;
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cccjDM90.s 			page 1
   57              	.LBE2:
   58              	.LBB3:
  342:Src/main.c    ****   __HAL_RCC_GPIOB_CLK_ENABLE();
-ARM GAS  /tmp/cccjDM90.s 			page 8
+ARM GAS  /tmp/ccoE54Gu.s 			page 8
 
 
   59              		.loc 1 342 0
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cccjDM90.s 			page 1
   97              	.LVL2:
  359:Src/main.c    **** 
  360:Src/main.c    ****   /*Configure GPIO pins : RGB_GREEN_Pin RGB_RED_Pin RGB_BLUE_Pin CUST_LED_Pin */
-ARM GAS  /tmp/cccjDM90.s 			page 9
+ARM GAS  /tmp/ccoE54Gu.s 			page 9
 
 
  361:Src/main.c    ****   GPIO_InitStruct.Pin = RGB_GREEN_Pin|RGB_RED_Pin|RGB_BLUE_Pin|CUST_LED_Pin;
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cccjDM90.s 			page 1
  146              		.cfi_offset 6, -12
  147              		.cfi_offset 7, -8
  148              		.cfi_offset 14, -4
-ARM GAS  /tmp/cccjDM90.s 			page 10
+ARM GAS  /tmp/ccoE54Gu.s 			page 10
 
 
  212:Src/main.c    ****   hadc1.Init.ScanConvMode = DISABLE;
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cccjDM90.s 			page 1
  189 0038 6360     		str	r3, [r4, #4]
  236:Src/main.c    ****   {
  190              		.loc 1 236 0
-ARM GAS  /tmp/cccjDM90.s 			page 11
+ARM GAS  /tmp/ccoE54Gu.s 			page 11
 
 
  191 003a 2146     		mov	r1, r4
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cccjDM90.s 			page 1
  240              	.LCFI4:
  241              		.cfi_def_cfa_offset 16
  242              		.cfi_offset 4, -16
-ARM GAS  /tmp/cccjDM90.s 			page 12
+ARM GAS  /tmp/ccoE54Gu.s 			page 12
 
 
  243              		.cfi_offset 5, -12
@@ -667,621 +667,622 @@ ARM GAS  /tmp/cccjDM90.s 			page 1
  246 0002 8AB0     		sub	sp, sp, #40
  247              	.LCFI5:
  248              		.cfi_def_cfa_offset 56
- 277:Src/main.c    ****   hcan.Init.Prescaler = 2;
+ 277:Src/main.c    ****   hcan.Init.Prescaler = 2; //500kbit/s
  249              		.loc 1 277 0
- 250 0004 214D     		ldr	r5, .L11
- 251 0006 224B     		ldr	r3, .L11+4
+ 250 0004 224D     		ldr	r5, .L11
+ 251 0006 234B     		ldr	r3, .L11+4
  252 0008 2B60     		str	r3, [r5]
  278:Src/main.c    ****   hcan.Init.Mode = CAN_MODE_NORMAL;
  253              		.loc 1 278 0
  254 000a 0226     		movs	r6, #2
  255 000c 6E60     		str	r6, [r5, #4]
- 279:Src/main.c    ****   hcan.Init.SyncJumpWidth = CAN_SJW_1TQ;
+ 279:Src/main.c    ****   hcan.Init.SyncJumpWidth = CAN_SJW_2TQ;
  256              		.loc 1 279 0
  257 000e 0024     		movs	r4, #0
  258 0010 AC60     		str	r4, [r5, #8]
- 280:Src/main.c    ****   hcan.Init.TimeSeg1 = CAN_BS1_3TQ;
+ 280:Src/main.c    ****   hcan.Init.TimeSeg1 = CAN_BS1_13TQ;
  259              		.loc 1 280 0
- 260 0012 EC60     		str	r4, [r5, #12]
- 281:Src/main.c    ****   hcan.Init.TimeSeg2 = CAN_BS2_4TQ;
- 261              		.loc 1 281 0
- 262 0014 4FF40033 		mov	r3, #131072
- 263 0018 2B61     		str	r3, [r5, #16]
+ 260 0012 4FF08073 		mov	r3, #16777216
+ 261 0016 EB60     		str	r3, [r5, #12]
+ 281:Src/main.c    ****   hcan.Init.TimeSeg2 = CAN_BS2_2TQ;
+ 262              		.loc 1 281 0
+ 263 0018 4FF44023 		mov	r3, #786432
+ 264 001c 2B61     		str	r3, [r5, #16]
  282:Src/main.c    ****   hcan.Init.TimeTriggeredMode = DISABLE;
- 264              		.loc 1 282 0
- 265 001a 4FF44013 		mov	r3, #3145728
- 266 001e 6B61     		str	r3, [r5, #20]
+ 265              		.loc 1 282 0
+ 266 001e 4FF48013 		mov	r3, #1048576
+ 267 0022 6B61     		str	r3, [r5, #20]
  283:Src/main.c    ****   hcan.Init.AutoBusOff = DISABLE;
- 267              		.loc 1 283 0
- 268 0020 2C76     		strb	r4, [r5, #24]
+ 268              		.loc 1 283 0
+ 269 0024 2C76     		strb	r4, [r5, #24]
  284:Src/main.c    ****   hcan.Init.AutoWakeUp = DISABLE;
- 269              		.loc 1 284 0
- 270 0022 6C76     		strb	r4, [r5, #25]
+ 270              		.loc 1 284 0
+ 271 0026 6C76     		strb	r4, [r5, #25]
  285:Src/main.c    ****   hcan.Init.AutoRetransmission = DISABLE;
- 271              		.loc 1 285 0
- 272 0024 AC76     		strb	r4, [r5, #26]
+ 272              		.loc 1 285 0
+ 273 0028 AC76     		strb	r4, [r5, #26]
  286:Src/main.c    ****   hcan.Init.ReceiveFifoLocked = DISABLE;
- 273              		.loc 1 286 0
- 274 0026 EC76     		strb	r4, [r5, #27]
+ 274              		.loc 1 286 0
+ 275 002a EC76     		strb	r4, [r5, #27]
  287:Src/main.c    ****   hcan.Init.TransmitFifoPriority = DISABLE;
- 275              		.loc 1 287 0
- 276 0028 2C77     		strb	r4, [r5, #28]
+ 276              		.loc 1 287 0
+ 277 002c 2C77     		strb	r4, [r5, #28]
  288:Src/main.c    ****   if (HAL_CAN_Init(&hcan) != HAL_OK)
- 277              		.loc 1 288 0
- 278 002a 6C77     		strb	r4, [r5, #29]
+ 278              		.loc 1 288 0
+ 279 002e 6C77     		strb	r4, [r5, #29]
  289:Src/main.c    ****   {
- 279              		.loc 1 289 0
- 280 002c 2846     		mov	r0, r5
- 281 002e FFF7FEFF 		bl	HAL_CAN_Init
- 282              	.LVL9:
+ 280              		.loc 1 289 0
+ 281 0030 2846     		mov	r0, r5
+ 282 0032 FFF7FEFF 		bl	HAL_CAN_Init
+ 283              	.LVL9:
  294:Src/main.c    **** 	POT_TxHeader.RTR = CAN_RTR_DATA; 						// CAN frame type
- 283              		.loc 1 294 0
- 284 0032 184B     		ldr	r3, .L11+8
- 285 0034 0F22     		movs	r2, #15
-ARM GAS  /tmp/cccjDM90.s 			page 13
+ 284              		.loc 1 294 0
+ 285 0036 184B     		ldr	r3, .L11+8
+ARM GAS  /tmp/ccoE54Gu.s 			page 13
 
 
- 286 0036 1A60     		str	r2, [r3]
+ 286 0038 0F22     		movs	r2, #15
+ 287 003a 1A60     		str	r2, [r3]
  295:Src/main.c    **** 	POT_TxHeader.IDE = CAN_ID_STD; 							// CAN ID type
- 287              		.loc 1 295 0
- 288 0038 DC60     		str	r4, [r3, #12]
+ 288              		.loc 1 295 0
+ 289 003c DC60     		str	r4, [r3, #12]
  296:Src/main.c    **** 	POT_TxHeader.DLC = 4; 									// CAN frame length in bytes
- 289              		.loc 1 296 0
- 290 003a 9C60     		str	r4, [r3, #8]
+ 290              		.loc 1 296 0
+ 291 003e 9C60     		str	r4, [r3, #8]
  297:Src/main.c    **** 	POT_TxHeader.TransmitGlobalTime = DISABLE;				// CAN timestamp in TxData[6] and TxData[7]
- 291              		.loc 1 297 0
- 292 003c 0422     		movs	r2, #4
- 293 003e 1A61     		str	r2, [r3, #16]
+ 292              		.loc 1 297 0
+ 293 0040 0422     		movs	r2, #4
+ 294 0042 1A61     		str	r2, [r3, #16]
  298:Src/main.c    **** 
- 294              		.loc 1 298 0
- 295 0040 1C75     		strb	r4, [r3, #20]
+ 295              		.loc 1 298 0
+ 296 0044 1C75     		strb	r4, [r3, #20]
  300:Src/main.c    **** 	POT_Txheader.RTR = CAN_RTR_DATA; 						// CAN frame type
- 296              		.loc 1 300 0
- 297 0042 154B     		ldr	r3, .L11+12
- 298 0044 6422     		movs	r2, #100
- 299 0046 1A60     		str	r2, [r3]
+ 297              		.loc 1 300 0
+ 298 0046 154B     		ldr	r3, .L11+12
+ 299 0048 6422     		movs	r2, #100
+ 300 004a 1A60     		str	r2, [r3]
  301:Src/main.c    **** 	POT_Txheader.IDE = CAN_ID_STD; 							// CAN ID type
- 300              		.loc 1 301 0
- 301 0048 DC60     		str	r4, [r3, #12]
+ 301              		.loc 1 301 0
+ 302 004c DC60     		str	r4, [r3, #12]
  302:Src/main.c    **** 	POT_Txheader.DLC = 2; 									// CAN frame length in bytes
- 302              		.loc 1 302 0
- 303 004a 9C60     		str	r4, [r3, #8]
+ 303              		.loc 1 302 0
+ 304 004e 9C60     		str	r4, [r3, #8]
  303:Src/main.c    **** 	POT_Txheader.TransmitGlobalTime = DISABLE;				// CAN timestamp in TxData[6] and TxData[7]
- 304              		.loc 1 303 0
- 305 004c 1E61     		str	r6, [r3, #16]
+ 305              		.loc 1 303 0
+ 306 0050 1E61     		str	r6, [r3, #16]
  304:Src/main.c    **** 
- 306              		.loc 1 304 0
- 307 004e 1C75     		strb	r4, [r3, #20]
+ 307              		.loc 1 304 0
+ 308 0052 1C75     		strb	r4, [r3, #20]
  306:Src/main.c    ****   POT_Txheader1.RTR = CAN_RTR_DATA; 						// CAN frame type
- 308              		.loc 1 306 0
- 309 0050 124B     		ldr	r3, .L11+16
- 310 0052 8222     		movs	r2, #130
- 311 0054 1A60     		str	r2, [r3]
+ 309              		.loc 1 306 0
+ 310 0054 124B     		ldr	r3, .L11+16
+ 311 0056 8222     		movs	r2, #130
+ 312 0058 1A60     		str	r2, [r3]
  307:Src/main.c    ****   POT_Txheader1.IDE = CAN_ID_STD; 							// CAN ID type
- 312              		.loc 1 307 0
- 313 0056 DC60     		str	r4, [r3, #12]
+ 313              		.loc 1 307 0
+ 314 005a DC60     		str	r4, [r3, #12]
  308:Src/main.c    ****   POT_Txheader1.DLC = 2; 									// CAN frame length in bytes
- 314              		.loc 1 308 0
- 315 0058 9C60     		str	r4, [r3, #8]
+ 315              		.loc 1 308 0
+ 316 005c 9C60     		str	r4, [r3, #8]
  309:Src/main.c    ****   POT_Txheader1.TransmitGlobalTime = DISABLE;				// CAN timestamp in TxData[6] and TxData[7]
- 316              		.loc 1 309 0
- 317 005a 1E61     		str	r6, [r3, #16]
+ 317              		.loc 1 309 0
+ 318 005e 1E61     		str	r6, [r3, #16]
  310:Src/main.c    **** 
- 318              		.loc 1 310 0
- 319 005c 1C75     		strb	r4, [r3, #20]
+ 319              		.loc 1 310 0
+ 320 0060 1C75     		strb	r4, [r3, #20]
  312:Src/main.c    **** 	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;		// mask mode or identifier mode
- 320              		.loc 1 312 0
- 321 005e 0594     		str	r4, [sp, #20]
+ 321              		.loc 1 312 0
+ 322 0062 0594     		str	r4, [sp, #20]
  313:Src/main.c    **** 	sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
- 322              		.loc 1 313 0
- 323 0060 0694     		str	r4, [sp, #24]
+ 323              		.loc 1 313 0
+ 324 0064 0694     		str	r4, [sp, #24]
  314:Src/main.c    **** 	sFilterConfig.FilterIdHigh = 0x0000;					// received ID must match filter ID for each bit specifie
- 324              		.loc 1 314 0
- 325 0062 0123     		movs	r3, #1
-ARM GAS  /tmp/cccjDM90.s 			page 14
+ 325              		.loc 1 314 0
+ARM GAS  /tmp/ccoE54Gu.s 			page 14
 
 
- 326 0064 0793     		str	r3, [sp, #28]
+ 326 0066 0123     		movs	r3, #1
+ 327 0068 0793     		str	r3, [sp, #28]
  315:Src/main.c    **** 	sFilterConfig.FilterIdLow = 0x0000;
- 327              		.loc 1 315 0
- 328 0066 0094     		str	r4, [sp]
+ 328              		.loc 1 315 0
+ 329 006a 0094     		str	r4, [sp]
  316:Src/main.c    **** 	sFilterConfig.FilterMaskIdHigh = 0x0000;				// specifies which bits of the received ID to compare 
- 329              		.loc 1 316 0
- 330 0068 0194     		str	r4, [sp, #4]
+ 330              		.loc 1 316 0
+ 331 006c 0194     		str	r4, [sp, #4]
  317:Src/main.c    **** 	sFilterConfig.FilterMaskIdLow = 0x0000;
- 331              		.loc 1 317 0
- 332 006a 0294     		str	r4, [sp, #8]
+ 332              		.loc 1 317 0
+ 333 006e 0294     		str	r4, [sp, #8]
  318:Src/main.c    **** 	sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO0;		// receive FIFO (0 or 1, must match chosen int
- 333              		.loc 1 318 0
- 334 006c 0394     		str	r4, [sp, #12]
+ 334              		.loc 1 318 0
+ 335 0070 0394     		str	r4, [sp, #12]
  319:Src/main.c    **** 	sFilterConfig.FilterActivation = ENABLE;
- 335              		.loc 1 319 0
- 336 006e 0494     		str	r4, [sp, #16]
+ 336              		.loc 1 319 0
+ 337 0072 0494     		str	r4, [sp, #16]
  320:Src/main.c    **** 
- 337              		.loc 1 320 0
- 338 0070 0893     		str	r3, [sp, #32]
+ 338              		.loc 1 320 0
+ 339 0074 0893     		str	r3, [sp, #32]
  322:Src/main.c    **** 
- 339              		.loc 1 322 0
- 340 0072 6946     		mov	r1, sp
- 341 0074 2846     		mov	r0, r5
- 342 0076 FFF7FEFF 		bl	HAL_CAN_ConfigFilter
- 343              	.LVL10:
+ 340              		.loc 1 322 0
+ 341 0076 6946     		mov	r1, sp
+ 342 0078 2846     		mov	r0, r5
+ 343 007a FFF7FEFF 		bl	HAL_CAN_ConfigFilter
+ 344              	.LVL10:
  324:Src/main.c    **** 
- 344              		.loc 1 324 0
- 345 007a 2846     		mov	r0, r5
- 346 007c FFF7FEFF 		bl	HAL_CAN_Start
- 347              	.LVL11:
+ 345              		.loc 1 324 0
+ 346 007e 2846     		mov	r0, r5
+ 347 0080 FFF7FEFF 		bl	HAL_CAN_Start
+ 348              	.LVL11:
  326:Src/main.c    ****   /* USER CODE END CAN_Init 2 */
- 348              		.loc 1 326 0
- 349 0080 3146     		mov	r1, r6
- 350 0082 2846     		mov	r0, r5
- 351 0084 FFF7FEFF 		bl	HAL_CAN_ActivateNotification
- 352              	.LVL12:
+ 349              		.loc 1 326 0
+ 350 0084 3146     		mov	r1, r6
+ 351 0086 2846     		mov	r0, r5
+ 352 0088 FFF7FEFF 		bl	HAL_CAN_ActivateNotification
+ 353              	.LVL12:
  329:Src/main.c    **** 
- 353              		.loc 1 329 0
- 354 0088 0AB0     		add	sp, sp, #40
- 355              	.LCFI6:
- 356              		.cfi_def_cfa_offset 16
- 357              		@ sp needed
- 358 008a 70BD     		pop	{r4, r5, r6, pc}
- 359              	.L12:
- 360              		.align	2
- 361              	.L11:
- 362 008c 00000000 		.word	hcan
- 363 0090 00640040 		.word	1073767424
- 364 0094 00000000 		.word	POT_TxHeader
- 365 0098 00000000 		.word	POT_Txheader
- 366 009c 00000000 		.word	POT_Txheader1
- 367              		.cfi_endproc
- 368              	.LFE67:
- 370              		.section	.text.SystemClock_Config,"ax",%progbits
- 371              		.align	1
- 372              		.global	SystemClock_Config
- 373              		.syntax unified
-ARM GAS  /tmp/cccjDM90.s 			page 15
+ 354              		.loc 1 329 0
+ 355 008c 0AB0     		add	sp, sp, #40
+ 356              	.LCFI6:
+ 357              		.cfi_def_cfa_offset 16
+ 358              		@ sp needed
+ 359 008e 70BD     		pop	{r4, r5, r6, pc}
+ 360              	.L12:
+ 361              		.align	2
+ 362              	.L11:
+ 363 0090 00000000 		.word	hcan
+ 364 0094 00640040 		.word	1073767424
+ 365 0098 00000000 		.word	POT_TxHeader
+ 366 009c 00000000 		.word	POT_Txheader
+ 367 00a0 00000000 		.word	POT_Txheader1
+ 368              		.cfi_endproc
+ 369              	.LFE67:
+ 371              		.section	.text.SystemClock_Config,"ax",%progbits
+ 372              		.align	1
+ 373              		.global	SystemClock_Config
+ARM GAS  /tmp/ccoE54Gu.s 			page 15
 
 
- 374              		.thumb
- 375              		.thumb_func
- 376              		.fpu softvfp
- 378              	SystemClock_Config:
- 379              	.LFB65:
+ 374              		.syntax unified
+ 375              		.thumb
+ 376              		.thumb_func
+ 377              		.fpu softvfp
+ 379              	SystemClock_Config:
+ 380              	.LFB65:
  157:Src/main.c    ****   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
- 380              		.loc 1 157 0
- 381              		.cfi_startproc
- 382              		@ args = 0, pretend = 0, frame = 80
- 383              		@ frame_needed = 0, uses_anonymous_args = 0
- 384 0000 30B5     		push	{r4, r5, lr}
- 385              	.LCFI7:
- 386              		.cfi_def_cfa_offset 12
- 387              		.cfi_offset 4, -12
- 388              		.cfi_offset 5, -8
- 389              		.cfi_offset 14, -4
- 390 0002 95B0     		sub	sp, sp, #84
- 391              	.LCFI8:
- 392              		.cfi_def_cfa_offset 96
+ 381              		.loc 1 157 0
+ 382              		.cfi_startproc
+ 383              		@ args = 0, pretend = 0, frame = 80
+ 384              		@ frame_needed = 0, uses_anonymous_args = 0
+ 385 0000 30B5     		push	{r4, r5, lr}
+ 386              	.LCFI7:
+ 387              		.cfi_def_cfa_offset 12
+ 388              		.cfi_offset 4, -12
+ 389              		.cfi_offset 5, -8
+ 390              		.cfi_offset 14, -4
+ 391 0002 95B0     		sub	sp, sp, #84
+ 392              	.LCFI8:
+ 393              		.cfi_def_cfa_offset 96
  158:Src/main.c    ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
- 393              		.loc 1 158 0
- 394 0004 2822     		movs	r2, #40
- 395 0006 0021     		movs	r1, #0
- 396 0008 0DEB0200 		add	r0, sp, r2
- 397 000c FFF7FEFF 		bl	memset
- 398              	.LVL13:
+ 394              		.loc 1 158 0
+ 395 0004 2822     		movs	r2, #40
+ 396 0006 0021     		movs	r1, #0
+ 397 0008 0DEB0200 		add	r0, sp, r2
+ 398 000c FFF7FEFF 		bl	memset
+ 399              	.LVL13:
  159:Src/main.c    ****   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
- 399              		.loc 1 159 0
- 400 0010 0024     		movs	r4, #0
- 401 0012 0594     		str	r4, [sp, #20]
- 402 0014 0694     		str	r4, [sp, #24]
- 403 0016 0794     		str	r4, [sp, #28]
- 404 0018 0894     		str	r4, [sp, #32]
- 405 001a 0994     		str	r4, [sp, #36]
+ 400              		.loc 1 159 0
+ 401 0010 0024     		movs	r4, #0
+ 402 0012 0594     		str	r4, [sp, #20]
+ 403 0014 0694     		str	r4, [sp, #24]
+ 404 0016 0794     		str	r4, [sp, #28]
+ 405 0018 0894     		str	r4, [sp, #32]
+ 406 001a 0994     		str	r4, [sp, #36]
  160:Src/main.c    **** 
- 406              		.loc 1 160 0
- 407 001c 0194     		str	r4, [sp, #4]
- 408 001e 0294     		str	r4, [sp, #8]
- 409 0020 0394     		str	r4, [sp, #12]
- 410 0022 0494     		str	r4, [sp, #16]
+ 407              		.loc 1 160 0
+ 408 001c 0194     		str	r4, [sp, #4]
+ 409 001e 0294     		str	r4, [sp, #8]
+ 410 0020 0394     		str	r4, [sp, #12]
+ 411 0022 0494     		str	r4, [sp, #16]
  164:Src/main.c    ****   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
- 411              		.loc 1 164 0
- 412 0024 0225     		movs	r5, #2
- 413 0026 0A95     		str	r5, [sp, #40]
+ 412              		.loc 1 164 0
+ 413 0024 0225     		movs	r5, #2
+ 414 0026 0A95     		str	r5, [sp, #40]
  165:Src/main.c    ****   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
- 414              		.loc 1 165 0
- 415 0028 0123     		movs	r3, #1
- 416 002a 0E93     		str	r3, [sp, #56]
+ 415              		.loc 1 165 0
+ 416 0028 0123     		movs	r3, #1
+ 417 002a 0E93     		str	r3, [sp, #56]
  166:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
- 417              		.loc 1 166 0
- 418 002c 1023     		movs	r3, #16
- 419 002e 0F93     		str	r3, [sp, #60]
+ 418              		.loc 1 166 0
+ 419 002c 1023     		movs	r3, #16
+ 420 002e 0F93     		str	r3, [sp, #60]
  168:Src/main.c    ****   {
- 420              		.loc 1 168 0
- 421 0030 0AA8     		add	r0, sp, #40
- 422 0032 FFF7FEFF 		bl	HAL_RCC_OscConfig
- 423              	.LVL14:
-ARM GAS  /tmp/cccjDM90.s 			page 16
+ 421              		.loc 1 168 0
+ 422 0030 0AA8     		add	r0, sp, #40
+ 423 0032 FFF7FEFF 		bl	HAL_RCC_OscConfig
+ARM GAS  /tmp/ccoE54Gu.s 			page 16
 
 
+ 424              	.LVL14:
  174:Src/main.c    ****                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
- 424              		.loc 1 174 0
- 425 0036 0F23     		movs	r3, #15
- 426 0038 0593     		str	r3, [sp, #20]
+ 425              		.loc 1 174 0
+ 426 0036 0F23     		movs	r3, #15
+ 427 0038 0593     		str	r3, [sp, #20]
  176:Src/main.c    ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
- 427              		.loc 1 176 0
- 428 003a 0694     		str	r4, [sp, #24]
+ 428              		.loc 1 176 0
+ 429 003a 0694     		str	r4, [sp, #24]
  177:Src/main.c    ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
- 429              		.loc 1 177 0
- 430 003c 0794     		str	r4, [sp, #28]
+ 430              		.loc 1 177 0
+ 431 003c 0794     		str	r4, [sp, #28]
  178:Src/main.c    ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
- 431              		.loc 1 178 0
- 432 003e 0894     		str	r4, [sp, #32]
+ 432              		.loc 1 178 0
+ 433 003e 0894     		str	r4, [sp, #32]
  179:Src/main.c    **** 
- 433              		.loc 1 179 0
- 434 0040 0994     		str	r4, [sp, #36]
+ 434              		.loc 1 179 0
+ 435 0040 0994     		str	r4, [sp, #36]
  181:Src/main.c    ****   {
- 435              		.loc 1 181 0
- 436 0042 2146     		mov	r1, r4
- 437 0044 05A8     		add	r0, sp, #20
- 438 0046 FFF7FEFF 		bl	HAL_RCC_ClockConfig
- 439              	.LVL15:
+ 436              		.loc 1 181 0
+ 437 0042 2146     		mov	r1, r4
+ 438 0044 05A8     		add	r0, sp, #20
+ 439 0046 FFF7FEFF 		bl	HAL_RCC_ClockConfig
+ 440              	.LVL15:
  185:Src/main.c    ****   PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV2;
- 440              		.loc 1 185 0
- 441 004a 0195     		str	r5, [sp, #4]
+ 441              		.loc 1 185 0
+ 442 004a 0195     		str	r5, [sp, #4]
  186:Src/main.c    ****   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
- 442              		.loc 1 186 0
- 443 004c 0394     		str	r4, [sp, #12]
+ 443              		.loc 1 186 0
+ 444 004c 0394     		str	r4, [sp, #12]
  187:Src/main.c    ****   {
- 444              		.loc 1 187 0
- 445 004e 01A8     		add	r0, sp, #4
- 446 0050 FFF7FEFF 		bl	HAL_RCCEx_PeriphCLKConfig
- 447              	.LVL16:
+ 445              		.loc 1 187 0
+ 446 004e 01A8     		add	r0, sp, #4
+ 447 0050 FFF7FEFF 		bl	HAL_RCCEx_PeriphCLKConfig
+ 448              	.LVL16:
  191:Src/main.c    **** 
- 448              		.loc 1 191 0
- 449 0054 15B0     		add	sp, sp, #84
- 450              	.LCFI9:
- 451              		.cfi_def_cfa_offset 12
- 452              		@ sp needed
- 453 0056 30BD     		pop	{r4, r5, pc}
- 454              		.cfi_endproc
- 455              	.LFE65:
- 457              		.section	.text.POT_read,"ax",%progbits
- 458              		.align	1
- 459              		.global	POT_read
- 460              		.syntax unified
- 461              		.thumb
- 462              		.thumb_func
- 463              		.fpu softvfp
- 465              	POT_read:
- 466              	.LFB69:
+ 449              		.loc 1 191 0
+ 450 0054 15B0     		add	sp, sp, #84
+ 451              	.LCFI9:
+ 452              		.cfi_def_cfa_offset 12
+ 453              		@ sp needed
+ 454 0056 30BD     		pop	{r4, r5, pc}
+ 455              		.cfi_endproc
+ 456              	.LFE65:
+ 458              		.section	.text.POT_read,"ax",%progbits
+ 459              		.align	1
+ 460              		.global	POT_read
+ 461              		.syntax unified
+ 462              		.thumb
+ 463              		.thumb_func
+ 464              		.fpu softvfp
+ 466              	POT_read:
+ 467              	.LFB69:
  368:Src/main.c    **** 
  369:Src/main.c    **** 
  370:Src/main.c    **** 
  371:Src/main.c    **** /* USER CODE BEGIN 4 */
  372:Src/main.c    **** void POT_read(uint16_t pot_values[4]) {
- 467              		.loc 1 372 0
-ARM GAS  /tmp/cccjDM90.s 			page 17
+ARM GAS  /tmp/ccoE54Gu.s 			page 17
 
 
- 468              		.cfi_startproc
- 469              		@ args = 0, pretend = 0, frame = 0
- 470              		@ frame_needed = 0, uses_anonymous_args = 0
- 471              	.LVL17:
- 472 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
- 473              	.LCFI10:
- 474              		.cfi_def_cfa_offset 24
- 475              		.cfi_offset 4, -24
- 476              		.cfi_offset 5, -20
- 477              		.cfi_offset 6, -16
- 478              		.cfi_offset 7, -12
- 479              		.cfi_offset 8, -8
- 480              		.cfi_offset 14, -4
- 481 0004 0746     		mov	r7, r0
+ 468              		.loc 1 372 0
+ 469              		.cfi_startproc
+ 470              		@ args = 0, pretend = 0, frame = 0
+ 471              		@ frame_needed = 0, uses_anonymous_args = 0
+ 472              	.LVL17:
+ 473 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 474              	.LCFI10:
+ 475              		.cfi_def_cfa_offset 24
+ 476              		.cfi_offset 4, -24
+ 477              		.cfi_offset 5, -20
+ 478              		.cfi_offset 6, -16
+ 479              		.cfi_offset 7, -12
+ 480              		.cfi_offset 8, -8
+ 481              		.cfi_offset 14, -4
+ 482 0004 0746     		mov	r7, r0
  373:Src/main.c    **** 	//0 1 7 9
  374:Src/main.c    **** 
  375:Src/main.c    **** 	sConfig.Channel = ADC_CHANNEL_0;
- 482              		.loc 1 375 0
- 483 0006 334D     		ldr	r5, .L17
- 484 0008 0023     		movs	r3, #0
- 485 000a 2B60     		str	r3, [r5]
+ 483              		.loc 1 375 0
+ 484 0006 334D     		ldr	r5, .L17
+ 485 0008 0023     		movs	r3, #0
+ 486 000a 2B60     		str	r3, [r5]
  376:Src/main.c    **** 	sConfig.Rank = ADC_REGULAR_RANK_1;
- 486              		.loc 1 376 0
- 487 000c 0126     		movs	r6, #1
- 488 000e 6E60     		str	r6, [r5, #4]
+ 487              		.loc 1 376 0
+ 488 000c 0126     		movs	r6, #1
+ 489 000e 6E60     		str	r6, [r5, #4]
  377:Src/main.c    **** 	sConfig.SamplingTime = ADC_SAMPLETIME_71CYCLES_5;
- 489              		.loc 1 377 0
- 490 0010 4FF00608 		mov	r8, #6
- 491 0014 C5F80880 		str	r8, [r5, #8]
+ 490              		.loc 1 377 0
+ 491 0010 4FF00608 		mov	r8, #6
+ 492 0014 C5F80880 		str	r8, [r5, #8]
  378:Src/main.c    **** 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
- 492              		.loc 1 378 0
- 493 0018 2F4C     		ldr	r4, .L17+4
- 494 001a 2946     		mov	r1, r5
- 495 001c 2046     		mov	r0, r4
- 496              	.LVL18:
- 497 001e FFF7FEFF 		bl	HAL_ADC_ConfigChannel
- 498              	.LVL19:
+ 493              		.loc 1 378 0
+ 494 0018 2F4C     		ldr	r4, .L17+4
+ 495 001a 2946     		mov	r1, r5
+ 496 001c 2046     		mov	r0, r4
+ 497              	.LVL18:
+ 498 001e FFF7FEFF 		bl	HAL_ADC_ConfigChannel
+ 499              	.LVL19:
  379:Src/main.c    **** 
  380:Src/main.c    **** 	HAL_ADC_Start(&hadc1);
- 499              		.loc 1 380 0
- 500 0022 2046     		mov	r0, r4
- 501 0024 FFF7FEFF 		bl	HAL_ADC_Start
- 502              	.LVL20:
+ 500              		.loc 1 380 0
+ 501 0022 2046     		mov	r0, r4
+ 502 0024 FFF7FEFF 		bl	HAL_ADC_Start
+ 503              	.LVL20:
  381:Src/main.c    **** 	HAL_ADC_PollForConversion(&hadc1, 1000);		//change timeout to a HAL define
- 503              		.loc 1 381 0
- 504 0028 4FF47A71 		mov	r1, #1000
- 505 002c 2046     		mov	r0, r4
- 506 002e FFF7FEFF 		bl	HAL_ADC_PollForConversion
- 507              	.LVL21:
+ 504              		.loc 1 381 0
+ 505 0028 4FF47A71 		mov	r1, #1000
+ 506 002c 2046     		mov	r0, r4
+ 507 002e FFF7FEFF 		bl	HAL_ADC_PollForConversion
+ 508              	.LVL21:
  382:Src/main.c    **** 	pot_values[0] = HAL_ADC_GetValue(&hadc1);
- 508              		.loc 1 382 0
- 509 0032 2046     		mov	r0, r4
- 510 0034 FFF7FEFF 		bl	HAL_ADC_GetValue
- 511              	.LVL22:
- 512 0038 3880     		strh	r0, [r7]	@ movhi
+ 509              		.loc 1 382 0
+ 510 0032 2046     		mov	r0, r4
+ 511 0034 FFF7FEFF 		bl	HAL_ADC_GetValue
+ 512              	.LVL22:
+ 513 0038 3880     		strh	r0, [r7]	@ movhi
  383:Src/main.c    **** 	HAL_ADC_Stop(&hadc1);
- 513              		.loc 1 383 0
-ARM GAS  /tmp/cccjDM90.s 			page 18
+ARM GAS  /tmp/ccoE54Gu.s 			page 18
 
 
- 514 003a 2046     		mov	r0, r4
- 515 003c FFF7FEFF 		bl	HAL_ADC_Stop
- 516              	.LVL23:
+ 514              		.loc 1 383 0
+ 515 003a 2046     		mov	r0, r4
+ 516 003c FFF7FEFF 		bl	HAL_ADC_Stop
+ 517              	.LVL23:
  384:Src/main.c    **** 
  385:Src/main.c    **** 	sConfig.Channel = ADC_CHANNEL_1;
- 517              		.loc 1 385 0
- 518 0040 2E60     		str	r6, [r5]
+ 518              		.loc 1 385 0
+ 519 0040 2E60     		str	r6, [r5]
  386:Src/main.c    **** 	sConfig.Rank = ADC_REGULAR_RANK_1;
- 519              		.loc 1 386 0
- 520 0042 6E60     		str	r6, [r5, #4]
+ 520              		.loc 1 386 0
+ 521 0042 6E60     		str	r6, [r5, #4]
  387:Src/main.c    **** 	sConfig.SamplingTime = ADC_SAMPLETIME_71CYCLES_5;
- 521              		.loc 1 387 0
- 522 0044 C5F80880 		str	r8, [r5, #8]
+ 522              		.loc 1 387 0
+ 523 0044 C5F80880 		str	r8, [r5, #8]
  388:Src/main.c    **** 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
- 523              		.loc 1 388 0
- 524 0048 2946     		mov	r1, r5
- 525 004a 2046     		mov	r0, r4
- 526 004c FFF7FEFF 		bl	HAL_ADC_ConfigChannel
- 527              	.LVL24:
+ 524              		.loc 1 388 0
+ 525 0048 2946     		mov	r1, r5
+ 526 004a 2046     		mov	r0, r4
+ 527 004c FFF7FEFF 		bl	HAL_ADC_ConfigChannel
+ 528              	.LVL24:
  389:Src/main.c    **** 
  390:Src/main.c    **** 	HAL_ADC_Start(&hadc1);
- 528              		.loc 1 390 0
- 529 0050 2046     		mov	r0, r4
- 530 0052 FFF7FEFF 		bl	HAL_ADC_Start
- 531              	.LVL25:
+ 529              		.loc 1 390 0
+ 530 0050 2046     		mov	r0, r4
+ 531 0052 FFF7FEFF 		bl	HAL_ADC_Start
+ 532              	.LVL25:
  391:Src/main.c    **** 	HAL_ADC_PollForConversion(&hadc1, 1000);
- 532              		.loc 1 391 0
- 533 0056 4FF47A71 		mov	r1, #1000
- 534 005a 2046     		mov	r0, r4
- 535 005c FFF7FEFF 		bl	HAL_ADC_PollForConversion
- 536              	.LVL26:
+ 533              		.loc 1 391 0
+ 534 0056 4FF47A71 		mov	r1, #1000
+ 535 005a 2046     		mov	r0, r4
+ 536 005c FFF7FEFF 		bl	HAL_ADC_PollForConversion
+ 537              	.LVL26:
  392:Src/main.c    **** 	pot_values[1] = HAL_ADC_GetValue(&hadc1);
- 537              		.loc 1 392 0
- 538 0060 2046     		mov	r0, r4
- 539 0062 FFF7FEFF 		bl	HAL_ADC_GetValue
- 540              	.LVL27:
- 541 0066 7880     		strh	r0, [r7, #2]	@ movhi
+ 538              		.loc 1 392 0
+ 539 0060 2046     		mov	r0, r4
+ 540 0062 FFF7FEFF 		bl	HAL_ADC_GetValue
+ 541              	.LVL27:
+ 542 0066 7880     		strh	r0, [r7, #2]	@ movhi
  393:Src/main.c    **** 	HAL_ADC_Stop(&hadc1);
- 542              		.loc 1 393 0
- 543 0068 2046     		mov	r0, r4
- 544 006a FFF7FEFF 		bl	HAL_ADC_Stop
- 545              	.LVL28:
+ 543              		.loc 1 393 0
+ 544 0068 2046     		mov	r0, r4
+ 545 006a FFF7FEFF 		bl	HAL_ADC_Stop
+ 546              	.LVL28:
  394:Src/main.c    **** 
  395:Src/main.c    **** 	sConfig.Channel = ADC_CHANNEL_7;
- 546              		.loc 1 395 0
- 547 006e 0723     		movs	r3, #7
- 548 0070 2B60     		str	r3, [r5]
+ 547              		.loc 1 395 0
+ 548 006e 0723     		movs	r3, #7
+ 549 0070 2B60     		str	r3, [r5]
  396:Src/main.c    **** 	sConfig.Rank = ADC_REGULAR_RANK_1;
- 549              		.loc 1 396 0
- 550 0072 6E60     		str	r6, [r5, #4]
+ 550              		.loc 1 396 0
+ 551 0072 6E60     		str	r6, [r5, #4]
  397:Src/main.c    **** 	sConfig.SamplingTime = ADC_SAMPLETIME_71CYCLES_5;
- 551              		.loc 1 397 0
- 552 0074 C5F80880 		str	r8, [r5, #8]
+ 552              		.loc 1 397 0
+ 553 0074 C5F80880 		str	r8, [r5, #8]
  398:Src/main.c    **** 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
- 553              		.loc 1 398 0
- 554 0078 2946     		mov	r1, r5
- 555 007a 2046     		mov	r0, r4
-ARM GAS  /tmp/cccjDM90.s 			page 19
+ 554              		.loc 1 398 0
+ 555 0078 2946     		mov	r1, r5
+ARM GAS  /tmp/ccoE54Gu.s 			page 19
 
 
- 556 007c FFF7FEFF 		bl	HAL_ADC_ConfigChannel
- 557              	.LVL29:
+ 556 007a 2046     		mov	r0, r4
+ 557 007c FFF7FEFF 		bl	HAL_ADC_ConfigChannel
+ 558              	.LVL29:
  399:Src/main.c    **** 
  400:Src/main.c    **** 
  401:Src/main.c    **** 	HAL_ADC_Start(&hadc1);
- 558              		.loc 1 401 0
- 559 0080 2046     		mov	r0, r4
- 560 0082 FFF7FEFF 		bl	HAL_ADC_Start
- 561              	.LVL30:
+ 559              		.loc 1 401 0
+ 560 0080 2046     		mov	r0, r4
+ 561 0082 FFF7FEFF 		bl	HAL_ADC_Start
+ 562              	.LVL30:
  402:Src/main.c    **** 	HAL_ADC_PollForConversion(&hadc1, 1000);
- 562              		.loc 1 402 0
- 563 0086 4FF47A71 		mov	r1, #1000
- 564 008a 2046     		mov	r0, r4
- 565 008c FFF7FEFF 		bl	HAL_ADC_PollForConversion
- 566              	.LVL31:
+ 563              		.loc 1 402 0
+ 564 0086 4FF47A71 		mov	r1, #1000
+ 565 008a 2046     		mov	r0, r4
+ 566 008c FFF7FEFF 		bl	HAL_ADC_PollForConversion
+ 567              	.LVL31:
  403:Src/main.c    **** 	pot_values[2] = HAL_ADC_GetValue(&hadc1);
- 567              		.loc 1 403 0
- 568 0090 2046     		mov	r0, r4
- 569 0092 FFF7FEFF 		bl	HAL_ADC_GetValue
- 570              	.LVL32:
- 571 0096 B880     		strh	r0, [r7, #4]	@ movhi
+ 568              		.loc 1 403 0
+ 569 0090 2046     		mov	r0, r4
+ 570 0092 FFF7FEFF 		bl	HAL_ADC_GetValue
+ 571              	.LVL32:
+ 572 0096 B880     		strh	r0, [r7, #4]	@ movhi
  404:Src/main.c    **** 	HAL_ADC_Stop(&hadc1);
- 572              		.loc 1 404 0
- 573 0098 2046     		mov	r0, r4
- 574 009a FFF7FEFF 		bl	HAL_ADC_Stop
- 575              	.LVL33:
+ 573              		.loc 1 404 0
+ 574 0098 2046     		mov	r0, r4
+ 575 009a FFF7FEFF 		bl	HAL_ADC_Stop
+ 576              	.LVL33:
  405:Src/main.c    **** 
  406:Src/main.c    **** 	sConfig.Channel = ADC_CHANNEL_9;
- 576              		.loc 1 406 0
- 577 009e 0923     		movs	r3, #9
- 578 00a0 2B60     		str	r3, [r5]
+ 577              		.loc 1 406 0
+ 578 009e 0923     		movs	r3, #9
+ 579 00a0 2B60     		str	r3, [r5]
  407:Src/main.c    **** 	sConfig.Rank = ADC_REGULAR_RANK_1;
- 579              		.loc 1 407 0
- 580 00a2 6E60     		str	r6, [r5, #4]
+ 580              		.loc 1 407 0
+ 581 00a2 6E60     		str	r6, [r5, #4]
  408:Src/main.c    **** 	sConfig.SamplingTime = ADC_SAMPLETIME_71CYCLES_5;
- 581              		.loc 1 408 0
- 582 00a4 C5F80880 		str	r8, [r5, #8]
+ 582              		.loc 1 408 0
+ 583 00a4 C5F80880 		str	r8, [r5, #8]
  409:Src/main.c    **** 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
- 583              		.loc 1 409 0
- 584 00a8 2946     		mov	r1, r5
- 585 00aa 2046     		mov	r0, r4
- 586 00ac FFF7FEFF 		bl	HAL_ADC_ConfigChannel
- 587              	.LVL34:
+ 584              		.loc 1 409 0
+ 585 00a8 2946     		mov	r1, r5
+ 586 00aa 2046     		mov	r0, r4
+ 587 00ac FFF7FEFF 		bl	HAL_ADC_ConfigChannel
+ 588              	.LVL34:
  410:Src/main.c    **** 
  411:Src/main.c    **** 
  412:Src/main.c    **** 	HAL_ADC_Start(&hadc1);
- 588              		.loc 1 412 0
- 589 00b0 2046     		mov	r0, r4
- 590 00b2 FFF7FEFF 		bl	HAL_ADC_Start
- 591              	.LVL35:
+ 589              		.loc 1 412 0
+ 590 00b0 2046     		mov	r0, r4
+ 591 00b2 FFF7FEFF 		bl	HAL_ADC_Start
+ 592              	.LVL35:
  413:Src/main.c    **** 	HAL_ADC_PollForConversion(&hadc1, 1000);
- 592              		.loc 1 413 0
- 593 00b6 4FF47A71 		mov	r1, #1000
- 594 00ba 2046     		mov	r0, r4
- 595 00bc FFF7FEFF 		bl	HAL_ADC_PollForConversion
- 596              	.LVL36:
+ 593              		.loc 1 413 0
+ 594 00b6 4FF47A71 		mov	r1, #1000
+ 595 00ba 2046     		mov	r0, r4
+ 596 00bc FFF7FEFF 		bl	HAL_ADC_PollForConversion
+ 597              	.LVL36:
+ARM GAS  /tmp/ccoE54Gu.s 			page 20
+
+
  414:Src/main.c    **** 	pot_values[3] = HAL_ADC_GetValue(&hadc1);
-ARM GAS  /tmp/cccjDM90.s 			page 20
-
-
- 597              		.loc 1 414 0
- 598 00c0 2046     		mov	r0, r4
- 599 00c2 FFF7FEFF 		bl	HAL_ADC_GetValue
- 600              	.LVL37:
- 601 00c6 F880     		strh	r0, [r7, #6]	@ movhi
+ 598              		.loc 1 414 0
+ 599 00c0 2046     		mov	r0, r4
+ 600 00c2 FFF7FEFF 		bl	HAL_ADC_GetValue
+ 601              	.LVL37:
+ 602 00c6 F880     		strh	r0, [r7, #6]	@ movhi
  415:Src/main.c    **** 
  416:Src/main.c    **** 	HAL_ADC_Stop(&hadc1);
- 602              		.loc 1 416 0
- 603 00c8 2046     		mov	r0, r4
- 604 00ca FFF7FEFF 		bl	HAL_ADC_Stop
- 605              	.LVL38:
- 606 00ce BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
- 607              	.LVL39:
- 608              	.L18:
- 609 00d2 00BF     		.align	2
- 610              	.L17:
- 611 00d4 00000000 		.word	.LANCHOR0
- 612 00d8 00000000 		.word	hadc1
- 613              		.cfi_endproc
- 614              	.LFE69:
- 616              		.section	.text.POT_interpret,"ax",%progbits
- 617              		.align	1
- 618              		.global	POT_interpret
- 619              		.syntax unified
- 620              		.thumb
- 621              		.thumb_func
- 622              		.fpu softvfp
- 624              	POT_interpret:
- 625              	.LFB70:
+ 603              		.loc 1 416 0
+ 604 00c8 2046     		mov	r0, r4
+ 605 00ca FFF7FEFF 		bl	HAL_ADC_Stop
+ 606              	.LVL38:
+ 607 00ce BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 608              	.LVL39:
+ 609              	.L18:
+ 610 00d2 00BF     		.align	2
+ 611              	.L17:
+ 612 00d4 00000000 		.word	.LANCHOR0
+ 613 00d8 00000000 		.word	hadc1
+ 614              		.cfi_endproc
+ 615              	.LFE69:
+ 617              		.section	.text.POT_interpret,"ax",%progbits
+ 618              		.align	1
+ 619              		.global	POT_interpret
+ 620              		.syntax unified
+ 621              		.thumb
+ 622              		.thumb_func
+ 623              		.fpu softvfp
+ 625              	POT_interpret:
+ 626              	.LFB70:
  417:Src/main.c    **** 
  418:Src/main.c    **** }
  419:Src/main.c    **** 
  420:Src/main.c    **** void POT_interpret(uint16_t pot_values[4]) {
- 626              		.loc 1 420 0
- 627              		.cfi_startproc
- 628              		@ args = 0, pretend = 0, frame = 8
- 629              		@ frame_needed = 0, uses_anonymous_args = 0
- 630              	.LVL40:
- 631 0000 30B5     		push	{r4, r5, lr}
- 632              	.LCFI11:
- 633              		.cfi_def_cfa_offset 12
- 634              		.cfi_offset 4, -12
- 635              		.cfi_offset 5, -8
- 636              		.cfi_offset 14, -4
- 637 0002 83B0     		sub	sp, sp, #12
- 638              	.LCFI12:
- 639              		.cfi_def_cfa_offset 24
- 640              	.LVL41:
+ 627              		.loc 1 420 0
+ 628              		.cfi_startproc
+ 629              		@ args = 0, pretend = 0, frame = 8
+ 630              		@ frame_needed = 0, uses_anonymous_args = 0
+ 631              	.LVL40:
+ 632 0000 30B5     		push	{r4, r5, lr}
+ 633              	.LCFI11:
+ 634              		.cfi_def_cfa_offset 12
+ 635              		.cfi_offset 4, -12
+ 636              		.cfi_offset 5, -8
+ 637              		.cfi_offset 14, -4
+ 638 0002 83B0     		sub	sp, sp, #12
+ 639              	.LCFI12:
+ 640              		.cfi_def_cfa_offset 24
+ 641              	.LVL41:
  421:Src/main.c    **** 
  422:Src/main.c    **** 	uint8_t pot_pos[4];
  423:Src/main.c    **** 	uint8_t i, j;
  424:Src/main.c    **** 
  425:Src/main.c    **** 	for (i = 0; i < 4; i++) {
- 641              		.loc 1 425 0
- 642 0004 0024     		movs	r4, #0
- 643 0006 1FE0     		b	.L20
- 644              	.LVL42:
-ARM GAS  /tmp/cccjDM90.s 			page 21
+ 642              		.loc 1 425 0
+ 643 0004 0024     		movs	r4, #0
+ 644 0006 1FE0     		b	.L20
+ARM GAS  /tmp/ccoE54Gu.s 			page 21
 
 
- 645              	.L21:
+ 645              	.LVL42:
+ 646              	.L21:
  426:Src/main.c    **** 
  427:Src/main.c    **** 		for (j = 0; j < 10; j++) {
- 646              		.loc 1 427 0 discriminator 2
- 647 0008 0133     		adds	r3, r3, #1
- 648              	.LVL43:
- 649 000a DBB2     		uxtb	r3, r3
- 650              	.LVL44:
- 651              	.L23:
- 652              		.loc 1 427 0 is_stmt 0 discriminator 1
- 653 000c 092B     		cmp	r3, #9
- 654 000e 13D8     		bhi	.L44
+ 647              		.loc 1 427 0 discriminator 2
+ 648 0008 0133     		adds	r3, r3, #1
+ 649              	.LVL43:
+ 650 000a DBB2     		uxtb	r3, r3
+ 651              	.LVL44:
+ 652              	.L23:
+ 653              		.loc 1 427 0 is_stmt 0 discriminator 1
+ 654 000c 092B     		cmp	r3, #9
+ 655 000e 13D8     		bhi	.L44
  428:Src/main.c    **** 
  429:Src/main.c    **** 			//uint16_t pot_threshold[12] = {0, 615, 1025, 1435, 1845, 2255, 2665, 3075, 3485, 3895, 4095};
  430:Src/main.c    **** 			if ((pot_values[i] > pot_threshold[j]) && (pot_values[i] <= pot_threshold[j + 1]))
- 655              		.loc 1 430 0 is_stmt 1
- 656 0010 30F81420 		ldrh	r2, [r0, r4, lsl #1]
- 657 0014 5749     		ldr	r1, .L55
- 658 0016 31F81310 		ldrh	r1, [r1, r3, lsl #1]
- 659 001a 8A42     		cmp	r2, r1
- 660 001c F4D9     		bls	.L21
- 661              		.loc 1 430 0 is_stmt 0 discriminator 1
- 662 001e 591C     		adds	r1, r3, #1
- 663 0020 544D     		ldr	r5, .L55
- 664 0022 35F81110 		ldrh	r1, [r5, r1, lsl #1]
- 665 0026 8A42     		cmp	r2, r1
- 666 0028 EED8     		bhi	.L21
+ 656              		.loc 1 430 0 is_stmt 1
+ 657 0010 30F81420 		ldrh	r2, [r0, r4, lsl #1]
+ 658 0014 5749     		ldr	r1, .L55
+ 659 0016 31F81310 		ldrh	r1, [r1, r3, lsl #1]
+ 660 001a 8A42     		cmp	r2, r1
+ 661 001c F4D9     		bls	.L21
+ 662              		.loc 1 430 0 is_stmt 0 discriminator 1
+ 663 001e 591C     		adds	r1, r3, #1
+ 664 0020 544D     		ldr	r5, .L55
+ 665 0022 35F81110 		ldrh	r1, [r5, r1, lsl #1]
+ 666 0026 8A42     		cmp	r2, r1
+ 667 0028 EED8     		bhi	.L21
  431:Src/main.c    **** 				pot_pos[i] = 10 - (j + 1); // pot_pos[i] = 0 is ~3.3V, pot_pos[i] = 1 is ~3V, etc.
- 667              		.loc 1 431 0 is_stmt 1
- 668 002a C3F10902 		rsb	r2, r3, #9
- 669 002e 02A9     		add	r1, sp, #8
- 670 0030 2144     		add	r1, r1, r4
- 671 0032 01F8042C 		strb	r2, [r1, #-4]
- 672 0036 E7E7     		b	.L21
- 673              	.L44:
+ 668              		.loc 1 431 0 is_stmt 1
+ 669 002a C3F10902 		rsb	r2, r3, #9
+ 670 002e 02A9     		add	r1, sp, #8
+ 671 0030 2144     		add	r1, r1, r4
+ 672 0032 01F8042C 		strb	r2, [r1, #-4]
+ 673 0036 E7E7     		b	.L21
+ 674              	.L44:
  432:Src/main.c    **** 			}
  433:Src/main.c    **** 
  434:Src/main.c    **** 		POT_data[i] = pot_pos[i];
- 674              		.loc 1 434 0 discriminator 2
- 675 0038 02AB     		add	r3, sp, #8
- 676              	.LVL45:
- 677 003a 2344     		add	r3, r3, r4
- 678 003c 13F8042C 		ldrb	r2, [r3, #-4]	@ zero_extendqisi2
- 679 0040 4D4B     		ldr	r3, .L55+4
- 680 0042 1A55     		strb	r2, [r3, r4]
+ 675              		.loc 1 434 0 discriminator 2
+ 676 0038 02AB     		add	r3, sp, #8
+ 677              	.LVL45:
+ 678 003a 2344     		add	r3, r3, r4
+ 679 003c 13F8042C 		ldrb	r2, [r3, #-4]	@ zero_extendqisi2
+ 680 0040 4D4B     		ldr	r3, .L55+4
+ 681 0042 1A55     		strb	r2, [r3, r4]
  425:Src/main.c    **** 
- 681              		.loc 1 425 0 discriminator 2
- 682 0044 0134     		adds	r4, r4, #1
- 683              	.LVL46:
- 684 0046 E4B2     		uxtb	r4, r4
- 685              	.LVL47:
- 686              	.L20:
+ 682              		.loc 1 425 0 discriminator 2
+ 683 0044 0134     		adds	r4, r4, #1
+ 684              	.LVL46:
+ 685 0046 E4B2     		uxtb	r4, r4
+ 686              	.LVL47:
+ 687              	.L20:
  425:Src/main.c    **** 
- 687              		.loc 1 425 0 is_stmt 0 discriminator 1
- 688 0048 032C     		cmp	r4, #3
- 689 004a 01D8     		bhi	.L45
- 690 004c 0023     		movs	r3, #0
-ARM GAS  /tmp/cccjDM90.s 			page 22
+ 688              		.loc 1 425 0 is_stmt 0 discriminator 1
+ 689 0048 032C     		cmp	r4, #3
+ 690 004a 01D8     		bhi	.L45
+ARM GAS  /tmp/ccoE54Gu.s 			page 22
 
 
- 691 004e DDE7     		b	.L23
- 692              	.L45:
+ 691 004c 0023     		movs	r3, #0
+ 692 004e DDE7     		b	.L23
+ 693              	.L45:
  435:Src/main.c    **** 		//POT_data[0] = 0x00;
  436:Src/main.c    **** 
  437:Src/main.c    **** 	}
  438:Src/main.c    **** 
  439:Src/main.c    **** if (pot_pos[1] == 0){
- 693              		.loc 1 439 0 is_stmt 1
- 694 0050 9DF80540 		ldrb	r4, [sp, #5]	@ zero_extendqisi2
- 695              	.LVL48:
- 696 0054 5CBB     		cbnz	r4, .L24
+ 694              		.loc 1 439 0 is_stmt 1
+ 695 0050 9DF80540 		ldrb	r4, [sp, #5]	@ zero_extendqisi2
+ 696              	.LVL48:
+ 697 0054 5CBB     		cbnz	r4, .L24
  440:Src/main.c    **** 	POT_Data[1] = 1;
- 697              		.loc 1 440 0
- 698 0056 494B     		ldr	r3, .L55+8
- 699 0058 0122     		movs	r2, #1
- 700 005a 5A70     		strb	r2, [r3, #1]
+ 698              		.loc 1 440 0
+ 699 0056 494B     		ldr	r3, .L55+8
+ 700 0058 0122     		movs	r2, #1
+ 701 005a 5A70     		strb	r2, [r3, #1]
  441:Src/main.c    ****   POT_Data[0] = 244;
- 701              		.loc 1 441 0
- 702 005c F422     		movs	r2, #244
- 703 005e 1A70     		strb	r2, [r3]
- 704              	.L25:
+ 702              		.loc 1 441 0
+ 703 005c F422     		movs	r2, #244
+ 704 005e 1A70     		strb	r2, [r3]
+ 705              	.L25:
  442:Src/main.c    ****   }
  443:Src/main.c    **** 
  444:Src/main.c    **** else if (pot_pos[1] == 1){
@@ -1317,10 +1318,10 @@ ARM GAS  /tmp/cccjDM90.s 			page 1
  474:Src/main.c    **** else if (pot_pos[1] == 7){
  475:Src/main.c    ****     	POT_Data[1] = 7;
  476:Src/main.c    ****       POT_Data[0] = 158;
+ARM GAS  /tmp/ccoE54Gu.s 			page 23
+
+
  477:Src/main.c    ****   }
-ARM GAS  /tmp/cccjDM90.s 			page 23
-
-
  478:Src/main.c    **** 
  479:Src/main.c    **** else if (pot_pos[1] == 8){
  480:Src/main.c    ****     	POT_Data[1] = 8;
@@ -1333,364 +1334,364 @@ ARM GAS  /tmp/cccjDM90.s 			page 1
  487:Src/main.c    ****   }
  488:Src/main.c    **** 
  489:Src/main.c    **** 	if (pot_pos[0] != 0) // if CURRENT_POT is in any position other than first, turn on CUR_LED
- 705              		.loc 1 489 0
- 706 0060 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
- 707 0064 002B     		cmp	r3, #0
- 708 0066 6AD0     		beq	.L34
+ 706              		.loc 1 489 0
+ 707 0060 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 708 0064 002B     		cmp	r3, #0
+ 709 0066 6AD0     		beq	.L34
  490:Src/main.c    **** 		HAL_GPIO_WritePin(GPIOB, CUST_LED_Pin, GPIO_PIN_SET);
- 709              		.loc 1 490 0
- 710 0068 0122     		movs	r2, #1
- 711 006a 4FF48071 		mov	r1, #256
- 712 006e 4448     		ldr	r0, .L55+12
- 713              	.LVL49:
- 714 0070 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 715              	.LVL50:
- 716              	.L35:
+ 710              		.loc 1 490 0
+ 711 0068 0122     		movs	r2, #1
+ 712 006a 4FF48071 		mov	r1, #256
+ 713 006e 4448     		ldr	r0, .L55+12
+ 714              	.LVL49:
+ 715 0070 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 716              	.LVL50:
+ 717              	.L35:
  491:Src/main.c    ****   else
  492:Src/main.c    ****   	HAL_GPIO_WritePin(GPIOB, CUST_LED_Pin, GPIO_PIN_RESET);
  493:Src/main.c    **** 
  494:Src/main.c    **** 	if (pot_pos[1] != 0) // if CUSTOM_POT is in any position other than first, turn on CUST_LED
- 717              		.loc 1 494 0
- 718 0074 002C     		cmp	r4, #0
- 719 0076 69D0     		beq	.L36
+ 718              		.loc 1 494 0
+ 719 0074 002C     		cmp	r4, #0
+ 720 0076 69D0     		beq	.L36
  495:Src/main.c    **** 		HAL_GPIO_WritePin(GPIOA, CUR_LED_Pin, GPIO_PIN_SET);
- 720              		.loc 1 495 0
- 721 0078 0122     		movs	r2, #1
- 722 007a 0821     		movs	r1, #8
- 723 007c 4148     		ldr	r0, .L55+16
- 724 007e FFF7FEFF 		bl	HAL_GPIO_WritePin
- 725              	.LVL51:
- 726              	.L37:
+ 721              		.loc 1 495 0
+ 722 0078 0122     		movs	r2, #1
+ 723 007a 0821     		movs	r1, #8
+ 724 007c 4148     		ldr	r0, .L55+16
+ 725 007e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 726              	.LVL51:
+ 727              	.L37:
  496:Src/main.c    **** 	else
  497:Src/main.c    **** 		HAL_GPIO_WritePin(GPIOA, CUR_LED_Pin, GPIO_PIN_RESET);
  498:Src/main.c    **** 
  499:Src/main.c    **** 	if (pot_pos[2] != 0) // if TC_POT is in any position other than first, turn on TC_LED
- 727              		.loc 1 499 0
- 728 0082 9DF80630 		ldrb	r3, [sp, #6]	@ zero_extendqisi2
- 729 0086 002B     		cmp	r3, #0
- 730 0088 66D0     		beq	.L38
+ 728              		.loc 1 499 0
+ 729 0082 9DF80630 		ldrb	r3, [sp, #6]	@ zero_extendqisi2
+ 730 0086 002B     		cmp	r3, #0
+ 731 0088 66D0     		beq	.L38
  500:Src/main.c    **** 		HAL_GPIO_WritePin(GPIOA, TC_LED_Pin, GPIO_PIN_SET);
- 731              		.loc 1 500 0
- 732 008a 0122     		movs	r2, #1
- 733 008c 4FF40071 		mov	r1, #512
- 734 0090 3C48     		ldr	r0, .L55+16
- 735 0092 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 736              	.LVL52:
- 737              	.L39:
+ 732              		.loc 1 500 0
+ 733 008a 0122     		movs	r2, #1
+ 734 008c 4FF40071 		mov	r1, #512
+ 735 0090 3C48     		ldr	r0, .L55+16
+ 736 0092 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 737              	.LVL52:
+ 738              	.L39:
+ARM GAS  /tmp/ccoE54Gu.s 			page 24
+
+
  501:Src/main.c    **** 	else
-ARM GAS  /tmp/cccjDM90.s 			page 24
-
-
  502:Src/main.c    **** 		HAL_GPIO_WritePin(GPIOA, TC_LED_Pin, GPIO_PIN_RESET);
  503:Src/main.c    **** 
  504:Src/main.c    **** 	if (pot_pos[3] != 0) // if DRS_POT is in any position other than first, turn on DRS_LED
- 738              		.loc 1 504 0
- 739 0096 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
- 740 009a 002B     		cmp	r3, #0
- 741 009c 63D1     		bne	.L46
+ 739              		.loc 1 504 0
+ 740 0096 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 741 009a 002B     		cmp	r3, #0
+ 742 009c 63D1     		bne	.L46
  505:Src/main.c    **** 		HAL_GPIO_WritePin(GPIOA, DRS_LED_Pin, GPIO_PIN_SET);
  506:Src/main.c    **** 	else
  507:Src/main.c    **** 		HAL_GPIO_WritePin(GPIOA, DRS_LED_Pin, GPIO_PIN_RESET);
- 742              		.loc 1 507 0
- 743 009e 0022     		movs	r2, #0
- 744 00a0 4FF48071 		mov	r1, #256
- 745 00a4 3748     		ldr	r0, .L55+16
- 746 00a6 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 747              	.LVL53:
- 748              	.L19:
+ 743              		.loc 1 507 0
+ 744 009e 0022     		movs	r2, #0
+ 745 00a0 4FF48071 		mov	r1, #256
+ 746 00a4 3748     		ldr	r0, .L55+16
+ 747 00a6 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 748              	.LVL53:
+ 749              	.L19:
  508:Src/main.c    **** 
  509:Src/main.c    **** }
- 749              		.loc 1 509 0
- 750 00aa 03B0     		add	sp, sp, #12
- 751              	.LCFI13:
- 752              		.cfi_remember_state
- 753              		.cfi_def_cfa_offset 12
- 754              		@ sp needed
- 755 00ac 30BD     		pop	{r4, r5, pc}
- 756              	.LVL54:
- 757              	.L24:
- 758              	.LCFI14:
- 759              		.cfi_restore_state
+ 750              		.loc 1 509 0
+ 751 00aa 03B0     		add	sp, sp, #12
+ 752              	.LCFI13:
+ 753              		.cfi_remember_state
+ 754              		.cfi_def_cfa_offset 12
+ 755              		@ sp needed
+ 756 00ac 30BD     		pop	{r4, r5, pc}
+ 757              	.LVL54:
+ 758              	.L24:
+ 759              	.LCFI14:
+ 760              		.cfi_restore_state
  444:Src/main.c    ****   	POT_Data[1] = 3;
- 760              		.loc 1 444 0
- 761 00ae 012C     		cmp	r4, #1
- 762 00b0 15D0     		beq	.L47
+ 761              		.loc 1 444 0
+ 762 00ae 012C     		cmp	r4, #1
+ 763 00b0 15D0     		beq	.L47
  449:Src/main.c    ****     	POT_Data[1] = 4;
- 763              		.loc 1 449 0
- 764 00b2 022C     		cmp	r4, #2
- 765 00b4 19D0     		beq	.L48
+ 764              		.loc 1 449 0
+ 765 00b2 022C     		cmp	r4, #2
+ 766 00b4 19D0     		beq	.L48
  454:Src/main.c    ****     	POT_Data[1] = 5;
- 766              		.loc 1 454 0
- 767 00b6 032C     		cmp	r4, #3
- 768 00b8 1DD0     		beq	.L49
+ 767              		.loc 1 454 0
+ 768 00b6 032C     		cmp	r4, #3
+ 769 00b8 1DD0     		beq	.L49
  459:Src/main.c    ****       	POT_Data[1] = 5;
- 769              		.loc 1 459 0
- 770 00ba 042C     		cmp	r4, #4
- 771 00bc 21D0     		beq	.L50
+ 770              		.loc 1 459 0
+ 771 00ba 042C     		cmp	r4, #4
+ 772 00bc 21D0     		beq	.L50
  464:Src/main.c    ****         	POT_Data[1] = 6;
- 772              		.loc 1 464 0
- 773 00be 052C     		cmp	r4, #5
- 774 00c0 25D0     		beq	.L51
+ 773              		.loc 1 464 0
+ 774 00be 052C     		cmp	r4, #5
+ 775 00c0 25D0     		beq	.L51
  469:Src/main.c    ****     	POT_Data[1] = 7;
- 775              		.loc 1 469 0
- 776 00c2 062C     		cmp	r4, #6
- 777 00c4 29D0     		beq	.L52
+ 776              		.loc 1 469 0
+ 777 00c2 062C     		cmp	r4, #6
+ 778 00c4 29D0     		beq	.L52
  474:Src/main.c    ****     	POT_Data[1] = 7;
- 778              		.loc 1 474 0
- 779 00c6 072C     		cmp	r4, #7
-ARM GAS  /tmp/cccjDM90.s 			page 25
+ 779              		.loc 1 474 0
+ARM GAS  /tmp/ccoE54Gu.s 			page 25
 
 
- 780 00c8 2DD0     		beq	.L53
+ 780 00c6 072C     		cmp	r4, #7
+ 781 00c8 2DD0     		beq	.L53
  479:Src/main.c    ****     	POT_Data[1] = 8;
- 781              		.loc 1 479 0
- 782 00ca 082C     		cmp	r4, #8
- 783 00cc 31D0     		beq	.L54
+ 782              		.loc 1 479 0
+ 783 00ca 082C     		cmp	r4, #8
+ 784 00cc 31D0     		beq	.L54
  484:Src/main.c    ****     	POT_Data[1] = 8;
- 784              		.loc 1 484 0
- 785 00ce 092C     		cmp	r4, #9
- 786 00d0 C6D1     		bne	.L25
+ 785              		.loc 1 484 0
+ 786 00ce 092C     		cmp	r4, #9
+ 787 00d0 C6D1     		bne	.L25
  485:Src/main.c    ****       POT_Data[0] = 202;
- 787              		.loc 1 485 0
- 788 00d2 2A4B     		ldr	r3, .L55+8
- 789 00d4 0822     		movs	r2, #8
- 790 00d6 5A70     		strb	r2, [r3, #1]
+ 788              		.loc 1 485 0
+ 789 00d2 2A4B     		ldr	r3, .L55+8
+ 790 00d4 0822     		movs	r2, #8
+ 791 00d6 5A70     		strb	r2, [r3, #1]
  486:Src/main.c    ****   }
- 791              		.loc 1 486 0
- 792 00d8 CA22     		movs	r2, #202
- 793 00da 1A70     		strb	r2, [r3]
- 794 00dc C0E7     		b	.L25
- 795              	.L47:
+ 792              		.loc 1 486 0
+ 793 00d8 CA22     		movs	r2, #202
+ 794 00da 1A70     		strb	r2, [r3]
+ 795 00dc C0E7     		b	.L25
+ 796              	.L47:
  445:Src/main.c    ****     POT_Data[0] = 232;
- 796              		.loc 1 445 0
- 797 00de 274B     		ldr	r3, .L55+8
- 798 00e0 0322     		movs	r2, #3
- 799 00e2 5A70     		strb	r2, [r3, #1]
+ 797              		.loc 1 445 0
+ 798 00de 274B     		ldr	r3, .L55+8
+ 799 00e0 0322     		movs	r2, #3
+ 800 00e2 5A70     		strb	r2, [r3, #1]
  446:Src/main.c    ****   }
- 800              		.loc 1 446 0
- 801 00e4 E822     		movs	r2, #232
- 802 00e6 1A70     		strb	r2, [r3]
- 803 00e8 BAE7     		b	.L25
- 804              	.L48:
+ 801              		.loc 1 446 0
+ 802 00e4 E822     		movs	r2, #232
+ 803 00e6 1A70     		strb	r2, [r3]
+ 804 00e8 BAE7     		b	.L25
+ 805              	.L48:
  450:Src/main.c    ****       POT_Data[0] = 176;
- 805              		.loc 1 450 0
- 806 00ea 244B     		ldr	r3, .L55+8
- 807 00ec 0422     		movs	r2, #4
- 808 00ee 5A70     		strb	r2, [r3, #1]
+ 806              		.loc 1 450 0
+ 807 00ea 244B     		ldr	r3, .L55+8
+ 808 00ec 0422     		movs	r2, #4
+ 809 00ee 5A70     		strb	r2, [r3, #1]
  451:Src/main.c    ****   }
- 809              		.loc 1 451 0
- 810 00f0 B022     		movs	r2, #176
- 811 00f2 1A70     		strb	r2, [r3]
- 812 00f4 B4E7     		b	.L25
- 813              	.L49:
+ 810              		.loc 1 451 0
+ 811 00f0 B022     		movs	r2, #176
+ 812 00f2 1A70     		strb	r2, [r3]
+ 813 00f4 B4E7     		b	.L25
+ 814              	.L49:
  455:Src/main.c    ****       POT_Data[0] = 70;
- 814              		.loc 1 455 0
- 815 00f6 214B     		ldr	r3, .L55+8
- 816 00f8 0522     		movs	r2, #5
- 817 00fa 5A70     		strb	r2, [r3, #1]
+ 815              		.loc 1 455 0
+ 816 00f6 214B     		ldr	r3, .L55+8
+ 817 00f8 0522     		movs	r2, #5
+ 818 00fa 5A70     		strb	r2, [r3, #1]
  456:Src/main.c    ****   }
- 818              		.loc 1 456 0
- 819 00fc 4622     		movs	r2, #70
- 820 00fe 1A70     		strb	r2, [r3]
- 821 0100 AEE7     		b	.L25
- 822              	.L50:
+ 819              		.loc 1 456 0
+ 820 00fc 4622     		movs	r2, #70
+ 821 00fe 1A70     		strb	r2, [r3]
+ 822 0100 AEE7     		b	.L25
+ 823              	.L50:
  460:Src/main.c    ****         POT_Data[0] = 220;
- 823              		.loc 1 460 0
- 824 0102 1E4B     		ldr	r3, .L55+8
- 825 0104 0522     		movs	r2, #5
-ARM GAS  /tmp/cccjDM90.s 			page 26
+ 824              		.loc 1 460 0
+ 825 0102 1E4B     		ldr	r3, .L55+8
+ARM GAS  /tmp/ccoE54Gu.s 			page 26
 
 
- 826 0106 5A70     		strb	r2, [r3, #1]
+ 826 0104 0522     		movs	r2, #5
+ 827 0106 5A70     		strb	r2, [r3, #1]
  461:Src/main.c    ****   }
- 827              		.loc 1 461 0
- 828 0108 DC22     		movs	r2, #220
- 829 010a 1A70     		strb	r2, [r3]
- 830 010c A8E7     		b	.L25
- 831              	.L51:
+ 828              		.loc 1 461 0
+ 829 0108 DC22     		movs	r2, #220
+ 830 010a 1A70     		strb	r2, [r3]
+ 831 010c A8E7     		b	.L25
+ 832              	.L51:
  465:Src/main.c    ****           POT_Data[0] = 114;
- 832              		.loc 1 465 0
- 833 010e 1B4B     		ldr	r3, .L55+8
- 834 0110 0622     		movs	r2, #6
- 835 0112 5A70     		strb	r2, [r3, #1]
+ 833              		.loc 1 465 0
+ 834 010e 1B4B     		ldr	r3, .L55+8
+ 835 0110 0622     		movs	r2, #6
+ 836 0112 5A70     		strb	r2, [r3, #1]
  466:Src/main.c    ****   }
- 836              		.loc 1 466 0
- 837 0114 7222     		movs	r2, #114
- 838 0116 1A70     		strb	r2, [r3]
- 839 0118 A2E7     		b	.L25
- 840              	.L52:
+ 837              		.loc 1 466 0
+ 838 0114 7222     		movs	r2, #114
+ 839 0116 1A70     		strb	r2, [r3]
+ 840 0118 A2E7     		b	.L25
+ 841              	.L52:
  470:Src/main.c    ****       POT_Data[0] = 8;
- 841              		.loc 1 470 0
- 842 011a 184B     		ldr	r3, .L55+8
- 843 011c 0722     		movs	r2, #7
- 844 011e 5A70     		strb	r2, [r3, #1]
+ 842              		.loc 1 470 0
+ 843 011a 184B     		ldr	r3, .L55+8
+ 844 011c 0722     		movs	r2, #7
+ 845 011e 5A70     		strb	r2, [r3, #1]
  471:Src/main.c    ****   }
- 845              		.loc 1 471 0
- 846 0120 0822     		movs	r2, #8
- 847 0122 1A70     		strb	r2, [r3]
- 848 0124 9CE7     		b	.L25
- 849              	.L53:
+ 846              		.loc 1 471 0
+ 847 0120 0822     		movs	r2, #8
+ 848 0122 1A70     		strb	r2, [r3]
+ 849 0124 9CE7     		b	.L25
+ 850              	.L53:
  475:Src/main.c    ****       POT_Data[0] = 158;
- 850              		.loc 1 475 0
- 851 0126 154B     		ldr	r3, .L55+8
- 852 0128 0722     		movs	r2, #7
- 853 012a 5A70     		strb	r2, [r3, #1]
+ 851              		.loc 1 475 0
+ 852 0126 154B     		ldr	r3, .L55+8
+ 853 0128 0722     		movs	r2, #7
+ 854 012a 5A70     		strb	r2, [r3, #1]
  476:Src/main.c    ****   }
- 854              		.loc 1 476 0
- 855 012c 9E22     		movs	r2, #158
- 856 012e 1A70     		strb	r2, [r3]
- 857 0130 96E7     		b	.L25
- 858              	.L54:
+ 855              		.loc 1 476 0
+ 856 012c 9E22     		movs	r2, #158
+ 857 012e 1A70     		strb	r2, [r3]
+ 858 0130 96E7     		b	.L25
+ 859              	.L54:
  480:Src/main.c    ****       POT_Data[0] = 52;
- 859              		.loc 1 480 0
- 860 0132 124B     		ldr	r3, .L55+8
- 861 0134 0822     		movs	r2, #8
- 862 0136 5A70     		strb	r2, [r3, #1]
+ 860              		.loc 1 480 0
+ 861 0132 124B     		ldr	r3, .L55+8
+ 862 0134 0822     		movs	r2, #8
+ 863 0136 5A70     		strb	r2, [r3, #1]
  481:Src/main.c    ****   }
- 863              		.loc 1 481 0
- 864 0138 3422     		movs	r2, #52
- 865 013a 1A70     		strb	r2, [r3]
- 866 013c 90E7     		b	.L25
- 867              	.L34:
+ 864              		.loc 1 481 0
+ 865 0138 3422     		movs	r2, #52
+ 866 013a 1A70     		strb	r2, [r3]
+ 867 013c 90E7     		b	.L25
+ 868              	.L34:
  492:Src/main.c    **** 
- 868              		.loc 1 492 0
- 869 013e 0022     		movs	r2, #0
- 870 0140 4FF48071 		mov	r1, #256
- 871 0144 0E48     		ldr	r0, .L55+12
- 872              	.LVL55:
-ARM GAS  /tmp/cccjDM90.s 			page 27
+ 869              		.loc 1 492 0
+ 870 013e 0022     		movs	r2, #0
+ 871 0140 4FF48071 		mov	r1, #256
+ 872 0144 0E48     		ldr	r0, .L55+12
+ARM GAS  /tmp/ccoE54Gu.s 			page 27
 
 
- 873 0146 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 874              	.LVL56:
- 875 014a 93E7     		b	.L35
- 876              	.L36:
+ 873              	.LVL55:
+ 874 0146 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 875              	.LVL56:
+ 876 014a 93E7     		b	.L35
+ 877              	.L36:
  497:Src/main.c    **** 
- 877              		.loc 1 497 0
- 878 014c 0022     		movs	r2, #0
- 879 014e 0821     		movs	r1, #8
- 880 0150 0C48     		ldr	r0, .L55+16
- 881 0152 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 882              	.LVL57:
- 883 0156 94E7     		b	.L37
- 884              	.L38:
+ 878              		.loc 1 497 0
+ 879 014c 0022     		movs	r2, #0
+ 880 014e 0821     		movs	r1, #8
+ 881 0150 0C48     		ldr	r0, .L55+16
+ 882 0152 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 883              	.LVL57:
+ 884 0156 94E7     		b	.L37
+ 885              	.L38:
  502:Src/main.c    **** 
- 885              		.loc 1 502 0
- 886 0158 0022     		movs	r2, #0
- 887 015a 4FF40071 		mov	r1, #512
- 888 015e 0948     		ldr	r0, .L55+16
- 889 0160 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 890              	.LVL58:
- 891 0164 97E7     		b	.L39
- 892              	.L46:
+ 886              		.loc 1 502 0
+ 887 0158 0022     		movs	r2, #0
+ 888 015a 4FF40071 		mov	r1, #512
+ 889 015e 0948     		ldr	r0, .L55+16
+ 890 0160 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 891              	.LVL58:
+ 892 0164 97E7     		b	.L39
+ 893              	.L46:
  505:Src/main.c    **** 	else
- 893              		.loc 1 505 0
- 894 0166 0122     		movs	r2, #1
- 895 0168 4FF48071 		mov	r1, #256
- 896 016c 0548     		ldr	r0, .L55+16
- 897 016e FFF7FEFF 		bl	HAL_GPIO_WritePin
- 898              	.LVL59:
- 899 0172 9AE7     		b	.L19
- 900              	.L56:
- 901              		.align	2
- 902              	.L55:
- 903 0174 00000000 		.word	.LANCHOR1
- 904 0178 00000000 		.word	POT_data
- 905 017c 00000000 		.word	POT_Data
- 906 0180 000C0140 		.word	1073810432
- 907 0184 00080140 		.word	1073809408
- 908              		.cfi_endproc
- 909              	.LFE70:
- 911              		.section	.text.HAL_CAN_RxFifo0MsgPendingCallback,"ax",%progbits
- 912              		.align	1
- 913              		.global	HAL_CAN_RxFifo0MsgPendingCallback
- 914              		.syntax unified
- 915              		.thumb
- 916              		.thumb_func
- 917              		.fpu softvfp
- 919              	HAL_CAN_RxFifo0MsgPendingCallback:
- 920              	.LFB71:
+ 894              		.loc 1 505 0
+ 895 0166 0122     		movs	r2, #1
+ 896 0168 4FF48071 		mov	r1, #256
+ 897 016c 0548     		ldr	r0, .L55+16
+ 898 016e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 899              	.LVL59:
+ 900 0172 9AE7     		b	.L19
+ 901              	.L56:
+ 902              		.align	2
+ 903              	.L55:
+ 904 0174 00000000 		.word	.LANCHOR1
+ 905 0178 00000000 		.word	POT_data
+ 906 017c 00000000 		.word	POT_Data
+ 907 0180 000C0140 		.word	1073810432
+ 908 0184 00080140 		.word	1073809408
+ 909              		.cfi_endproc
+ 910              	.LFE70:
+ 912              		.section	.text.HAL_CAN_RxFifo0MsgPendingCallback,"ax",%progbits
+ 913              		.align	1
+ 914              		.global	HAL_CAN_RxFifo0MsgPendingCallback
+ 915              		.syntax unified
+ 916              		.thumb
+ 917              		.thumb_func
+ 918              		.fpu softvfp
+ 920              	HAL_CAN_RxFifo0MsgPendingCallback:
+ 921              	.LFB71:
  510:Src/main.c    **** 
  511:Src/main.c    **** void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *CanHandle)
  512:Src/main.c    **** {
- 921              		.loc 1 512 0
- 922              		.cfi_startproc
- 923              		@ args = 0, pretend = 0, frame = 0
- 924              		@ frame_needed = 0, uses_anonymous_args = 0
- 925              	.LVL60:
-ARM GAS  /tmp/cccjDM90.s 			page 28
+ 922              		.loc 1 512 0
+ 923              		.cfi_startproc
+ 924              		@ args = 0, pretend = 0, frame = 0
+ 925              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/ccoE54Gu.s 			page 28
 
 
- 926 0000 08B5     		push	{r3, lr}
- 927              	.LCFI15:
- 928              		.cfi_def_cfa_offset 8
- 929              		.cfi_offset 3, -8
- 930              		.cfi_offset 14, -4
+ 926              	.LVL60:
+ 927 0000 08B5     		push	{r3, lr}
+ 928              	.LCFI15:
+ 929              		.cfi_def_cfa_offset 8
+ 930              		.cfi_offset 3, -8
+ 931              		.cfi_offset 14, -4
  513:Src/main.c    ****   if (HAL_CAN_GetRxMessage(&hcan, CAN_RX_FIFO0, &RxHeader, RxData) == HAL_OK)
- 931              		.loc 1 513 0
- 932 0002 054B     		ldr	r3, .L60
- 933 0004 054A     		ldr	r2, .L60+4
- 934 0006 0021     		movs	r1, #0
- 935 0008 0548     		ldr	r0, .L60+8
- 936              	.LVL61:
- 937 000a FFF7FEFF 		bl	HAL_CAN_GetRxMessage
- 938              	.LVL62:
- 939 000e 10B9     		cbnz	r0, .L57
+ 932              		.loc 1 513 0
+ 933 0002 054B     		ldr	r3, .L60
+ 934 0004 054A     		ldr	r2, .L60+4
+ 935 0006 0021     		movs	r1, #0
+ 936 0008 0548     		ldr	r0, .L60+8
+ 937              	.LVL61:
+ 938 000a FFF7FEFF 		bl	HAL_CAN_GetRxMessage
+ 939              	.LVL62:
+ 940 000e 10B9     		cbnz	r0, .L57
  514:Src/main.c    **** 	  CAN_flag = 0xFF;
- 940              		.loc 1 514 0
- 941 0010 FF22     		movs	r2, #255
- 942 0012 044B     		ldr	r3, .L60+12
- 943 0014 1A70     		strb	r2, [r3]
- 944              	.L57:
- 945 0016 08BD     		pop	{r3, pc}
- 946              	.L61:
- 947              		.align	2
- 948              	.L60:
- 949 0018 00000000 		.word	RxData
- 950 001c 00000000 		.word	RxHeader
- 951 0020 00000000 		.word	hcan
- 952 0024 00000000 		.word	CAN_flag
- 953              		.cfi_endproc
- 954              	.LFE71:
- 956              		.section	.text.CAN_interpret,"ax",%progbits
- 957              		.align	1
- 958              		.global	CAN_interpret
- 959              		.syntax unified
- 960              		.thumb
- 961              		.thumb_func
- 962              		.fpu softvfp
- 964              	CAN_interpret:
- 965              	.LFB72:
+ 941              		.loc 1 514 0
+ 942 0010 FF22     		movs	r2, #255
+ 943 0012 044B     		ldr	r3, .L60+12
+ 944 0014 1A70     		strb	r2, [r3]
+ 945              	.L57:
+ 946 0016 08BD     		pop	{r3, pc}
+ 947              	.L61:
+ 948              		.align	2
+ 949              	.L60:
+ 950 0018 00000000 		.word	RxData
+ 951 001c 00000000 		.word	RxHeader
+ 952 0020 00000000 		.word	hcan
+ 953 0024 00000000 		.word	CAN_flag
+ 954              		.cfi_endproc
+ 955              	.LFE71:
+ 957              		.section	.text.CAN_interpret,"ax",%progbits
+ 958              		.align	1
+ 959              		.global	CAN_interpret
+ 960              		.syntax unified
+ 961              		.thumb
+ 962              		.thumb_func
+ 963              		.fpu softvfp
+ 965              	CAN_interpret:
+ 966              	.LFB72:
  515:Src/main.c    **** }
  516:Src/main.c    **** 
  517:Src/main.c    **** void CAN_interpret(void) {
- 966              		.loc 1 517 0
- 967              		.cfi_startproc
- 968              		@ args = 0, pretend = 0, frame = 0
- 969              		@ frame_needed = 0, uses_anonymous_args = 0
- 970 0000 70B5     		push	{r4, r5, r6, lr}
- 971              	.LCFI16:
- 972              		.cfi_def_cfa_offset 16
- 973              		.cfi_offset 4, -16
- 974              		.cfi_offset 5, -12
- 975              		.cfi_offset 6, -8
- 976              		.cfi_offset 14, -4
+ 967              		.loc 1 517 0
+ 968              		.cfi_startproc
+ 969              		@ args = 0, pretend = 0, frame = 0
+ 970              		@ frame_needed = 0, uses_anonymous_args = 0
+ 971 0000 70B5     		push	{r4, r5, r6, lr}
+ 972              	.LCFI16:
+ 973              		.cfi_def_cfa_offset 16
+ 974              		.cfi_offset 4, -16
+ 975              		.cfi_offset 5, -12
+ 976              		.cfi_offset 6, -8
+ 977              		.cfi_offset 14, -4
  518:Src/main.c    **** 
  519:Src/main.c    **** 	uint16_t received_ID;
+ARM GAS  /tmp/ccoE54Gu.s 			page 29
+
+
  520:Src/main.c    **** 	received_ID = RxHeader.StdId;
-ARM GAS  /tmp/cccjDM90.s 			page 29
-
-
- 977              		.loc 1 520 0
- 978 0002 954B     		ldr	r3, .L108
- 979 0004 1C88     		ldrh	r4, [r3]
- 980              	.LVL63:
+ 978              		.loc 1 520 0
+ 979 0002 954B     		ldr	r3, .L108
+ 980 0004 1C88     		ldrh	r4, [r3]
+ 981              	.LVL63:
  521:Src/main.c    **** 
  522:Src/main.c    **** 	if (received_ID == FAULTS) {
- 981              		.loc 1 522 0
- 982 0006 D02C     		cmp	r4, #208
- 983 0008 08D0     		beq	.L86
- 984              	.L63:
+ 982              		.loc 1 522 0
+ 983 0006 D02C     		cmp	r4, #208
+ 984 0008 08D0     		beq	.L86
+ 985              	.L63:
  523:Src/main.c    **** 
  524:Src/main.c    **** 		uint8_t BMS_fault;
  525:Src/main.c    **** 		uint8_t IMD_fault;
@@ -1733,14 +1734,14 @@ ARM GAS  /tmp/cccjDM90.s 			page 1
  562:Src/main.c    **** 	}
  563:Src/main.c    **** 
  564:Src/main.c    **** 	if (received_ID == STATES) {
- 985              		.loc 1 564 0
- 986 000a D12C     		cmp	r4, #209
- 987 000c 47D0     		beq	.L87
- 988              	.L70:
+ 986              		.loc 1 564 0
+ 987 000a D12C     		cmp	r4, #209
+ 988 000c 47D0     		beq	.L87
+ 989              	.L70:
+ARM GAS  /tmp/ccoE54Gu.s 			page 30
+
+
  565:Src/main.c    **** 
-ARM GAS  /tmp/cccjDM90.s 			page 30
-
-
  566:Src/main.c    **** 		uint8_t Precharge_state;
  567:Src/main.c    **** 		Precharge_state = RxData[0];
  568:Src/main.c    **** 
@@ -1797,10 +1798,10 @@ ARM GAS  /tmp/cccjDM90.s 			page 1
  619:Src/main.c    ****     BSPD_fault = RxData[3];
  620:Src/main.c    **** 
  621:Src/main.c    ****     if (BMS_fault == 0xFF) {
+ARM GAS  /tmp/ccoE54Gu.s 			page 31
+
+
  622:Src/main.c    ****       HAL_GPIO_WritePin(GPIOA, BMS_LED_ON_Pin, GPIO_PIN_SET);
-ARM GAS  /tmp/cccjDM90.s 			page 31
-
-
  623:Src/main.c    ****       any_fault = true;
  624:Src/main.c    ****     }
  625:Src/main.c    ****     else if (BMS_fault == 0x00)
@@ -1832,11 +1833,11 @@ ARM GAS  /tmp/cccjDM90.s 			page 1
  651:Src/main.c    **** 
  652:Src/main.c    **** 
  653:Src/main.c    **** if (received_ID == MOTOR_POS) {
- 989              		.loc 1 653 0
- 990 000e A52C     		cmp	r4, #165
- 991 0010 00F00181 		beq	.L88
- 992              	.LVL64:
- 993              	.L83:
+ 990              		.loc 1 653 0
+ 991 000e A52C     		cmp	r4, #165
+ 992 0010 00F00181 		beq	.L88
+ 993              	.LVL64:
+ 994              	.L83:
  654:Src/main.c    ****   uint16_t Rpm;
  655:Src/main.c    ****   Rpm = RxData[2] + 256*RxData[3];
  656:Src/main.c    **** 
@@ -1856,656 +1857,656 @@ ARM GAS  /tmp/cccjDM90.s 			page 1
  670:Src/main.c    **** 
  671:Src/main.c    **** 
  672:Src/main.c    **** 	CAN_flag = 0x00;
- 994              		.loc 1 672 0
- 995 0014 0022     		movs	r2, #0
-ARM GAS  /tmp/cccjDM90.s 			page 32
+ 995              		.loc 1 672 0
+ARM GAS  /tmp/ccoE54Gu.s 			page 32
 
 
- 996 0016 914B     		ldr	r3, .L108+4
- 997 0018 1A70     		strb	r2, [r3]
- 998 001a 70BD     		pop	{r4, r5, r6, pc}
- 999              	.LVL65:
- 1000              	.L86:
- 1001              	.LBB4:
+ 996 0014 0022     		movs	r2, #0
+ 997 0016 914B     		ldr	r3, .L108+4
+ 998 0018 1A70     		strb	r2, [r3]
+ 999 001a 70BD     		pop	{r4, r5, r6, pc}
+ 1000              	.LVL65:
+ 1001              	.L86:
+ 1002              	.LBB4:
  529:Src/main.c    **** 		IMD_fault = RxData[1];
- 1002              		.loc 1 529 0
- 1003 001c 904B     		ldr	r3, .L108+8
- 1004 001e 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
- 1005              	.LVL66:
+ 1003              		.loc 1 529 0
+ 1004 001c 904B     		ldr	r3, .L108+8
+ 1005 001e 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 1006              	.LVL66:
  530:Src/main.c    **** 		BSPD_fault = RxData[2];
- 1006              		.loc 1 530 0
- 1007 0020 5E78     		ldrb	r6, [r3, #1]	@ zero_extendqisi2
- 1008              	.LVL67:
+ 1007              		.loc 1 530 0
+ 1008 0020 5E78     		ldrb	r6, [r3, #1]	@ zero_extendqisi2
+ 1009              	.LVL67:
  531:Src/main.c    **** 
- 1009              		.loc 1 531 0
- 1010 0022 9D78     		ldrb	r5, [r3, #2]	@ zero_extendqisi2
- 1011              	.LVL68:
+ 1010              		.loc 1 531 0
+ 1011 0022 9D78     		ldrb	r5, [r3, #2]	@ zero_extendqisi2
+ 1012              	.LVL68:
  533:Src/main.c    **** 			HAL_GPIO_WritePin(GPIOA, BMS_LED_ON_Pin, GPIO_PIN_SET);
- 1012              		.loc 1 533 0
- 1013 0024 FF2A     		cmp	r2, #255
- 1014 0026 17D0     		beq	.L89
+ 1013              		.loc 1 533 0
+ 1014 0024 FF2A     		cmp	r2, #255
+ 1015 0026 17D0     		beq	.L89
  537:Src/main.c    **** 			HAL_GPIO_WritePin(GPIOA, BMS_LED_ON_Pin, GPIO_PIN_RESET);
- 1015              		.loc 1 537 0
- 1016 0028 E2B1     		cbz	r2, .L90
- 1017              	.LVL69:
- 1018              	.L65:
+ 1016              		.loc 1 537 0
+ 1017 0028 E2B1     		cbz	r2, .L90
+ 1018              	.LVL69:
+ 1019              	.L65:
  540:Src/main.c    **** 			HAL_GPIO_WritePin(GPIOA, IMD_LED_ON_Pin, GPIO_PIN_SET);
- 1019              		.loc 1 540 0
- 1020 002a FF2E     		cmp	r6, #255
- 1021 002c 1FD0     		beq	.L91
+ 1020              		.loc 1 540 0
+ 1021 002a FF2E     		cmp	r6, #255
+ 1022 002c 1FD0     		beq	.L91
  544:Src/main.c    **** 			HAL_GPIO_WritePin(GPIOA, IMD_LED_ON_Pin, GPIO_PIN_RESET);
- 1022              		.loc 1 544 0
- 1023 002e 26B3     		cbz	r6, .L92
- 1024              	.L67:
+ 1023              		.loc 1 544 0
+ 1024 002e 26B3     		cbz	r6, .L92
+ 1025              	.L67:
  547:Src/main.c    **** 			HAL_GPIO_WritePin(GPIOA, BSPD_LED_ON_Pin, GPIO_PIN_SET);
- 1025              		.loc 1 547 0
- 1026 0030 FF2D     		cmp	r5, #255
- 1027 0032 28D0     		beq	.L93
+ 1026              		.loc 1 547 0
+ 1027 0030 FF2D     		cmp	r5, #255
+ 1028 0032 28D0     		beq	.L93
  551:Src/main.c    **** 			HAL_GPIO_WritePin(GPIOA, BSPD_LED_ON_Pin, GPIO_PIN_RESET);
- 1028              		.loc 1 551 0
- 1029 0034 6DB3     		cbz	r5, .L94
- 1030              	.L69:
+ 1029              		.loc 1 551 0
+ 1030 0034 6DB3     		cbz	r5, .L94
+ 1031              	.L69:
  556:Src/main.c    **** 			HAL_GPIO_WritePin(GPIOB, RGB_RED_Pin, GPIO_PIN_SET);
- 1031              		.loc 1 556 0
- 1032 0036 8B4D     		ldr	r5, .L108+12
- 1033              	.LVL70:
- 1034 0038 0022     		movs	r2, #0
- 1035 003a 2021     		movs	r1, #32
- 1036 003c 2846     		mov	r0, r5
- 1037 003e FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1038              	.LVL71:
+ 1032              		.loc 1 556 0
+ 1033 0036 8B4D     		ldr	r5, .L108+12
+ 1034              	.LVL70:
+ 1035 0038 0022     		movs	r2, #0
+ 1036 003a 2021     		movs	r1, #32
+ 1037 003c 2846     		mov	r0, r5
+ 1038 003e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1039              	.LVL71:
  557:Src/main.c    **** 			HAL_GPIO_WritePin(GPIOB, RGB_BLUE_Pin, GPIO_PIN_RESET);
- 1039              		.loc 1 557 0
- 1040 0042 0122     		movs	r2, #1
- 1041 0044 4021     		movs	r1, #64
-ARM GAS  /tmp/cccjDM90.s 			page 33
+ 1040              		.loc 1 557 0
+ 1041 0042 0122     		movs	r2, #1
+ARM GAS  /tmp/ccoE54Gu.s 			page 33
 
 
- 1042 0046 2846     		mov	r0, r5
- 1043 0048 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1044              	.LVL72:
+ 1042 0044 4021     		movs	r1, #64
+ 1043 0046 2846     		mov	r0, r5
+ 1044 0048 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1045              	.LVL72:
  558:Src/main.c    **** 			any_fault = false;
- 1045              		.loc 1 558 0
- 1046 004c 0022     		movs	r2, #0
- 1047 004e 8021     		movs	r1, #128
- 1048 0050 2846     		mov	r0, r5
- 1049 0052 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1050              	.LVL73:
- 1051 0056 D8E7     		b	.L63
- 1052              	.LVL74:
- 1053              	.L89:
+ 1046              		.loc 1 558 0
+ 1047 004c 0022     		movs	r2, #0
+ 1048 004e 8021     		movs	r1, #128
+ 1049 0050 2846     		mov	r0, r5
+ 1050 0052 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1051              	.LVL73:
+ 1052 0056 D8E7     		b	.L63
+ 1053              	.LVL74:
+ 1054              	.L89:
  534:Src/main.c    **** 			any_fault = true;
- 1054              		.loc 1 534 0
- 1055 0058 0122     		movs	r2, #1
- 1056              	.LVL75:
- 1057 005a 1021     		movs	r1, #16
- 1058 005c 8248     		ldr	r0, .L108+16
- 1059 005e FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1060              	.LVL76:
- 1061 0062 E2E7     		b	.L65
- 1062              	.LVL77:
- 1063              	.L90:
+ 1055              		.loc 1 534 0
+ 1056 0058 0122     		movs	r2, #1
+ 1057              	.LVL75:
+ 1058 005a 1021     		movs	r1, #16
+ 1059 005c 8248     		ldr	r0, .L108+16
+ 1060 005e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1061              	.LVL76:
+ 1062 0062 E2E7     		b	.L65
+ 1063              	.LVL77:
+ 1064              	.L90:
  538:Src/main.c    **** 
- 1064              		.loc 1 538 0
- 1065 0064 1021     		movs	r1, #16
- 1066 0066 8048     		ldr	r0, .L108+16
- 1067 0068 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1068              	.LVL78:
- 1069 006c DDE7     		b	.L65
- 1070              	.LVL79:
- 1071              	.L91:
+ 1065              		.loc 1 538 0
+ 1066 0064 1021     		movs	r1, #16
+ 1067 0066 8048     		ldr	r0, .L108+16
+ 1068 0068 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1069              	.LVL78:
+ 1070 006c DDE7     		b	.L65
+ 1071              	.LVL79:
+ 1072              	.L91:
  541:Src/main.c    **** 			any_fault = true;
- 1072              		.loc 1 541 0
- 1073 006e 0122     		movs	r2, #1
- 1074 0070 2021     		movs	r1, #32
- 1075 0072 7D48     		ldr	r0, .L108+16
- 1076 0074 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1077              	.LVL80:
- 1078 0078 DAE7     		b	.L67
- 1079              	.L92:
+ 1073              		.loc 1 541 0
+ 1074 006e 0122     		movs	r2, #1
+ 1075 0070 2021     		movs	r1, #32
+ 1076 0072 7D48     		ldr	r0, .L108+16
+ 1077 0074 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1078              	.LVL80:
+ 1079 0078 DAE7     		b	.L67
+ 1080              	.L92:
  545:Src/main.c    **** 
- 1080              		.loc 1 545 0
- 1081 007a 0022     		movs	r2, #0
- 1082 007c 2021     		movs	r1, #32
- 1083 007e 7A48     		ldr	r0, .L108+16
- 1084 0080 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1085              	.LVL81:
- 1086 0084 D4E7     		b	.L67
- 1087              	.L93:
+ 1081              		.loc 1 545 0
+ 1082 007a 0022     		movs	r2, #0
+ 1083 007c 2021     		movs	r1, #32
+ 1084 007e 7A48     		ldr	r0, .L108+16
+ 1085 0080 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1086              	.LVL81:
+ 1087 0084 D4E7     		b	.L67
+ 1088              	.L93:
  548:Src/main.c    **** 			any_fault = true;
- 1088              		.loc 1 548 0
- 1089 0086 0122     		movs	r2, #1
- 1090 0088 4021     		movs	r1, #64
- 1091 008a 7748     		ldr	r0, .L108+16
- 1092 008c FFF7FEFF 		bl	HAL_GPIO_WritePin
-ARM GAS  /tmp/cccjDM90.s 			page 34
+ 1089              		.loc 1 548 0
+ 1090 0086 0122     		movs	r2, #1
+ 1091 0088 4021     		movs	r1, #64
+ 1092 008a 7748     		ldr	r0, .L108+16
+ARM GAS  /tmp/ccoE54Gu.s 			page 34
 
 
- 1093              	.LVL82:
- 1094 0090 D1E7     		b	.L69
- 1095              	.L94:
+ 1093 008c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1094              	.LVL82:
+ 1095 0090 D1E7     		b	.L69
+ 1096              	.L94:
  552:Src/main.c    **** 
- 1096              		.loc 1 552 0
- 1097 0092 0022     		movs	r2, #0
- 1098 0094 4021     		movs	r1, #64
- 1099 0096 7448     		ldr	r0, .L108+16
- 1100 0098 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1101              	.LVL83:
- 1102 009c CBE7     		b	.L69
- 1103              	.LVL84:
- 1104              	.L87:
- 1105              	.LBE4:
- 1106              	.LBB5:
+ 1097              		.loc 1 552 0
+ 1098 0092 0022     		movs	r2, #0
+ 1099 0094 4021     		movs	r1, #64
+ 1100 0096 7448     		ldr	r0, .L108+16
+ 1101 0098 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1102              	.LVL83:
+ 1103 009c CBE7     		b	.L69
+ 1104              	.LVL84:
+ 1105              	.L87:
+ 1106              	.LBE4:
+ 1107              	.LBB5:
  567:Src/main.c    **** 
- 1107              		.loc 1 567 0
- 1108 009e 704B     		ldr	r3, .L108+8
- 1109 00a0 1D78     		ldrb	r5, [r3]	@ zero_extendqisi2
- 1110              	.LVL85:
+ 1108              		.loc 1 567 0
+ 1109 009e 704B     		ldr	r3, .L108+8
+ 1110 00a0 1D78     		ldrb	r5, [r3]	@ zero_extendqisi2
+ 1111              	.LVL85:
  569:Src/main.c    **** 			// if precharge is complete
- 1111              		.loc 1 569 0
- 1112 00a2 012D     		cmp	r5, #1
- 1113 00a4 30D0     		beq	.L95
- 1114              	.L71:
+ 1112              		.loc 1 569 0
+ 1113 00a2 012D     		cmp	r5, #1
+ 1114 00a4 30D0     		beq	.L95
+ 1115              	.L71:
  576:Src/main.c    **** 			// if precharge is not complete
- 1115              		.loc 1 576 0
- 1116 00a6 022D     		cmp	r5, #2
- 1117 00a8 3FD0     		beq	.L96
- 1118              	.L72:
+ 1116              		.loc 1 576 0
+ 1117 00a6 022D     		cmp	r5, #2
+ 1118 00a8 3FD0     		beq	.L96
+ 1119              	.L72:
  584:Src/main.c    ****       // if precharge is not complete
- 1119              		.loc 1 584 0
- 1120 00aa 042D     		cmp	r5, #4
- 1121 00ac 4ED0     		beq	.L97
- 1122              	.L73:
+ 1120              		.loc 1 584 0
+ 1121 00aa 042D     		cmp	r5, #4
+ 1122 00ac 4ED0     		beq	.L97
+ 1123              	.L73:
  591:Src/main.c    ****       // if precharge is not complete
- 1123              		.loc 1 591 0
- 1124 00ae 082D     		cmp	r5, #8
- 1125 00b0 5DD0     		beq	.L98
- 1126              	.L74:
+ 1124              		.loc 1 591 0
+ 1125 00ae 082D     		cmp	r5, #8
+ 1126 00b0 5DD0     		beq	.L98
+ 1127              	.L74:
  598:Src/main.c    ****       // if precharge is not complete
- 1127              		.loc 1 598 0
- 1128 00b2 102D     		cmp	r5, #16
- 1129 00b4 6CD0     		beq	.L99
- 1130              	.L75:
+ 1128              		.loc 1 598 0
+ 1129 00b2 102D     		cmp	r5, #16
+ 1130 00b4 6CD0     		beq	.L99
+ 1131              	.L75:
  605:Src/main.c    ****       // if precharge is not complete
- 1131              		.loc 1 605 0
- 1132 00b6 202D     		cmp	r5, #32
- 1133 00b8 7BD0     		beq	.L100
- 1134              	.LVL86:
- 1135              	.L76:
+ 1132              		.loc 1 605 0
+ 1133 00b6 202D     		cmp	r5, #32
+ 1134 00b8 7BD0     		beq	.L100
+ 1135              	.LVL86:
+ 1136              	.L76:
  617:Src/main.c    ****     IMD_fault = RxData[2];
- 1136              		.loc 1 617 0
- 1137 00ba 694B     		ldr	r3, .L108+8
- 1138 00bc 5A78     		ldrb	r2, [r3, #1]	@ zero_extendqisi2
- 1139              	.LVL87:
+ 1137              		.loc 1 617 0
+ 1138 00ba 694B     		ldr	r3, .L108+8
+ 1139 00bc 5A78     		ldrb	r2, [r3, #1]	@ zero_extendqisi2
+ 1140              	.LVL87:
+ARM GAS  /tmp/ccoE54Gu.s 			page 35
+
+
  618:Src/main.c    ****     BSPD_fault = RxData[3];
-ARM GAS  /tmp/cccjDM90.s 			page 35
-
-
- 1140              		.loc 1 618 0
- 1141 00be 9E78     		ldrb	r6, [r3, #2]	@ zero_extendqisi2
- 1142              	.LVL88:
+ 1141              		.loc 1 618 0
+ 1142 00be 9E78     		ldrb	r6, [r3, #2]	@ zero_extendqisi2
+ 1143              	.LVL88:
  619:Src/main.c    **** 
- 1143              		.loc 1 619 0
- 1144 00c0 DD78     		ldrb	r5, [r3, #3]	@ zero_extendqisi2
- 1145              	.LVL89:
+ 1144              		.loc 1 619 0
+ 1145 00c0 DD78     		ldrb	r5, [r3, #3]	@ zero_extendqisi2
+ 1146              	.LVL89:
  621:Src/main.c    ****       HAL_GPIO_WritePin(GPIOA, BMS_LED_ON_Pin, GPIO_PIN_SET);
- 1146              		.loc 1 621 0
- 1147 00c2 FF2A     		cmp	r2, #255
- 1148 00c4 00F08480 		beq	.L101
+ 1147              		.loc 1 621 0
+ 1148 00c2 FF2A     		cmp	r2, #255
+ 1149 00c4 00F08480 		beq	.L101
  625:Src/main.c    ****       HAL_GPIO_WritePin(GPIOA, BMS_LED_ON_Pin, GPIO_PIN_RESET);
- 1149              		.loc 1 625 0
- 1150 00c8 002A     		cmp	r2, #0
- 1151 00ca 00F08780 		beq	.L102
- 1152              	.LVL90:
- 1153              	.L78:
+ 1150              		.loc 1 625 0
+ 1151 00c8 002A     		cmp	r2, #0
+ 1152 00ca 00F08780 		beq	.L102
+ 1153              	.LVL90:
+ 1154              	.L78:
  628:Src/main.c    ****       HAL_GPIO_WritePin(GPIOA, IMD_LED_ON_Pin, GPIO_PIN_SET);
- 1154              		.loc 1 628 0
- 1155 00ce FF2E     		cmp	r6, #255
- 1156 00d0 00F08980 		beq	.L103
+ 1155              		.loc 1 628 0
+ 1156 00ce FF2E     		cmp	r6, #255
+ 1157 00d0 00F08980 		beq	.L103
  632:Src/main.c    ****       HAL_GPIO_WritePin(GPIOA, IMD_LED_ON_Pin, GPIO_PIN_RESET);
- 1157              		.loc 1 632 0
- 1158 00d4 002E     		cmp	r6, #0
- 1159 00d6 00F08C80 		beq	.L104
- 1160              	.L80:
+ 1158              		.loc 1 632 0
+ 1159 00d4 002E     		cmp	r6, #0
+ 1160 00d6 00F08C80 		beq	.L104
+ 1161              	.L80:
  635:Src/main.c    ****       HAL_GPIO_WritePin(GPIOA, BSPD_LED_ON_Pin, GPIO_PIN_SET);
- 1161              		.loc 1 635 0
- 1162 00da FF2D     		cmp	r5, #255
- 1163 00dc 00F08F80 		beq	.L105
+ 1162              		.loc 1 635 0
+ 1163 00da FF2D     		cmp	r5, #255
+ 1164 00dc 00F08F80 		beq	.L105
  639:Src/main.c    ****       HAL_GPIO_WritePin(GPIOA, BSPD_LED_ON_Pin, GPIO_PIN_RESET);
- 1164              		.loc 1 639 0
- 1165 00e0 002D     		cmp	r5, #0
- 1166 00e2 00F09280 		beq	.L106
- 1167              	.L82:
+ 1165              		.loc 1 639 0
+ 1166 00e0 002D     		cmp	r5, #0
+ 1167 00e2 00F09280 		beq	.L106
+ 1168              	.L82:
  644:Src/main.c    ****       HAL_GPIO_WritePin(GPIOB, RGB_RED_Pin, GPIO_PIN_SET);
- 1168              		.loc 1 644 0
- 1169 00e6 5F4D     		ldr	r5, .L108+12
- 1170              	.LVL91:
- 1171 00e8 0022     		movs	r2, #0
- 1172 00ea 2021     		movs	r1, #32
- 1173 00ec 2846     		mov	r0, r5
- 1174 00ee FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1175              	.LVL92:
+ 1169              		.loc 1 644 0
+ 1170 00e6 5F4D     		ldr	r5, .L108+12
+ 1171              	.LVL91:
+ 1172 00e8 0022     		movs	r2, #0
+ 1173 00ea 2021     		movs	r1, #32
+ 1174 00ec 2846     		mov	r0, r5
+ 1175 00ee FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1176              	.LVL92:
  645:Src/main.c    ****       HAL_GPIO_WritePin(GPIOB, RGB_BLUE_Pin, GPIO_PIN_RESET);
- 1176              		.loc 1 645 0
- 1177 00f2 0122     		movs	r2, #1
- 1178 00f4 4021     		movs	r1, #64
- 1179 00f6 2846     		mov	r0, r5
- 1180 00f8 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1181              	.LVL93:
+ 1177              		.loc 1 645 0
+ 1178 00f2 0122     		movs	r2, #1
+ 1179 00f4 4021     		movs	r1, #64
+ 1180 00f6 2846     		mov	r0, r5
+ 1181 00f8 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1182              	.LVL93:
  646:Src/main.c    ****       any_fault = false;
- 1182              		.loc 1 646 0
- 1183 00fc 0022     		movs	r2, #0
- 1184 00fe 8021     		movs	r1, #128
- 1185 0100 2846     		mov	r0, r5
- 1186 0102 FFF7FEFF 		bl	HAL_GPIO_WritePin
-ARM GAS  /tmp/cccjDM90.s 			page 36
+ 1183              		.loc 1 646 0
+ 1184 00fc 0022     		movs	r2, #0
+ 1185 00fe 8021     		movs	r1, #128
+ 1186 0100 2846     		mov	r0, r5
+ARM GAS  /tmp/ccoE54Gu.s 			page 36
 
 
- 1187              	.LVL94:
- 1188 0106 82E7     		b	.L70
- 1189              	.LVL95:
- 1190              	.L95:
+ 1187 0102 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1188              	.LVL94:
+ 1189 0106 82E7     		b	.L70
+ 1190              	.LVL95:
+ 1191              	.L95:
  571:Src/main.c    **** 			HAL_GPIO_WritePin(GPIOB, RGB_RED_Pin, GPIO_PIN_RESET);
- 1191              		.loc 1 571 0
- 1192 0108 564E     		ldr	r6, .L108+12
- 1193 010a 0022     		movs	r2, #0
- 1194 010c 2021     		movs	r1, #32
- 1195 010e 3046     		mov	r0, r6
- 1196 0110 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1197              	.LVL96:
+ 1192              		.loc 1 571 0
+ 1193 0108 564E     		ldr	r6, .L108+12
+ 1194 010a 0022     		movs	r2, #0
+ 1195 010c 2021     		movs	r1, #32
+ 1196 010e 3046     		mov	r0, r6
+ 1197 0110 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1198              	.LVL96:
  572:Src/main.c    **** 			HAL_GPIO_WritePin(GPIOB, RGB_BLUE_Pin, GPIO_PIN_RESET);
- 1198              		.loc 1 572 0
- 1199 0114 0022     		movs	r2, #0
- 1200 0116 4021     		movs	r1, #64
- 1201 0118 3046     		mov	r0, r6
- 1202 011a FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1203              	.LVL97:
+ 1199              		.loc 1 572 0
+ 1200 0114 0022     		movs	r2, #0
+ 1201 0116 4021     		movs	r1, #64
+ 1202 0118 3046     		mov	r0, r6
+ 1203 011a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1204              	.LVL97:
  573:Src/main.c    **** 		}
- 1204              		.loc 1 573 0
- 1205 011e 0022     		movs	r2, #0
- 1206 0120 8021     		movs	r1, #128
- 1207 0122 3046     		mov	r0, r6
- 1208 0124 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1209              	.LVL98:
- 1210 0128 BDE7     		b	.L71
- 1211              	.L96:
+ 1205              		.loc 1 573 0
+ 1206 011e 0022     		movs	r2, #0
+ 1207 0120 8021     		movs	r1, #128
+ 1208 0122 3046     		mov	r0, r6
+ 1209 0124 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1210              	.LVL98:
+ 1211 0128 BDE7     		b	.L71
+ 1212              	.L96:
  578:Src/main.c    **** 			HAL_GPIO_WritePin(GPIOB, RGB_RED_Pin, GPIO_PIN_RESET);
- 1212              		.loc 1 578 0
- 1213 012a 4E4E     		ldr	r6, .L108+12
- 1214 012c 0022     		movs	r2, #0
- 1215 012e 2021     		movs	r1, #32
- 1216 0130 3046     		mov	r0, r6
- 1217 0132 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1218              	.LVL99:
+ 1213              		.loc 1 578 0
+ 1214 012a 4E4E     		ldr	r6, .L108+12
+ 1215 012c 0022     		movs	r2, #0
+ 1216 012e 2021     		movs	r1, #32
+ 1217 0130 3046     		mov	r0, r6
+ 1218 0132 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1219              	.LVL99:
  579:Src/main.c    **** 			HAL_GPIO_WritePin(GPIOB, RGB_BLUE_Pin, GPIO_PIN_SET);
- 1219              		.loc 1 579 0
- 1220 0136 0022     		movs	r2, #0
- 1221 0138 4021     		movs	r1, #64
- 1222 013a 3046     		mov	r0, r6
- 1223 013c FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1224              	.LVL100:
+ 1220              		.loc 1 579 0
+ 1221 0136 0022     		movs	r2, #0
+ 1222 0138 4021     		movs	r1, #64
+ 1223 013a 3046     		mov	r0, r6
+ 1224 013c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1225              	.LVL100:
  580:Src/main.c    **** 
- 1225              		.loc 1 580 0
- 1226 0140 0122     		movs	r2, #1
- 1227 0142 8021     		movs	r1, #128
- 1228 0144 3046     		mov	r0, r6
- 1229 0146 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1230              	.LVL101:
- 1231 014a AEE7     		b	.L72
- 1232              	.L97:
+ 1226              		.loc 1 580 0
+ 1227 0140 0122     		movs	r2, #1
+ 1228 0142 8021     		movs	r1, #128
+ 1229 0144 3046     		mov	r0, r6
+ 1230 0146 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1231              	.LVL101:
+ 1232 014a AEE7     		b	.L72
+ 1233              	.L97:
  586:Src/main.c    ****       HAL_GPIO_WritePin(GPIOB, RGB_RED_Pin, GPIO_PIN_RESET);
- 1233              		.loc 1 586 0
- 1234 014c 454E     		ldr	r6, .L108+12
- 1235 014e 0122     		movs	r2, #1
- 1236 0150 2021     		movs	r1, #32
-ARM GAS  /tmp/cccjDM90.s 			page 37
+ 1234              		.loc 1 586 0
+ 1235 014c 454E     		ldr	r6, .L108+12
+ 1236 014e 0122     		movs	r2, #1
+ARM GAS  /tmp/ccoE54Gu.s 			page 37
 
 
- 1237 0152 3046     		mov	r0, r6
- 1238 0154 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1239              	.LVL102:
+ 1237 0150 2021     		movs	r1, #32
+ 1238 0152 3046     		mov	r0, r6
+ 1239 0154 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1240              	.LVL102:
  587:Src/main.c    ****       HAL_GPIO_WritePin(GPIOB, RGB_BLUE_Pin, GPIO_PIN_SET);
- 1240              		.loc 1 587 0
- 1241 0158 0022     		movs	r2, #0
- 1242 015a 4021     		movs	r1, #64
- 1243 015c 3046     		mov	r0, r6
- 1244 015e FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1245              	.LVL103:
+ 1241              		.loc 1 587 0
+ 1242 0158 0022     		movs	r2, #0
+ 1243 015a 4021     		movs	r1, #64
+ 1244 015c 3046     		mov	r0, r6
+ 1245 015e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1246              	.LVL103:
  588:Src/main.c    **** 
- 1246              		.loc 1 588 0
- 1247 0162 0122     		movs	r2, #1
- 1248 0164 8021     		movs	r1, #128
- 1249 0166 3046     		mov	r0, r6
- 1250 0168 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1251              	.LVL104:
- 1252 016c 9FE7     		b	.L73
- 1253              	.L98:
+ 1247              		.loc 1 588 0
+ 1248 0162 0122     		movs	r2, #1
+ 1249 0164 8021     		movs	r1, #128
+ 1250 0166 3046     		mov	r0, r6
+ 1251 0168 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1252              	.LVL104:
+ 1253 016c 9FE7     		b	.L73
+ 1254              	.L98:
  593:Src/main.c    ****       HAL_GPIO_WritePin(GPIOB, RGB_RED_Pin, GPIO_PIN_RESET);
- 1254              		.loc 1 593 0
- 1255 016e 3D4E     		ldr	r6, .L108+12
- 1256 0170 0122     		movs	r2, #1
- 1257 0172 2021     		movs	r1, #32
- 1258 0174 3046     		mov	r0, r6
- 1259 0176 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1260              	.LVL105:
+ 1255              		.loc 1 593 0
+ 1256 016e 3D4E     		ldr	r6, .L108+12
+ 1257 0170 0122     		movs	r2, #1
+ 1258 0172 2021     		movs	r1, #32
+ 1259 0174 3046     		mov	r0, r6
+ 1260 0176 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1261              	.LVL105:
  594:Src/main.c    ****       HAL_GPIO_WritePin(GPIOB, RGB_BLUE_Pin, GPIO_PIN_RESET);
- 1261              		.loc 1 594 0
- 1262 017a 0022     		movs	r2, #0
- 1263 017c 4021     		movs	r1, #64
- 1264 017e 3046     		mov	r0, r6
- 1265 0180 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1266              	.LVL106:
+ 1262              		.loc 1 594 0
+ 1263 017a 0022     		movs	r2, #0
+ 1264 017c 4021     		movs	r1, #64
+ 1265 017e 3046     		mov	r0, r6
+ 1266 0180 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1267              	.LVL106:
  595:Src/main.c    **** 
- 1267              		.loc 1 595 0
- 1268 0184 0022     		movs	r2, #0
- 1269 0186 8021     		movs	r1, #128
- 1270 0188 3046     		mov	r0, r6
- 1271 018a FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1272              	.LVL107:
- 1273 018e 90E7     		b	.L74
- 1274              	.L99:
+ 1268              		.loc 1 595 0
+ 1269 0184 0022     		movs	r2, #0
+ 1270 0186 8021     		movs	r1, #128
+ 1271 0188 3046     		mov	r0, r6
+ 1272 018a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1273              	.LVL107:
+ 1274 018e 90E7     		b	.L74
+ 1275              	.L99:
  600:Src/main.c    ****       HAL_GPIO_WritePin(GPIOB, RGB_RED_Pin, GPIO_PIN_RESET);
- 1275              		.loc 1 600 0
- 1276 0190 344E     		ldr	r6, .L108+12
- 1277 0192 0122     		movs	r2, #1
- 1278 0194 2021     		movs	r1, #32
- 1279 0196 3046     		mov	r0, r6
- 1280 0198 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1281              	.LVL108:
+ 1276              		.loc 1 600 0
+ 1277 0190 344E     		ldr	r6, .L108+12
+ 1278 0192 0122     		movs	r2, #1
+ 1279 0194 2021     		movs	r1, #32
+ 1280 0196 3046     		mov	r0, r6
+ 1281 0198 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1282              	.LVL108:
  601:Src/main.c    ****       HAL_GPIO_WritePin(GPIOB, RGB_BLUE_Pin, GPIO_PIN_RESET);
- 1282              		.loc 1 601 0
- 1283 019c 0022     		movs	r2, #0
- 1284 019e 4021     		movs	r1, #64
- 1285 01a0 3046     		mov	r0, r6
- 1286 01a2 FFF7FEFF 		bl	HAL_GPIO_WritePin
-ARM GAS  /tmp/cccjDM90.s 			page 38
+ 1283              		.loc 1 601 0
+ 1284 019c 0022     		movs	r2, #0
+ 1285 019e 4021     		movs	r1, #64
+ 1286 01a0 3046     		mov	r0, r6
+ARM GAS  /tmp/ccoE54Gu.s 			page 38
 
 
- 1287              	.LVL109:
+ 1287 01a2 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1288              	.LVL109:
  602:Src/main.c    **** 
- 1288              		.loc 1 602 0
- 1289 01a6 0022     		movs	r2, #0
- 1290 01a8 8021     		movs	r1, #128
- 1291 01aa 3046     		mov	r0, r6
- 1292 01ac FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1293              	.LVL110:
- 1294 01b0 81E7     		b	.L75
- 1295              	.L100:
+ 1289              		.loc 1 602 0
+ 1290 01a6 0022     		movs	r2, #0
+ 1291 01a8 8021     		movs	r1, #128
+ 1292 01aa 3046     		mov	r0, r6
+ 1293 01ac FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1294              	.LVL110:
+ 1295 01b0 81E7     		b	.L75
+ 1296              	.L100:
  607:Src/main.c    ****       HAL_GPIO_TogglePin(GPIOB, RGB_RED_Pin);
- 1296              		.loc 1 607 0
- 1297 01b2 2C4D     		ldr	r5, .L108+12
- 1298              	.LVL111:
- 1299 01b4 0022     		movs	r2, #0
- 1300 01b6 2021     		movs	r1, #32
- 1301 01b8 2846     		mov	r0, r5
- 1302 01ba FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1303              	.LVL112:
+ 1297              		.loc 1 607 0
+ 1298 01b2 2C4D     		ldr	r5, .L108+12
+ 1299              	.LVL111:
+ 1300 01b4 0022     		movs	r2, #0
+ 1301 01b6 2021     		movs	r1, #32
+ 1302 01b8 2846     		mov	r0, r5
+ 1303 01ba FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1304              	.LVL112:
  608:Src/main.c    ****       HAL_GPIO_TogglePin(GPIOB, RGB_BLUE_Pin);
- 1304              		.loc 1 608 0
- 1305 01be 4021     		movs	r1, #64
- 1306 01c0 2846     		mov	r0, r5
- 1307 01c2 FFF7FEFF 		bl	HAL_GPIO_TogglePin
- 1308              	.LVL113:
+ 1305              		.loc 1 608 0
+ 1306 01be 4021     		movs	r1, #64
+ 1307 01c0 2846     		mov	r0, r5
+ 1308 01c2 FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ 1309              	.LVL113:
  609:Src/main.c    **** 
- 1309              		.loc 1 609 0
- 1310 01c6 8021     		movs	r1, #128
- 1311 01c8 2846     		mov	r0, r5
- 1312 01ca FFF7FEFF 		bl	HAL_GPIO_TogglePin
- 1313              	.LVL114:
- 1314 01ce 74E7     		b	.L76
- 1315              	.LVL115:
- 1316              	.L101:
+ 1310              		.loc 1 609 0
+ 1311 01c6 8021     		movs	r1, #128
+ 1312 01c8 2846     		mov	r0, r5
+ 1313 01ca FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ 1314              	.LVL114:
+ 1315 01ce 74E7     		b	.L76
+ 1316              	.LVL115:
+ 1317              	.L101:
  622:Src/main.c    ****       any_fault = true;
- 1317              		.loc 1 622 0
- 1318 01d0 0122     		movs	r2, #1
- 1319              	.LVL116:
- 1320 01d2 1021     		movs	r1, #16
- 1321 01d4 2448     		ldr	r0, .L108+16
- 1322 01d6 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1323              	.LVL117:
- 1324 01da 78E7     		b	.L78
- 1325              	.LVL118:
- 1326              	.L102:
+ 1318              		.loc 1 622 0
+ 1319 01d0 0122     		movs	r2, #1
+ 1320              	.LVL116:
+ 1321 01d2 1021     		movs	r1, #16
+ 1322 01d4 2448     		ldr	r0, .L108+16
+ 1323 01d6 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1324              	.LVL117:
+ 1325 01da 78E7     		b	.L78
+ 1326              	.LVL118:
+ 1327              	.L102:
  626:Src/main.c    **** 
- 1327              		.loc 1 626 0
- 1328 01dc 1021     		movs	r1, #16
- 1329 01de 2248     		ldr	r0, .L108+16
- 1330 01e0 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1331              	.LVL119:
- 1332 01e4 73E7     		b	.L78
- 1333              	.LVL120:
- 1334              	.L103:
+ 1328              		.loc 1 626 0
+ 1329 01dc 1021     		movs	r1, #16
+ 1330 01de 2248     		ldr	r0, .L108+16
+ 1331 01e0 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1332              	.LVL119:
+ 1333 01e4 73E7     		b	.L78
+ 1334              	.LVL120:
+ 1335              	.L103:
  629:Src/main.c    ****       any_fault = true;
- 1335              		.loc 1 629 0
- 1336 01e6 0122     		movs	r2, #1
-ARM GAS  /tmp/cccjDM90.s 			page 39
+ 1336              		.loc 1 629 0
+ARM GAS  /tmp/ccoE54Gu.s 			page 39
 
 
- 1337 01e8 2021     		movs	r1, #32
- 1338 01ea 1F48     		ldr	r0, .L108+16
- 1339 01ec FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1340              	.LVL121:
- 1341 01f0 73E7     		b	.L80
- 1342              	.L104:
+ 1337 01e6 0122     		movs	r2, #1
+ 1338 01e8 2021     		movs	r1, #32
+ 1339 01ea 1F48     		ldr	r0, .L108+16
+ 1340 01ec FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1341              	.LVL121:
+ 1342 01f0 73E7     		b	.L80
+ 1343              	.L104:
  633:Src/main.c    **** 
- 1343              		.loc 1 633 0
- 1344 01f2 0022     		movs	r2, #0
- 1345 01f4 2021     		movs	r1, #32
- 1346 01f6 1C48     		ldr	r0, .L108+16
- 1347 01f8 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1348              	.LVL122:
- 1349 01fc 6DE7     		b	.L80
- 1350              	.L105:
+ 1344              		.loc 1 633 0
+ 1345 01f2 0022     		movs	r2, #0
+ 1346 01f4 2021     		movs	r1, #32
+ 1347 01f6 1C48     		ldr	r0, .L108+16
+ 1348 01f8 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1349              	.LVL122:
+ 1350 01fc 6DE7     		b	.L80
+ 1351              	.L105:
  636:Src/main.c    ****       any_fault = true;
- 1351              		.loc 1 636 0
- 1352 01fe 0122     		movs	r2, #1
- 1353 0200 4021     		movs	r1, #64
- 1354 0202 1948     		ldr	r0, .L108+16
- 1355 0204 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1356              	.LVL123:
- 1357 0208 6DE7     		b	.L82
- 1358              	.L106:
+ 1352              		.loc 1 636 0
+ 1353 01fe 0122     		movs	r2, #1
+ 1354 0200 4021     		movs	r1, #64
+ 1355 0202 1948     		ldr	r0, .L108+16
+ 1356 0204 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1357              	.LVL123:
+ 1358 0208 6DE7     		b	.L82
+ 1359              	.L106:
  640:Src/main.c    **** 
- 1359              		.loc 1 640 0
- 1360 020a 0022     		movs	r2, #0
- 1361 020c 4021     		movs	r1, #64
- 1362 020e 1648     		ldr	r0, .L108+16
- 1363 0210 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 1364              	.LVL124:
- 1365 0214 67E7     		b	.L82
- 1366              	.LVL125:
- 1367              	.L88:
- 1368              	.LBE5:
- 1369              	.LBB6:
+ 1360              		.loc 1 640 0
+ 1361 020a 0022     		movs	r2, #0
+ 1362 020c 4021     		movs	r1, #64
+ 1363 020e 1648     		ldr	r0, .L108+16
+ 1364 0210 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1365              	.LVL124:
+ 1366 0214 67E7     		b	.L82
+ 1367              	.LVL125:
+ 1368              	.L88:
+ 1369              	.LBE5:
+ 1370              	.LBB6:
  655:Src/main.c    **** 
- 1370              		.loc 1 655 0
- 1371 0216 124B     		ldr	r3, .L108+8
- 1372 0218 9C78     		ldrb	r4, [r3, #2]	@ zero_extendqisi2
- 1373              	.LVL126:
- 1374 021a DB78     		ldrb	r3, [r3, #3]	@ zero_extendqisi2
- 1375 021c 04EB0324 		add	r4, r4, r3, lsl #8
- 1376 0220 A4B2     		uxth	r4, r4
- 1377              	.LVL127:
+ 1371              		.loc 1 655 0
+ 1372 0216 124B     		ldr	r3, .L108+8
+ 1373 0218 9C78     		ldrb	r4, [r3, #2]	@ zero_extendqisi2
+ 1374              	.LVL126:
+ 1375 021a DB78     		ldrb	r3, [r3, #3]	@ zero_extendqisi2
+ 1376 021c 04EB0324 		add	r4, r4, r3, lsl #8
+ 1377 0220 A4B2     		uxth	r4, r4
+ 1378              	.LVL127:
  657:Src/main.c    ****     POT_Data1[1] = 0;
- 1378              		.loc 1 657 0
- 1379 0222 312C     		cmp	r4, #49
- 1380 0224 0DD9     		bls	.L107
- 1381              	.L84:
+ 1379              		.loc 1 657 0
+ 1380 0222 312C     		cmp	r4, #49
+ 1381 0224 0DD9     		bls	.L107
+ 1382              	.L84:
  663:Src/main.c    ****     POT_Data1[1] = 3;
- 1382              		.loc 1 663 0
- 1383 0226 312C     		cmp	r4, #49
- 1384 0228 7FF6F4AE 		bls	.L83
+ 1383              		.loc 1 663 0
+ 1384 0226 312C     		cmp	r4, #49
+ 1385 0228 7FF6F4AE 		bls	.L83
  664:Src/main.c    ****     POT_Data1[0] = 232;
- 1385              		.loc 1 664 0
- 1386 022c 0F4A     		ldr	r2, .L108+20
-ARM GAS  /tmp/cccjDM90.s 			page 40
+ 1386              		.loc 1 664 0
+ARM GAS  /tmp/ccoE54Gu.s 			page 40
 
 
- 1387 022e 0323     		movs	r3, #3
- 1388 0230 5370     		strb	r3, [r2, #1]
+ 1387 022c 0F4A     		ldr	r2, .L108+20
+ 1388 022e 0323     		movs	r3, #3
+ 1389 0230 5370     		strb	r3, [r2, #1]
  665:Src/main.c    ****     HAL_CAN_AddTxMessage(&hcan, &POT_Txheader1, POT_Data1, &TxMailbox);
- 1389              		.loc 1 665 0
- 1390 0232 E823     		movs	r3, #232
- 1391 0234 1370     		strb	r3, [r2]
+ 1390              		.loc 1 665 0
+ 1391 0232 E823     		movs	r3, #232
+ 1392 0234 1370     		strb	r3, [r2]
  666:Src/main.c    ****   }
- 1392              		.loc 1 666 0
- 1393 0236 0E4B     		ldr	r3, .L108+24
- 1394 0238 0E49     		ldr	r1, .L108+28
- 1395 023a 0F48     		ldr	r0, .L108+32
- 1396 023c FFF7FEFF 		bl	HAL_CAN_AddTxMessage
- 1397              	.LVL128:
- 1398 0240 E8E6     		b	.L83
- 1399              	.L107:
+ 1393              		.loc 1 666 0
+ 1394 0236 0E4B     		ldr	r3, .L108+24
+ 1395 0238 0E49     		ldr	r1, .L108+28
+ 1396 023a 0F48     		ldr	r0, .L108+32
+ 1397 023c FFF7FEFF 		bl	HAL_CAN_AddTxMessage
+ 1398              	.LVL128:
+ 1399 0240 E8E6     		b	.L83
+ 1400              	.L107:
  658:Src/main.c    ****     POT_Data1[0] = 0;
- 1400              		.loc 1 658 0
- 1401 0242 0A4A     		ldr	r2, .L108+20
- 1402 0244 0023     		movs	r3, #0
- 1403 0246 5370     		strb	r3, [r2, #1]
+ 1401              		.loc 1 658 0
+ 1402 0242 0A4A     		ldr	r2, .L108+20
+ 1403 0244 0023     		movs	r3, #0
+ 1404 0246 5370     		strb	r3, [r2, #1]
  659:Src/main.c    ****     HAL_CAN_AddTxMessage(&hcan, &POT_Txheader1, POT_Data1, &TxMailbox);
- 1404              		.loc 1 659 0
- 1405 0248 1370     		strb	r3, [r2]
+ 1405              		.loc 1 659 0
+ 1406 0248 1370     		strb	r3, [r2]
  660:Src/main.c    ****   }
- 1406              		.loc 1 660 0
- 1407 024a 094B     		ldr	r3, .L108+24
- 1408 024c 0949     		ldr	r1, .L108+28
- 1409 024e 0A48     		ldr	r0, .L108+32
- 1410 0250 FFF7FEFF 		bl	HAL_CAN_AddTxMessage
- 1411              	.LVL129:
- 1412 0254 E7E7     		b	.L84
- 1413              	.L109:
- 1414 0256 00BF     		.align	2
- 1415              	.L108:
- 1416 0258 00000000 		.word	RxHeader
- 1417 025c 00000000 		.word	CAN_flag
- 1418 0260 00000000 		.word	RxData
- 1419 0264 000C0140 		.word	1073810432
- 1420 0268 00080140 		.word	1073809408
- 1421 026c 00000000 		.word	POT_Data1
- 1422 0270 00000000 		.word	TxMailbox
- 1423 0274 00000000 		.word	POT_Txheader1
- 1424 0278 00000000 		.word	hcan
- 1425              	.LBE6:
- 1426              		.cfi_endproc
- 1427              	.LFE72:
- 1429              		.section	.text.main,"ax",%progbits
- 1430              		.align	1
- 1431              		.global	main
- 1432              		.syntax unified
- 1433              		.thumb
- 1434              		.thumb_func
- 1435              		.fpu softvfp
- 1437              	main:
- 1438              	.LFB64:
+ 1407              		.loc 1 660 0
+ 1408 024a 094B     		ldr	r3, .L108+24
+ 1409 024c 0949     		ldr	r1, .L108+28
+ 1410 024e 0A48     		ldr	r0, .L108+32
+ 1411 0250 FFF7FEFF 		bl	HAL_CAN_AddTxMessage
+ 1412              	.LVL129:
+ 1413 0254 E7E7     		b	.L84
+ 1414              	.L109:
+ 1415 0256 00BF     		.align	2
+ 1416              	.L108:
+ 1417 0258 00000000 		.word	RxHeader
+ 1418 025c 00000000 		.word	CAN_flag
+ 1419 0260 00000000 		.word	RxData
+ 1420 0264 000C0140 		.word	1073810432
+ 1421 0268 00080140 		.word	1073809408
+ 1422 026c 00000000 		.word	POT_Data1
+ 1423 0270 00000000 		.word	TxMailbox
+ 1424 0274 00000000 		.word	POT_Txheader1
+ 1425 0278 00000000 		.word	hcan
+ 1426              	.LBE6:
+ 1427              		.cfi_endproc
+ 1428              	.LFE72:
+ 1430              		.section	.text.main,"ax",%progbits
+ 1431              		.align	1
+ 1432              		.global	main
+ 1433              		.syntax unified
+ 1434              		.thumb
+ 1435              		.thumb_func
+ 1436              		.fpu softvfp
+ 1438              	main:
+ 1439              	.LFB64:
   95:Src/main.c    ****   /* USER CODE BEGIN 1 */
- 1439              		.loc 1 95 0
-ARM GAS  /tmp/cccjDM90.s 			page 41
+ARM GAS  /tmp/ccoE54Gu.s 			page 41
 
 
- 1440              		.cfi_startproc
- 1441              		@ Volatile: function does not return.
- 1442              		@ args = 0, pretend = 0, frame = 8
- 1443              		@ frame_needed = 0, uses_anonymous_args = 0
- 1444 0000 00B5     		push	{lr}
- 1445              	.LCFI17:
- 1446              		.cfi_def_cfa_offset 4
- 1447              		.cfi_offset 14, -4
- 1448 0002 83B0     		sub	sp, sp, #12
- 1449              	.LCFI18:
- 1450              		.cfi_def_cfa_offset 16
+ 1440              		.loc 1 95 0
+ 1441              		.cfi_startproc
+ 1442              		@ Volatile: function does not return.
+ 1443              		@ args = 0, pretend = 0, frame = 8
+ 1444              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1445 0000 00B5     		push	{lr}
+ 1446              	.LCFI17:
+ 1447              		.cfi_def_cfa_offset 4
+ 1448              		.cfi_offset 14, -4
+ 1449 0002 83B0     		sub	sp, sp, #12
+ 1450              	.LCFI18:
+ 1451              		.cfi_def_cfa_offset 16
  103:Src/main.c    **** 
- 1451              		.loc 1 103 0
- 1452 0004 FFF7FEFF 		bl	HAL_Init
- 1453              	.LVL130:
+ 1452              		.loc 1 103 0
+ 1453 0004 FFF7FEFF 		bl	HAL_Init
+ 1454              	.LVL130:
  110:Src/main.c    **** 
- 1454              		.loc 1 110 0
- 1455 0008 FFF7FEFF 		bl	SystemClock_Config
- 1456              	.LVL131:
+ 1455              		.loc 1 110 0
+ 1456 0008 FFF7FEFF 		bl	SystemClock_Config
+ 1457              	.LVL131:
  117:Src/main.c    ****   MX_ADC1_Init();
- 1457              		.loc 1 117 0
- 1458 000c FFF7FEFF 		bl	MX_GPIO_Init
- 1459              	.LVL132:
+ 1458              		.loc 1 117 0
+ 1459 000c FFF7FEFF 		bl	MX_GPIO_Init
+ 1460              	.LVL132:
  118:Src/main.c    ****   MX_CAN_Init();
- 1460              		.loc 1 118 0
- 1461 0010 FFF7FEFF 		bl	MX_ADC1_Init
- 1462              	.LVL133:
+ 1461              		.loc 1 118 0
+ 1462 0010 FFF7FEFF 		bl	MX_ADC1_Init
+ 1463              	.LVL133:
  119:Src/main.c    ****   /* USER CODE BEGIN 2 */
- 1463              		.loc 1 119 0
- 1464 0014 FFF7FEFF 		bl	MX_CAN_Init
- 1465              	.LVL134:
- 1466 0018 17E0     		b	.L112
- 1467              	.L111:
- 1468              	.LBB7:
+ 1464              		.loc 1 119 0
+ 1465 0014 FFF7FEFF 		bl	MX_CAN_Init
+ 1466              	.LVL134:
+ 1467 0018 17E0     		b	.L112
+ 1468              	.L111:
+ 1469              	.LBB7:
  138:Src/main.c    **** 	POT_interpret(pot_position);
- 1469              		.loc 1 138 0
- 1470 001a 6846     		mov	r0, sp
- 1471 001c FFF7FEFF 		bl	POT_read
- 1472              	.LVL135:
+ 1470              		.loc 1 138 0
+ 1471 001a 6846     		mov	r0, sp
+ 1472 001c FFF7FEFF 		bl	POT_read
+ 1473              	.LVL135:
  139:Src/main.c    **** 
- 1473              		.loc 1 139 0
- 1474 0020 6846     		mov	r0, sp
- 1475 0022 FFF7FEFF 		bl	POT_interpret
- 1476              	.LVL136:
+ 1474              		.loc 1 139 0
+ 1475 0020 6846     		mov	r0, sp
+ 1476 0022 FFF7FEFF 		bl	POT_interpret
+ 1477              	.LVL136:
  142:Src/main.c    ****   HAL_CAN_AddTxMessage(&hcan, &POT_Txheader, POT_Data, &TxMailbox);
- 1477              		.loc 1 142 0
- 1478 0026 0D4D     		ldr	r5, .L114
- 1479 0028 0D4C     		ldr	r4, .L114+4
- 1480 002a 2B46     		mov	r3, r5
- 1481 002c 0D4A     		ldr	r2, .L114+8
- 1482 002e 0E49     		ldr	r1, .L114+12
- 1483 0030 2046     		mov	r0, r4
- 1484 0032 FFF7FEFF 		bl	HAL_CAN_AddTxMessage
- 1485              	.LVL137:
+ 1478              		.loc 1 142 0
+ 1479 0026 0D4D     		ldr	r5, .L114
+ 1480 0028 0D4C     		ldr	r4, .L114+4
+ 1481 002a 2B46     		mov	r3, r5
+ 1482 002c 0D4A     		ldr	r2, .L114+8
+ 1483 002e 0E49     		ldr	r1, .L114+12
+ 1484 0030 2046     		mov	r0, r4
+ 1485 0032 FFF7FEFF 		bl	HAL_CAN_AddTxMessage
+ 1486              	.LVL137:
  143:Src/main.c    **** 
- 1486              		.loc 1 143 0
- 1487 0036 2B46     		mov	r3, r5
-ARM GAS  /tmp/cccjDM90.s 			page 42
+ 1487              		.loc 1 143 0
+ARM GAS  /tmp/ccoE54Gu.s 			page 42
 
 
- 1488 0038 0C4A     		ldr	r2, .L114+16
- 1489 003a 0D49     		ldr	r1, .L114+20
- 1490 003c 2046     		mov	r0, r4
- 1491 003e FFF7FEFF 		bl	HAL_CAN_AddTxMessage
- 1492              	.LVL138:
+ 1488 0036 2B46     		mov	r3, r5
+ 1489 0038 0C4A     		ldr	r2, .L114+16
+ 1490 003a 0D49     		ldr	r1, .L114+20
+ 1491 003c 2046     		mov	r0, r4
+ 1492 003e FFF7FEFF 		bl	HAL_CAN_AddTxMessage
+ 1493              	.LVL138:
  145:Src/main.c    **** 
- 1493              		.loc 1 145 0
- 1494 0042 4FF47A70 		mov	r0, #1000
- 1495 0046 FFF7FEFF 		bl	HAL_Delay
- 1496              	.LVL139:
- 1497              	.L112:
+ 1494              		.loc 1 145 0
+ 1495 0042 4FF47A70 		mov	r0, #1000
+ 1496 0046 FFF7FEFF 		bl	HAL_Delay
+ 1497              	.LVL139:
+ 1498              	.L112:
  132:Src/main.c    **** 		CAN_interpret();
- 1498              		.loc 1 132 0
- 1499 004a 0A4B     		ldr	r3, .L114+24
- 1500 004c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 1501 004e DBB2     		uxtb	r3, r3
- 1502 0050 FF2B     		cmp	r3, #255
- 1503 0052 E2D1     		bne	.L111
+ 1499              		.loc 1 132 0
+ 1500 004a 0A4B     		ldr	r3, .L114+24
+ 1501 004c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1502 004e DBB2     		uxtb	r3, r3
+ 1503 0050 FF2B     		cmp	r3, #255
+ 1504 0052 E2D1     		bne	.L111
  133:Src/main.c    **** 
- 1504              		.loc 1 133 0
- 1505 0054 FFF7FEFF 		bl	CAN_interpret
- 1506              	.LVL140:
- 1507 0058 DFE7     		b	.L111
- 1508              	.L115:
- 1509 005a 00BF     		.align	2
- 1510              	.L114:
- 1511 005c 00000000 		.word	TxMailbox
- 1512 0060 00000000 		.word	hcan
- 1513 0064 00000000 		.word	POT_data
- 1514 0068 00000000 		.word	POT_TxHeader
- 1515 006c 00000000 		.word	POT_Data
- 1516 0070 00000000 		.word	POT_Txheader
- 1517 0074 00000000 		.word	CAN_flag
- 1518              	.LBE7:
- 1519              		.cfi_endproc
- 1520              	.LFE64:
- 1522              		.section	.text.Error_Handler,"ax",%progbits
- 1523              		.align	1
- 1524              		.global	Error_Handler
- 1525              		.syntax unified
- 1526              		.thumb
- 1527              		.thumb_func
- 1528              		.fpu softvfp
- 1530              	Error_Handler:
- 1531              	.LFB73:
+ 1505              		.loc 1 133 0
+ 1506 0054 FFF7FEFF 		bl	CAN_interpret
+ 1507              	.LVL140:
+ 1508 0058 DFE7     		b	.L111
+ 1509              	.L115:
+ 1510 005a 00BF     		.align	2
+ 1511              	.L114:
+ 1512 005c 00000000 		.word	TxMailbox
+ 1513 0060 00000000 		.word	hcan
+ 1514 0064 00000000 		.word	POT_data
+ 1515 0068 00000000 		.word	POT_TxHeader
+ 1516 006c 00000000 		.word	POT_Data
+ 1517 0070 00000000 		.word	POT_Txheader
+ 1518 0074 00000000 		.word	CAN_flag
+ 1519              	.LBE7:
+ 1520              		.cfi_endproc
+ 1521              	.LFE64:
+ 1523              		.section	.text.Error_Handler,"ax",%progbits
+ 1524              		.align	1
+ 1525              		.global	Error_Handler
+ 1526              		.syntax unified
+ 1527              		.thumb
+ 1528              		.thumb_func
+ 1529              		.fpu softvfp
+ 1531              	Error_Handler:
+ 1532              	.LFB73:
  673:Src/main.c    **** 
  674:Src/main.c    **** }
  675:Src/main.c    **** /* USER CODE END 4 */
@@ -2516,125 +2517,125 @@ ARM GAS  /tmp/cccjDM90.s 			page 1
  680:Src/main.c    ****   */
  681:Src/main.c    **** void Error_Handler(void)
  682:Src/main.c    **** {
- 1532              		.loc 1 682 0
- 1533              		.cfi_startproc
-ARM GAS  /tmp/cccjDM90.s 			page 43
+ 1533              		.loc 1 682 0
+ARM GAS  /tmp/ccoE54Gu.s 			page 43
 
 
- 1534              		@ args = 0, pretend = 0, frame = 0
- 1535              		@ frame_needed = 0, uses_anonymous_args = 0
- 1536              		@ link register save eliminated.
- 1537 0000 7047     		bx	lr
- 1538              		.cfi_endproc
- 1539              	.LFE73:
- 1541              		.global	pot_threshold
- 1542              		.comm	CAN_flag,1,1
- 1543              		.comm	TxMailbox,4,4
- 1544              		.comm	POT_Data1,8,4
- 1545              		.comm	POT_Data,8,4
- 1546              		.comm	POT_data,8,4
- 1547              		.comm	POT_Txheader1,24,4
- 1548              		.comm	POT_Txheader,24,4
- 1549              		.comm	POT_TxHeader,24,4
- 1550              		.comm	RxData,8,4
- 1551              		.comm	RxHeader,28,4
- 1552              		.comm	hcan,40,4
- 1553              		.global	sConfig
- 1554              		.comm	hadc1,48,4
- 1555              		.section	.bss.sConfig,"aw",%nobits
- 1556              		.align	2
- 1557              		.set	.LANCHOR0,. + 0
- 1560              	sConfig:
- 1561 0000 00000000 		.space	12
- 1561      00000000 
- 1561      00000000 
- 1562              		.section	.data.pot_threshold,"aw",%progbits
- 1563              		.align	2
- 1564              		.set	.LANCHOR1,. + 0
- 1567              	pot_threshold:
- 1568 0000 0000     		.short	0
- 1569 0002 6702     		.short	615
- 1570 0004 0104     		.short	1025
- 1571 0006 9B05     		.short	1435
- 1572 0008 3507     		.short	1845
- 1573 000a CF08     		.short	2255
- 1574 000c 690A     		.short	2665
- 1575 000e 030C     		.short	3075
- 1576 0010 9D0D     		.short	3485
- 1577 0012 370F     		.short	3895
- 1578 0014 FF0F     		.short	4095
- 1579              		.text
- 1580              	.Letext0:
- 1581              		.file 2 "/usr/include/newlib/machine/_default_types.h"
- 1582              		.file 3 "/usr/include/newlib/sys/_stdint.h"
- 1583              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
- 1584              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
- 1585              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
- 1586              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h"
- 1587              		.file 8 "/usr/include/newlib/sys/lock.h"
- 1588              		.file 9 "/usr/include/newlib/sys/_types.h"
- 1589              		.file 10 "/usr/lib/gcc/arm-none-eabi/6.3.1/include/stddef.h"
- 1590              		.file 11 "/usr/include/newlib/sys/reent.h"
- 1591              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
- 1592              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h"
- 1593              		.file 14 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h"
-ARM GAS  /tmp/cccjDM90.s 			page 44
+ 1534              		.cfi_startproc
+ 1535              		@ args = 0, pretend = 0, frame = 0
+ 1536              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1537              		@ link register save eliminated.
+ 1538 0000 7047     		bx	lr
+ 1539              		.cfi_endproc
+ 1540              	.LFE73:
+ 1542              		.global	pot_threshold
+ 1543              		.comm	CAN_flag,1,1
+ 1544              		.comm	TxMailbox,4,4
+ 1545              		.comm	POT_Data1,8,4
+ 1546              		.comm	POT_Data,8,4
+ 1547              		.comm	POT_data,8,4
+ 1548              		.comm	POT_Txheader1,24,4
+ 1549              		.comm	POT_Txheader,24,4
+ 1550              		.comm	POT_TxHeader,24,4
+ 1551              		.comm	RxData,8,4
+ 1552              		.comm	RxHeader,28,4
+ 1553              		.comm	hcan,40,4
+ 1554              		.global	sConfig
+ 1555              		.comm	hadc1,48,4
+ 1556              		.section	.bss.sConfig,"aw",%nobits
+ 1557              		.align	2
+ 1558              		.set	.LANCHOR0,. + 0
+ 1561              	sConfig:
+ 1562 0000 00000000 		.space	12
+ 1562      00000000 
+ 1562      00000000 
+ 1563              		.section	.data.pot_threshold,"aw",%progbits
+ 1564              		.align	2
+ 1565              		.set	.LANCHOR1,. + 0
+ 1568              	pot_threshold:
+ 1569 0000 0000     		.short	0
+ 1570 0002 6702     		.short	615
+ 1571 0004 0104     		.short	1025
+ 1572 0006 9B05     		.short	1435
+ 1573 0008 3507     		.short	1845
+ 1574 000a CF08     		.short	2255
+ 1575 000c 690A     		.short	2665
+ 1576 000e 030C     		.short	3075
+ 1577 0010 9D0D     		.short	3485
+ 1578 0012 370F     		.short	3895
+ 1579 0014 FF0F     		.short	4095
+ 1580              		.text
+ 1581              	.Letext0:
+ 1582              		.file 2 "/usr/include/newlib/machine/_default_types.h"
+ 1583              		.file 3 "/usr/include/newlib/sys/_stdint.h"
+ 1584              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
+ 1585              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 1586              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 1587              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h"
+ 1588              		.file 8 "/usr/include/newlib/sys/lock.h"
+ 1589              		.file 9 "/usr/include/newlib/sys/_types.h"
+ 1590              		.file 10 "/usr/lib/gcc/arm-none-eabi/6.3.1/include/stddef.h"
+ 1591              		.file 11 "/usr/include/newlib/sys/reent.h"
+ 1592              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 1593              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h"
+ARM GAS  /tmp/ccoE54Gu.s 			page 44
 
 
- 1594              		.file 15 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
- 1595              		.file 16 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
- 1596              		.file 17 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h"
- 1597              		.file 18 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h"
- 1598              		.file 19 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
-ARM GAS  /tmp/cccjDM90.s 			page 45
+ 1594              		.file 14 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h"
+ 1595              		.file 15 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ 1596              		.file 16 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 1597              		.file 17 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h"
+ 1598              		.file 18 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h"
+ 1599              		.file 19 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ARM GAS  /tmp/ccoE54Gu.s 			page 45
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.c
-     /tmp/cccjDM90.s:16     .text.MX_GPIO_Init:0000000000000000 $t
-     /tmp/cccjDM90.s:22     .text.MX_GPIO_Init:0000000000000000 MX_GPIO_Init
-     /tmp/cccjDM90.s:121    .text.MX_GPIO_Init:0000000000000088 $d
-     /tmp/cccjDM90.s:128    .text.MX_ADC1_Init:0000000000000000 $t
-     /tmp/cccjDM90.s:134    .text.MX_ADC1_Init:0000000000000000 MX_ADC1_Init
-     /tmp/cccjDM90.s:220    .text.MX_ADC1_Init:0000000000000064 $d
+     /tmp/ccoE54Gu.s:16     .text.MX_GPIO_Init:0000000000000000 $t
+     /tmp/ccoE54Gu.s:22     .text.MX_GPIO_Init:0000000000000000 MX_GPIO_Init
+     /tmp/ccoE54Gu.s:121    .text.MX_GPIO_Init:0000000000000088 $d
+     /tmp/ccoE54Gu.s:128    .text.MX_ADC1_Init:0000000000000000 $t
+     /tmp/ccoE54Gu.s:134    .text.MX_ADC1_Init:0000000000000000 MX_ADC1_Init
+     /tmp/ccoE54Gu.s:220    .text.MX_ADC1_Init:0000000000000064 $d
                             *COM*:0000000000000030 hadc1
-     /tmp/cccjDM90.s:227    .text.MX_CAN_Init:0000000000000000 $t
-     /tmp/cccjDM90.s:233    .text.MX_CAN_Init:0000000000000000 MX_CAN_Init
-     /tmp/cccjDM90.s:362    .text.MX_CAN_Init:000000000000008c $d
+     /tmp/ccoE54Gu.s:227    .text.MX_CAN_Init:0000000000000000 $t
+     /tmp/ccoE54Gu.s:233    .text.MX_CAN_Init:0000000000000000 MX_CAN_Init
+     /tmp/ccoE54Gu.s:363    .text.MX_CAN_Init:0000000000000090 $d
                             *COM*:0000000000000028 hcan
                             *COM*:0000000000000018 POT_TxHeader
                             *COM*:0000000000000018 POT_Txheader
                             *COM*:0000000000000018 POT_Txheader1
-     /tmp/cccjDM90.s:371    .text.SystemClock_Config:0000000000000000 $t
-     /tmp/cccjDM90.s:378    .text.SystemClock_Config:0000000000000000 SystemClock_Config
-     /tmp/cccjDM90.s:458    .text.POT_read:0000000000000000 $t
-     /tmp/cccjDM90.s:465    .text.POT_read:0000000000000000 POT_read
-     /tmp/cccjDM90.s:611    .text.POT_read:00000000000000d4 $d
-     /tmp/cccjDM90.s:617    .text.POT_interpret:0000000000000000 $t
-     /tmp/cccjDM90.s:624    .text.POT_interpret:0000000000000000 POT_interpret
-     /tmp/cccjDM90.s:903    .text.POT_interpret:0000000000000174 $d
+     /tmp/ccoE54Gu.s:372    .text.SystemClock_Config:0000000000000000 $t
+     /tmp/ccoE54Gu.s:379    .text.SystemClock_Config:0000000000000000 SystemClock_Config
+     /tmp/ccoE54Gu.s:459    .text.POT_read:0000000000000000 $t
+     /tmp/ccoE54Gu.s:466    .text.POT_read:0000000000000000 POT_read
+     /tmp/ccoE54Gu.s:612    .text.POT_read:00000000000000d4 $d
+     /tmp/ccoE54Gu.s:618    .text.POT_interpret:0000000000000000 $t
+     /tmp/ccoE54Gu.s:625    .text.POT_interpret:0000000000000000 POT_interpret
+     /tmp/ccoE54Gu.s:904    .text.POT_interpret:0000000000000174 $d
                             *COM*:0000000000000008 POT_data
                             *COM*:0000000000000008 POT_Data
-     /tmp/cccjDM90.s:912    .text.HAL_CAN_RxFifo0MsgPendingCallback:0000000000000000 $t
-     /tmp/cccjDM90.s:919    .text.HAL_CAN_RxFifo0MsgPendingCallback:0000000000000000 HAL_CAN_RxFifo0MsgPendingCallback
-     /tmp/cccjDM90.s:949    .text.HAL_CAN_RxFifo0MsgPendingCallback:0000000000000018 $d
+     /tmp/ccoE54Gu.s:913    .text.HAL_CAN_RxFifo0MsgPendingCallback:0000000000000000 $t
+     /tmp/ccoE54Gu.s:920    .text.HAL_CAN_RxFifo0MsgPendingCallback:0000000000000000 HAL_CAN_RxFifo0MsgPendingCallback
+     /tmp/ccoE54Gu.s:950    .text.HAL_CAN_RxFifo0MsgPendingCallback:0000000000000018 $d
                             *COM*:0000000000000008 RxData
                             *COM*:000000000000001c RxHeader
                             *COM*:0000000000000001 CAN_flag
-     /tmp/cccjDM90.s:957    .text.CAN_interpret:0000000000000000 $t
-     /tmp/cccjDM90.s:964    .text.CAN_interpret:0000000000000000 CAN_interpret
-     /tmp/cccjDM90.s:1416   .text.CAN_interpret:0000000000000258 $d
+     /tmp/ccoE54Gu.s:958    .text.CAN_interpret:0000000000000000 $t
+     /tmp/ccoE54Gu.s:965    .text.CAN_interpret:0000000000000000 CAN_interpret
+     /tmp/ccoE54Gu.s:1417   .text.CAN_interpret:0000000000000258 $d
                             *COM*:0000000000000008 POT_Data1
                             *COM*:0000000000000004 TxMailbox
-     /tmp/cccjDM90.s:1430   .text.main:0000000000000000 $t
-     /tmp/cccjDM90.s:1437   .text.main:0000000000000000 main
-     /tmp/cccjDM90.s:1511   .text.main:000000000000005c $d
-     /tmp/cccjDM90.s:1523   .text.Error_Handler:0000000000000000 $t
-     /tmp/cccjDM90.s:1530   .text.Error_Handler:0000000000000000 Error_Handler
-     /tmp/cccjDM90.s:1567   .data.pot_threshold:0000000000000000 pot_threshold
-     /tmp/cccjDM90.s:1560   .bss.sConfig:0000000000000000 sConfig
-     /tmp/cccjDM90.s:1556   .bss.sConfig:0000000000000000 $d
-     /tmp/cccjDM90.s:1563   .data.pot_threshold:0000000000000000 $d
+     /tmp/ccoE54Gu.s:1431   .text.main:0000000000000000 $t
+     /tmp/ccoE54Gu.s:1438   .text.main:0000000000000000 main
+     /tmp/ccoE54Gu.s:1512   .text.main:000000000000005c $d
+     /tmp/ccoE54Gu.s:1524   .text.Error_Handler:0000000000000000 $t
+     /tmp/ccoE54Gu.s:1531   .text.Error_Handler:0000000000000000 Error_Handler
+     /tmp/ccoE54Gu.s:1568   .data.pot_threshold:0000000000000000 pot_threshold
+     /tmp/ccoE54Gu.s:1561   .bss.sConfig:0000000000000000 sConfig
+     /tmp/ccoE54Gu.s:1557   .bss.sConfig:0000000000000000 $d
+     /tmp/ccoE54Gu.s:1564   .data.pot_threshold:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS
@@ -2646,7 +2647,7 @@ HAL_CAN_Init
 HAL_CAN_ConfigFilter
 HAL_CAN_Start
 HAL_CAN_ActivateNotification
-ARM GAS  /tmp/cccjDM90.s 			page 46
+ARM GAS  /tmp/ccoE54Gu.s 			page 46
 
 
 memset

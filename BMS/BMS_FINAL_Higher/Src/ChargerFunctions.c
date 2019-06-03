@@ -6,7 +6,7 @@ void setDischarge(BMSconfigStructTypedef cfg, uint16_t allVoltage[12][12], bool 
 	chargeRate = 2;												// initialize the charging current to normal operation
 	
 	/* iterate through every cell */
-	for (int board = 0; board < cfg.numOfICs; board++) {
+	for (int board = 4; board < cfg.numOfICs; board++) {
 		for (int cell = 0; cell < cfg.numOfCellsPerIC; cell++) {
 			/* get the voltage of current cell */
 			uint16_t voltage = allVoltage[board][cell];
@@ -38,7 +38,7 @@ uint16_t getLowestVoltage(BMSconfigStructTypedef cfg, uint16_t cellVoltage[12][8
 	uint16_t low = cellVoltage[0][0];
 
 	/* iterate through all cells and get the smallest voltage */
-	for (int i = 0; i < cfg.numOfICs; i++) {
+	for (int i = 4; i < cfg.numOfICs; i++) {
 		for (int j = 0; j < cfg.numOfCellsPerIC; j++) {
 			if (low > cellVoltage[i][j]) {
 				low = cellVoltage[i][j];
