@@ -16,6 +16,9 @@ void loadConfig(BMSconfigStructTypedef* cfg) {
 
 	cfg->OV_threshold = 42000;
 	cfg->UV_threshold = 25000;
+
+	cfg->LUV_threshold = 20000;
+	cfg->HUV_threshold = 25000;
 	//charge to 4.14V, lower charge current, discharge cells above 4.16V
 	//exceed 4.18V, stop charging entirely, discharge to 4.15V
 	//exceed 4.2V, fault prevents discharging

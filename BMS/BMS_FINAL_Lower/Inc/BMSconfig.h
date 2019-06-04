@@ -15,6 +15,8 @@ typedef struct {
 	uint8_t ADCConversionRate;
 	uint16_t OV_threshold;
 	uint16_t UV_threshold;
+	uint16_t LUV_threshold;
+	uint16_t HUV_threshold;
 	uint16_t slowCharge_threshold;
 	uint16_t stopCharge_threshold;
 	uint16_t max_difference;

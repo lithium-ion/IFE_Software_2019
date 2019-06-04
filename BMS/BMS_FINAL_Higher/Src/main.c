@@ -76,7 +76,7 @@ uint8_t                 ChargerTxData[8];
 uint8_t                 CELLVAL_DATA[6];
 uint8_t                 BMSSTAT_DATA[6];
 
-uint16_t                minimum;
+uint16_t volatile       minimum;
 uint32_t                sumOfCells;
 uint8_t                 chargeRate = 2;
 
@@ -178,15 +178,22 @@ int main(void)
     readAllCellTemps(BMSconfig, BMS_DATA);
     // BMSTINF_message(BMSconfig, BMS_DATA);
 
-    //check for faults (cell DC, cell OV, cell UV, cell OT, cell TDC, invalid PEC, no charger comm)
     checkAllCellConnections(BMSconfig, BMS_DATA);
-    BMS_FAULT = FAULT_check(BMSconfig, BMS_DATA, BMS_STATUS);
 
     //if AIR and CHARGE_EN are low, pack is charging
     AIR = HAL_GPIO_ReadPin(GPIOB, AIR_Pin);
     CHARGE_EN = HAL_GPIO_ReadPin(GPIOB, CHARGE_EN_Pin);
 
-    if (/*(AIR == 0) && */(CHARGE_EN == 0)) {
+    if(CHARGE_EN == 0){
+      cfg->UV_threshold = cfg->LUV_threshold;
+    } else {
+      cfg->UV_threshold = cfg->HUV_threshold;
+    }
+
+    //check for faults (cell DC, cell OV, cell UV, cell OT, cell TDC, invalid PEC, no charger comm)
+    BMS_FAULT = FAULT_check(BMSconfig, BMS_DATA, BMS_STATUS);
+
+    if ((AIR == 0) && (CHARGE_EN == 0)) {
 
       if (chargeRate != 0)
         setDischarge(BMSconfig, BMS_DATA, discharge, BMS_FAULT, full_discharge);
