@@ -659,11 +659,11 @@ void setDischarge(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6], bool cellD
     bmsData[i][1] &= 0x5F; //charging state = 2
 
     // if any cell voltage is much greater than the minimum (>200mV), stop charging and discharge that cell to the minimum
-    if (cellVoltage > (minimum + cfg.max_difference)) {
-      chargeRate = 0;
-      fullDischarge[board][cell] = 1;
-      bmsData[i][1] &= 0x7F; //charging state = 3
-    }
+    // if (cellVoltage > (minimum + cfg.max_difference)) {
+    //   chargeRate = 0;
+    //   fullDischarge[board][cell] = 1;
+    //   bmsData[i][1] &= 0x7F; //charging state = 3
+    // }
     // if any cell voltage is greater than some absolute threshold (4.18V), stop charging and discharge that cell to the minimum
     // could discharge to a fixed value (4.15V) instead
     if (cellVoltage > cfg.stopCharge_threshold) {
