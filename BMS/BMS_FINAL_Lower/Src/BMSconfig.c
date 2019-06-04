@@ -3,7 +3,7 @@
 void loadConfig(BMSconfigStructTypedef* cfg) {
 
 	//change this
-	cfg->numOfICs = 4;
+	cfg->numOfICs = 12;
 	for(int i = 0; i<12; i++){
 		cfg->address[i] = i;
 	}
@@ -33,12 +33,12 @@ void loadConfig(BMSconfigStructTypedef* cfg) {
 	//UV FAULT 2.5, check ESF
 	//if cells are below 3, don't balance
 
-	cfg->slowCharge_threshold = 41400;
-	cfg->stopCharge_threshold = 41800;
+	cfg->slowCharge_threshold = 37400; //41400;
+	cfg->stopCharge_threshold = 37800; //41800;
 	cfg->max_difference = 2000;
 	cfg->balancing_difference = 500;
-	cfg->start_scaling = 41000;
-	cfg->stop_scaling = 41600;
+	cfg->start_scaling = 37000; //41000;
+	cfg->stop_scaling = 37600; //41600;
 	cfg->scale_to = 100;
 
 	cfg->invalidPECcount = 5;
