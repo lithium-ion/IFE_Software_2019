@@ -654,43 +654,43 @@ void setDischarge(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6], bool cellD
 
     board = i / cfg.numOfCellsPerIC;
     cell = i % cfg.numOfCellsPerIC;
-    cellDischarge[board][cell] = 1;
+    // cellDischarge[board][cell] = 1;
 
     bmsData[i][1] &= 0x5F; //charging state = 2
 
-    // // if any cell voltage is much greater than the minimum (>200mV), stop charging and discharge that cell to the minimum
-    // if (cellVoltage > (minimum + cfg.max_difference)) {
-    //   chargeRate = 0;
-    //   fullDischarge[board][cell] = 1;
-    //   bmsData[i][1] &= 0x7F; //charging state = 3
-    // }
-    // // if any cell voltage is greater than some absolute threshold (4.18V), stop charging and discharge that cell to the minimum
-    // // could discharge to a fixed value (4.15V) instead
-    // if (cellVoltage > cfg.stopCharge_threshold) {
-    //   chargeRate = 0;
-    //   fullDischarge[board][cell] = 1;
-    //   bmsData[i][1] &= 0x9F; //charging state = 4
-    // }
+    // if any cell voltage is much greater than the minimum (>200mV), stop charging and discharge that cell to the minimum
+    if (cellVoltage > (minimum + cfg.max_difference)) {
+      chargeRate = 0;
+      fullDischarge[board][cell] = 1;
+      bmsData[i][1] &= 0x7F; //charging state = 3
+    }
+    // if any cell voltage is greater than some absolute threshold (4.18V), stop charging and discharge that cell to the minimum
+    // could discharge to a fixed value (4.15V) instead
+    if (cellVoltage > cfg.stopCharge_threshold) {
+      chargeRate = 0;
+      fullDischarge[board][cell] = 1;
+      bmsData[i][1] &= 0x9F; //charging state = 4
+    }
 
-    // // if still charging AND cells above ~3V
-    // if ((chargeRate != 0) && (minimum > 30000)) {
+    // if still charging AND cells above ~3V
+    if ((chargeRate != 0) && (minimum > 30000)) {
 
-    //   // if any cell is above some absolute threshold, charge slower 
-    //   if (cellVoltage > cfg.slowCharge_threshold)
-    //     chargeRate = 1;
+      // if any cell is above some absolute threshold, charge slower 
+      if (cellVoltage > cfg.slowCharge_threshold)
+        chargeRate = 1;
 
-    //   // determine the relative balancing threshold based on minimum voltage
-    //   threshold = balancingThreshold(cfg);
+      // determine the relative balancing threshold based on minimum voltage
+      threshold = balancingThreshold(cfg);
 
-    //   if (cellVoltage > (minimum + threshold)) {
-    //     cellDischarge[board][cell] = 1;
-    //     bmsData[i][1] &= 0x2F; //charging state = 1
-    //   }
-    //   else {
-    //     cellDischarge[board][cell] = 0;
-    //     bmsData[i][1] &= 0x1F; //charging state = 0
-    //   }
-    // }
+      if (cellVoltage > (minimum + threshold)) {
+        cellDischarge[board][cell] = 1;
+        bmsData[i][1] &= 0x2F; //charging state = 1
+      }
+      else {
+        cellDischarge[board][cell] = 0;
+        bmsData[i][1] &= 0x1F; //charging state = 0
+      }
+    }
 	}
 }
 
@@ -827,7 +827,7 @@ void BMSVINF_message(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
   uint16_t averageV;
   uint32_t sum = 0;
 
-  for (uint8_t cell = 0; cell < 96; cell++) {
+  for (uint8_t cell = START; cell < END; cell++) {
 
     cellVoltage = 0;
     cellVoltage = (uint16_t) (bmsData[cell][2]);
