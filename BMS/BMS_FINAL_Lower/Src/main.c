@@ -172,11 +172,11 @@ int main(void)
 
     //read all cell voltages, send BMSVINF message
     readAllCellVoltages(BMSconfig, BMS_DATA);
-    // BMSVINF_message(BMSconfig, BMS_DATA);
+    BMSVINF_message(BMSconfig, BMS_DATA);
 
     //read all cell temps, send BMSTINF message
     readAllCellTemps(BMSconfig, BMS_DATA);
-    // BMSTINF_message(BMSconfig, BMS_DATA);
+    BMSTINF_message(BMSconfig, BMS_DATA);
 
     checkAllCellConnections(BMSconfig, BMS_DATA);
 
@@ -185,9 +185,9 @@ int main(void)
     CHARGE_EN = HAL_GPIO_ReadPin(GPIOB, CHARGE_EN_Pin);
 
     if(CHARGE_EN == 0){
-      cfg->UV_threshold = cfg->LUV_threshold;
+      BMSconfig.UV_threshold = BMSconfig.LUV_threshold;
     } else {
-      cfg->UV_threshold = cfg->HUV_threshold;
+      BMSconfig.UV_threshold = BMSconfig.HUV_threshold;
     }
 
     //check for faults (cell DC, cell OV, cell UV, cell OT, cell TDC, invalid PEC, no charger comm)
@@ -214,7 +214,7 @@ int main(void)
     //send remaining CAN messages
     CELLVAL_message(BMSconfig, BMS_DATA);
     BMSSTAT_message(BMSconfig, BMS_STATUS);
-    // PACKSTAT_message(BMSconfig, BMS_DATA);
+    PACKSTAT_message(BMSconfig, BMS_DATA);
 
   }
   /* USER CODE END 3 */
@@ -878,7 +878,7 @@ void BMSTINF_message(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
   uint16_t averageT;
   uint32_t sum = 0;
 
-  for (uint8_t cell = 0; cell < 96; cell++) {
+  for (uint8_t cell = START; cell < END; cell++) {
 
     cellTemp = 0;
     cellTemp = (uint16_t) (bmsData[cell][4]);
@@ -915,6 +915,7 @@ void BMSTINF_message(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
 
   HAL_CAN_AddTxMessage(&hcan, &TxHeader, BMSTINF_DATA, &TxMailbox);  
 
+  //Insert PWM code
 };
 
 void PACKSTAT_message(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
