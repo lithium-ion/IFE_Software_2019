@@ -14,7 +14,7 @@ void loadConfig(BMSconfigStructTypedef* cfg) {
 	cfg->numOfCellsPerIC = 8;
 	cfg->numOfTempPerIC = 4;
 
-	cfg->OV_threshold = 42000;
+	cfg->OV_threshold = 38000; //42000;
 	cfg->UV_threshold = 25000;
 
 	cfg->LUV_threshold = 20000;
