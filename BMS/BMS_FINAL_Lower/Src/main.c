@@ -38,7 +38,7 @@
 #define BMSVINF_ID      0x004
 #define BMSTINF_ID      0x005
 #define PACKSTAT_ID     0x006
-#define CHARGER_ID      0x042
+#define CHARGER_ID      0x02A
 
 #define START           0
 #define END             32
@@ -969,9 +969,9 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *CanHandle)
   HAL_CAN_GetRxMessage(&hcan, CAN_RX_FIFO0, &RxHeader, RxData);
   if(RxHeader.StdId == 0x001)
   {
-    minimum = RxData[1];
+    minimum = RxData[0];
     minimum = minimum << 8;
-    minimum |= (uint16_t) RxData[0];
+    minimum += (uint16_t) RxData[1];
   }
 }
 
