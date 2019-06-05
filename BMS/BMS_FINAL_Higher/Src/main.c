@@ -654,6 +654,9 @@ void setDischarge(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6], bool cellD
 
     board = i / cfg.numOfCellsPerIC;
     cell = i % cfg.numOfCellsPerIC;
+    if(minimum == 0) {
+      cellDischarge[board][cell] = 0;
+    }
     // cellDischarge[board][cell] = 1;
 
     bmsData[i][1] &= 0x5F; //charging state = 2
@@ -673,7 +676,7 @@ void setDischarge(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6], bool cellD
     }
 
     // if still charging AND cells above ~3V
-    if ((chargeRate != 0) && (minimum > 30000)) {
+    if ((chargeRate != 0)/* && (minimum > 30000)*/) {
 
       // if any cell is above some absolute threshold, charge slower 
       if (cellVoltage > cfg.slowCharge_threshold)
@@ -692,6 +695,7 @@ void setDischarge(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6], bool cellD
       }
     }
 	}
+  minimum = 0;
 }
 
 uint16_t balancingThreshold(BMSconfigStructTypedef cfg) {
