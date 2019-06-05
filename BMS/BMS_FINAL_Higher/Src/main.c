@@ -656,6 +656,7 @@ void setDischarge(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6], bool cellD
     cell = i % cfg.numOfCellsPerIC;
     if(minimum == 0) {
       cellDischarge[board][cell] = 0;
+      continue;
     }
     // cellDischarge[board][cell] = 1;
 
@@ -852,7 +853,7 @@ void BMSVINF_message(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
   }
 
   sumOfCells = sum;
-  minimum = minV;
+  //minimum = minV;
   averageV = (uint16_t) (sum / (cfg.numOfICs * cfg.numOfCellsPerIC));
 
   TxHeader.StdId = BMSVINF_ID;
