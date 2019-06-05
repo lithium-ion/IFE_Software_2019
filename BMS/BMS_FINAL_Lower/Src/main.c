@@ -763,20 +763,20 @@ void setChargerTxData(BMSconfigStructTypedef cfg) {
   ChargerTxHeader.DLC = 8;
 
 	/* voltage data (hex value of desired voltage (V) times 10)*/
-	ChargerTxData[0] = (uint8_t)((cfg.chargerVoltage & 0xFF) >> 8);
+	ChargerTxData[0] = (uint8_t)((cfg.chargerVoltage >> 8) & 0xFF);
 	ChargerTxData[1] = (uint8_t)(cfg.chargerVoltage & 0xFF);
 
 	/* set the current data (hex value of desired current (A) times 10) */
 	switch (chargeRate) {
 		case 1:
 			/* lower current */
-			ChargerTxData[2] = (uint8_t)((cfg.lowerCurrent & 0xFF) >> 8);
+			ChargerTxData[2] = (uint8_t)((cfg.lowerCurrent>> 8) & 0xFF);
 			ChargerTxData[3] = (uint8_t)(cfg.lowerCurrent & 0xFF);
 			break;
 
 		case 2:
 			/* normal current */
-			ChargerTxData[2] = (uint8_t)((cfg.normalCurrent & 0xFF) >> 8);
+			ChargerTxData[2] = (uint8_t)((cfg.normalCurrent >> 8) & 0xFF);
 			ChargerTxData[3] = (uint8_t)(cfg.normalCurrent & 0xFF);
 			break;
 
