@@ -531,7 +531,7 @@ bool dischargeCellGroups(BMSconfigStructTypedef config, bool cellDischarge[12][8
 
 	wakeup_idle();
 
-	for (uint8_t i = 6; i < config.numOfICs; i++) {
+	for (uint8_t i = 0; i < config.numOfICs; i++) {
 
 		cfg->DischargeCell1 = cellDischarge[i][0];
 		cfg->DischargeCell2 = cellDischarge[i][1];
