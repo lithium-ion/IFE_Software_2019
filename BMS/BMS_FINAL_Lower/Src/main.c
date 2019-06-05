@@ -347,7 +347,7 @@ static void MX_CAN_Init(void)
 
 	ChargerTxHeader.ExtId = CHARGER_ID; 					// CAN extended ID
 	ChargerTxHeader.RTR = CAN_RTR_DATA; 			// CAN frame type
-	ChargerTxHeader.IDE = CAN_ID_EXT; 				// CAN ID type
+	ChargerTxHeader.IDE = CAN_ID_STD; 				// CAN ID type
 	ChargerTxHeader.DLC = 8; 						// CAN frame length in bytes
 	ChargerTxHeader.TransmitGlobalTime = DISABLE;	// CAN timestamp in TxData[6] and TxData[7]
 
@@ -759,8 +759,8 @@ void checkDischarge(BMSconfigStructTypedef cfg, bool fullDischarge[12][8], uint8
 
 void setChargerTxData(BMSconfigStructTypedef cfg) {
 
-  TxHeader.StdId = CHARGER_ID;
-  TxHeader.DLC = 8;
+  ChargerTxHeader.StdId = CHARGER_ID;
+  ChargerTxHeader.DLC = 8;
 
 	/* voltage data (hex value of desired voltage (V) times 10)*/
 	ChargerTxData[0] = (uint8_t)((cfg.chargerVoltage & 0xFF) >> 8);
