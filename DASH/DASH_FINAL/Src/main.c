@@ -37,9 +37,10 @@
 #define RINEHARTCUR_CAN_ID			0x064
 #define RINEHARTTOR_CAN_ID			0x082
 #define FAULTS				0x0D0
-#define STATES			0x0D1
+#define STATES			0x00E
 #define ENABLE_SIG		0x0D2
 #define MOTOR_POS		0x0A5
+#define BASiC     69
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -129,8 +130,8 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
-	if (CAN_flag == 0xFF)
-		CAN_interpret();
+	//if (CAN_flag == 0xFF)
+	//	CAN_interpret();
 
 	//send POT positions CAN message
 
@@ -139,10 +140,10 @@ int main(void)
 	POT_interpret(pot_position);
 
 
-	HAL_CAN_AddTxMessage(&hcan, &POT_TxHeader, POT_data, &TxMailbox);
-  HAL_CAN_AddTxMessage(&hcan, &POT_Txheader, POT_Data, &TxMailbox);
+	//HAL_CAN_AddTxMessage(&hcan, &POT_TxHeader, POT_data, &TxMailbox);
+  //HAL_CAN_AddTxMessage(&hcan, &POT_Txheader, POT_Data, &TxMailbox);
 
-	HAL_Delay(1000);
+	//HAL_Delay(1000);
 
 
   }
@@ -312,9 +313,9 @@ hcan.Instance = CAN1;
 	sFilterConfig.FilterBank = 0;							// filter number (0-13)
 	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;		// mask mode or identifier mode
 	sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
-	sFilterConfig.FilterIdHigh = 0x0000;					// received ID must match filter ID for each bit specified by filter mask
+	sFilterConfig.FilterIdHigh = (0x000E << 5);					// received ID must match filter ID for each bit specified by filter mask
 	sFilterConfig.FilterIdLow = 0x0000;
-	sFilterConfig.FilterMaskIdHigh = 0x0000;				// specifies which bits of the received ID to compare to the filter ID
+	sFilterConfig.FilterMaskIdHigh = 0x0FFE0;				// specifies which bits of the received ID to compare to the filter ID
 	sFilterConfig.FilterMaskIdLow = 0x0000;
 	sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO0;		// receive FIFO (0 or 1, must match chosen interrupt!)
 	sFilterConfig.FilterActivation = ENABLE;
@@ -510,56 +511,16 @@ else if (pot_pos[1] == 9){
 
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *CanHandle)
 {
+  //HAL_GPIO_TogglePin(GPIOB, TC_LED_Pin);
   if (HAL_CAN_GetRxMessage(&hcan, CAN_RX_FIFO0, &RxHeader, RxData) == HAL_OK)
-	  CAN_flag = 0xFF;
+	  CAN_interpret();
 }
 
 void CAN_interpret(void) {
 
 	uint16_t received_ID;
 	received_ID = RxHeader.StdId;
-
-	if (received_ID == FAULTS) {
-
-		uint8_t BMS_fault;
-		uint8_t IMD_fault;
-		uint8_t BSPD_fault;
-		bool any_fault;
-
-		BMS_fault = RxData[0];
-		IMD_fault = RxData[1];
-		BSPD_fault = RxData[2];
-
-		if (BMS_fault == 0xFF) {
-			HAL_GPIO_WritePin(GPIOA, BMS_LED_ON_Pin, GPIO_PIN_SET);
-			any_fault = true;
-		}
-		else if (BMS_fault == 0x00)
-			HAL_GPIO_WritePin(GPIOA, BMS_LED_ON_Pin, GPIO_PIN_RESET);
-
-		if (IMD_fault == 0xFF) {
-			HAL_GPIO_WritePin(GPIOA, IMD_LED_ON_Pin, GPIO_PIN_SET);
-			any_fault = true;
-		}
-		else if (IMD_fault == 0x00)
-			HAL_GPIO_WritePin(GPIOA, IMD_LED_ON_Pin, GPIO_PIN_RESET);
-
-		if (BSPD_fault == 0xFF) {
-			HAL_GPIO_WritePin(GPIOA, BSPD_LED_ON_Pin, GPIO_PIN_SET);
-			any_fault = true;
-		}
-		else if (BSPD_fault == 0x00)
-			HAL_GPIO_WritePin(GPIOA, BSPD_LED_ON_Pin, GPIO_PIN_RESET);
-
-		if (any_fault == true) {
-			// if there is any fault
-			HAL_GPIO_WritePin(GPIOB, RGB_GREEN_Pin, GPIO_PIN_RESET); // set RGB LED red
-			HAL_GPIO_WritePin(GPIOB, RGB_RED_Pin, GPIO_PIN_SET);
-			HAL_GPIO_WritePin(GPIOB, RGB_BLUE_Pin, GPIO_PIN_RESET);
-			any_fault = false;
-		}
-
-	}
+  //HAL_GPIO_TogglePin(GPIOB, CUST_LED_Pin);
 
 	if (received_ID == STATES) {
 
@@ -620,57 +581,31 @@ void CAN_interpret(void) {
 
     if (BMS_fault == 0xFF) {
       HAL_GPIO_WritePin(GPIOA, BMS_LED_ON_Pin, GPIO_PIN_SET);
-      any_fault = true;
+      HAL_GPIO_WritePin(GPIOB, RGB_GREEN_Pin, GPIO_PIN_RESET); // set RGB LED red
+      HAL_GPIO_WritePin(GPIOB, RGB_RED_Pin, GPIO_PIN_SET);
+      HAL_GPIO_WritePin(GPIOB, RGB_BLUE_Pin, GPIO_PIN_RESET);
     }
     else if (BMS_fault == 0x00)
       HAL_GPIO_WritePin(GPIOA, BMS_LED_ON_Pin, GPIO_PIN_RESET);
 
     if (IMD_fault == 0xFF) {
       HAL_GPIO_WritePin(GPIOA, IMD_LED_ON_Pin, GPIO_PIN_SET);
-      any_fault = true;
+      HAL_GPIO_WritePin(GPIOB, RGB_GREEN_Pin, GPIO_PIN_RESET); // set RGB LED red
+      HAL_GPIO_WritePin(GPIOB, RGB_RED_Pin, GPIO_PIN_SET);
+      HAL_GPIO_WritePin(GPIOB, RGB_BLUE_Pin, GPIO_PIN_RESET);
     }
     else if (IMD_fault == 0x00)
       HAL_GPIO_WritePin(GPIOA, IMD_LED_ON_Pin, GPIO_PIN_RESET);
 
     if (BSPD_fault == 0xFF) {
       HAL_GPIO_WritePin(GPIOA, BSPD_LED_ON_Pin, GPIO_PIN_SET);
-      any_fault = true;
-    }
-    else if (BSPD_fault == 0x00)
-      HAL_GPIO_WritePin(GPIOA, BSPD_LED_ON_Pin, GPIO_PIN_RESET);
-
-    if (any_fault == true) {
-      // if there is any fault
       HAL_GPIO_WritePin(GPIOB, RGB_GREEN_Pin, GPIO_PIN_RESET); // set RGB LED red
       HAL_GPIO_WritePin(GPIOB, RGB_RED_Pin, GPIO_PIN_SET);
       HAL_GPIO_WritePin(GPIOB, RGB_BLUE_Pin, GPIO_PIN_RESET);
-      any_fault = false;
     }
-
+    else if (BSPD_fault == 0x00)
+      HAL_GPIO_WritePin(GPIOA, BSPD_LED_ON_Pin, GPIO_PIN_RESET);
 	}
-
-
-if (received_ID == MOTOR_POS) {
-  uint16_t Rpm;
-  Rpm = RxData[2] + 256*RxData[3];
-
-  if (Rpm < 50){
-    POT_Data1[1] = 0;
-    POT_Data1[0] = 0;
-    HAL_CAN_AddTxMessage(&hcan, &POT_Txheader1, POT_Data1, &TxMailbox);
-  }
-
-  if (Rpm >= 50){
-    POT_Data1[1] = 3;
-    POT_Data1[0] = 232;
-    HAL_CAN_AddTxMessage(&hcan, &POT_Txheader1, POT_Data1, &TxMailbox);
-  }
-
-}
-
-
-	CAN_flag = 0x00;
-
 }
 /* USER CODE END 4 */
 
