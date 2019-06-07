@@ -248,13 +248,14 @@ int main(void)
    while (1)
    {
      //READ FOR PRECHARGE
-   if(HAL_GPIO_ReadPin(GPIOB, PRECHARGE_COMPLETE_Pin) == GPIO_PIN_RESET){
+  // if(HAL_GPIO_ReadPin(GPIOB, PRECHARGE_COMPLETE_Pin) == GPIO_PIN_RESET){
      car_state_machine(PRECHARGED);
      //READ FOR ENABLE
-     //TxCar_state_data[4] = HAL_GPIO_ReadPin(GPIOB,ENABLE_IN_Pin);
+
     if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_8) == GPIO_PIN_RESET){
        car_state_machine(ENABLE_FLIPPED);
-       //HAL_GPIO_WritePin(GPIOB,GPIO_PIN_13,GPIO_PIN_SET);
+  
+       HAL_GPIO_WritePin(GPIOB, BTSF_EN_Pin|APPS_EN_Pin ,GPIO_PIN_SET);
 
             //ADC for Brake pressure
        brakePressure_1 = updateADC(BRAKE_PRESSURE_1_ADC_CHANNEL);
@@ -284,9 +285,10 @@ int main(void)
      { //IF WE HAVE DE ENABLED LA COCHE
        TxCar_state_data[0] = PRECHARGED;
        HAL_GPIO_WritePin(GPIOB, RTD_EN_Pin,GPIO_PIN_RESET);
-       HAL_Delay(500);//THIS IS PUT HERE TO AVOID BOUNCING WHEN ITS REMOVED
+       HAL_GPIO_WritePin(GPIOB, BTSF_EN_Pin|APPS_EN_Pin ,GPIO_PIN_RESET);
+      // HAL_Delay(500);//THIS IS PUT HERE TO AVOID BOUNCING WHEN ITS REMOVED
      }
-   } // end of if precharge complete statement
+  // } // end of if precharge complete statement
       if(RTDS_Timer == 0)
        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15,GPIO_PIN_RESET);
   
@@ -308,8 +310,8 @@ int main(void)
    if (CAN_Timer == 0){ //sending routine message every 1 second
 
      sendCar_state();
-     sendFaultMsg();
-     CAN_Timer = 200;
+     //sendFaultMsg();
+     CAN_Timer = 500;
      //HAL_GPIO_WritePin(BRAKE_LIGHT_EN_GPIO_Port, BRAKE_LIGHT_EN_Pin, GPIO_PIN_SET);
 
    }
@@ -552,8 +554,8 @@ void readFaults(){
   else bms = FAULT_INACTIVE;
 
   if(bms || imd){
-    //TxCar_state_data[0] = LV_ON;
-    //HAL_GPIO_WritePin(GPIOB, RTD_EN_Pin | RTDS_EN_Pin, GPIO_PIN_RESET);
+    TxCar_state_data[0] = LV_ON;
+    HAL_GPIO_WritePin(GPIOB, RTD_EN_Pin | RTDS_EN_Pin, GPIO_PIN_RESET);
   }
 
 }
