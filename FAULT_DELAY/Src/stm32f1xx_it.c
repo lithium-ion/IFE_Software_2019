@@ -208,7 +208,7 @@ void TIM4_IRQHandler(void)
   HAL_TIM_IRQHandler(&htim4);
   /* USER CODE BEGIN TIM4_IRQn 1 */
   __HAL_TIM_SET_COUNTER(&htim4, 0);
-  HAL_TIM_OC_Stop_IT(&htim4, TIM_CHANNEL_4);
+  HAL_TIM_Base_Stop_IT(&htim4);
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
   /* USER CODE END TIM4_IRQn 1 */
 }
