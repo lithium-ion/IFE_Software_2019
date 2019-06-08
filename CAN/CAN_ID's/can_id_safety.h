@@ -13,7 +13,7 @@
 #define SOFT_FAULTS 0x0D0
 /*
 *
-* SIZE = 3 Bytes 
+* SIZE = 6 Bytes 
 *  Byte # 	|	Type 	| Description 			| Name
 ------------------------------------------------------
 * 	0 		|  upper	| Brake pressue 1 upper | BP1
@@ -38,7 +38,7 @@
 #define CAR_STATE 0x00E
 /*
 *
-* SIZE = 3 Bytes 
+* SIZE = 4 Bytes 
 *  Byte # 	|	Type 	| Description 			| Name
 ------------------------------------------------------
 * 	0 		| 	STATE	| 	LV_ON           0x01| CAR_STATE
@@ -56,17 +56,5 @@
 ------------------------------------------------------
 * 	3 		| 	Boolean	|	0xFF = Fault present| BSPD
 *			|			| 	0x00 = no FAULT 	| 
-*
-*/
-
-#define ENABLE	0x0D2
-/*
-*
-* Size = 1 Byte 
-*	Byte 	| Type 		| Description 			| Name
-------------------------------------------------------
-*	0		|	Boolean	|	0xFF = Enabled 		| Enabled
-			|			|	0x00 = not Enabled 	|	
-*
 *
 */
