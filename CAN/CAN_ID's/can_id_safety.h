@@ -10,35 +10,52 @@
 
 
 
-#define FAULTS 0x0D0
+#define SOFT_FAULTS 0x0D0
 /*
 *
 * SIZE = 3 Bytes 
 *  Byte # 	|	Type 	| Description 			| Name
 ------------------------------------------------------
-* 	0 		| 	Boolean	| 	0xFF = Fault present| BMS
-*			|			| 	0x00 = no FAULT 	|
+* 	0 		|  upper	| Brake pressue 1 upper | BP1
+*			|  			| bits					|
 -----------------------------------------------------
-*	1		| 	Boolean	|	0xFF = Fault present| IMD 
-*			| 			|	0x00 = no fault 	|
+*	1		|  lower 	| Brake pressure 1 lower|
+*			|  			| bits					|
 ------------------------------------------------------
-* 	2 		| 	Boolean	|	0xFF = Fault present| BSPD
-*			|			| 	0x00 = no FAULT 	| 
+* 	2 		|  upper	| Brake pressue 2 upper | BP2
+*			|  			| bits					|
+-----------------------------------------------------
+*	3		|  lower 	| Brake pressure 2 lower|
+*			|  			| bits					|
 ------------------------------------------------------
-* 	3 		| 	Boolean	|	0xFF = Fault present| APPS
-*			|			| 	0x00 = no FAULT 	| 
-*
+* 	4 		|  upper	| throttle 1 upper 		| TH1
+*			|  			| bits					|
+-----------------------------------------------------
+*	5		|  lower 	| Throttle 1 lower		|
+*			|  			| bits					|
 */
 
-#define PRECHARGE 0x0D1
+#define CAR_STATE 0x00E
 /*
 *
-* Size = 1 Byte 
-*	Byte 	| Type 		| Description 			| Name
+* SIZE = 3 Bytes 
+*  Byte # 	|	Type 	| Description 			| Name
 ------------------------------------------------------
-*	0		|	Boolean	|	0xFF = Charged		| Precharge
-			|			|	0x00 = not charged 	|	
-*
+* 	0 		| 	STATE	| 	LV_ON           0x01| CAR_STATE
+*			|			| 	PRECHARGED      0x02|
+*			|			|	ENABLE_FLIPPED  0x04|
+*			|			|	RTDS_SOUND      0x08|
+*			|			|	PWR_AVAILABLE   0x10|
+*			|			|	SOFT_FAULT      0x20|
+-----------------------------------------------------
+*	1		| 	Boolean	|	0xFF = Fault present| BMS
+*			| 			|	0x00 = no fault 	|
+------------------------------------------------------
+* 	2 		| 	Boolean	|	0xFF = Fault present| IMD
+*			|			| 	0x00 = no FAULT 	| 
+------------------------------------------------------
+* 	3 		| 	Boolean	|	0xFF = Fault present| BSPD
+*			|			| 	0x00 = no FAULT 	| 
 *
 */
 
