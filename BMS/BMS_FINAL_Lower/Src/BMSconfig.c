@@ -14,7 +14,7 @@ void loadConfig(BMSconfigStructTypedef* cfg) {
 	cfg->numOfCellsPerIC = 8;
 	cfg->numOfTempPerIC = 4;
 
-	cfg->OV_threshold = 38000; //42000;
+	cfg->OV_threshold = 42000; //42000;
 	cfg->UV_threshold = 25000;
 
 	cfg->LUV_threshold = 20000;
@@ -33,19 +33,19 @@ void loadConfig(BMSconfigStructTypedef* cfg) {
 	//UV FAULT 2.5, check ESF
 	//if cells are below 3, don't balance
 
-	cfg->slowCharge_threshold = 37400; //41400;
-	cfg->stopCharge_threshold = 37800; //41800;
+	cfg->slowCharge_threshold = 41400; //41400;
+	cfg->stopCharge_threshold = 41800; //41800;
 	cfg->max_difference = 2000;
 	cfg->balancing_difference = 500;
-	cfg->start_scaling = 37000; //41000;
-	cfg->stop_scaling = 37600; //41600;
+	cfg->start_scaling = 41000; //41000;
+	cfg->stop_scaling = 41600; //41600;
 	cfg->scale_to = 100;
 
 	cfg->invalidPECcount = 5;
 
 	cfg->dischargeTime = 500; // ms
 
-	cfg->normalCurrent = 0x003E; // 6.2A 
+	cfg->normalCurrent = 0x0046; // 7.0A 
 	cfg->lowerCurrent = 0x000A; // 1A
 	cfg->chargerVoltage = 0xFA0; // 400V
 

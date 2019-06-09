@@ -79,6 +79,7 @@ uint8_t                 BMSSTAT_DATA[6];
 uint16_t volatile       minimum;
 uint32_t                sumOfCells;
 uint8_t                 chargeRate = 2;
+uint16_t                global_error_count = 0;
 
 /* USER CODE END PV */
 
@@ -622,11 +623,16 @@ bool FAULT_check(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6], uint8_t bms
     }*/
   }
 
-  if (BMS_FAULT == false)
+  if (BMS_FAULT == false){
+    global_error_count = 0;
     HAL_GPIO_WritePin(GPIOB, BMS_FLT_Pin, GPIO_PIN_RESET);
-  if (BMS_FAULT == true)
-    HAL_GPIO_WritePin(GPIOB, BMS_FLT_Pin, GPIO_PIN_SET);
-  
+  } else {
+    global_error_count++;
+    if(global_error_count == 5){
+      global_error_count = 0;
+      HAL_GPIO_WritePin(GPIOB, BMS_FLT_Pin, GPIO_PIN_SET);
+    }
+  }
   return BMS_FAULT;
 }
 
