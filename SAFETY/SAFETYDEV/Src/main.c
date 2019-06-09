@@ -85,7 +85,7 @@
 const uint16_t ThrottleA_5 = 725;
 // That means 25% from 0 is .7635 volts
 const uint16_t ThrottleA_25 = 940;
-const uint16_t brakeThreshold = 2000; //80; >> 3.5 volts on 5 v scale, 2.1 on 3.3v scale
+const uint16_t brakeThreshold = 1117; //80; >> 3.5 volts on 5 v scale, 2.1 on 3.3v scale
 const uint16_t RTD_Threshold = 500; // NO idea for this
 
 // APPS is .35 volts, so .21 volts scaled
@@ -146,7 +146,7 @@ uint32_t TxCar_stateMailbox;
 
 //CAN FAULT VARIABLES
 CAN_TxHeaderTypeDef TxFaults;
-uint8_t TxFault_data[8] = {0x55, 0x55, 0x55, 0x55,0x55, 0x55, 0x55, 0x55};
+uint8_t TxBRAKE_data[8] = {0xDE, 0xAD, 0xBE, 0xEF,0x55, 0x55, 0x55, 0x55};
 /*Set these values: 0xFF = Fault present
                     0x00 = No fault*/
 uint8_t bms;        //TxData[0]
@@ -176,7 +176,7 @@ char checkAPPS();
 char APPS_Diff();
 void sendFaultMsg();
 void sendCar_state();
-void readFaults();
+char readFaults();
 void car_state_machine(char STATE);
 uint16_t updateADC(int channel); 
 /* USER CODE END PFP */
@@ -249,6 +249,7 @@ int main(void)
    {
      //READ FOR PRECHARGE
   // if(HAL_GPIO_ReadPin(GPIOB, PRECHARGE_COMPLETE_Pin) == GPIO_PIN_RESET){
+    if(readFaults()){
      car_state_machine(PRECHARGED);
      //READ FOR ENABLE
 
@@ -259,8 +260,8 @@ int main(void)
 
             //ADC for Brake pressure
        brakePressure_1 = updateADC(BRAKE_PRESSURE_1_ADC_CHANNEL);
-       TxFault_data[6] = brakePressure_1 >>8;
-       TxFault_data[7] = brakePressure_1; 
+       TxBRAKE_data[6] = brakePressure_1 >>8;
+       TxBRAKE_data[7] = brakePressure_1; 
        //SEE IF BRAKE IS PRESSED 
        if(brakePressure_1 >= RTD_Threshold){
        //set 3 second timer
@@ -288,7 +289,7 @@ int main(void)
        HAL_GPIO_WritePin(GPIOB, BTSF_EN_Pin|APPS_EN_Pin ,GPIO_PIN_RESET);
       // HAL_Delay(500);//THIS IS PUT HERE TO AVOID BOUNCING WHEN ITS REMOVED
      }
-  // } // end of if precharge complete statement
+   } // end of if faults complete statement
       if(RTDS_Timer == 0)
        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15,GPIO_PIN_RESET);
   
@@ -303,15 +304,15 @@ int main(void)
          HAL_GPIO_WritePin(GPIOB, BTSF_EN_Pin|APPS_EN_Pin ,GPIO_PIN_SET);
      }
     
-      //TxFault_data[4] = checkAPPS();
+      //TxBRAKE_data[4] = checkAPPS();
    }
 
    readFaults(); 
    if (CAN_Timer == 0){ //sending routine message every 1 second
 
      sendCar_state();
-     //sendFaultMsg();
-     CAN_Timer = 500;
+     sendFaultMsg();
+     CAN_Timer = 300;
      //HAL_GPIO_WritePin(BRAKE_LIGHT_EN_GPIO_Port, BRAKE_LIGHT_EN_Pin, GPIO_PIN_SET);
 
    }
@@ -385,11 +386,12 @@ char checkBTSF(){
   brakePressure_2 = updateADC(BRAKE_PRESSURE_2_ADC_CHANNEL);
   brakePressure_1 = updateADC(BRAKE_PRESSURE_1_ADC_CHANNEL);
   throttle_A = updateADC(THROTTLE_A_ADC_CHANNEL); 
-  TxFault_data[0]= brakePressure_1 >>8;
-  TxFault_data[1]= brakePressure_1;
-  TxFault_data[2]= brakePressure_2 >>8;
-  TxFault_data[3]= brakePressure_2;
-  
+  TxBRAKE_data[0]= brakePressure_1 >>8;
+  TxBRAKE_data[1]= brakePressure_1;
+  TxBRAKE_data[2]= brakePressure_2 >>8;
+  TxBRAKE_data[3]= brakePressure_2;
+  TxBRAKE_data[4]= throttle_A >>8;
+  TxBRAKE_data[5] = throttle_A;
   if(BTSF_ACTIVE)
   {
     if(throttle_A <= ThrottleA_5)
@@ -474,37 +476,37 @@ char APPS_Diff(){
 
 throttle_A = updateADC(THROTTLE_A_ADC_CHANNEL); 
 throttle_B = updateADC(THROTTLE_B_ADC_CHANNEL);
-    //TxFault_data[4] = throttle_A;
-    //TxFault_data[5] = throttle_A >> 8;
-    //TxFault_data[6] = throttle_B;
-    //TxFault_data[7] = throttle_B >>8;
+    //TxBRAKE_data[4] = throttle_A;
+    //TxBRAKE_data[5] = throttle_A >> 8;
+    //TxBRAKE_data[6] = throttle_B;
+    //TxBRAKE_data[7] = throttle_B >>8;
 
 int t_A = throttle_A;
 int t_B = throttle_B;
 
  //Fault if throttles are too low or too high
  if(t_A < throttle_min_APPS || t_A > throttle_max_APPS_A){
-  //TxFault_data[0] = 0xFF;
+  //TxBRAKE_data[0] = 0xFF;
   return 1;
  }
  //else
-  //TxFault_data[0] = 0x00;
+  //TxBRAKE_data[0] = 0x00;
  if(t_B < throttle_min_APPS || t_B > throttle_max_APPS_B){
-  //TxFault_data[1] = 0xFF;
+  //TxBRAKE_data[1] = 0xFF;
   return 1;
  }
  //else
-  //TxFault_data[1] = 0x00;
+  //TxBRAKE_data[1] = 0x00;
 
  t_B -= throttleA_to_B_offset;
 
 
   if(abs(t_A - t_B) > APPS_difference){ //600 ~ 0.5v
-    //TxFault_data[2] = 0xFF;
+    //TxBRAKE_data[2] = 0xFF;
     return 1;
   }
   else {
-    //TxFault_data[2] = 0x00;
+    //TxBRAKE_data[2] = 0x00;
     return 0;
   }
 
@@ -522,7 +524,7 @@ int t_B = throttle_B;
 }
 void sendFaultMsg(){
  
-  HAL_CAN_AddTxMessage(&hcan, &TxFaults, TxFault_data, &TxFaultsMailbox);
+  HAL_CAN_AddTxMessage(&hcan, &TxFaults, TxBRAKE_data, &TxFaultsMailbox);
 }
 
 void sendCar_state(){
@@ -540,7 +542,7 @@ void car_state_machine(char STATE)
   }
 }
 
-void readFaults(){
+char readFaults(){
   if (HAL_GPIO_ReadPin(GPIOD, FAULT_BSPD_STATUS_Pin) == GPIO_PIN_SET)
     bspd = FAULT_ACTIVE;
   else bspd = FAULT_INACTIVE;
@@ -553,10 +555,12 @@ void readFaults(){
     bms = FAULT_ACTIVE;
   else bms = FAULT_INACTIVE;
 
-  if(bms || imd){
+  if(bms || imd || bspd){
     TxCar_state_data[0] = LV_ON;
+    return 0;
     HAL_GPIO_WritePin(GPIOB, RTD_EN_Pin | RTDS_EN_Pin, GPIO_PIN_RESET);
   }
+  return 1;
 
 }
 

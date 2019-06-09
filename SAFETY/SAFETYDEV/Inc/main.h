@@ -132,7 +132,7 @@ char checkAPPS();
 char APPS_Diff();
 void sendFaultMsg();
 void sendCar_state();
-void readFaults();
+char readFaults();
 void car_state_machine(char STATE);
 uint16_t updateADC(int channel); 
 
