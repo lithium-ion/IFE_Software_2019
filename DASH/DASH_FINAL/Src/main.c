@@ -33,14 +33,11 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define DASH_CAN_ID			0x00F
-#define RINEHARTCUR_CAN_ID			0x064
-#define RINEHARTTOR_CAN_ID			0x082
-#define FAULTS				0x0D0
-#define STATES			0x00E
-#define ENABLE_SIG		0x0D2
-#define MOTOR_POS		0x0A5
-#define BASiC     69
+
+#define SOFT_FAULTS				         0x0D0
+#define STATES			               0x00E
+#define RINEHARTCUR_CAN_ID         0x202
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -58,17 +55,16 @@ CAN_HandleTypeDef hcan;
 CAN_RxHeaderTypeDef     RxHeader;
 uint8_t                 RxData[8];
 
-CAN_TxHeaderTypeDef     POT_TxHeader;
-CAN_TxHeaderTypeDef     POT_Txheader;
-CAN_TxHeaderTypeDef     POT_Txheader1;
-uint8_t                 POT_data[8];
-uint8_t                 POT_Data[8];
-uint8_t                 POT_Data1[8];
+CAN_TxHeaderTypeDef     RIENHART_CURRENT_Tx;
+uint8_t                RIENHART_CURRENT_Data[8] = {0,0,0,0,0,0,0,0};
+
+
 uint32_t                TxMailbox;
 
 volatile char					CAN_flag;
 
 uint16_t				pot_threshold[11] = {0, 615, 1025, 1435, 1845, 2255, 2665, 3075, 3485, 3895, 4095};
+uint16_t        current_limits[11] = {200,200,175,150,125,100,75,50,30,15,10};
 
 /* USER CODE END PV */
 
@@ -119,7 +115,7 @@ int main(void)
   MX_ADC1_Init();
   MX_CAN_Init();
   /* USER CODE BEGIN 2 */
-
+  uint16_t pot_position[4];
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -130,20 +126,14 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
-	//if (CAN_flag == 0xFF)
-	//	CAN_interpret();
-
-	//send POT positions CAN message
-
-	uint16_t pot_position[4];
+	
 	POT_read(pot_position);
 	POT_interpret(pot_position);
+  HAL_CAN_AddTxMessage(&hcan,&RIENHART_CURRENT_Tx,RIENHART_CURRENT_Data,&TxMailbox);
+
+  HAL_Delay(150);
 
 
-	//HAL_CAN_AddTxMessage(&hcan, &POT_TxHeader, POT_data, &TxMailbox);
-  //HAL_CAN_AddTxMessage(&hcan, &POT_Txheader, POT_Data, &TxMailbox);
-
-	//HAL_Delay(1000);
 
 
   }
@@ -292,23 +282,12 @@ hcan.Instance = CAN1;
     Error_Handler();
   }
   /* USER CODE BEGIN CAN_Init 2 */
-	POT_TxHeader.StdId = DASH_CAN_ID; 						// CAN standard ID
-	POT_TxHeader.RTR = CAN_RTR_DATA; 						// CAN frame type
-	POT_TxHeader.IDE = CAN_ID_STD; 							// CAN ID type
-	POT_TxHeader.DLC = 4; 									// CAN frame length in bytes
-	POT_TxHeader.TransmitGlobalTime = DISABLE;				// CAN timestamp in TxData[6] and TxData[7]
 
-  POT_Txheader.StdId = RINEHARTCUR_CAN_ID; 						// CAN standard ID
-	POT_Txheader.RTR = CAN_RTR_DATA; 						// CAN frame type
-	POT_Txheader.IDE = CAN_ID_STD; 							// CAN ID type
-	POT_Txheader.DLC = 2; 									// CAN frame length in bytes
-	POT_Txheader.TransmitGlobalTime = DISABLE;				// CAN timestamp in TxData[6] and TxData[7]
-
-  POT_Txheader1.StdId = RINEHARTTOR_CAN_ID; 						// CAN standard ID
-  POT_Txheader1.RTR = CAN_RTR_DATA; 						// CAN frame type
-  POT_Txheader1.IDE = CAN_ID_STD; 							// CAN ID type
-  POT_Txheader1.DLC = 2; 									// CAN frame length in bytes
-  POT_Txheader1.TransmitGlobalTime = DISABLE;				// CAN timestamp in TxData[6] and TxData[7]
+  RIENHART_CURRENT_Tx.StdId = RINEHARTCUR_CAN_ID; 						// CAN standard ID
+	RIENHART_CURRENT_Tx.RTR = CAN_RTR_DATA; 						// CAN frame type
+	RIENHART_CURRENT_Tx.IDE = CAN_ID_STD; 							// CAN ID type
+	RIENHART_CURRENT_Tx.DLC = 8; 									// CAN frame length in bytes
+	RIENHART_CURRENT_Tx.TransmitGlobalTime = DISABLE;				// CAN timestamp in TxData[6] and TxData[7]
 
 	sFilterConfig.FilterBank = 0;							// filter number (0-13)
 	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;		// mask mode or identifier mode
@@ -373,17 +352,17 @@ static void MX_GPIO_Init(void)
 void POT_read(uint16_t pot_values[4]) {
 	//0 1 7 9
 
-	sConfig.Channel = ADC_CHANNEL_0;
+	sConfig.Channel = ADC_CHANNEL_0; //
 	sConfig.Rank = ADC_REGULAR_RANK_1;
 	sConfig.SamplingTime = ADC_SAMPLETIME_71CYCLES_5;
 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
 
 	HAL_ADC_Start(&hadc1);
-	HAL_ADC_PollForConversion(&hadc1, 1000);		//change timeout to a HAL define
+	HAL_ADC_PollForConversion(&hadc1, 1000);		//CURRENT_VAL, PA0
 	pot_values[0] = HAL_ADC_GetValue(&hadc1);
 	HAL_ADC_Stop(&hadc1);
 
-	sConfig.Channel = ADC_CHANNEL_1;
+	sConfig.Channel = ADC_CHANNEL_1;   // CUSTOM VAL PA1
 	sConfig.Rank = ADC_REGULAR_RANK_1;
 	sConfig.SamplingTime = ADC_SAMPLETIME_71CYCLES_5;
 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
@@ -393,7 +372,7 @@ void POT_read(uint16_t pot_values[4]) {
 	pot_values[1] = HAL_ADC_GetValue(&hadc1);
 	HAL_ADC_Stop(&hadc1);
 
-	sConfig.Channel = ADC_CHANNEL_7;
+	sConfig.Channel = ADC_CHANNEL_7;         //TC_VAL PA7
 	sConfig.Rank = ADC_REGULAR_RANK_1;
 	sConfig.SamplingTime = ADC_SAMPLETIME_71CYCLES_5;
 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
@@ -404,7 +383,7 @@ void POT_read(uint16_t pot_values[4]) {
 	pot_values[2] = HAL_ADC_GetValue(&hadc1);
 	HAL_ADC_Stop(&hadc1);
 
-	sConfig.Channel = ADC_CHANNEL_9;
+	sConfig.Channel = ADC_CHANNEL_9;         //DRS_VAL PA9
 	sConfig.Rank = ADC_REGULAR_RANK_1;
 	sConfig.SamplingTime = ADC_SAMPLETIME_71CYCLES_5;
 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
@@ -429,62 +408,15 @@ void POT_interpret(uint16_t pot_values[4]) {
 
 			//uint16_t pot_threshold[12] = {0, 615, 1025, 1435, 1845, 2255, 2665, 3075, 3485, 3895, 4095};
 			if ((pot_values[i] > pot_threshold[j]) && (pot_values[i] <= pot_threshold[j + 1]))
+      {
 				pot_pos[i] = 10 - (j + 1); // pot_pos[i] = 0 is ~3.3V, pot_pos[i] = 1 is ~3V, etc.
+        if(i == 2)
+        {
+            RIENHART_CURRENT_Data[0] = current_limits[j];
+            RIENHART_CURRENT_Data[1] = current_limits[j] >> 8;
+        }
 			}
-
-		POT_data[i] = pot_pos[i];
-		//POT_data[0] = 0x00;
-
-	}
-
-if (pot_pos[1] == 0){
-	POT_Data[1] = 1;
-  POT_Data[0] = 244;
-  }
-
-else if (pot_pos[1] == 1){
-  	POT_Data[1] = 3;
-    POT_Data[0] = 232;
-  }
-
-else if (pot_pos[1] == 2){
-    	POT_Data[1] = 4;
-      POT_Data[0] = 176;
-  }
-
-else if (pot_pos[1] == 3){
-    	POT_Data[1] = 5;
-      POT_Data[0] = 70;
-  }
-
-else if (pot_pos[1] == 4){
-      	POT_Data[1] = 5;
-        POT_Data[0] = 220;
-  }
-
-else if (pot_pos[1] == 5){
-        	POT_Data[1] = 6;
-          POT_Data[0] = 114;
-  }
-
-else if (pot_pos[1] == 6){
-    	POT_Data[1] = 7;
-      POT_Data[0] = 8;
-  }
-
-else if (pot_pos[1] == 7){
-    	POT_Data[1] = 7;
-      POT_Data[0] = 158;
-  }
-
-else if (pot_pos[1] == 8){
-    	POT_Data[1] = 8;
-      POT_Data[0] = 52;
-  }
-
-else if (pot_pos[1] == 9){
-    	POT_Data[1] = 8;
-      POT_Data[0] = 202;
+    }
   }
 
 	if (pot_pos[0] != 0) // if CURRENT_POT is in any position other than first, turn on CUR_LED
@@ -512,8 +444,11 @@ else if (pot_pos[1] == 9){
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *CanHandle)
 {
   //HAL_GPIO_TogglePin(GPIOB, TC_LED_Pin);
+
   if (HAL_CAN_GetRxMessage(&hcan, CAN_RX_FIFO0, &RxHeader, RxData) == HAL_OK)
-	  CAN_interpret();
+   { 
+      CAN_interpret();
+  }
 }
 
 void CAN_interpret(void) {
@@ -544,9 +479,9 @@ void CAN_interpret(void) {
 
   if (Precharge_state == 0x04) {
       // if precharge is not complete
-      HAL_GPIO_WritePin(GPIOB, RGB_GREEN_Pin, GPIO_PIN_SET); // set RGB LED blue
+      HAL_GPIO_TogglePin(GPIOB, RGB_GREEN_Pin); // set RGB LED blue
       HAL_GPIO_WritePin(GPIOB, RGB_RED_Pin, GPIO_PIN_RESET);
-      HAL_GPIO_WritePin(GPIOB, RGB_BLUE_Pin, GPIO_PIN_SET);
+      HAL_GPIO_TogglePin(GPIOB, RGB_BLUE_Pin);
 
     }
     if (Precharge_state == 0x08) {
