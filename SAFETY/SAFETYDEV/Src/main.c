@@ -82,10 +82,10 @@
 //throttle A .66-3.2 scaled to .396-1.866
 //throttle B .33-2.7 scaled to .198-1.62
 // That means 5% from 0 is .4705 volts
-const uint16_t ThrottleA_5 = 725;
+const uint16_t ThrottleA_5 = 800;
 // That means 25% from 0 is .7635 volts
-const uint16_t ThrottleA_25 = 940;
-const uint16_t brakeThreshold = 1117; //80; >> 3.5 volts on 5 v scale, 2.1 on 3.3v scale
+const uint16_t ThrottleA_25 = 1070;
+const uint16_t brakeThreshold = 800; //80; >> 3.5 volts on 5 v scale, 2.1 on 3.3v scale
 const uint16_t RTD_Threshold = 500; // NO idea for this
 
 // APPS is .35 volts, so .21 volts scaled
@@ -94,15 +94,12 @@ const int APPS_difference = 600; //~0.5 voltz
 
 //These are based off above values measured
 const int throttle_A_min = 657;
-const int throttle_A_max = 1737;
+const int throttle_A_max = 2200;
 const int throttle_B_min = 1365;
-const int throttle_B_max = 2978;
-const int throttle_min_APPS = 300;
-const int throttle_max_APPS_B = 3500;
-const int throttle_max_APPS_A = 2250;
+const int throttle_B_max = 3800;
 // APPS is .35 volts, so .21 volts scaled
 //This values is 0-100 based
-const int throttleA_to_B_offset = 900;
+const int throttleA_to_B_offset = 1200;
 
 
 
@@ -260,8 +257,8 @@ int main(void)
 
             //ADC for Brake pressure
        brakePressure_1 = updateADC(BRAKE_PRESSURE_1_ADC_CHANNEL);
-       TxBRAKE_data[6] = brakePressure_1 >>8;
-       TxBRAKE_data[7] = brakePressure_1; 
+       //TxBRAKE_data[6] = brakePressure_1 >>8;
+       //TxBRAKE_data[7] = brakePressure_1; 
        //SEE IF BRAKE IS PRESSED 
        if(brakePressure_1 >= RTD_Threshold){
        //set 3 second timer
@@ -301,6 +298,7 @@ int main(void)
      }
      else if(TxCar_state_data[0] == SOFT_FAULT) {
          TxCar_state_data[0] = PWR_AVAILABLE;
+         TxCar_state_data[5] = 0x0;
          HAL_GPIO_WritePin(GPIOB, BTSF_EN_Pin|APPS_EN_Pin ,GPIO_PIN_SET);
      }
     
@@ -371,6 +369,7 @@ char checkAPPS(){
   //APPS_EN Fault
   else if(millisTimer == 0){ //this occurs when APPS_diff is true for > 100 ms
     HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_RESET);
+    TxCar_state_data[5] = 0x0A;
     return 1; //will set driving = 0;
   }
   return 0; //APPS is good
@@ -386,12 +385,15 @@ char checkBTSF(){
   brakePressure_2 = updateADC(BRAKE_PRESSURE_2_ADC_CHANNEL);
   brakePressure_1 = updateADC(BRAKE_PRESSURE_1_ADC_CHANNEL);
   throttle_A = updateADC(THROTTLE_A_ADC_CHANNEL); 
+  throttle_B = updateADC(THROTTLE_B_ADC_CHANNEL);
   TxBRAKE_data[0]= brakePressure_1 >>8;
   TxBRAKE_data[1]= brakePressure_1;
   TxBRAKE_data[2]= brakePressure_2 >>8;
   TxBRAKE_data[3]= brakePressure_2;
   TxBRAKE_data[4]= throttle_A >>8;
   TxBRAKE_data[5] = throttle_A;
+  TxBRAKE_data[6] = throttle_B >> 8;
+  TxBRAKE_data[7] = throttle_B;
   if(BTSF_ACTIVE)
   {
     if(throttle_A <= ThrottleA_5)
@@ -406,6 +408,7 @@ char checkBTSF(){
   if((brakePressure_1 > brakeThreshold) && (throttle_A > ThrottleA_25)){
        //HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET);
        BTSF_ACTIVE = 0xFF;
+       TxCar_state_data[5] = 0x0B;
        return 1;
   }
   
@@ -485,13 +488,13 @@ int t_A = throttle_A;
 int t_B = throttle_B;
 
  //Fault if throttles are too low or too high
- if(t_A < throttle_min_APPS || t_A > throttle_max_APPS_A){
+ if(t_A < throttle_A_min || t_A > throttle_A_max){
   //TxBRAKE_data[0] = 0xFF;
   return 1;
  }
  //else
   //TxBRAKE_data[0] = 0x00;
- if(t_B < throttle_min_APPS || t_B > throttle_max_APPS_B){
+ if(t_B < throttle_B_min || t_B > throttle_B_max){
   //TxBRAKE_data[1] = 0xFF;
   return 1;
  }

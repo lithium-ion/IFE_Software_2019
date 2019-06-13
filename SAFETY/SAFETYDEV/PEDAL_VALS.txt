@@ -1,0 +1,2 @@
+0x032Dh ~ 813 = start ~ .65volts
+0x05B2h ~ 1458 = end ~1.17 volts
