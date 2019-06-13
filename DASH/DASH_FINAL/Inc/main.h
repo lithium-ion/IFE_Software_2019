@@ -32,7 +32,7 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+int32_t soft_fault_check;
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
