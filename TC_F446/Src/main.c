@@ -137,7 +137,8 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+    HAL_GPIO_TogglePin(GPIOB,GPIO_PIN_13);
+    HAL_Delay(500);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -457,6 +458,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(REGEN_DISABLE_GPIO_Port, &GPIO_InitStruct);
 
+  GPIO_InitStruct.Pin = GPIO_PIN_13;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
   /*Configure GPIO pins : PB4 PB5 PB6 PB7 */
   GPIO_InitStruct.Pin = GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
@@ -481,6 +488,7 @@ void EXTI4_IRQHandler(void)
   /* USER CODE BEGIN EXTI4_IRQn 0 */
   if(__HAL_GPIO_EXTI_GET_IT(GPIO_PIN_4) != RESET){
     pulses[0] = __HAL_TIM_GET_COUNTER(&htim2);
+    __HAL_TIM_SetCounter(&htim2,0);
   }
   /* USER CODE END EXTI4_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_4);
@@ -496,11 +504,14 @@ void EXTI9_5_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI9_5_IRQn 0 */
   if(__HAL_GPIO_EXTI_GET_IT(GPIO_PIN_5) != RESET){
-    pulses[1] = __HAL_TIM_GET_COUNTER(&htim2);
+    pulses[1] = __HAL_TIM_GET_COUNTER(&htim3);
+    __HAL_TIM_SetCounter(&htim3,0);
   } else if(__HAL_GPIO_EXTI_GET_IT(GPIO_PIN_6) != RESET){
-    pulses[2] = __HAL_TIM_GET_COUNTER(&htim2);
+    pulses[2] = __HAL_TIM_GET_COUNTER(&htim4);
+    __HAL_TIM_SetCounter(&htim4,0);
   } else if(__HAL_GPIO_EXTI_GET_IT(GPIO_PIN_7) != RESET){
-    pulses[3] = __HAL_TIM_GET_COUNTER(&htim2);
+    pulses[3] = __HAL_TIM_GET_COUNTER(&htim5);
+    __HAL_TIM_SetCounter(&htim5,0);
   }
   /* USER CODE END EXTI9_5_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_5);
@@ -524,8 +535,10 @@ void TIM7_IRQHandler(void)
   /* USER CODE BEGIN TIM7_IRQn 1 */
   if(pulses[3] >900){  // 18000/0.849*24
       HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, GPIO_PIN_SET);
+      //HAL_GPIO_WritePin(GPIOB,GPIO_PIN_13,GPIO_PIN_RESET);
   } else {
-      HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, GPIO_PIN_RESET);
+      HAL_GPIO_WritePin(GPIOB,GPIO_PIN_13,GPIO_PIN_SET);
+      //HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, GPIO_PIN_RESET);
   }
 
   if(pulses[0] > 54000 || pulses[3] > 54000){ // pulse length of pulses[1,2] is invalid

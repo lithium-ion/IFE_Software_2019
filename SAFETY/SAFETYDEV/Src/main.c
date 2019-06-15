@@ -743,7 +743,7 @@ hcan.Instance = CAN1;
   TxCar_state.TransmitGlobalTime = DISABLE;
 
   /* USER CODE END CAN_Init 1 */
-
+  
     HAL_CAN_Start(&hcan);
   /* USER CODE END CAN_Init 2 */
 
