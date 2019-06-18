@@ -940,7 +940,8 @@ void BMSTINF_message(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
   HAL_CAN_AddTxMessage(&hcan, &TxHeader, BMSTINF_DATA, &TxMailbox);  
 
   //Insert PWM code
-  if(maxT>17400 || BMS_FAULT) HAL_GPIO_WritePin(GPIOD, GPIO_PIN_1, GPIO_PIN_RESET);
+  if((maxT>17400) || BMS_FAULT) 
+    HAL_GPIO_WritePin(GPIOD, GPIO_PIN_1, GPIO_PIN_RESET);
   else HAL_GPIO_WritePin(GPIOD, GPIO_PIN_1, GPIO_PIN_RESET);  
 };
 
