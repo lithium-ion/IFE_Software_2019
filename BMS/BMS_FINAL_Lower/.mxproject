@@ -1,7 +1,7 @@
 [PreviousGenFiles]
-HeaderPath=C:/IFE/BMS_FINAL/Inc
+HeaderPath=C:/Users/chait/Documents/WSL/IFE_Software_2019/BMS/BMS_FINAL_Lower/Inc
 HeaderFiles=stm32f1xx_it.h;stm32f1xx_hal_conf.h;main.h;
-SourcePath=C:/IFE/BMS_FINAL/Src
+SourcePath=C:/Users/chait/Documents/WSL/IFE_Software_2019/BMS/BMS_FINAL_Lower/Src
 SourceFiles=stm32f1xx_it.c;stm32f1xx_hal_msp.c;main.c;
 
 [PreviousLibFiles]

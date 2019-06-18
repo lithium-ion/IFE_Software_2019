@@ -60,8 +60,6 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define DEBUG_Pin GPIO_PIN_13
 #define DEBUG_GPIO_Port GPIOC
-#define FAN_PWM_Pin GPIO_PIN_1
-#define FAN_PWM_GPIO_Port GPIOD
 #define BMS_CS_Pin GPIO_PIN_4
 #define BMS_CS_GPIO_Port GPIOA
 #define BMS_SCK_Pin GPIO_PIN_5
