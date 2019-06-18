@@ -98,7 +98,7 @@ uint16_t balancingThreshold(BMSconfigStructTypedef cfg);
 void setChargerTxData(BMSconfigStructTypedef cfg);
 void CELLVAL_message(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]);
 void BMSVINF_message(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]);
-void BMSTINF_message(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]);
+void BMSTINF_message(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6], bool BMS_FAULT);
 void BMSSTAT_message(BMSconfigStructTypedef cfg, uint8_t bmsStatus[6]);
 void PACKSTAT_message(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]);
 /* USER CODE END PFP */
@@ -177,7 +177,7 @@ int main(void)
 
     //read all cell temps, send BMSTINF message
     readAllCellTemps(BMSconfig, BMS_DATA);
-    BMSTINF_message(BMSconfig, BMS_DATA);
+    BMSTINF_message(BMSconfig, BMS_DATA,BMS_FAULT);
 
     checkAllCellConnections(BMSconfig, BMS_DATA);
 
@@ -892,7 +892,7 @@ void BMSVINF_message(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
 
 }
 
-void BMSTINF_message(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
+void BMSTINF_message(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6], bool BMS_FAULT) {
 
   uint16_t cellTemp;
   uint16_t minT = 0xFFFF;
