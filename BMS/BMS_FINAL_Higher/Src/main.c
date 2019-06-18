@@ -138,7 +138,7 @@ int main(void)
   MX_GPIO_Init();
   MX_ADC1_Init();
   MX_CAN_Init();
-  //MX_SPI1_Init();
+  MX_SPI1_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 
@@ -196,7 +196,7 @@ int main(void)
 
     if ((AIR == 0) && (CHARGE_EN == 0)) {
 
-      if (chargeRate != 0)
+      //if (chargeRate != 0)
         setDischarge(BMSconfig, BMS_DATA, discharge, BMS_FAULT, full_discharge);
       
       setChargerTxData(BMSconfig);
@@ -274,7 +274,7 @@ static void MX_ADC1_Init(void)
 
   /* USER CODE END ADC1_Init 0 */
 
-  //ADC_ChannelConfTypeDef sConfig = {0};
+  ADC_ChannelConfTypeDef sConfig = {0};
 
   /* USER CODE BEGIN ADC1_Init 1 */
 
@@ -323,11 +323,11 @@ static void MX_CAN_Init(void)
   CAN_FilterTypeDef     sFilterConfig;
   /* USER CODE END CAN_Init 1 */
   hcan.Instance = CAN1;
-  hcan.Init.Prescaler = 2; //500kbit/s
+  hcan.Init.Prescaler = 16;
   hcan.Init.Mode = CAN_MODE_NORMAL;
-  hcan.Init.SyncJumpWidth = CAN_SJW_2TQ;
-  hcan.Init.TimeSeg1 = CAN_BS1_13TQ;
-  hcan.Init.TimeSeg2 = CAN_BS2_2TQ;
+  hcan.Init.SyncJumpWidth = CAN_SJW_1TQ;
+  hcan.Init.TimeSeg1 = CAN_BS1_1TQ;
+  hcan.Init.TimeSeg2 = CAN_BS2_1TQ;
   hcan.Init.TimeTriggeredMode = DISABLE;
   hcan.Init.AutoBusOff = DISABLE;
   hcan.Init.AutoWakeUp = DISABLE;
@@ -428,9 +428,9 @@ static void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 8000;
+  htim2.Init.Prescaler = 0;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 65535;
+  htim2.Init.Period = 0;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
@@ -470,7 +470,10 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(DEBUG_GPIO_Port, DEBUG_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(DEBUG_GPIO_Port, DEBUG_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_1, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, BMS_CS_Pin|TRIGGER_Pin, GPIO_PIN_RESET);
@@ -484,6 +487,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(DEBUG_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PD1 */
+  GPIO_InitStruct.Pin = GPIO_PIN_1;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
   /*Configure GPIO pins : BMS_CS_Pin TRIGGER_Pin */
   GPIO_InitStruct.Pin = BMS_CS_Pin|TRIGGER_Pin;
@@ -504,6 +514,9 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(BMS_FLT_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure peripheral I/O remapping */
+  __HAL_AFIO_REMAP_PD01_ENABLE();
 
 }
 
@@ -748,14 +761,14 @@ void checkDischarge(BMSconfigStructTypedef cfg, bool fullDischarge[12][8], uint8
     board = i / cfg.numOfCellsPerIC;
     cell = i % cfg.numOfCellsPerIC;
 
-    if (fullDischarge[board][cell] == 1) {
+    //if (fullDischarge[board][cell] == 1) {
       if (cellVoltage <= minimum) {
         fullDischarge[board][cell] = 0;
         bmsData[i][1] &= 0x5F; //reset charging state to 2
       }
       else
         sum += 1;
-    }
+    //}
   }
 
   if (sum == 0)
@@ -927,6 +940,8 @@ void BMSTINF_message(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
   HAL_CAN_AddTxMessage(&hcan, &TxHeader, BMSTINF_DATA, &TxMailbox);  
 
   //Insert PWM code
+  if(maxT>17400 || BMS_FAULT) HAL_GPIO_WritePin(GPIOD, GPIO_PIN_1, GPIO_PIN_RESET);
+  else HAL_GPIO_WritePin(GPIOD, GPIO_PIN_1, GPIO_PIN_RESET);  
 };
 
 void PACKSTAT_message(BMSconfigStructTypedef cfg, uint8_t bmsData[96][6]) {
