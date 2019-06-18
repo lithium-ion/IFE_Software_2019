@@ -38,6 +38,10 @@
 #define STATES			               0x00E
 #define RINEHARTCUR_CAN_ID         0x202
 #define RINEHART_FAULTS            0x0AB
+#define TC_CONTROL_ID              0x0D3
+
+#define FAULT_CLEAR_TIME          100
+//if we are in clear mode, how much time to wait until we fault
 
 /* USER CODE END PD */
 
@@ -57,10 +61,13 @@ CAN_RxHeaderTypeDef     RxHeader;
 uint8_t                 RxData[8];
 
 CAN_TxHeaderTypeDef     RIENHART_SOFT_FAULT;
-uint8_t                 RIENHART_SOFT_FAULT_Data[8] = {0,0x14,0x01,0,0,0,0,0};
+uint8_t                 RIENHART_SOFT_FAULT_Data[8] = {0x14,0x0,0x01,0x0,0x0,0x0,0x0,0x0};
 
 CAN_TxHeaderTypeDef     RIENHART_CURRENT_Tx;
 uint8_t                 RIENHART_CURRENT_Data[8] = {0,0,0,0,0,0,0,0};
+
+CAN_TxHeaderTypeDef     TC_CONTROL;
+uint8_t                 TC_CONTROL_Data[1] = {0};
 
 
 uint32_t                TxMailbox;
@@ -69,11 +76,21 @@ volatile char					CAN_flag;
 
 uint16_t				pot_threshold[11] = {0, 615, 1025, 1435, 1845, 2255, 2665, 3075, 3485, 3895, 4095};
 uint16_t        current_limits[11] = {200,200,175,150,125,100,75,50,30,15,10};
-char            Soft_Fault_Clear = 0x00;
+uint8_t         Soft_Fault_Clear = 0x00;
+
+uint8_t         KNOB_FAULT_CLEAR_POS = 0;
+uint8_t         LED_SIGN = 0;
+uint8_t         BOOT_UP = 0;
+
+uint8_t         FULL_SEND_MODE = 0x00;
+uint8_t         CLEARABLE_FAULT = 0x00;
+
+
 
 
 
 extern int32_t soft_fault_check;
+extern int32_t fault_clear_mode;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -124,7 +141,7 @@ int main(void)
   MX_CAN_Init();
   /* USER CODE BEGIN 2 */
   uint16_t pot_position[4];
-  soft_fault_check = 5000;
+  soft_fault_check = 1000;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -142,15 +159,14 @@ int main(void)
 
   HAL_Delay(50);
   if(soft_fault_check <= 0)
+    {
+      MX_CAN_Init();
+      soft_fault_check = 1000;
+    }
+  if((fault_clear_mode <= 0) && (FULL_SEND_MODE) && (CLEARABLE_FAULT))
   {
-    MX_CAN_Init();
-    //HAL_GPIO_TogglePin(GPIOB, RGB_BLUE_Pin);
-
-
-    soft_fault_check = 5000;
+    HAL_CAN_AddTxMessage(&hcan,&RIENHART_SOFT_FAULT,RIENHART_SOFT_FAULT_Data,&TxMailbox);
   }
-
-
 
   }
   /* USER CODE END 3 */
@@ -305,6 +321,12 @@ hcan.Instance = CAN1;
 	RIENHART_CURRENT_Tx.DLC = 8; 									// CAN frame length in bytes
 	RIENHART_CURRENT_Tx.TransmitGlobalTime = DISABLE;
 
+  TC_CONTROL.StdId = TC_CONTROL_ID;             // CAN standard ID
+  TC_CONTROL.RTR = CAN_RTR_DATA;             // CAN frame type
+  TC_CONTROL.IDE = CAN_ID_STD;               // CAN ID type
+  TC_CONTROL.DLC = 1;                  // CAN frame length in bytes
+  TC_CONTROL.TransmitGlobalTime = DISABLE;
+
   RIENHART_SOFT_FAULT.StdId = SOFT_FAULTS;            // CAN standard ID
   RIENHART_SOFT_FAULT.RTR = CAN_RTR_DATA;             // CAN frame type
   RIENHART_SOFT_FAULT.IDE = CAN_ID_STD;               // CAN ID type
@@ -449,14 +471,21 @@ void POT_interpret(uint16_t pot_values[4]) {
   }
 
 	if (pot_pos[0] != 0) // if CURRENT_POT is in any position other than first, turn on CUR_LED
-		HAL_GPIO_WritePin(GPIOB, CUST_LED_Pin, GPIO_PIN_SET);
+	{
+  	HAL_GPIO_WritePin(GPIOB, CUST_LED_Pin, GPIO_PIN_SET);
+  }
   else
+  {
   	HAL_GPIO_WritePin(GPIOB, CUST_LED_Pin, GPIO_PIN_RESET);
-
+  }
 	if (pot_pos[1] != 0) // if CUSTOM_POT is in any position other than first, turn on CUST_LED
-		HAL_GPIO_WritePin(GPIOA, CUR_LED_Pin, GPIO_PIN_SET);
+	{	
+    HAL_GPIO_WritePin(GPIOA, CUR_LED_Pin, GPIO_PIN_SET);
+  }
 	else
+  {
 		HAL_GPIO_WritePin(GPIOA, CUR_LED_Pin, GPIO_PIN_RESET);
+  }
 
 	if (pot_pos[2] != 0) // if TC_POT is in any position other than first, turn on TC_LED
 		HAL_GPIO_WritePin(GPIOA, TC_LED_Pin, GPIO_PIN_SET);
@@ -467,6 +496,20 @@ void POT_interpret(uint16_t pot_values[4]) {
 		HAL_GPIO_WritePin(GPIOA, DRS_LED_Pin, GPIO_PIN_SET);
 	else
 		HAL_GPIO_WritePin(GPIOA, DRS_LED_Pin, GPIO_PIN_RESET);
+  if((pot_pos[0] != KNOB_FAULT_CLEAR_POS) && (BOOT_UP == 0xFF))
+  {
+      HAL_CAN_AddTxMessage(&hcan,&RIENHART_SOFT_FAULT,RIENHART_SOFT_FAULT_Data,&TxMailbox);
+  }
+  if(pot_pos[0] >= 7)
+  {
+    FULL_SEND_MODE = 0xFF;
+  }
+  else if(pot_pos[0] < 7)
+  {
+    FULL_SEND_MODE = 0x00;
+  }
+  BOOT_UP = 0xFF;
+  KNOB_FAULT_CLEAR_POS = pot_pos[0];
 
 }
 
@@ -497,7 +540,8 @@ void CAN_interpret(void) {
   Hold_Array[5] = RxData[5];
   Hold_Array[6] = RxData[6];
   Hold_Array[7] = RxData[7];
-
+  uint8_t Precharge_state;
+  Precharge_state = RxData[0];
 
     BMS_fault = RxData[1];
     IMD_fault = RxData[2];
@@ -505,8 +549,8 @@ void CAN_interpret(void) {
 
 	if (received_ID == STATES) {
 
-		uint8_t Precharge_state;
-		Precharge_state = RxData[0];
+
+		
 
 		if (Precharge_state == 0x01) {
 			// if precharge is complete
@@ -528,11 +572,11 @@ void CAN_interpret(void) {
       HAL_GPIO_TogglePin(GPIOB, RGB_GREEN_Pin); // set RGB LED blue
       HAL_GPIO_WritePin(GPIOB, RGB_RED_Pin, GPIO_PIN_RESET);
       HAL_GPIO_TogglePin(GPIOB, RGB_BLUE_Pin);
-      if(Soft_Fault_Clear)
-      {
-        Soft_Fault_Clear = 0x00;
-        HAL_CAN_AddTxMessage(&hcan,&RIENHART_SOFT_FAULT,RIENHART_SOFT_FAULT_Data,&TxMailbox);
-      }
+      //if(Soft_Fault_Clear)
+      //{
+      //  Soft_Fault_Clear = 0x00;
+       // HAL_CAN_AddTxMessage(&hcan,&RIENHART_SOFT_FAULT,RIENHART_SOFT_FAULT_Data,&TxMailbox);
+      //}
     }
     if (Precharge_state == 0x08 && (!Soft_Fault_Clear)) {
       // if precharge is not complete
@@ -596,18 +640,43 @@ void CAN_interpret(void) {
 
   if(received_ID == RINEHART_FAULTS)
   {
-      if(Hold_Array[0] || Hold_Array[1] || Hold_Array[2] || Hold_Array[3] || Hold_Array[4] || Hold_Array[5] || Hold_Array[7] || Hold_Array[7])
+
+      if((Hold_Array[4] & 0x06) || (Hold_Array[5] & 0x03))
+      {
+          HAL_GPIO_WritePin(GPIOB,RGB_RED_Pin | RGB_GREEN_Pin | RGB_BLUE_Pin,LED_SIGN);
+          if(LED_SIGN == 0)
+          {
+            LED_SIGN = 1;
+          }
+          else
+          { 
+            LED_SIGN = 0;
+          }
+          Soft_Fault_Clear = 0xFF;
+          if(FULL_SEND_MODE)
+          {
+            CLEARABLE_FAULT = 0xFF;
+            fault_clear_mode = FAULT_CLEAR_TIME;
+          }
+      }
+      else if(Hold_Array[0] || Hold_Array[1] || Hold_Array[2] || Hold_Array[3] || Hold_Array[4] || Hold_Array[5] || Hold_Array[7] || Hold_Array[7])
       {
       HAL_GPIO_WritePin(GPIOB, RGB_GREEN_Pin, GPIO_PIN_RESET); // set RGB LED red
       HAL_GPIO_TogglePin(GPIOB, RGB_RED_Pin);
       HAL_GPIO_WritePin(GPIOB, RGB_BLUE_Pin, GPIO_PIN_RESET); 
       Soft_Fault_Clear = 0xFF;
       }
-      soft_fault_check = 5000;
+      else
+      {
+        Soft_Fault_Clear = 0x00;
+      }
+      soft_fault_check = 1000;
       MX_CAN_Init();
       //HAL_GPIO_TogglePin(GPIOB, RGB_RED_Pin);
-
   }
+
+  //HAL_CAN_AddTxMessage(&hcan,&TC_CONTROL,TC_CONTROL_Data,&TxMailbox);
+
 }
 /* USER CODE END 4 */
 
